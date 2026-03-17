@@ -94,6 +94,10 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
     document.documentElement.classList.toggle('dark', theme === 'dark')
   }, [theme])
 
+  useEffect(() => {
+    document.documentElement.lang = locale === 'de' ? 'de' : 'ru'
+  }, [locale])
+
   const value = useMemo(
     () => ({
       locale,

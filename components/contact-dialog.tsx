@@ -59,24 +59,33 @@ export function ContactDialog({ open, onClose, copy }: ContactDialogProps) {
                 </div>
 
                 <form className="mt-8 grid gap-4" onSubmit={handleSubmit}>
-                  <label className="text-sm text-slate-200">
+                  <label htmlFor="contact-name" className="text-sm text-slate-200">
                     {copy.name}
                     <input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
                       required
                       className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none ring-0 transition placeholder:text-slate-500 focus:border-emerald-300/40"
                     />
                   </label>
-                  <label className="text-sm text-slate-200">
+                  <label htmlFor="contact-email" className="text-sm text-slate-200">
                     {copy.email}
                     <input
+                      id="contact-email"
+                      name="email"
                       type="email"
+                      autoComplete="email"
                       required
                       className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-300/40"
                     />
                   </label>
-                  <label className="text-sm text-slate-200">
+                  <label htmlFor="contact-project" className="text-sm text-slate-200">
                     {copy.project}
                     <textarea
+                      id="contact-project"
+                      name="project"
                       rows={5}
                       required
                       className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-300/40"

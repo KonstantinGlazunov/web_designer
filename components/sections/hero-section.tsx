@@ -1,6 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -75,12 +76,13 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
               <Button size="lg" onClick={onOpenForm}>
                 {copy.hero.ctaPrimary}
               </Button>
-              <a href="#portfolio">
-                <Button variant="secondary" size="lg" className="gap-2">
-                  {copy.hero.ctaSecondary}
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </a>
+              <Link
+                href="#portfolio"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 text-base font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:border-emerald-300/40 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              >
+                {copy.hero.ctaSecondary}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </motion.div>
 
             <div className="mt-10 grid gap-3 md:max-w-2xl md:grid-cols-3">
