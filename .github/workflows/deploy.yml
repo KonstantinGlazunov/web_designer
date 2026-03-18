@@ -12,12 +12,6 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
-      - name: Check secrets
-        if: secrets.VM_SSH_KEY == ''
-        run: |
-          echo "::error::VM_SSH_KEY не настроен. Добавь приватный SSH-ключ в Settings → Secrets and variables → Actions"
-          exit 1
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
