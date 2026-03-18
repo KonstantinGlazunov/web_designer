@@ -25,13 +25,23 @@ const LOCALE_KEY = 'codevibe-locale'
 const THEME_KEY = 'codevibe-theme'
 const PREFERENCES_EVENT = 'codevibe-preferences-change'
 
+function detectBrowserLocale(): Locale {
+  if (typeof navigator === 'undefined') return 'de'
+  const lang = navigator.language || (navigator.languages && navigator.languages[0]) || ''
+  const code = lang.toLowerCase().split('-')[0]
+  if (code === 'ru') return 'ru'
+  if (code === 'de') return 'de'
+  return 'de'
+}
+
 function getStoredLocale(): Locale {
   if (typeof window === 'undefined') {
-    return 'ru'
+    return 'de'
   }
 
   const storedLocale = window.localStorage.getItem(LOCALE_KEY)
-  return storedLocale === 'de' ? 'de' : 'ru'
+  if (storedLocale === 'de' || storedLocale === 'ru') return storedLocale
+  return detectBrowserLocale()
 }
 
 function getStoredTheme(): Theme {
@@ -59,7 +69,7 @@ function getSnapshot() {
   return cachedSnapshot
 }
 
-const serverSnapshot = { locale: 'ru' as Locale, theme: 'dark' as Theme }
+const serverSnapshot = { locale: 'de' as Locale, theme: 'dark' as Theme }
 
 function getServerSnapshot() {
   return serverSnapshot

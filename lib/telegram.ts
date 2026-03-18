@@ -47,6 +47,10 @@ function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
 
+export function escapeHtmlForTelegram(s: string): string {
+  return escapeHtml(s)
+}
+
 function formatDialog(messages: ChatMessage[], maxLen = 2000): string {
   if (!messages?.length) return ''
   const lines = messages.map((m) => {
@@ -160,6 +164,10 @@ export async function sendReadyBrief(sessionId: string, brief: Brief, messages: 
   ]
   if (dialog) parts.push('', '<b>Диалог:</b>', dialog)
   await sendMessage(parts.join('\n'), getInlineButtons(sessionId))
+}
+
+export async function sendQuizMessage(text: string): Promise<boolean> {
+  return sendMessage(text)
 }
 
 function getInlineButtons(sessionId: string): object {

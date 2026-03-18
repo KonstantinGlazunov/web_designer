@@ -105,7 +105,7 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
     if (step > 0) setStep((s) => s - 1)
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const body = [
       '--- Quiz Answers ---',
@@ -122,9 +122,24 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
       `WhatsApp: ${whatsapp}`,
     ].join('\n')
 
-    const mailto = `mailto:hello@codevibe.studio?subject=${encodeURIComponent('Quiz: Website idea request')}&body=${encodeURIComponent(body)}`
-    window.location.href = mailto
-    setSubmitted(true)
+    try {
+      const res = await fetch('/api/quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: body, locale }),
+      })
+
+      if (!res.ok) {
+        console.error('[Quiz] submit failed', await res.text().catch(() => ''))
+        alert(locale === 'de' ? 'Fehler beim Senden. Bitte versuchen Sie es später erneut.' : 'Ошибка при отправке. Попробуйте позже.')
+        return
+      }
+
+      setSubmitted(true)
+    } catch (e) {
+      console.error('[Quiz] submit error', e)
+      alert(locale === 'de' ? 'Fehler beim Senden. Bitte versuchen Sie es später erneut.' : 'Ошибка при отправке. Попробуйте позже.')
+    }
   }
 
   function handleClose() {
