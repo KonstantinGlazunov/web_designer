@@ -23,11 +23,22 @@ jobs:
           ssh-keyscan -H ${{ secrets.VM_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Test SSH connection
-        run: ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} "echo SSH OK"
+        run: |
+          SSH_OPTS="-i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=15"
+          for i in 1 2 3 4 5; do
+            echo "Attempt $i/5..."
+            if ssh $SSH_OPTS ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} "echo SSH OK"; then
+              echo "SSH OK"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "SSH connection failed after 5 attempts"
+          exit 1
 
       - name: Stop application and free memory
         run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'ENDSSH'
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'ENDSSH'
             pkill -9 -f "node.*programmersites" || true
             pkill -9 -f "node.*server.js" || true
             sleep 2
@@ -39,12 +50,12 @@ jobs:
       - name: Copy files to server
         run: |
           rsync -avz --exclude 'node_modules' --exclude '.next' --exclude '.git' \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30" \
             ./ ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:/home/opc/programmersites/
 
       - name: Deploy application
         run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'ENDSSH'
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=60 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'ENDSSH'
             set -e
             APP_DIR="/home/opc/programmersites"
             cd "$APP_DIR"
@@ -55,6 +66,6 @@ jobs:
 
       - name: Verify deployment
         run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'ENDSSH'
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'ENDSSH'
             /home/opc/programmersites/deploy.sh status || exit 1
           ENDSSH
