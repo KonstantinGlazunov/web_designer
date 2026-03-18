@@ -154,7 +154,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'Speicher Balkonkraftwerk',
           description: 'Лендинг для солнечных модулей и накопителей энергии. Мультиязычность, калькулятор, конверсионный CTA.',
-          image: '/visual-neural-grid.svg',
+          image: '/portfolio/speicher.png',
           tech: ['Next.js', 'Tailwind', 'i18n', 'Vercel'],
           size: 'lg',
           url: 'https://speicher-balkonkraftwerk.de/ru/',
@@ -162,7 +162,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'BewerbungProfi',
           description: 'AI-генератор сопроводительных писем для работы в Германии. OpenAI API, мультиязычность, PDF.',
-          image: '/visual-illustration.svg',
+          image: '/portfolio/bewerbungprofi.png',
           tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
           size: 'sm',
           url: 'https://bewerbungprofi.de/',
@@ -170,7 +170,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'Beauty Studio Lesya',
           description: 'Сайт бьюти-студии перманентного макияжа в Браунфельсе. Элегантный дизайн, галерея работ.',
-          image: '/visual-mesh-gradient.svg',
+          image: '/portfolio/lesia.png',
           tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
           size: 'sm',
           url: 'https://konstantinglazunov.github.io/-Lesia/',
@@ -178,7 +178,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'Dogs Services',
           description: 'Сервис для владельцев собак. Бронирование, каталог услуг, современный UI.',
-          image: '/visual-launch-scene.svg',
+          image: '/portfolio/dogs.png',
           tech: ['React', 'TypeScript', 'DigitalOcean'],
           size: 'lg',
           url: 'https://dog-app-iw6ow.ondigitalocean.app/',
@@ -307,7 +307,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'Speicher Balkonkraftwerk',
           description: 'Landing fuer Solar-Module und Energiespeicher. Mehrsprachig, Rechner, Conversion-CTA.',
-          image: '/visual-neural-grid.svg',
+          image: '/portfolio/speicher.png',
           tech: ['Next.js', 'Tailwind', 'i18n', 'Vercel'],
           size: 'lg',
           url: 'https://speicher-balkonkraftwerk.de/ru/',
@@ -315,7 +315,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'BewerbungProfi',
           description: 'KI-Generator fuer Bewerbungsanschreiben in Deutschland. OpenAI API, Mehrsprachigkeit, PDF.',
-          image: '/visual-illustration.svg',
+          image: '/portfolio/bewerbungprofi.png',
           tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
           size: 'sm',
           url: 'https://bewerbungprofi.de/',
@@ -323,7 +323,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'Beauty Studio Lesya',
           description: 'Website der Beauty-Studio fuer Permanent-Make-up in Braunfels. Elegantes Design, Galerie.',
-          image: '/visual-mesh-gradient.svg',
+          image: '/portfolio/lesia.png',
           tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
           size: 'sm',
           url: 'https://konstantinglazunov.github.io/-Lesia/',
@@ -331,7 +331,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'Dogs Services',
           description: 'Service fuer Hundebesitzer. Buchung, Leistungskatalog, modernes UI.',
-          image: '/visual-launch-scene.svg',
+          image: '/portfolio/dogs.png',
           tech: ['React', 'TypeScript', 'DigitalOcean'],
           size: 'lg',
           url: 'https://dog-app-iw6ow.ondigitalocean.app/',

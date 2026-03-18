@@ -34,7 +34,7 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
     return (
       <form
         onSubmit={handleSubmit}
-        className={isDark ? 'flex gap-2 border-t border-white/10 p-3' : 'flex gap-2 border-t border-slate-100 bg-white p-3'}
+        className={isDark ? 'flex shrink-0 gap-2 border-t border-white/10 p-3' : 'flex shrink-0 gap-2 border-t border-slate-100 bg-white p-3'}
       >
         <input
           ref={setRefs}

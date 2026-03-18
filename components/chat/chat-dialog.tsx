@@ -33,8 +33,8 @@ export function ChatDialog({ open, onClose, locale, theme }: ChatDialogProps) {
             <div
               className={
                 isDark
-                  ? 'mx-auto flex h-full max-h-[calc(100vh-3rem)] max-w-2xl flex-col overflow-hidden rounded-[24px] border border-white/12 bg-slate-950/95 shadow-[0_24px_120px_rgba(15,23,42,0.8)] backdrop-blur-2xl'
-                  : 'mx-auto flex h-full max-h-[calc(100vh-3rem)] max-w-2xl flex-col overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_25px_80px_-12px_rgba(0,0,0,0.12)]'
+                  ? 'mx-auto flex h-full max-h-[calc(100dvh-3rem)] max-w-2xl flex-col overflow-hidden rounded-[24px] border border-white/12 bg-slate-950/95 shadow-[0_24px_120px_rgba(15,23,42,0.8)] backdrop-blur-2xl'
+                  : 'mx-auto flex h-full max-h-[calc(100dvh-3rem)] max-w-2xl flex-col overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_25px_80px_-12px_rgba(0,0,0,0.12)]'
               }
             >
               <div

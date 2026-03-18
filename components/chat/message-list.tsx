@@ -33,8 +33,8 @@ export function MessageList({ messages, isTyping, quickReplies, onQuickReply, ot
     <div
       className={
         theme === 'dark'
-          ? 'flex flex-1 flex-col gap-3 overflow-y-auto px-2 py-4'
-          : 'flex flex-1 flex-col gap-3 overflow-y-auto bg-slate-50/50 px-2 py-4'
+          ? 'flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-contain px-2 py-4'
+          : 'flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-contain bg-slate-50/50 px-2 py-4'
       }
     >
       {messages.length > 0 && (

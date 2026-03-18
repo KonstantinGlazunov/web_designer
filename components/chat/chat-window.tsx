@@ -134,7 +134,7 @@ export function ChatWindow({ locale, theme, autoFocus }: ChatWindowProps) {
   )
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex min-h-0 flex-1 flex-col">
       <MessageList
         messages={displayMessages}
         isTyping={isTyping}
