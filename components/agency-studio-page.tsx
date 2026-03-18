@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { ChatFab } from '@/components/chat/chat-fab'
 import { ContactDialog } from '@/components/contact-dialog'
 import { QuizDialog } from '@/components/quiz-dialog'
 import { useSitePreferences } from '@/components/providers/site-preferences'
@@ -15,7 +16,7 @@ import { TechMarqueeSection } from '@/components/sections/tech-marquee-section'
 import { siteCopy } from '@/lib/translations'
 
 export function AgencyStudioPage() {
-  const { locale } = useSitePreferences()
+  const { locale, theme } = useSitePreferences()
   const [open, setOpen] = useState(false)
   const [quizOpen, setQuizOpen] = useState(false)
 
@@ -36,6 +37,7 @@ export function AgencyStudioPage() {
       <StickyCta copy={copy.stickyCta} onOpenForm={() => setQuizOpen(true)} />
       <QuizDialog open={quizOpen} onClose={() => setQuizOpen(false)} locale={locale} />
       <ContactDialog copy={copy.form} open={open} onClose={() => setOpen(false)} />
+      <ChatFab locale={locale} theme={theme} />
     </>
   )
 }

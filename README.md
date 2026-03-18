@@ -11,6 +11,20 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## AI-чат-бот
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Чат-бот собирает техническое задание (бриф) на разработку сайта через диалог с клиентом.
+
+### Переменные окружения (.env.local)
+
+Скопируйте `.env.local.example` в `.env.local` и заполните:
+
+- `OPENAI_API_KEY` — ключ OpenAI API
+- `TELEGRAM_BOT_TOKEN` — токен Telegram-бота
+- `TELEGRAM_CHAT_ID` — ID группы для уведомлений
+
+### API
+
+- `POST /api/chat` — отправка сообщения, получение ответа AI
+- `POST /api/finish` — завершение брифа, отправка в Telegram
+- `GET /api/session?sessionId=...` — получение истории сессии

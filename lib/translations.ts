@@ -160,20 +160,20 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           url: 'https://speicher-balkonkraftwerk.de/ru/',
         },
         {
-          title: 'Beauty Studio Lesya',
-          description: 'Сайт бьюти-студии перманентного макияжа в Браунфельсе. Элегантный дизайн, галерея работ.',
-          image: '/visual-mesh-gradient.svg',
-          tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
-          size: 'sm',
-          url: 'https://konstantinglazunov.github.io/-Lesia/',
-        },
-        {
           title: 'BewerbungProfi',
           description: 'AI-генератор сопроводительных писем для работы в Германии. OpenAI API, мультиязычность, PDF.',
           image: '/visual-illustration.svg',
           tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
           size: 'sm',
           url: 'https://bewerbungprofi.de/',
+        },
+        {
+          title: 'Beauty Studio Lesya',
+          description: 'Сайт бьюти-студии перманентного макияжа в Браунфельсе. Элегантный дизайн, галерея работ.',
+          image: '/visual-mesh-gradient.svg',
+          tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
+          size: 'sm',
+          url: 'https://konstantinglazunov.github.io/-Lesia/',
         },
         {
           title: 'Dogs Services',
@@ -313,20 +313,20 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           url: 'https://speicher-balkonkraftwerk.de/ru/',
         },
         {
-          title: 'Beauty Studio Lesya',
-          description: 'Website der Beauty-Studio fuer Permanent-Make-up in Braunfels. Elegantes Design, Galerie.',
-          image: '/visual-mesh-gradient.svg',
-          tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
-          size: 'sm',
-          url: 'https://konstantinglazunov.github.io/-Lesia/',
-        },
-        {
           title: 'BewerbungProfi',
           description: 'KI-Generator fuer Bewerbungsanschreiben in Deutschland. OpenAI API, Mehrsprachigkeit, PDF.',
           image: '/visual-illustration.svg',
           tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
           size: 'sm',
           url: 'https://bewerbungprofi.de/',
+        },
+        {
+          title: 'Beauty Studio Lesya',
+          description: 'Website der Beauty-Studio fuer Permanent-Make-up in Braunfels. Elegantes Design, Galerie.',
+          image: '/visual-mesh-gradient.svg',
+          tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
+          size: 'sm',
+          url: 'https://konstantinglazunov.github.io/-Lesia/',
         },
         {
           title: 'Dogs Services',
@@ -387,5 +387,38 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       },
       socials: 'Socials',
     },
+  },
+}
+
+export const chatCopy: Record<Locale, {
+  initialGreeting: string
+  initialOptions: string[]
+  placeholder: string
+  submitButton: string
+  other: string
+  emptyHint: string
+  dialogTitle: string
+}> = {
+  ru: {
+    initialGreeting: `Привет! Давайте немного поговорим о вашем будущем сайте. 🙂
+
+Вам нужен сайт?`,
+    initialOptions: ['Да, хочу сайт', 'Пока смотрю', 'Есть вопрос', 'Другое'],
+    placeholder: 'Напишите сообщение...',
+    submitButton: 'Отправить',
+    other: 'Другое',
+    emptyHint: 'Напишите первое сообщение — Guidi поможет собрать техническое задание на сайт.',
+    dialogTitle: 'Guidi',
+  },
+  de: {
+    initialGreeting: `Hallo! Lassen Sie uns kurz über Ihre zukünftige Website sprechen. 🙂
+
+Brauchen Sie eine Website?`,
+    initialOptions: ['Ja, ich möchte eine Website', 'Schauen nur', 'Habe eine Frage', 'Anderes'],
+    placeholder: 'Nachricht schreiben...',
+    submitButton: 'Senden',
+    other: 'Anderes',
+    emptyHint: 'Schreiben Sie die erste Nachricht — Guidi hilft beim Sammeln der technischen Anforderungen.',
+    dialogTitle: 'Guidi',
   },
 }
