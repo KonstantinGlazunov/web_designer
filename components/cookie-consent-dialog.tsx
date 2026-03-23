@@ -100,7 +100,7 @@ function CookieConsentDialogBody() {
     <Dialog as="div" className="relative z-[60]" onClose={closeDialog} open>
           <DialogBackdrop
             as={motion.div}
-            className="fixed inset-0 bg-slate-950/50 backdrop-blur-sm"
+            className="fixed inset-0 bg-slate-950/28 backdrop-blur-[1px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -112,7 +112,7 @@ function CookieConsentDialogBody() {
                 initial={{ opacity: 0, y: 18, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 18, scale: 0.98 }}
-                className="w-full max-w-lg overflow-hidden rounded-[28px] border border-white/10 bg-white/90 p-6 shadow-2xl backdrop-blur-xl dark:bg-slate-950/70 sm:p-7"
+                className="w-full max-w-lg overflow-hidden rounded-[28px] border border-white/16 bg-white/80 p-6 shadow-2xl backdrop-blur-md dark:bg-slate-950/58 sm:p-7"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -177,4 +177,3 @@ export function CookieConsentDialog() {
     </AnimatePresence>
   )
 }
-

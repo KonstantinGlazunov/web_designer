@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 const TYPING_SPEED_MS = 28
+const MAX_ANIMATED_MESSAGE_LENGTH = 320
 
 interface MessageItemProps {
   role: 'user' | 'assistant'
@@ -20,8 +21,11 @@ export function MessageItem({ role, content, theme = 'dark', animateIn, onTyping
   const [displayedContent, setDisplayedContent] = useState(animateIn ? '' : content)
 
   useEffect(() => {
-    if (!animateIn) {
+    if (!animateIn || content.length > MAX_ANIMATED_MESSAGE_LENGTH) {
       setDisplayedContent(content)
+      if (animateIn && content.length > MAX_ANIMATED_MESSAGE_LENGTH) {
+        onTypingComplete?.()
+      }
       return
     }
     setDisplayedContent('')

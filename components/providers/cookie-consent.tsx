@@ -46,17 +46,6 @@ function coerceStored(value: unknown): CookieConsentState | null {
   return { necessary: true, analytics: v.analytics, marketing: v.marketing, updatedAt: v.updatedAt }
 }
 
-function readStored(): CookieConsentState | null {
-  if (typeof window === 'undefined') return null
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY)
-    if (!raw) return null
-    return coerceStored(JSON.parse(raw))
-  } catch {
-    return null
-  }
-}
-
 function writeStored(state: CookieConsentState) {
   if (typeof window === 'undefined') return
   try {
@@ -166,4 +155,3 @@ export function useCookieConsent() {
   if (!ctx) throw new Error('useCookieConsent must be used within CookieConsentProvider')
   return ctx
 }
-

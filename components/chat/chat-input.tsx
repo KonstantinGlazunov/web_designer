@@ -8,10 +8,14 @@ interface ChatInputProps {
   placeholder?: string
   submitButton?: string
   theme?: 'light' | 'dark'
+  onFocusChange?: (focused: boolean) => void
 }
 
 export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
-  function ChatInput({ onSend, disabled, placeholder = 'Напишите сообщение...', submitButton = 'Отправить', theme = 'dark' }, ref) {
+  function ChatInput(
+    { onSend, disabled, placeholder = 'Напишите сообщение...', submitButton = 'Отправить', theme = 'dark', onFocusChange },
+    ref
+  ) {
     const inputRef = useRef<HTMLInputElement>(null)
     const setRefs = (el: HTMLInputElement | null) => {
       ;(inputRef as React.MutableRefObject<HTMLInputElement | null>).current = el
@@ -21,9 +25,9 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
       e.preventDefault()
-      const value = inputRef.current?.value?.trim()
-      if (!value || disabled) return
-      onSend(value)
+      const nextValue = inputRef.current?.value?.trim()
+      if (!nextValue || disabled) return
+      onSend(nextValue)
       if (inputRef.current) {
         inputRef.current.value = ''
       }
@@ -41,6 +45,13 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
           type="text"
           placeholder={placeholder}
           disabled={disabled}
+          aria-label={placeholder}
+          autoComplete="off"
+          autoCorrect="on"
+          autoCapitalize="sentences"
+          enterKeyHint="send"
+          onFocus={() => onFocusChange?.(true)}
+          onBlur={() => onFocusChange?.(false)}
           className={
             isDark
               ? 'flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-300/40 disabled:opacity-50'
@@ -50,6 +61,7 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
         <button
           type="submit"
           disabled={disabled}
+          aria-label={submitButton}
           className="rounded-xl bg-emerald-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-400 disabled:opacity-50"
         >
           {submitButton}

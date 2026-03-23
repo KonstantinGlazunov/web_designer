@@ -400,10 +400,11 @@ export const chatCopy: Record<Locale, {
   dialogTitle: string
 }> = {
   ru: {
-    initialGreeting: `Привет! Давайте немного поговорим о вашем будущем сайте. 🙂
+    initialGreeting: `Здравствуйте!
+Меня зовут Guidi, я помогаю малому бизнесу в Германии получать клиентов через сайты.
 
-Вам нужен сайт?`,
-    initialOptions: ['Да, хочу сайт', 'Пока смотрю', 'Есть вопрос', 'Другое'],
+Подскажите, пожалуйста, как я могу к вам обращаться?`,
+    initialOptions: [],
     placeholder: 'Напишите сообщение...',
     submitButton: 'Отправить',
     other: 'Другое',
@@ -411,10 +412,11 @@ export const chatCopy: Record<Locale, {
     dialogTitle: 'Guidi',
   },
   de: {
-    initialGreeting: `Hallo! Lassen Sie uns kurz über Ihre zukünftige Website sprechen. 🙂
+    initialGreeting: `Guten Tag!
+Ich bin Guidi und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen.
 
-Brauchen Sie eine Website?`,
-    initialOptions: ['Ja, ich möchte eine Website', 'Schauen nur', 'Habe eine Frage', 'Anderes'],
+Wie darf ich Sie ansprechen?`,
+    initialOptions: [],
     placeholder: 'Nachricht schreiben...',
     submitButton: 'Senden',
     other: 'Anderes',

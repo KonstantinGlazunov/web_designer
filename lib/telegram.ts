@@ -13,11 +13,19 @@ function getToken(): string {
   return token
 }
 
+function getChatId(): string {
+  const chatId = process.env.TELEGRAM_CHAT_ID
+  if (!chatId) {
+    console.warn('[Telegram] TELEGRAM_CHAT_ID not set')
+    return ''
+  }
+  return chatId
+}
+
 async function sendMessage(text: string, replyMarkup?: object): Promise<boolean> {
   const token = getToken()
-  if (!token) return false
-
-  const chatId = process.env.TELEGRAM_CHAT_ID || '-5143321122'
+  const chatId = getChatId()
+  if (!token || !chatId) return false
 
   try {
     const res = await fetch(`${TELEGRAM_API}${token}/sendMessage`, {

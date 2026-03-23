@@ -18,7 +18,9 @@ export function ChatFab({ locale, theme }: ChatFabProps) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg transition hover:scale-105 hover:bg-emerald-400"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        className="fixed bottom-[calc(6rem+env(safe-area-inset-bottom))] right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg transition hover:scale-105 hover:bg-emerald-400"
         aria-label={locale === 'de' ? 'Chat mit Guidi öffnen' : 'Открыть чат с Guidi'}
       >
         <MessageCircle className="h-6 w-6" />

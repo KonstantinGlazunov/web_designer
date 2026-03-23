@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSession, updateSession } from '@/lib/session-store'
 import { sendReadyBrief } from '@/lib/telegram'
+import { isValidSessionId } from '@/lib/request-validation'
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { sessionId } = body as { sessionId?: string }
 
-    if (!sessionId) {
+    if (!isValidSessionId(sessionId)) {
       return NextResponse.json({ error: 'sessionId required' }, { status: 400 })
     }
 

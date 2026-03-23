@@ -28,10 +28,15 @@ export function ContactDialog({ open, onClose, copy }: ContactDialogProps) {
     setSubmitted(true)
   }
 
+  function handleClose() {
+    setSubmitted(false)
+    onClose()
+  }
+
   return (
     <AnimatePresence>
       {open ? (
-        <Dialog as="div" className="relative z-[90]" open={open} onClose={onClose}>
+        <Dialog as="div" className="relative z-[90]" open={open} onClose={handleClose}>
           <DialogBackdrop
             as={motion.div}
             initial={{ opacity: 0 }}
@@ -53,7 +58,7 @@ export function ContactDialog({ open, onClose, copy }: ContactDialogProps) {
                     <h3 className="text-2xl font-semibold text-white">{copy.title}</h3>
                     <p className="mt-2 text-sm text-slate-300">{copy.subtitle}</p>
                   </div>
-                  <Button variant="ghost" onClick={onClose}>
+                  <Button variant="ghost" onClick={handleClose}>
                     {copy.close}
                   </Button>
                 </div>
@@ -100,7 +105,7 @@ export function ContactDialog({ open, onClose, copy }: ContactDialogProps) {
                       Email
                     </a>
                   </div>
-                  {submitted ? <p className="text-sm text-emerald-300">{copy.success}</p> : null}
+                  {submitted ? <p className="text-sm text-emerald-300" aria-live="polite">{copy.success}</p> : null}
                 </form>
               </DialogPanel>
             </div>

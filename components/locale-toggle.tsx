@@ -17,6 +17,8 @@ export function LocaleToggle() {
             key={value}
             type="button"
             onClick={() => setLocale(value)}
+            aria-pressed={active}
+            aria-label={value === 'de' ? 'Deutsch' : 'Русский'}
             className={`rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] transition ${
               active ? 'bg-white text-slate-950' : 'text-slate-200 hover:text-white'
             }`}

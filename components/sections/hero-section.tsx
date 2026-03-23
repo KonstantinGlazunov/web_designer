@@ -20,14 +20,15 @@ interface HeroSectionProps {
 
 export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
   return (
-    <section className="relative min-h-screen overflow-hidden px-4 pb-16 pt-6 sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute inset-0 bg-organic-gradient opacity-90" />
-      <div className="pointer-events-none absolute -left-10 top-12 h-56 w-56 rounded-full bg-sky-400/30 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 top-24 h-72 w-72 rounded-full bg-violet-500/25 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-16 left-1/3 h-56 w-56 rounded-full bg-emerald-400/20 blur-3xl" />
+    <section className="relative min-h-[100svh] overflow-x-clip overflow-y-hidden px-4 pb-10 pt-4 sm:min-h-screen sm:px-6 sm:pb-16 sm:pt-6 lg:px-8">
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <HeroScene mode="background" className="h-full" />
+      </div>
+      <div className="hero-aurora pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_20%_22%,rgba(56,189,248,0.3),transparent_40%),radial-gradient(circle_at_78%_26%,rgba(139,92,246,0.32),transparent_42%),radial-gradient(circle_at_48%_72%,rgba(16,185,129,0.26),transparent_44%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(180deg,rgba(2,6,23,0.04)_0%,rgba(2,6,23,0.12)_55%,rgba(2,6,23,0.18)_100%)]" />
 
-      <div className="relative mx-auto flex max-w-7xl flex-col">
-        <div className="mb-10 flex items-center justify-between gap-4 rounded-full border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl">
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col">
+        <div className="mb-6 flex items-center justify-between gap-3 rounded-full border border-white/15 bg-white/10 px-3 py-2.5 backdrop-blur-xl sm:mb-10 sm:gap-4 sm:px-4 sm:py-3">
           <div className="flex items-center gap-2 text-sm font-semibold text-white">
             <Sparkles className="h-4 w-4 text-emerald-300" />
             CodeVibe Studio
@@ -38,8 +39,7 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
           </div>
         </div>
 
-        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-          <div>
+        <div className="max-w-4xl">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -53,7 +53,7 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.05 }}
-              className="mt-6 max-w-5xl text-balance text-[clamp(4rem,10vw,8rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-white"
+              className="mt-4 max-w-5xl text-balance text-[clamp(2.4rem,13vw,8rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white sm:mt-6 sm:tracking-[-0.06em]"
             >
               {copy.hero.title}
             </motion.h1>
@@ -62,7 +62,7 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.1 }}
-              className="mt-6 max-w-2xl text-base leading-8 text-slate-100/90 md:text-xl"
+              className="mt-4 max-w-2xl text-sm leading-6 text-slate-100/90 sm:mt-6 sm:text-base sm:leading-8 md:text-xl"
             >
               {copy.hero.subtitle}
             </motion.p>
@@ -71,7 +71,7 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.16 }}
-              className="mt-8 flex flex-wrap gap-4"
+              className="mt-6 flex flex-wrap gap-3 sm:mt-8 sm:gap-4"
             >
               <Button size="lg" onClick={onOpenForm}>
                 {copy.hero.ctaPrimary}
@@ -85,35 +85,19 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
               </Link>
             </motion.div>
 
-            <div className="mt-10 grid gap-3 md:max-w-2xl md:grid-cols-3">
+            <div className="mt-6 grid gap-2.5 md:mt-10 md:max-w-2xl md:grid-cols-3 md:gap-3">
               {copy.hero.proofPoints.map((point, index) => (
                 <motion.div
                   key={point}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.18 + index * 0.08 }}
-                  className="rounded-[26px] border border-white/15 bg-white/10 px-4 py-4 text-sm text-slate-100 backdrop-blur-xl"
+                  className="rounded-[22px] border border-white/15 bg-white/10 px-3 py-3 text-xs text-slate-100 backdrop-blur-xl sm:rounded-[26px] sm:px-4 sm:py-4 sm:text-sm"
                 >
                   {point}
                 </motion.div>
               ))}
             </div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.12 }}
-            className="relative"
-          >
-            <HeroScene />
-            <div className="absolute -bottom-6 -left-2 max-w-[14rem] rounded-[28px] border border-white/12 bg-white/10 p-4 backdrop-blur-xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">
-                {copy.hero.floatingCardTitle}
-              </p>
-              <p className="mt-2 text-sm leading-6 text-white/90">{copy.hero.floatingCardText}</p>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

@@ -33,9 +33,10 @@ interface ChatWindowProps {
   locale: Locale
   theme: 'light' | 'dark'
   autoFocus?: boolean
+  onInputFocusChange?: (focused: boolean) => void
 }
 
-export function ChatWindow({ locale, theme, autoFocus }: ChatWindowProps) {
+export function ChatWindow({ locale, theme, autoFocus, onInputFocusChange }: ChatWindowProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const [typingMessageIndex, setTypingMessageIndex] = useState<number | null>(null)
@@ -44,30 +45,51 @@ export function ChatWindow({ locale, theme, autoFocus }: ChatWindowProps) {
   const [quickRepliesDismissed, setQuickRepliesDismissed] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const chatCopyLocale = useMemo(() => chatCopy[locale], [locale])
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const check = () => {
+      setIsMobile(window.innerWidth < 640)
+    }
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     if (messages.length === 0 && sessionLoaded) setTypingMessageIndex(0)
   }, [messages.length, sessionLoaded])
 
   useEffect(() => {
-    if (autoFocus) {
+    if (autoFocus && !isMobile) {
       const timer = setTimeout(() => inputRef.current?.focus(), 200)
       return () => clearTimeout(timer)
     }
-  }, [autoFocus])
+  }, [autoFocus, isMobile])
 
   useEffect(() => {
-    fetch(`/api/session?sessionId=${encodeURIComponent(sessionId)}`)
+    const controller = new AbortController()
+
+    fetch(`/api/session?sessionId=${encodeURIComponent(sessionId)}`, { signal: controller.signal })
       .then((r) => r.json())
       .then((data) => {
         if (data.messages?.length) setMessages(data.messages)
       })
-      .catch(() => {})
+      .catch((error: unknown) => {
+        if ((error as { name?: string })?.name !== 'AbortError') {
+          console.error('[Chat] Session restore failed', error)
+        }
+      })
       .finally(() => setSessionLoaded(true))
+
+    return () => controller.abort()
   }, [sessionId])
 
   const sendMessage = useCallback(async (text: string) => {
-    const userMsg: ChatMessage = { role: 'user', content: text }
+    const trimmed = text.trim()
+    if (!trimmed) return
+    const userMsg: ChatMessage = { role: 'user', content: trimmed }
     setMessages((prev) => [...prev, userMsg])
     setIsTyping(true)
 
@@ -75,7 +97,7 @@ export function ChatWindow({ locale, theme, autoFocus }: ChatWindowProps) {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId, message: text, locale }),
+        body: JSON.stringify({ sessionId, message: trimmed, locale }),
       })
 
       const data = await res.json()
@@ -99,11 +121,13 @@ export function ChatWindow({ locale, theme, autoFocus }: ChatWindowProps) {
         ...prev,
         { role: 'assistant', content: (locale === 'de' ? 'Fehler: ' : 'Ошибка: ') + errMsg + (locale === 'de' ? ' Bitte versuchen Sie es später.' : '. Попробуйте позже.') },
       ])
-      setTimeout(() => inputRef.current?.focus(), 0)
+      if (!isMobile) {
+        setTimeout(() => inputRef.current?.focus(), 0)
+      }
     } finally {
       setIsTyping(false)
     }
-  }, [sessionId, locale])
+  }, [sessionId, locale, isMobile])
 
   const displayMessages = messages.length === 0 ? [getInitialGreeting(locale)] : messages
   const lastMsg = displayMessages[displayMessages.length - 1]
@@ -118,8 +142,17 @@ export function ChatWindow({ locale, theme, autoFocus }: ChatWindowProps) {
 
   const handleTypingComplete = useCallback(() => {
     setTypingMessageIndex(null)
-    setTimeout(() => inputRef.current?.focus(), 0)
-  }, [])
+    if (!isMobile) {
+      setTimeout(() => inputRef.current?.focus(), 0)
+    }
+  }, [isMobile])
+
+  const handleInputFocusChange = useCallback(
+    (focused: boolean) => {
+      onInputFocusChange?.(focused)
+    },
+    [onInputFocusChange]
+  )
 
   const handleQuickReply = useCallback(
     (text: string) => {
@@ -140,12 +173,19 @@ export function ChatWindow({ locale, theme, autoFocus }: ChatWindowProps) {
         isTyping={isTyping}
         quickReplies={quickReplies}
         onQuickReply={handleQuickReply}
-        otherLabel={chatCopyLocale.other}
         theme={theme}
         typingMessageIndex={typingMessageIndex}
         onTypingComplete={handleTypingComplete}
       />
-      <ChatInput ref={inputRef} onSend={sendMessage} disabled={isTyping} placeholder={chatCopyLocale.placeholder} submitButton={chatCopyLocale.submitButton} theme={theme} />
+      <ChatInput
+        ref={inputRef}
+        onSend={sendMessage}
+        disabled={isTyping}
+        placeholder={chatCopyLocale.placeholder}
+        submitButton={chatCopyLocale.submitButton}
+        theme={theme}
+        onFocusChange={handleInputFocusChange}
+      />
     </div>
   )
 }

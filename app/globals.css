@@ -42,12 +42,61 @@ html.dark body {
   animation: marquee 22s linear infinite;
 }
 
+.hero-aurora {
+  background-size: 220% 220%;
+  animation: hero-aurora-shift 9.5s ease-in-out infinite;
+}
+
+.hero-scan {
+  animation: hero-scan-sweep 4.6s linear infinite;
+}
+
+.hero-pulse {
+  animation: hero-pulse-glow 4.4s ease-in-out infinite;
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0%);
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes hero-aurora-shift {
+  0% {
+    background-position: 0% 35%;
+  }
+  50% {
+    background-position: 100% 65%;
+  }
+  100% {
+    background-position: 0% 35%;
+  }
+}
+
+@keyframes hero-scan-sweep {
+  0% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes hero-pulse-glow {
+  0% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 0.12;
+    transform: scale(1);
   }
 }
 
@@ -58,5 +107,11 @@ html.dark body {
 
   .marquee {
     animation: none;
+  }
+
+  .hero-aurora,
+  .hero-scan,
+  .hero-pulse {
+    animation-duration: 12s;
   }
 }

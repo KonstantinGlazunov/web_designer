@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSession } from '@/lib/session-store'
+import { isValidSessionId } from '@/lib/request-validation'
 
 export async function GET(req: NextRequest) {
   const sessionId = req.nextUrl.searchParams.get('sessionId')
-  if (!sessionId) {
+  if (!isValidSessionId(sessionId)) {
     return NextResponse.json({ error: 'sessionId required' }, { status: 400 })
   }
 

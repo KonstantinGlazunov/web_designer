@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { normalizeLongText } from '@/lib/request-validation'
 import { escapeHtmlForTelegram, sendQuizMessage } from '@/lib/telegram'
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { text, locale } = body as { text?: string; locale?: string }
+    const normalizedText = normalizeLongText(text)
 
-    if (!text || typeof text !== 'string' || !text.trim()) {
+    if (!normalizedText) {
       return NextResponse.json({ error: 'text required' }, { status: 400 })
     }
 
@@ -15,7 +17,7 @@ export async function POST(req: NextRequest) {
         ? '🧩 <b>Neue Quiz-Anfrage</b>'
         : '🧩 <b>Новый квиз-запрос</b>'
 
-    const payload = `${header}\n\n<pre>${escapeHtmlForTelegram(text)}</pre>`
+    const payload = `${header}\n\n<pre>${escapeHtmlForTelegram(normalizedText)}</pre>`
 
     const ok = await sendQuizMessage(payload)
     if (!ok) {
@@ -34,5 +36,4 @@ export async function POST(req: NextRequest) {
     )
   }
 }
-
 

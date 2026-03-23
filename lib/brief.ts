@@ -5,17 +5,22 @@ export interface Brief {
   contact: { name: string; phone: string; email: string }
   business: { type: string; description: string; location: string }
   goals: string[]
+  pain_points: string[]
   target_audience: string
   services: string[]
   usp: string
   competitors: string[]
   sales_funnel: string
   traffic_sources: string[]
+  materials: string[]
+  profiles: string[]
   features: string[]
+  extra_features: string[]
   design: { style: string; references: string[] }
   content: { has_texts: boolean; has_images: boolean }
   tech: { domain: boolean; hosting: boolean }
   seo: { needed: boolean; ads: boolean }
+  legal: { dsgvo: string }
   languages: string[]
   budget: { range: string }
   deadline: string
@@ -28,17 +33,22 @@ export const emptyBrief: Brief = {
   contact: { name: '', phone: '', email: '' },
   business: { type: '', description: '', location: '' },
   goals: [],
+  pain_points: [],
   target_audience: '',
   services: [],
   usp: '',
   competitors: [],
   sales_funnel: '',
   traffic_sources: [],
+  materials: [],
+  profiles: [],
   features: [],
+  extra_features: [],
   design: { style: '', references: [] },
   content: { has_texts: false, has_images: false },
   tech: { domain: false, hosting: false },
   seo: { needed: false, ads: false },
+  legal: { dsgvo: '' },
   languages: [],
   budget: { range: '' },
   deadline: '',
