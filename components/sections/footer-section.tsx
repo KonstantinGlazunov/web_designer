@@ -9,7 +9,7 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
     <footer id="contact" className="px-4 pb-28 pt-16 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 rounded-[32px] border border-white/12 bg-white/70 p-8 shadow-glow backdrop-blur-xl dark:bg-glass-dark/75 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-400">CodeVibe Studio</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-400">Vibe Studio</p>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">
             {copy.description}
           </p>

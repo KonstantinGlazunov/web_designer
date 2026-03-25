@@ -2,7 +2,7 @@ import { LegalPageLayout } from '@/components/legal-page-layout'
 
 export default function ImpressumPage() {
   return (
-    <LegalPageLayout eyebrow="Impressum" title="CodeVibe Studio">
+    <LegalPageLayout eyebrow="Impressum" title="Vibe Studio">
       <section>
         <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Angaben gemaess Paragraf 5 TMG</h2>
         <div className="mt-4 space-y-1">

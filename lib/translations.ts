@@ -92,64 +92,64 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       contact: 'Контакт',
     },
     hero: {
-      badge: 'Next.js 15 + motion + 3D',
-      title: 'CodeVibe Studio: Современные сайты для вашего бизнеса',
+      badge: 'Современный сайт для бизнеса',
+      title: 'Vibe Studio: Современные сайты для вашего бизнеса',
       subtitle:
-        'Next.js, Tailwind, AI-персонализация, 3D и чистая продуктовая инженерия для брендов, SaaS и e-commerce.',
+        'Делаю сайты, которые хорошо выглядят, подстраиваются под размер экрана, удобно работают на мобильном телефоне и помогают клиенту быстро связаться с вами.',
       ctaPrimary: 'Начать проект',
       ctaSecondary: 'Смотреть работы',
       proofPoints: [
-        'Senior-level frontend engineering',
-        'Тренды дизайна 2026 без шаблонности',
-        'Deploy-ready сайты на современном стеке',
+        'Дизайн адаптируется под размер экрана',
+        'Удобно пользоваться на мобильном телефоне',
+        'Связка с вашим мессенджером, почтой или CRM',
       ],
       floatingCardTitle: 'Vibe-driven workflow',
-      floatingCardText: 'От визуального вайба до production deployment без перегруза клиента.',
+      floatingCardText: 'От идеи до готового сайта без лишней технической сложности для клиента.',
     },
     about: {
       eyebrow: 'Обо мне',
-      title: 'Я подключаюсь как инженер и партнёр, а не просто “исполнитель”',
+      title: 'Я помогаю не только сделать сайт, но и собрать понятное решение под ваш бизнес',
       subtitle:
-        'На старте фиксируем цель, аудиторию и критерии успеха — чтобы дизайн, тексты и разработка работали на результат.',
+        'Сначала разбираемся, что вам действительно нужно: больше заявок, удобная запись, понятная подача услуг или простой способ связи.',
       bullets: [
-        'Созваниваемся и уточняем задачу (scope, сроки, референсы)',
-        'Предлагаю структуру и UX-логику, согласуем направление',
-        'Делаю реализацию и довожу до деплоя (скорость, SEO, адаптивность)',
+        'Обсуждаем задачу, сроки и то, как должен работать сайт',
+        'Собираю понятную структуру страниц и удобный путь для клиента',
+        'Довожу сайт до готового рабочего состояния и запуска',
       ],
     },
     services: {
-      eyebrow: 'Services',
-      title: 'Услуги, которые выглядят современно и работают на бизнес',
+      eyebrow: 'Услуги',
+      title: 'Что можно сделать для вашего сайта',
       subtitle:
-        'Каждый проект собирается под задачу, а не под ограничения билдера или готовой темы.',
+        'Подбираю решение под ваш бизнес: без лишнего, но с тем, что действительно нужно клиентам.',
       items: [
         {
-          title: 'Landing Pages',
-          description: 'Конверсионные лендинги с сильной типографикой, motion и четким CTA.',
+          title: 'Сайт для одной услуги или предложения',
+          description: 'Подходит, если нужно коротко и понятно показать услугу, преимущества и способ связи.',
           image: '/visual-neural-grid.svg',
         },
         {
-          title: 'E-commerce',
-          description: 'Современные магазины и product pages с премиальной подачей и UX.',
+          title: 'Интернет-магазин',
+          description: 'Если вы продаете товары, можно сделать удобный каталог, карточки товара и понятный путь к покупке.',
           image: '/visual-launch-scene.svg',
         },
         {
-          title: 'SaaS Dashboards',
-          description: 'Интерфейсы для продуктов, кабинетов и data-driven сценариев.',
+          title: 'Сайт компании или студии',
+          description: 'Чтобы красиво показать услуги, работы, отзывы, ответы на вопросы и контакты.',
           image: '/visual-workspace.svg',
         },
         {
-          title: 'AI-персонализация',
-          description: 'Флоу и UI под AI-опыт, smart onboarding и персонализированные блоки.',
+          title: 'Формы, запись и связь с клиентом',
+          description: 'Можно добавить запись, форму заявки, кнопку в мессенджер или связку с почтой и CRM.',
           image: '/visual-illustration.svg',
         },
       ],
     },
     portfolio: {
       eyebrow: 'Portfolio',
-      title: 'Работы, где видно engineering + визуальный уровень',
+      title: 'Примеры сайтов',
       subtitle:
-        'Masonry-сетка с hover reveal: каждая карточка подчеркивает стек, дизайн и подачу.',
+        'Здесь можно посмотреть, как выглядят сайты для разных ниш и задач.',
       items: [
         {
           title: 'Speicher Balkonkraftwerk',
@@ -187,29 +187,29 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     },
     process: {
       eyebrow: 'Process',
-      title: 'От дизайн-вайба до деплоя без лишней сложности',
+      title: 'Как проходит работа',
       subtitle:
-        'Понятный процесс для клиента и быстрый production pipeline для реализации.',
+        'Все по шагам и понятным языком, без лишней путаницы и сложных терминов.',
       steps: [
         {
-          title: 'Дизайн вайб',
-          description: 'Определяем подачу, настроение, структуру и визуальную логику сайта.',
+          title: 'Понимаем задачу',
+          description: 'Смотрим, что именно должен делать сайт: привлекать заявки, записывать клиентов или просто понятно рассказывать о вас.',
         },
         {
-          title: 'Vibe coding',
-          description: 'Собираю интерфейс, motion, адаптивность и frontend-архитектуру.',
+          title: 'Собираем сайт',
+          description: 'Делаю страницы, настраиваю дизайн под мобильный телефон и добавляю нужные способы связи.',
         },
         {
-          title: 'Deploy Vercel/Netlify',
-          description: 'Запуск, оптимизация, публикация и готовая ссылка на ваш проект.',
+          title: 'Запускаем',
+          description: 'Проверяю, чтобы все работало, и передаю вам готовый сайт с рабочей ссылкой.',
         },
       ],
     },
     stack: {
-      eyebrow: 'Tech stack',
-      title: 'Инструменты, на которых строятся современные digital-продукты',
-      subtitle: 'Next.js, motion, 3D, UI systems и deploy pipeline в одном современном стеке.',
-      items: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'Supabase', 'Vercel', 'shadcn/ui'],
+      eyebrow: 'Что получает клиент',
+      title: 'Не набор технологий, а понятный результат',
+      subtitle: 'Сайт работает быстро, хорошо смотрится на разных экранах и помогает клиенту легко с вами связаться.',
+      items: ['Адаптация под мобильный телефон', 'Понятная структура страниц', 'Форма заявки', 'Связка с мессенджером', 'Почта или CRM', 'Быстрая загрузка', 'Удобное обновление сайта'],
     },
     stickyCta: {
       text: 'Готовы к проекту? Пиши сейчас',
@@ -224,9 +224,10 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       submit: 'Отправить',
       close: 'Закрыть',
       success: 'Сообщение готово. Следующий шаг: согласовать scope и старт.',
+      
     },
     footer: {
-      description: 'CodeVibe Studio создает современные сайты и продуктовые интерфейсы без шаблонного ощущения.',
+      description: 'Vibe Studio делает понятные и современные сайты для малого бизнеса.',
       legal: {
         agb: 'AGB',
         privacy: 'Datenschutzerklaerung',
@@ -245,64 +246,64 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       contact: 'Kontakt',
     },
     hero: {
-      badge: 'Next.js 15 + Motion + 3D',
-      title: 'CodeVibe Studio: Moderne Websites fuer Ihr Business',
+      badge: 'Moderne Website fuer Ihr Business',
+      title: 'Vibe Studio: Moderne Websites fuer Ihr Business',
       subtitle:
-        'Next.js, Tailwind, AI-Personalisierung, 3D und saubere Produktentwicklung fuer Brands, SaaS und E-Commerce.',
+        'Ich baue Websites, die gut aussehen, sich an jede Bildschirmgroesse anpassen, auf dem Handy angenehm zu bedienen sind und Kunden den schnellen Kontakt zu Ihnen ermoeglichen.',
       ctaPrimary: 'Projekt starten',
       ctaSecondary: 'Portfolio ansehen',
       proofPoints: [
-        'Senior Frontend Engineering',
-        'Designtrends 2026 ohne Baukasten-Look',
-        'Deploy-ready Websites mit modernem Stack',
+        'Passt sich an jede Bildschirmgroesse an',
+        'Einfach auf dem Handy zu nutzen',
+        'Verbindung mit Messenger, E-Mail oder CRM',
       ],
       floatingCardTitle: 'Vibe-driven workflow',
-      floatingCardText: 'Vom visuellen Konzept bis zum produktiven Deployment ohne technische Last fuer den Kunden.',
+      floatingCardText: 'Von der Idee bis zur fertigen Website ohne unnoetige technische Komplexitaet fuer den Kunden.',
     },
     about: {
       eyebrow: 'Ueber mich',
-      title: 'Ich arbeite als Engineer und Partner — nicht nur als “Umsetzer”',
+      title: 'Ich helfe nicht nur beim Bauen, sondern finde mit Ihnen eine verstaendliche Loesung fuer Ihr Geschaeft',
       subtitle:
-        'Zum Start klaeren wir Ziel, Zielgruppe und Erfolgskriterien, damit Design, Text und Entwicklung messbar wirken.',
+        'Zu Beginn klaeren wir, was Ihre Website wirklich leisten soll: mehr Anfragen, online Termine, bessere Praesentation oder eine einfache Kontaktmoeglichkeit.',
       bullets: [
-        'Kickoff-Call: Scope, Timeline und Referenzen',
-        'Struktur & UX-Logik vorschlagen, Richtung abstimmen',
-        'Umsetzung bis Deployment (Performance, SEO, Responsivitaet)',
+        'Wir besprechen Ziel, Umfang und den Ablauf',
+        'Ich plane eine klare Seitenstruktur und einen einfachen Weg fuer Ihre Kunden',
+        'Ich setze die Website um und bringe sie live',
       ],
     },
     services: {
       eyebrow: 'Services',
-      title: 'Leistungen mit modernem Look und echtem Business-Fokus',
+      title: 'Was ich fuer Ihre Website umsetzen kann',
       subtitle:
-        'Jedes Projekt wird individuell gebaut, nicht durch die Grenzen eines Website-Builders bestimmt.',
+        'Die Loesung wird auf Ihr Geschaeft zugeschnitten: ohne Ballast, aber mit allem, was Ihre Kunden brauchen.',
       items: [
         {
-          title: 'Landing Pages',
-          description: 'Conversion-orientierte Seiten mit starker Typografie, Motion und klaren CTA-Strukturen.',
+          title: 'Website fuer ein Angebot oder eine Dienstleistung',
+          description: 'Gut geeignet, wenn Sie ein Angebot klar erklaeren und Kunden schnell zur Anfrage fuehren moechten.',
           image: '/visual-neural-grid.svg',
         },
         {
-          title: 'E-commerce',
-          description: 'Moderne Shops und Produktseiten mit hochwertigem UX und visueller Tiefe.',
+          title: 'Online-Shop',
+          description: 'Wenn Sie Produkte verkaufen, kann die Website Katalog, Produktseiten und einen klaren Weg zum Kauf enthalten.',
           image: '/visual-launch-scene.svg',
         },
         {
-          title: 'SaaS Dashboards',
-          description: 'Interfaces fuer Produkte, Admin-Bereiche und datengetriebene Workflows.',
+          title: 'Website fuer Firma, Studio oder Praxis',
+          description: 'Damit Leistungen, Referenzen, Bewertungen und Kontakte sauber und vertrauensvoll gezeigt werden.',
           image: '/visual-workspace.svg',
         },
         {
-          title: 'AI-Personalisierung',
-          description: 'UX-Flows und UI-Komponenten fuer AI-Erlebnisse, Smart Onboarding und dynamische Inhalte.',
+          title: 'Anfrage, Termin und Kontakt',
+          description: 'Moeglich sind Formulare, Online-Termin, Messenger-Buttons oder die Verbindung mit E-Mail und CRM.',
           image: '/visual-illustration.svg',
         },
       ],
     },
     portfolio: {
       eyebrow: 'Portfolio',
-      title: 'Arbeiten, die Engineering und visuelle Qualitaet zeigen',
+      title: 'Beispiele von Websites',
       subtitle:
-        'Masonry-Grid mit Hover-Reveal: jede Karte betont Stack, Design und Praesentation.',
+        'Hier sehen Sie, wie Websites fuer verschiedene Branchen und Aufgaben aussehen koennen.',
       items: [
         {
           title: 'Speicher Balkonkraftwerk',
@@ -340,29 +341,29 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     },
     process: {
       eyebrow: 'Prozess',
-      title: 'Vom Design-Vibe bis zum Deployment ohne technische Reibung',
+      title: 'So laeuft die Zusammenarbeit ab',
       subtitle:
-        'Ein klarer Ablauf fuer Kunden und eine schnelle Produktionskette fuer die Umsetzung.',
+        'Klar, verstaendlich und ohne unnötige Fachbegriffe.',
       steps: [
         {
-          title: 'Design Vibe',
-          description: 'Visuelle Richtung, Informationsstruktur und atmosphaerische Wirkung definieren.',
+          title: 'Ziel verstehen',
+          description: 'Wir klaeren, was die Website fuer Ihr Geschaeft tun soll: Anfragen bringen, Termine aufnehmen oder Ihre Leistungen klar zeigen.',
         },
         {
-          title: 'Vibe coding',
-          description: 'Interface, Motion, Responsivitaet und Frontend-Architektur produktionsreif umsetzen.',
+          title: 'Website aufbauen',
+          description: 'Ich gestalte die Seiten, passe alles fuer mobile Geraete an und richte die Kontaktwege ein.',
         },
         {
-          title: 'Deploy Vercel/Netlify',
-          description: 'Optimieren, veroeffentlichen und den fertigen Link an den Kunden senden.',
+          title: 'Live schalten',
+          description: 'Ich pruefe alles und uebergebe Ihnen die fertige Website mit funktionierendem Link.',
         },
       ],
     },
     stack: {
-      eyebrow: 'Tech stack',
-      title: 'Werkzeuge fuer moderne digitale Produkte',
-      subtitle: 'Next.js, Motion, 3D, UI Systems und ein sauberer Deployment-Workflow in einem Stack.',
-      items: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'Supabase', 'Vercel', 'shadcn/ui'],
+      eyebrow: 'Was Sie am Ende bekommen',
+      title: 'Nicht Technik um der Technik willen, sondern ein verstaendliches Ergebnis',
+      subtitle: 'Die Website laedt schnell, sieht auf verschiedenen Geraeten gut aus und macht den Kontakt fuer Kunden einfach.',
+      items: ['Mobilfreundliche Darstellung', 'Klare Seitenstruktur', 'Anfrageformular', 'Messenger-Verbindung', 'E-Mail oder CRM', 'Schnelle Ladezeit', 'Einfach zu pflegen'],
     },
     stickyCta: {
       text: 'Bereit fuer ein Projekt? Schreib jetzt',
@@ -379,7 +380,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       success: 'Die Anfrage ist vorbereitet. Der naechste Schritt ist Scope und Kickoff.',
     },
     footer: {
-      description: 'CodeVibe Studio entwickelt moderne Websites und digitale Interfaces ohne Baukasten-Charakter.',
+      description: 'Vibe Studio entwickelt klare und moderne Websites fuer kleine Unternehmen.',
       legal: {
         agb: 'AGB',
         privacy: 'Datenschutzerklaerung',
@@ -408,7 +409,7 @@ export const chatCopy: Record<Locale, {
     placeholder: 'Напишите сообщение...',
     submitButton: 'Отправить',
     other: 'Другое',
-    emptyHint: 'Напишите первое сообщение — Guidi поможет собрать техническое задание на сайт.',
+    emptyHint: 'Напишите первое сообщение — Guidi поможет понять, какой сайт вам нужен.',
     dialogTitle: 'Guidi',
   },
   de: {
@@ -420,7 +421,7 @@ Wie darf ich Sie ansprechen?`,
     placeholder: 'Nachricht schreiben...',
     submitButton: 'Senden',
     other: 'Anderes',
-    emptyHint: 'Schreiben Sie die erste Nachricht — Guidi hilft beim Sammeln der technischen Anforderungen.',
+    emptyHint: 'Schreiben Sie die erste Nachricht — Guidi hilft dabei zu verstehen, welche Website Sie brauchen.',
     dialogTitle: 'Guidi',
   },
 }

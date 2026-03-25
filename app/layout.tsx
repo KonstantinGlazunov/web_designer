@@ -18,16 +18,16 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'CodeVibe Studio',
+  title: 'Vibe Studio',
   description:
-    'CodeVibe Studio builds modern websites with Next.js, Tailwind, motion, AI-friendly UX, and premium 2026 visuals.',
-  applicationName: 'CodeVibe Studio',
+    'Vibe Studio builds modern websites with Next.js, Tailwind, motion, AI-friendly UX, and premium 2026 visuals.',
+  applicationName: 'Vibe Studio',
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: 'CodeVibe Studio',
+    title: 'Vibe Studio',
     description:
       'Modern websites for small businesses in Germany with strong UX, motion, and AI-assisted lead capture.',
     type: 'website',

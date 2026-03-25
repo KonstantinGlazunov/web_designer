@@ -6,7 +6,7 @@
 
 ## Summary
 
-Codebase audit and targeted refactors for ProgrammerSites (CodeVibe Studio): security, accessibility, HTML validity, and architecture tweaks. No business logic changed.
+Codebase audit and targeted refactors for ProgrammerSites (Vibe Studio): security, accessibility, HTML validity, and architecture tweaks. No business logic changed.
 
 ---
 

@@ -10,11 +10,33 @@ import type { ChatMessage } from './message-list'
 
 const SESSION_KEY = 'chat_session_id'
 
+function getTimeGreeting(locale: Locale, date = new Date()): string {
+  const hour = date.getHours()
+
+  if (locale === 'de') {
+    if (hour >= 5 && hour < 12) return 'Guten Morgen!'
+    if (hour >= 12 && hour < 18) return 'Guten Tag!'
+    if (hour >= 18 && hour < 23) return 'Guten Abend!'
+    return 'Gute Nacht!'
+  }
+
+  if (hour >= 5 && hour < 12) return 'Доброе утро!'
+  if (hour >= 12 && hour < 18) return 'Добрый день!'
+  if (hour >= 18 && hour < 23) return 'Добрый вечер!'
+  return 'Доброй ночи!'
+}
+
 function getInitialGreeting(locale: Locale): ChatMessage {
   const copy = chatCopy[locale]
+  const greeting = getTimeGreeting(locale)
+  const body =
+    locale === 'de'
+      ? 'Ich bin Guidi und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen.\n\nWie darf ich Sie ansprechen?'
+      : 'Меня зовут Guidi, я помогаю малому бизнесу в Германии получать клиентов через сайты.\n\nПодскажите, пожалуйста, как я могу к вам обращаться?'
+
   return {
     role: 'assistant',
-    content: copy.initialGreeting,
+    content: `${greeting}\n${body}`,
     options: copy.initialOptions,
   }
 }

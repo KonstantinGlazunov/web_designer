@@ -69,17 +69,37 @@ function ToggleRow({
   onChange?: (next: boolean) => void
 }) {
   return (
-    <div className="flex items-start justify-between gap-4 rounded-2xl border border-white/10 bg-white/70 p-4 backdrop-blur-xl dark:bg-white/5">
+    <div
+      className="flex items-start justify-between gap-4 rounded-2xl border p-4 shadow-[0_12px_40px_rgba(15,23,42,0.08)]"
+      style={{
+        backgroundColor: '#f8fafc',
+        borderColor: '#cbd5e1',
+        color: '#0f172a',
+        opacity: 1,
+        filter: 'none',
+        mixBlendMode: 'normal',
+      }}
+    >
       <div className="min-w-0">
-        <label htmlFor={id} className="block text-sm font-semibold text-slate-900 dark:text-white">
+        <label
+          htmlFor={id}
+          className="block text-sm font-semibold"
+          style={{ color: '#0f172a', opacity: 1, WebkitTextFillColor: '#0f172a' }}
+        >
           {label}
         </label>
-        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{hint}</p>
+        <p
+          className="mt-1 text-sm"
+          style={{ color: '#334155', opacity: 1, WebkitTextFillColor: '#334155' }}
+        >
+          {hint}
+        </p>
       </div>
       <input
         id={id}
         type="checkbox"
-        className="mt-1 h-5 w-5 accent-emerald-500"
+        className="mt-1 h-5 w-5 shrink-0 rounded border-2 border-slate-500 bg-white accent-emerald-600 shadow-sm focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-white"
+        style={{ accentColor: '#059669' }}
         checked={checked}
         disabled={disabled}
         onChange={(e) => onChange?.(e.target.checked)}
@@ -100,7 +120,7 @@ function CookieConsentDialogBody() {
     <Dialog as="div" className="relative z-[60]" onClose={closeDialog} open>
           <DialogBackdrop
             as={motion.div}
-            className="fixed inset-0 bg-slate-950/28 backdrop-blur-[1px]"
+            className="fixed inset-0 bg-slate-950/55"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -112,12 +132,30 @@ function CookieConsentDialogBody() {
                 initial={{ opacity: 0, y: 18, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 18, scale: 0.98 }}
-                className="w-full max-w-lg overflow-hidden rounded-[28px] border border-white/16 bg-white/80 p-6 shadow-2xl backdrop-blur-md dark:bg-slate-950/58 sm:p-7"
+                className="w-full max-w-lg overflow-hidden rounded-[28px] border p-6 shadow-2xl sm:p-7"
+                style={{
+                  backgroundColor: '#ffffff',
+                  borderColor: '#cbd5e1',
+                  color: '#0f172a',
+                  opacity: 1,
+                  filter: 'none',
+                  mixBlendMode: 'normal',
+                }}
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start justify-between gap-4" style={{ color: '#0f172a', opacity: 1 }}>
                   <div>
-                    <h2 className="text-lg font-semibold text-slate-950 dark:text-white">{copy.title}</h2>
-                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{copy.text}</p>
+                    <h2
+                      className="text-lg font-semibold"
+                      style={{ color: '#0f172a', opacity: 1, WebkitTextFillColor: '#0f172a' }}
+                    >
+                      {copy.title}
+                    </h2>
+                    <p
+                      className="mt-2 text-sm leading-6"
+                      style={{ color: '#334155', opacity: 1, WebkitTextFillColor: '#334155' }}
+                    >
+                      {copy.text}
+                    </p>
                   </div>
                 </div>
 
@@ -148,18 +186,51 @@ function CookieConsentDialogBody() {
                 <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
                   <Link
                     href="/datenschutzerklaerung"
-                    className="text-sm font-medium text-slate-700 underline-offset-4 hover:underline dark:text-slate-200"
+                    className="text-sm font-semibold underline-offset-4 hover:underline"
+                    style={{ color: '#0f172a', opacity: 1, WebkitTextFillColor: '#0f172a' }}
                   >
                     {copy.privacy}
                   </Link>
                   <div className="flex flex-wrap gap-2">
-                    <Button variant="secondary" onClick={acceptNecessary}>
+                    <Button
+                      variant="secondary"
+                      className="hover:!border-emerald-400/40 hover:!bg-slate-200"
+                      style={{
+                        backgroundColor: '#f1f5f9',
+                        borderColor: '#94a3b8',
+                        color: '#0f172a',
+                        opacity: 1,
+                        WebkitTextFillColor: '#0f172a',
+                      }}
+                      onClick={acceptNecessary}
+                    >
                       {copy.acceptNecessary}
                     </Button>
-                    <Button variant="secondary" onClick={acceptAll}>
+                    <Button
+                      variant="secondary"
+                      className="hover:!border-emerald-400/40 hover:!bg-slate-200"
+                      style={{
+                        backgroundColor: '#f1f5f9',
+                        borderColor: '#94a3b8',
+                        color: '#0f172a',
+                        opacity: 1,
+                        WebkitTextFillColor: '#0f172a',
+                      }}
+                      onClick={acceptAll}
+                    >
                       {copy.acceptAll}
                     </Button>
-                    <Button onClick={() => save({ analytics, marketing })}>{copy.save}</Button>
+                    <Button
+                      style={{
+                        backgroundColor: '#0f172a',
+                        color: '#ffffff',
+                        opacity: 1,
+                        WebkitTextFillColor: '#ffffff',
+                      }}
+                      onClick={() => save({ analytics, marketing })}
+                    >
+                      {copy.save}
+                    </Button>
                   </div>
                 </div>
               </DialogPanel>

@@ -15,8 +15,8 @@ export function StickyCta({ copy, onOpenForm }: StickyCtaProps) {
     <motion.div
       initial={{ y: 120 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.55, delay: 0.35 }}
-        className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-50 mx-auto max-w-4xl"
+      transition={{ duration: 0.82, delay: 9.1, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-50 mx-auto hidden max-w-4xl sm:block"
     >
       <div className="flex items-center justify-between gap-4 rounded-full border border-white/15 bg-slate-950/80 px-5 py-3 shadow-[0_24px_100px_rgba(2,6,23,0.45)] backdrop-blur-2xl dark:bg-slate-950/80">
         <div className="flex items-center gap-3 text-sm text-white md:text-base">

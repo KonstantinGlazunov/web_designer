@@ -6,7 +6,7 @@ export default function PrivacyPage() {
       <section>
         <h2 className="text-xl font-semibold text-slate-950 dark:text-white">1. Verantwortliche Stelle</h2>
         <div className="mt-4 space-y-1">
-          <p>CodeVibe Studio</p>
+          <p>Vibe Studio</p>
           <p>Berlin, Deutschland</p>
           <p>E-Mail: hello@codevibe.studio</p>
         </div>

@@ -6,7 +6,7 @@ export default function AgbPage() {
       <section>
         <h2 className="text-xl font-semibold text-slate-950 dark:text-white">1. Geltungsbereich</h2>
         <p className="mt-4">
-          Diese Allgemeinen Geschaeftsbedingungen gelten fuer alle Leistungen von CodeVibe Studio im Bereich Webdesign,
+          Diese Allgemeinen Geschaeftsbedingungen gelten fuer alle Leistungen von Vibe Studio im Bereich Webdesign,
           Frontend-Entwicklung, Konzeption und digitale Produktumsetzung.
         </p>
       </section>
@@ -15,7 +15,7 @@ export default function AgbPage() {
         <h2 className="text-xl font-semibold text-slate-950 dark:text-white">2. Leistungen</h2>
         <p className="mt-4">
           Art und Umfang der Leistungen ergeben sich aus dem individuellen Angebot, Projektbriefing oder einer gesonderten Vereinbarung.
-          CodeVibe Studio erbringt ausschliesslich die dort beschriebenen Leistungen.
+          Vibe Studio erbringt ausschliesslich die dort beschriebenen Leistungen.
         </p>
       </section>
 
@@ -44,7 +44,7 @@ export default function AgbPage() {
       <section>
         <h2 className="text-xl font-semibold text-slate-950 dark:text-white">6. Haftung</h2>
         <p className="mt-4">
-          CodeVibe Studio haftet nur fuer Vorsatz und grobe Fahrlaessigkeit, soweit gesetzlich zulaessig. Fuer Inhalte, die vom Kunden bereitgestellt werden, ist ausschliesslich der Kunde verantwortlich.
+          Vibe Studio haftet nur fuer Vorsatz und grobe Fahrlaessigkeit, soweit gesetzlich zulaessig. Fuer Inhalte, die vom Kunden bereitgestellt werden, ist ausschliesslich der Kunde verantwortlich.
         </p>
       </section>
 

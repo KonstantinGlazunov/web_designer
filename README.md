@@ -1,4 +1,4 @@
-# CodeVibe Studio
+# Vibe Studio
 
 Landing page and lead-capture experience for a web studio focused on small businesses in Germany. The project is built with Next.js App Router, Tailwind CSS, Framer Motion, a guided quiz flow, and an AI-assisted sales chat that structures leads and forwards updates to Telegram.
 
