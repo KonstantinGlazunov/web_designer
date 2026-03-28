@@ -8,9 +8,28 @@ import type { SiteCopy } from '@/lib/translations'
 interface StickyCtaProps {
   copy: SiteCopy['stickyCta']
   onOpenForm: () => void
+  mode?: 'fixed-desktop' | 'inline-mobile'
 }
 
-export function StickyCta({ copy, onOpenForm }: StickyCtaProps) {
+export function StickyCta({ copy, onOpenForm, mode = 'fixed-desktop' }: StickyCtaProps) {
+  if (mode === 'inline-mobile') {
+    return (
+      <section className="px-4 pb-6 pt-10 sm:hidden">
+        <div className="mx-auto max-w-7xl rounded-[28px] border border-white/12 bg-white/70 p-5 shadow-[0_20px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:bg-slate-900/60">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3 text-sm text-slate-700 dark:text-slate-100">
+              <MessageCircleMore className="h-4 w-4 text-emerald-400" />
+              <span>{copy.text}</span>
+            </div>
+            <Button size="lg" onClick={onOpenForm} className="w-full">
+              {copy.button}
+            </Button>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <motion.div
       initial={{ y: 120 }}

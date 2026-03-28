@@ -32,6 +32,7 @@ export function AgencyStudioPage() {
         <PortfolioSection copy={copy.portfolio} />
         <ProcessSection copy={copy.process} />
         <TechMarqueeSection copy={copy.stack} />
+        <StickyCta copy={copy.stickyCta} onOpenForm={() => setQuizOpen(true)} mode="inline-mobile" />
         <FooterSection copy={copy.footer} />
       </main>
       <StickyCta copy={copy.stickyCta} onOpenForm={() => setQuizOpen(true)} />
