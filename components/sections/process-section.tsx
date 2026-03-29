@@ -7,7 +7,7 @@ import type { SiteCopy } from '@/lib/translations'
 
 export function ProcessSection({ copy }: { copy: SiteCopy['process'] }) {
   return (
-    <section id="process" className="relative overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
+    <section id="process" className="relative overflow-hidden px-4 py-24 sm:px-6 lg:flex lg:min-h-screen lg:snap-start lg:items-center lg:px-8">
       <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden -translate-y-1/2 lg:block">
         <svg viewBox="0 0 1200 300" className="h-[280px] w-full opacity-25" fill="none">
           <path
@@ -26,7 +26,7 @@ export function ProcessSection({ copy }: { copy: SiteCopy['process'] }) {
           </defs>
         </svg>
       </div>
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl lg:w-full">
         <SectionHeading eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} />
         <div className="grid gap-6 lg:grid-cols-3">
           {copy.steps.map((step, index) => (

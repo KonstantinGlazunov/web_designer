@@ -8,8 +8,8 @@ import type { SiteCopy } from '@/lib/translations'
 
 export function PortfolioSection({ copy }: { copy: SiteCopy['portfolio'] }) {
   return (
-    <section id="portfolio" className="px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section id="portfolio" className="px-4 py-24 sm:px-6 lg:flex lg:min-h-screen lg:snap-start lg:items-center lg:px-8">
+      <div className="mx-auto max-w-7xl lg:w-full">
         <SectionHeading eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} />
         <div className="columns-1 gap-6 md:columns-2 xl:columns-3">
           {copy.items.map((item, index) => {

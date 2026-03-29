@@ -8,8 +8,8 @@ export function TechMarqueeSection({ copy }: { copy: SiteCopy['stack'] }) {
   const items = [...copy.items, ...copy.items]
 
   return (
-    <section className="px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section className="px-4 py-24 sm:px-6 lg:flex lg:min-h-screen lg:snap-start lg:items-center lg:px-8">
+      <div className="mx-auto max-w-7xl lg:w-full">
         <SectionHeading eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} />
         <div className="overflow-hidden rounded-[32px] border border-white/12 bg-white/60 py-6 shadow-glow backdrop-blur-xl dark:bg-glass-dark/70">
           <div className="marquee flex min-w-max gap-4 px-4">

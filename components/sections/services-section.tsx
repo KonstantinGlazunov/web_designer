@@ -8,8 +8,8 @@ import type { SiteCopy } from '@/lib/translations'
 
 export function ServicesSection({ copy }: { copy: SiteCopy['services'] }) {
   return (
-    <section id="services" className="px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section id="services" className="px-4 py-24 sm:px-6 lg:flex lg:min-h-screen lg:snap-start lg:items-center lg:px-8">
+      <div className="mx-auto max-w-7xl lg:w-full">
         <SectionHeading eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} />
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {copy.items.map((item, index) => (

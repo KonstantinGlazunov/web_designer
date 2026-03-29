@@ -7,8 +7,8 @@ import type { SiteCopy } from '@/lib/translations'
 
 export function AboutSection({ copy }: { copy: SiteCopy['about'] }) {
   return (
-    <section id="about" className="px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section id="about" className="px-4 py-24 sm:px-6 lg:flex lg:min-h-screen lg:snap-start lg:items-center lg:px-8">
+      <div className="mx-auto max-w-7xl lg:w-full">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -24 }}

@@ -118,7 +118,7 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
   }
 
   return (
-    <section className="relative min-h-[100svh] overflow-x-clip overflow-y-hidden px-4 pb-10 pt-4 sm:min-h-screen sm:px-6 sm:pb-16 sm:pt-6 lg:px-8">
+    <section className="relative min-h-[100svh] overflow-x-clip overflow-y-hidden px-4 pb-10 pt-4 sm:min-h-screen sm:px-6 sm:pb-16 sm:pt-6 lg:snap-start lg:px-8">
       <div className="pointer-events-none absolute inset-0 z-0">
         <motion.div
           initial={{ opacity: 0.34, scale: 1.018, filter: 'blur(8px)' }}
