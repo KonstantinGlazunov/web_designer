@@ -19,8 +19,8 @@ interface HeroSectionProps {
   onOpenForm: () => void
 }
 
-const VIDEO_CROSSFADE_MS = 2200
-const UI_REVEAL_DELAY_MS = 180
+const VIDEO_CROSSFADE_MS = 420
+const UI_REVEAL_DELAY_MS = 80
 const FALLBACK_VIDEO_MS = 9000
 
 export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
