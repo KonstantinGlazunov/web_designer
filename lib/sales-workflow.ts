@@ -98,9 +98,9 @@ function detectExplicitProjectType(text: string): ProjectType {
   if (/редизайн|redesign/.test(normalized)) return 'redesign'
   if (/поддержк|wartung|maintenance/.test(normalized)) return 'maintenance'
   if (/интернет-магазин|online-shop|shop|e-?commerce/.test(normalized)) return 'ecommerce'
-  if (/онлайн-запись|online-buchung|booking/.test(normalized)) return 'booking'
+  if (/онлайн-запись|online-buchung|booking|сайт\s*\+\s*онлайн-запись|website\s*\+\s*online-buchung/.test(normalized)) return 'booking'
   if (/лендинг|landing/.test(normalized)) return 'landing'
-  if (/сайт компании|unternehmensseite|corporate|company/.test(normalized)) return 'corporate'
+  if (/сайт компании|unternehmensseite|corporate|company|просто сайт|обычн(?:ый|ая)? сайт|сайт для услуг|прост(?:ой|ая) сайт|не знаю формат|нужна помощь выбрать|einfache website|normale website|hilfe bei auswahl|hilfe beim auswählen/.test(normalized)) return 'corporate'
   return 'unknown'
 }
 
@@ -199,6 +199,16 @@ function getMissingCriticalFields(brief: Brief, projectType: ProjectType, contac
   if (projectType === 'unknown') missing.push('projectType')
   if (!brief.services.length) missing.push('services')
   if (!brief.features.length) missing.push('features')
+  if (!brief.target_audience.trim()) missing.push('targetAudience')
+  if (!brief.competitors.length) missing.push('competitors')
+  if (!brief.usp.trim()) missing.push('usp')
+  if (!brief.pain_points.length) missing.push('competitorGaps')
+  if (!brief.design.references.length) missing.push('designRefs')
+  if (!brief.extra_features.length) missing.push('extraFeatures')
+  if (!brief.languages.length) missing.push('languages')
+  if (!brief.design.style.trim()) missing.push('brandStyle')
+  if (!brief.materials.length && !brief.content.has_images) missing.push('mediaAssets')
+  if (!brief.profiles.length) missing.push('socialProfiles')
   if (!brief.budget.range.trim()) missing.push('budgetRange')
   if (!brief.deadline.trim()) missing.push('timeline')
   if (contactStatus !== 'complete') missing.push('contact')
@@ -241,7 +251,22 @@ function determineStage(brief: Brief, userIntent: UserIntent, projectType: Proje
   if (!brief.niche.trim() || !brief.business.location.trim() || !brief.goals.length || !brief.site_status.trim()) return 'qualification'
   if (projectType === 'unknown') return 'project_branch'
   if (!brief.services.length || !brief.features.length) return 'scope_capture'
-  if (!brief.budget.range.trim() || !brief.deadline.trim()) return 'budget_timeline'
+
+  const discoveryMissing =
+    !brief.target_audience.trim() ||
+    !brief.competitors.length ||
+    !brief.usp.trim() ||
+    !brief.pain_points.length ||
+    !brief.design.references.length ||
+    !brief.extra_features.length ||
+    !brief.languages.length ||
+    !brief.design.style.trim() ||
+    (!brief.materials.length && !brief.content.has_images) ||
+    !brief.profiles.length ||
+    !brief.budget.range.trim() ||
+    !brief.deadline.trim()
+
+  if (discoveryMissing) return 'budget_timeline'
   if (contactStatus !== 'complete' || shouldMoveToContact(brief, userMessage)) return contactStatus === 'complete' ? 'summary' : 'contact_capture'
   return 'summary'
 }
@@ -264,8 +289,8 @@ function getRegionOptions(locale: 'ru' | 'de') {
 
 function getGoalOptions(locale: 'ru' | 'de') {
   return locale === 'de'
-    ? ['Mehr Anfragen', 'Produkte verkaufen', 'Online-Termine', 'Nur eine Visitenkarte']
-    : ['Получать больше заявок', 'Продавать товары', 'Онлайн-запись клиентов', 'Просто чтобы был сайт']
+    ? ['Direkte Verkäufe', 'Leads sammeln', 'Image-Website', 'Preise und Leistungen informieren']
+    : ['Прямые продажи', 'Сбор заявок/лидов', 'Визитка для имиджа', 'Информирование о ценах и услугах']
 }
 
 function getProjectTypeOptions(locale: 'ru' | 'de', hasExistingSite: boolean) {
@@ -278,6 +303,18 @@ function getProjectTypeOptions(locale: 'ru' | 'de', hasExistingSite: boolean) {
   return hasExistingSite
     ? ['Редизайн', 'Сайт компании', 'Интернет-магазин', 'Поддержка']
     : ['Лендинг', 'Сайт компании', 'Интернет-магазин', 'Онлайн-запись']
+}
+
+function getProjectTypeHelperOptions(locale: 'ru' | 'de', hasExistingSite: boolean) {
+  if (locale === 'de') {
+    return hasExistingSite
+      ? ['Einfach eine Firmen-Website', 'Website + Online-Buchung', 'Online-Shop', 'Bestehende Website aktualisieren']
+      : ['Einfach eine Firmen-Website', 'Website + Online-Buchung', 'Online-Shop', 'Ich brauche Hilfe bei der Auswahl']
+  }
+
+  return hasExistingSite
+    ? ['Просто сайт для услуг', 'Сайт + онлайн-запись', 'Интернет-магазин', 'Обновить текущий сайт']
+    : ['Просто сайт для услуг', 'Сайт + онлайн-запись', 'Интернет-магазин', 'Нужна помощь выбрать']
 }
 
 function getSiteStatusOptions(locale: 'ru' | 'de') {
@@ -302,7 +339,7 @@ function getFeatureOptions(projectType: ProjectType, locale: 'ru' | 'de') {
   const options = locale === 'de'
     ? {
         landing: ['Lead-Formular', 'Quiz', 'Mehrsprachig', 'Schneller Start'],
-        corporate: ['CMS und Blog', 'Cases und Referenzen', 'Mehrsprachig', 'SEO vorbereitet'],
+        corporate: ['Texte und News selbst bearbeiten', 'Beispiele und Bewertungen zeigen', 'Website in zwei Sprachen', 'Besser in Google gefunden werden'],
         ecommerce: ['Online-Zahlung', 'Katalog', 'Lieferung', 'CRM-Integration'],
         booking: ['Online-Buchung', 'Kalender', 'Erinnerungen', 'Online-Zahlung'],
         redesign: ['Neues Design', 'Inhalte uebernehmen', 'SEO erhalten', 'Aktuelles CMS behalten'],
@@ -311,7 +348,7 @@ function getFeatureOptions(projectType: ProjectType, locale: 'ru' | 'de') {
       }
     : {
         landing: ['Форма заявки', 'Квиз', 'Мультиязычность', 'Быстрый запуск'],
-        corporate: ['CMS и блог', 'Кейсы и отзывы', 'Мультиязычность', 'Основа для SEO'],
+        corporate: ['Самостоятельно менять тексты и новости', 'Показывать примеры работ и отзывы', 'Сайт на двух языках', 'Чтобы сайт лучше находили в Google'],
         ecommerce: ['Онлайн-оплата', 'Каталог', 'Доставка', 'Интеграция с CRM'],
         booking: ['Онлайн-запись', 'Календарь', 'Напоминания', 'Онлайн-оплата'],
         redesign: ['Новый дизайн', 'Перенос контента', 'Сохранить SEO', 'Оставить текущую систему управления'],
@@ -342,6 +379,30 @@ function getServiceOptions(niche: string, locale: 'ru' | 'de') {
   return locale === 'de'
     ? ['Beratung', 'Verkauf', 'Service', 'Montage']
     : ['Консультации', 'Продажа', 'Сервис', 'Монтаж']
+}
+
+function getExtraFeatureOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['Online-Buchung oder Reservierung', 'Kostenrechner', 'Persönliches Konto', 'Seitensuche und Filter', 'Kein spezieller Zusatz']
+    : ['Онлайн-запись или бронирование', 'Калькулятор стоимости услуг', 'Личный кабинет пользователя', 'Поиск по сайту и фильтры', 'Без спецфункций']
+}
+
+function getLanguageOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['Eine Sprache', 'Zwei Sprachen', 'Drei und mehr Sprachen']
+    : ['Один язык', 'Два языка', 'Три и более языков']
+}
+
+function getBrandStyleOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['Ja, alles ist vorhanden', 'Teilweise vorhanden', 'Nein, wir entwickeln es von null']
+    : ['Да, все есть', 'Есть частично', 'Нет, делаем с нуля']
+}
+
+function getMediaAssetOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['Ja, Fotos und Videos sind bereit', 'Teilweise vorhanden', 'Nein, wir brauchen Produktion']
+    : ['Да, фото и видео готовы', 'Есть частично', 'Нет, нужна съемка']
 }
 
 function buildSummaryReply(brief: Brief, locale: 'ru' | 'de') {
@@ -422,10 +483,15 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
 
   if (workflow.stage === 'qualification') {
     if (!brief.contact.name.trim()) {
+      const namePromptCount = countAsked(previousMessages, /wie darf ich sie ansprechen|как я могу к вам обращаться|ваше имя|ihr name/i)
       return {
         reply: locale === 'de'
-          ? 'Guten Tag! Ich bin Guidi und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen. Wie darf ich Sie ansprechen?'
-          : 'Здравствуйте! Меня зовут Guidi, я помогаю малому бизнесу в Германии получать клиентов через сайты. Подскажите, пожалуйста, как я могу к вам обращаться?',
+          ? namePromptCount > 0
+            ? 'Danke. Nennen Sie mir bitte nur Ihren Vornamen, damit ich das Projekt korrekt anlegen kann.'
+            : 'Guten Tag! Ich bin Max Webberater und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen. Wie darf ich Sie ansprechen?'
+          : namePromptCount > 0
+            ? 'Спасибо. Напишите, пожалуйста, только ваше имя, чтобы я корректно оформил проект.'
+            : 'Здравствуйте! Меня зовут Max Webberater, я помогаю малому бизнесу в Германии получать клиентов через сайты. Подскажите, пожалуйста, как я могу к вам обращаться?',
         workflow,
       }
     }
@@ -473,15 +539,22 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
 
   if (workflow.stage === 'project_branch') {
     const hasExistingSite = /уже есть|обнов|vorhanden|aktualisieren|already exists/i.test(brief.site_status)
-    const askedCount = countAsked(previousMessages, /лендинг|landingpage|редизайн|online-shop|интернет-магазин/i)
-    const leadIn = locale === 'de'
-      ? (askedCount > 0 ? 'Ich formuliere es konkreter. ' : '')
-      : (askedCount > 0 ? 'Сформулирую точнее. ' : '')
+    const askedCount = countAsked(previousMessages, /лендинг|landingpage|редизайн|online-shop|интернет-магазин|формат сайта|welches format/i)
+
+    if (askedCount > 0) {
+      return {
+        reply: locale === 'de'
+          ? 'Das ist vollkommen normal - Sie muessen keine Website-Formate kennen. Sagen Sie einfach, was Ihnen naeher ist, ich waehle die passende Struktur fuer Sie.'
+          : 'Это абсолютно нормально, вам не нужно разбираться в форматах сайта. Просто выберите, что вам ближе, а структуру я подберу сам.',
+        options: getProjectTypeHelperOptions(locale, hasExistingSite),
+        workflow,
+      }
+    }
 
     return {
       reply: locale === 'de'
-        ? `${leadIn}Welches Format passt für Ihr Projekt am besten?`
-        : `${leadIn}Какой формат сайта для вашего проекта подходит лучше всего?`,
+        ? 'Welches Format passt für Ihr Projekt am besten?'
+        : 'Какой формат сайта для вашего проекта подходит лучше всего?',
       options: getProjectTypeOptions(locale, hasExistingSite),
       workflow,
     }
@@ -510,6 +583,100 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
   }
 
   if (workflow.stage === 'budget_timeline') {
+    if (!brief.target_audience.trim()) {
+      return {
+        reply: locale === 'de'
+          ? 'Wer ist Ihr idealer Kunde? Beschreiben Sie kurz Alter, Bedarf und warum er gerade Sie wählt.'
+          : 'Кто ваш идеальный клиент? Коротко опишите возраст, боли и почему выбирают именно вас.',
+        workflow,
+      }
+    }
+
+    if (!brief.competitors.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Nennen Sie bitte Ihre wichtigsten Wettbewerber.'
+          : 'Назовите своих конкурентов.',
+        workflow,
+      }
+    }
+
+    if (!brief.usp.trim()) {
+      return {
+        reply: locale === 'de'
+          ? 'Was ist Ihr USP? Worin sind Sie besser als die Konkurrenz?'
+          : 'В чем ваше уникальное торговое предложение (УТП)? Чем вы лучше конкурентов?',
+        workflow,
+      }
+    }
+
+    if (!brief.pain_points.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Und in welchen Punkten sind Wettbewerber aktuell stärker als Sie?'
+          : 'Чем конкуренты лучше вас?',
+        workflow,
+      }
+    }
+
+    if (!brief.design.references.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Welche 3-5 Wettbewerber-Websites gefallen Ihnen? Was genau gefällt: Design, UX oder Funktionen?'
+          : 'Какие 3–5 сайтов конкурентов вам нравятся? Что именно нравится: дизайн, удобство или функции?',
+        workflow,
+      }
+    }
+
+    if (!brief.extra_features.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Brauchen Sie spezifische Zusatzfunktionen?'
+          : 'Нужен ли специфический функционал?',
+        options: getExtraFeatureOptions(locale),
+        workflow,
+      }
+    }
+
+    if (!brief.languages.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Auf wie vielen Sprachen soll die Website sein?'
+          : 'На скольких языках будет сайт?',
+        options: getLanguageOptions(locale),
+        workflow,
+      }
+    }
+
+    if (!brief.design.style.trim()) {
+      return {
+        reply: locale === 'de'
+          ? 'Haben Sie bereits einen Brand-Style (Logo, Brandbook, Schriften, Farben)?'
+          : 'Есть ли у вас готовый фирменный стиль? (Логотип, брендбук, шрифты, цвета).',
+        options: getBrandStyleOptions(locale),
+        workflow,
+      }
+    }
+
+    if (!brief.materials.length && !brief.content.has_images) {
+      return {
+        reply: locale === 'de'
+          ? 'Haben Sie hochwertige Foto- und Videomaterialien?'
+          : 'Есть ли у вас качественные фото и видеоматериалы?',
+        options: getMediaAssetOptions(locale),
+        workflow,
+      }
+    }
+
+    if (!brief.profiles.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Ist Ihr Unternehmen in sozialen Netzwerken präsent? Senden Sie bitte Links.'
+          : 'Представлена ли ваша компания в соцсетях? Пришлите ссылки.',
+        workflow,
+      }
+    }
+
     if (!brief.budget.range.trim()) {
       return {
         reply: locale === 'de'

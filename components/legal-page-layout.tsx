@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { BackToHomeLink } from '@/components/back-to-home-link'
 
 interface LegalPageLayoutProps {
   eyebrow: string
@@ -15,9 +15,7 @@ export function LegalPageLayout({ eyebrow, title, children }: LegalPageLayoutPro
         <div className="mt-8 space-y-8 text-sm leading-7 text-slate-600 dark:text-slate-300">
           {children}
         </div>
-        <Link href="/" className="mt-10 inline-flex text-sm font-semibold text-emerald-500 hover:text-emerald-400">
-          Zurueck zur Startseite
-        </Link>
+        <BackToHomeLink />
       </div>
     </main>
   )

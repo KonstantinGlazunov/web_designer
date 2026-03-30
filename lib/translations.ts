@@ -402,26 +402,26 @@ export const chatCopy: Record<Locale, {
 }> = {
   ru: {
     initialGreeting: `Здравствуйте!
-Меня зовут Guidi, я помогаю малому бизнесу в Германии получать клиентов через сайты.
+Меня зовут Max Webberater, я помогаю малому бизнесу в Германии получать клиентов через сайты.
 
 Подскажите, пожалуйста, как я могу к вам обращаться?`,
     initialOptions: [],
     placeholder: 'Напишите сообщение...',
     submitButton: 'Отправить',
     other: 'Другое',
-    emptyHint: 'Напишите первое сообщение — Guidi поможет понять, какой сайт вам нужен.',
-    dialogTitle: 'Guidi',
+    emptyHint: 'Напишите первое сообщение — Max Webberater поможет понять, какой сайт вам нужен.',
+    dialogTitle: 'Max Webberater',
   },
   de: {
     initialGreeting: `Guten Tag!
-Ich bin Guidi und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen.
+Ich bin Max Webberater und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen.
 
 Wie darf ich Sie ansprechen?`,
     initialOptions: [],
     placeholder: 'Nachricht schreiben...',
     submitButton: 'Senden',
     other: 'Anderes',
-    emptyHint: 'Schreiben Sie die erste Nachricht — Guidi hilft dabei zu verstehen, welche Website Sie brauchen.',
-    dialogTitle: 'Guidi',
+    emptyHint: 'Schreiben Sie die erste Nachricht — Max Webberater hilft dabei zu verstehen, welche Website Sie brauchen.',
+    dialogTitle: 'Max Webberater',
   },
 }

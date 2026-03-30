@@ -17,7 +17,7 @@ export function ContactDialog({ open, onClose, copy }: ContactDialogProps) {
 
   const mailtoHref = useMemo(
     () =>
-      `mailto:hello@codevibe.studio?subject=${encodeURIComponent('New project request')}&body=${encodeURIComponent(
+      `mailto:glazunov.const@gmail.com?subject=${encodeURIComponent('New project request')}&body=${encodeURIComponent(
         'Name:%0AEmail:%0A%0AProject:%0A',
       )}`,
     [],

@@ -91,6 +91,7 @@ export async function chatWithAI(
     body: JSON.stringify({
       model: 'gpt-4o-mini',
       messages: apiMessages,
+      response_format: { type: 'json_object' },
       temperature: 0.7,
     }),
     signal: controller.signal,

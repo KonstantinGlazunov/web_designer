@@ -211,6 +211,16 @@ function inferBriefFromContext(
     goals?: string[]
     services?: string[]
     features?: string[]
+    extra_features?: string[]
+    target_audience?: string
+    competitors?: string[]
+    usp?: string
+    pain_points?: string[]
+    design?: { style?: string; references?: string[] }
+    content?: { has_images?: boolean }
+    materials?: string[]
+    profiles?: string[]
+    languages?: string[]
     budget?: { range?: string }
     deadline?: string
   }
@@ -219,14 +229,10 @@ function inferBriefFromContext(
   const trimmed = userMessage.trim()
   const inferred: Partial<Brief> = {}
   const lastQuestionKind = detectQuestionKind(lastAssistantMessage)
-
-  // The initial greeting is rendered on the client, so the first server turn
-  // has no assistant context. Treat the first free-text reply as a name.
-  if (previousMessages.length === 0 && !brief.contact?.name?.trim()) {
-    const maybeInitialName = extractName(trimmed)
-    if (maybeInitialName) {
-      inferred.contact = { name: maybeInitialName, phone: '', email: '' }
-    }
+  const currentContact = {
+    name: brief.contact?.name ?? '',
+    phone: brief.contact?.phone ?? '',
+    email: brief.contact?.email ?? '',
   }
 
   if (!brief.want_website?.trim()) {
@@ -237,50 +243,60 @@ function inferBriefFromContext(
     }
   }
 
-  if (!brief.contact?.name?.trim() && asksForName(lastAssistantMessage)) {
+  if (!brief.contact?.name?.trim()) {
     const maybeName = extractName(trimmed)
-    if (maybeName) inferred.contact = { name: maybeName, phone: inferred.contact?.phone ?? '', email: inferred.contact?.email ?? '' }
+    if (maybeName) inferred.contact = { ...currentContact, ...inferred.contact, name: maybeName }
   }
 
-  if (!hasActualPhone(brief.contact?.phone) && asksForPhoneNumber(lastAssistantMessage)) {
+  if (!hasActualPhone(brief.contact?.phone)) {
     const maybePhone = extractPhone(trimmed)
-    if (maybePhone) inferred.contact = { name: inferred.contact?.name ?? '', phone: maybePhone, email: inferred.contact?.email ?? '' }
+    if (maybePhone) inferred.contact = { ...currentContact, ...inferred.contact, phone: maybePhone }
   }
 
-  if (!brief.contact?.email?.trim() && asksForEmail(lastAssistantMessage)) {
+  if (!brief.contact?.email?.trim()) {
     const maybeEmail = extractEmail(trimmed)
-    if (maybeEmail) inferred.contact = { name: inferred.contact?.name ?? '', phone: inferred.contact?.phone ?? '', email: maybeEmail }
+    if (maybeEmail) inferred.contact = { ...currentContact, ...inferred.contact, email: maybeEmail }
   }
 
   if (!isDeferredAnswer(trimmed)) {
-    if (lastQuestionKind === 'niche' && !brief.niche?.trim()) {
-      inferred.niche = trimmed
+    if (lastQuestionKind === 'niche' && !brief.niche?.trim()) inferred.niche = trimmed
+    if (lastQuestionKind === 'region' && !brief.business?.location?.trim()) inferred.business = { type: '', description: '', location: trimmed }
+    if (lastQuestionKind === 'site_status' && !brief.site_status?.trim()) inferred.site_status = trimmed
+    if (lastQuestionKind === 'goals' && !brief.goals?.length) inferred.goals = [trimmed]
+    if (lastQuestionKind === 'services' && !brief.services?.length) inferred.services = splitToItems(trimmed, 5)
+    if (lastQuestionKind === 'features' && !brief.features?.length) inferred.features = splitToItems(trimmed, 5)
+    if (lastQuestionKind === 'target_audience' && !brief.target_audience?.trim()) inferred.target_audience = trimmed
+    if (lastQuestionKind === 'competitors' && !brief.competitors?.length) inferred.competitors = splitToItems(trimmed, 6)
+    if (lastQuestionKind === 'usp' && !brief.usp?.trim()) inferred.usp = trimmed
+    if (lastQuestionKind === 'competitor_advantages' && !brief.pain_points?.length) inferred.pain_points = splitToItems(trimmed, 4)
+    if (lastQuestionKind === 'references' && !(brief.design?.references?.length ?? 0)) {
+      inferred.design = {
+        style: '',
+        references: extractUrls(trimmed).length ? extractUrls(trimmed) : splitToItems(trimmed, 5),
+      }
     }
-    if (lastQuestionKind === 'region' && !brief.business?.location?.trim()) {
-      inferred.business = { type: '', description: '', location: trimmed }
+    if (lastQuestionKind === 'extra_features' && !brief.extra_features?.length) inferred.extra_features = splitToItems(trimmed, 6)
+    if (lastQuestionKind === 'languages' && !brief.languages?.length) inferred.languages = splitToItems(trimmed, 4)
+    if (lastQuestionKind === 'brand_style' && !brief.design?.style?.trim()) {
+      inferred.design = { style: trimmed, references: brief.design?.references ?? [] }
     }
-    if (lastQuestionKind === 'site_status' && !brief.site_status?.trim()) {
-      inferred.site_status = trimmed
+    if (lastQuestionKind === 'media_assets' && !(brief.materials?.length ?? 0) && !brief.content?.has_images) {
+      inferred.materials = splitToItems(trimmed, 4)
+      if (/есть|имеются|готовы|yes|ja|have|photo|video|фото|видео/i.test(trimmed)) {
+        inferred.content = { has_texts: false, has_images: true }
+      }
     }
-    if (lastQuestionKind === 'goals' && !brief.goals?.length) {
-      inferred.goals = [trimmed]
+    if (lastQuestionKind === 'social_profiles' && !(brief.profiles?.length ?? 0)) {
+      const urls = extractUrls(trimmed)
+      inferred.profiles = urls.length ? urls : splitToItems(trimmed, 4)
     }
-    if (lastQuestionKind === 'services' && !brief.services?.length) {
-      inferred.services = [trimmed]
-    }
-    if (lastQuestionKind === 'features' && !brief.features?.length) {
-      inferred.features = [trimmed]
-    }
-    if (lastQuestionKind === 'budget' && !brief.budget?.range?.trim()) {
-      inferred.budget = { range: trimmed }
-    }
-    if (lastQuestionKind === 'deadline' && !brief.deadline?.trim()) {
-      inferred.deadline = trimmed
-    }
+    if (lastQuestionKind === 'budget' && !brief.budget?.range?.trim()) inferred.budget = { range: trimmed }
+    if (lastQuestionKind === 'deadline' && !brief.deadline?.trim()) inferred.deadline = trimmed
   }
 
   return inferred
 }
+
 
 function mergeBriefUpdates(...updates: Partial<Brief>[]) {
   const result: Partial<Brief> = {}
@@ -298,7 +314,16 @@ function mergeBriefUpdates(...updates: Partial<Brief>[]) {
         currentValue !== null &&
         !Array.isArray(currentValue)
       ) {
-        ;(result as Record<string, unknown>)[key] = { ...(currentValue as object), ...(value as object) }
+        const mergedObject = { ...(currentValue as Record<string, unknown>) }
+        for (const [nestedKey, nestedValue] of Object.entries(value as Record<string, unknown>)) {
+          if (typeof nestedValue === 'string' && !nestedValue.trim()) continue
+          if (Array.isArray(nestedValue)) {
+            const prev = mergedObject[nestedKey]
+            if (nestedValue.length === 0 && Array.isArray(prev) && prev.length > 0) continue
+          }
+          mergedObject[nestedKey] = nestedValue
+        }
+        ;(result as Record<string, unknown>)[key] = mergedObject
       } else {
         ;(result as Record<string, unknown>)[key] = value
       }
@@ -306,6 +331,19 @@ function mergeBriefUpdates(...updates: Partial<Brief>[]) {
   }
 
   return result
+}
+
+function splitToItems(text: string, max: number): string[] {
+  return text
+    .split(/[,;\n]+|\s[-•]\s|\sи\s|\sand\s/gi)
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .slice(0, max)
+}
+
+function extractUrls(text: string): string[] {
+  const matches = text.match(/https?:\/\/[^\s,]+/gi) ?? []
+  return Array.from(new Set(matches.map((url) => url.replace(/[)\]"'.,;:]+$/, ''))))
 }
 
 function asksForName(text: string) {
@@ -325,21 +363,45 @@ function isContactPrompt(text: string) {
 }
 
 function extractName(text: string) {
-  if (!/^[\p{L}\s-]{2,40}$/u.test(text)) return ''
   const normalized = text.replace(/\s+/g, ' ').trim()
-  if (/whatsapp|telegram|email|e-mail/i.test(normalized)) return ''
-  if (normalized.split(' ').length > 2) return ''
-  if (/сайт|клиент|заявк|онлайн|термин|termin|google|maps|ремонт|юрид|салон|praxis|shop/i.test(normalized)) return ''
-  if (isDeferredAnswer(normalized)) return ''
-  return normalizePersonName(normalized)
+  if (!normalized) return ''
+
+  const introMatch = normalized.match(
+    /(?:^|[,.!?\s])(?:меня зовут|зовут|это|i am|i'm|my name is|ich hei(?:ß|ss)e|mein name ist)\s+([\p{L}-]{2,40})/iu
+  )
+  const candidate = (introMatch?.[1] ?? normalized).trim()
+
+  if (!/^[\p{L}\s-]{2,40}$/u.test(candidate)) return ''
+  if (/whatsapp|telegram|email|e-mail|@/i.test(candidate)) return ''
+  if (candidate.split(' ').length > 2) return ''
+  if (/сайт|клиент|заявк|онлайн|термин|termin|google|maps|ремонт|юрид|салон|praxis|shop/i.test(candidate)) return ''
+  if (isDeferredAnswer(candidate)) return ''
+
+  return normalizePersonName(candidate)
 }
+
 
 function extractPhone(text: string) {
   if (isDeferredAnswer(text.trim())) return ''
+
+  const telegramHandle = extractTelegramHandle(text)
+  if (telegramHandle) return telegramHandle
+
   const normalized = text.replace(/[^\d+]/g, '')
   if (!/^\+?\d{7,20}$/.test(normalized)) return ''
   return normalized
 }
+
+function extractTelegramHandle(text: string) {
+  const linkMatch = text.match(/(?:https?:\/\/)?(?:t\.me|telegram\.me)\/([a-zA-Z][a-zA-Z0-9_]{4,31})/i)
+  if (linkMatch?.[1]) return `@${linkMatch[1]}`
+
+  const handleMatch = text.match(/(?:^|[\s"'«(])@([a-zA-Z][a-zA-Z0-9_]{4,31})(?=$|[\s"'»).,!?;:])/)
+  if (handleMatch?.[1]) return `@${handleMatch[1]}`
+
+  return ''
+}
+
 
 function extractEmail(text: string) {
   if (isDeferredAnswer(text.trim())) return ''
@@ -435,16 +497,27 @@ function buildNextBriefOptions(
 function detectQuestionKind(reply: string) {
   const text = reply.toLowerCase()
   if (/нужен сайт|вам нужен сайт|brauchen sie.*website/.test(text)) return 'want_website'
-  if (/какую задачу|главная задача сайта|что вы хотите достичь|цели у сайта|welches ziel|erreichen/.test(text)) return 'goals'
+  if (/какую задачу|главная задача сайта|основная цель|что вы хотите достичь|цели у сайта|welches ziel|erreichen/.test(text)) return 'goals'
   if (/в какой нише|в какой сфере|чем именно вы занимаетесь|чем вы занимаетесь|branche|nische/.test(text)) return 'niche'
   if (/в каком городе|в каком регионе|stadt|region in deutschland|lokales seo/.test(text)) return 'region'
   if (/уже есть сайт|нужен новый|bereits eine website/.test(text)) return 'site_status'
   if (/какие услуги|leistungen|produkte bieten sie an/.test(text)) return 'services'
   if (/какие функции|какая практическая функция|наиболее важна|funktionen brauchen/.test(text)) return 'features'
+  if (/идеальный клиент|портрет клиента|zielkunde|ideal customer/.test(text)) return 'target_audience'
+  if (/уникальн|утп|usp/.test(text)) return 'usp'
+  if (/чем конкуренты лучше|stärker als sie|was machen konkurrenten besser/.test(text)) return 'competitor_advantages'
+  if (/сайтов конкурентов|референс|references|welche websites/.test(text)) return 'references'
+  if (/назовите своих конкурентов|назовите конкурентов|важнейших конкурентов|wichtigsten wettbewerber|ihre wichtigsten wettbewerber/.test(text)) return 'competitors'
+  if (/специфический функционал|личный кабинет|калькулятор|поиск по сайту|zusatzfunktionen|spezifische funktionen/.test(text)) return 'extra_features'
+  if (/на скольких языках|сколько языков|wie viele sprachen/.test(text)) return 'languages'
+  if (/фирменный стиль|брендбук|логотип|brand style|brandbook/.test(text)) return 'brand_style'
+  if (/фото|видео|bild|foto|video/.test(text) && /есть|готов|haben sie|vorhanden/.test(text)) return 'media_assets'
+  if (/соцсет|social|instagram|facebook|tiktok|linkedin/.test(text) && /ссыл|link/.test(text)) return 'social_profiles'
   if (/какой бюджет|в каком бюджете|budgetrahmen|welches budget/.test(text)) return 'budget'
   if (/в какие сроки|когда.*запуск|wann.*start|ideal.*start/.test(text)) return 'deadline'
   return ''
 }
+
 
 function countAssistantQuestionsByKind(messages: Array<{ role: 'user' | 'assistant'; content: string }>, kind: string) {
   if (!kind) return 0
@@ -590,7 +663,8 @@ function buildOptionsForKind(
 }
 
 function normalizePersonName(name: string) {
-  const key = name.toLowerCase()
+  const normalizedName = name.replace(/\s+/g, ' ').trim()
+  const key = normalizedName.toLowerCase()
   const dictionary: Record<string, string> = {
     'алеша': 'Алексей',
     'алёша': 'Алексей',
@@ -610,7 +684,16 @@ function normalizePersonName(name: string) {
   }
 
   if (dictionary[key]) return dictionary[key]
-  return name
+
+  return normalizedName
+    .split(' ')
+    .map((part) => part.split('-').map(capitalizeWord).join('-'))
+    .join(' ')
+}
+
+function capitalizeWord(value: string) {
+  if (!value) return value
+  return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
 }
 
 function applyFullNameInReply(reply: string, fullName?: string) {
@@ -680,7 +763,12 @@ function withAcknowledgement(reply: string, locale: 'ru' | 'de', userMessage: st
 }
 
 function hasActualPhone(value?: string) {
-  return Boolean(value && /^\+?\d{7,20}$/.test(value.trim()))
+  if (!value) return false
+  const trimmed = value.trim()
+  const isPhoneNumber = /^\+?\d{7,20}$/.test(trimmed)
+  const isTelegramHandle = /^@[a-zA-Z][a-zA-Z0-9_]{4,31}$/.test(trimmed)
+  const isTelegramLink = /^(?:https?:\/\/)?(?:t\.me|telegram\.me)\/[a-zA-Z][a-zA-Z0-9_]{4,31}$/i.test(trimmed)
+  return isPhoneNumber || isTelegramHandle || isTelegramLink
 }
 
 function getServiceOptions(niche: string | undefined, locale: 'ru' | 'de') {

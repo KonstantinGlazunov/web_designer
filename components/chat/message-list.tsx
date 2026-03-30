@@ -57,7 +57,7 @@ export function MessageList({ messages, isTyping, quickReplies, onQuickReply, th
               <div className="flex h-9 w-9 shrink-0 overflow-hidden rounded-full">
                 <Image
                   src="/Chat_avatar.png"
-                  alt="Guidi"
+                  alt="Max Webberater"
                   width={36}
                   height={36}
                   className="h-9 w-9 object-cover"

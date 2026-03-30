@@ -31,8 +31,8 @@ function getInitialGreeting(locale: Locale): ChatMessage {
   const greeting = getTimeGreeting(locale)
   const body =
     locale === 'de'
-      ? 'Ich bin Guidi und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen.\n\nWie darf ich Sie ansprechen?'
-      : 'Меня зовут Guidi, я помогаю малому бизнесу в Германии получать клиентов через сайты.\n\nПодскажите, пожалуйста, как я могу к вам обращаться?'
+      ? 'Ich bin Max Webberater und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen.\n\nWie darf ich Sie ansprechen?'
+      : 'Меня зовут Max Webberater, я помогаю малому бизнесу в Германии получать клиентов через сайты.\n\nПодскажите, пожалуйста, как я могу к вам обращаться?'
 
   return {
     role: 'assistant',

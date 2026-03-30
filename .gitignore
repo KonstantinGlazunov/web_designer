@@ -25,3 +25,7 @@ variables.env
 *.njsproj
 *.sln
 *.sw?
+
+# Playwright
+playwright-report/
+test-results/
