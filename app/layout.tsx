@@ -18,6 +18,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://erstellen-websiten.de'),
   title: 'Vibe Studio',
   description:
     'Vibe Studio builds modern websites with Next.js, Tailwind, motion, AI-friendly UX, and premium 2026 visuals.',
@@ -31,6 +32,22 @@ export const metadata: Metadata = {
     description:
       'Modern websites for small businesses in Germany with strong UX, motion, and AI-assisted lead capture.',
     type: 'website',
+    url: 'https://erstellen-websiten.de',
+    images: [
+      {
+        url: '/working-photo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Vibe Studio working photo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vibe Studio',
+    description:
+      'Modern websites for small businesses in Germany with strong UX, motion, and AI-assisted lead capture.',
+    images: ['/working-photo.png'],
   },
   icons: {
     icon: '/favicon.svg',
