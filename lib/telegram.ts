@@ -59,14 +59,54 @@ export function escapeHtmlForTelegram(s: string): string {
   return escapeHtml(s)
 }
 
-function formatDialog(messages: ChatMessage[], maxLen = 2000): string {
+function formatDialog(messages: ChatMessage[]): string {
   if (!messages?.length) return ''
   const lines = messages.map((m) => {
     const escaped = escapeHtml(m.content)
     return m.role === 'user' ? `👤 ${escaped}` : `🤖 ${escaped}`
   })
-  const text = lines.join('\n')
-  return text.length > maxLen ? text.slice(0, maxLen) + '\n...' : text
+  return lines.join('\n')
+}
+
+function chunkByLength(text: string, maxLen = 3500): string[] {
+  if (!text) return []
+  if (text.length <= maxLen) return [text]
+
+  const chunks: string[] = []
+  let current = ''
+
+  for (const line of text.split('\n')) {
+    const candidate = current ? `${current}\n${line}` : line
+    if (candidate.length <= maxLen) {
+      current = candidate
+      continue
+    }
+
+    if (current) chunks.push(current)
+
+    if (line.length <= maxLen) {
+      current = line
+      continue
+    }
+
+    let offset = 0
+    while (offset < line.length) {
+      chunks.push(line.slice(offset, offset + maxLen))
+      offset += maxLen
+    }
+    current = ''
+  }
+
+  if (current) chunks.push(current)
+  return chunks
+}
+
+async function sendDialogChunks(dialog: string): Promise<void> {
+  const chunks = chunkByLength(dialog, 3500)
+  for (let i = 0; i < chunks.length; i += 1) {
+    const title = chunks.length > 1 ? `<b>Диалог (${i + 1}/${chunks.length}):</b>` : '<b>Диалог:</b>'
+    await sendMessage(`${title}\n${chunks[i]}`)
+  }
 }
 
 function formatBriefFields(brief: Brief): string[] {
@@ -100,8 +140,9 @@ export async function sendNewLead(sessionId: string, brief: Brief, messages: Cha
     ...lines,
     'Статус: NEW',
   ]
-  if (dialog) parts.push('', '<b>Диалог:</b>', dialog)
-  await sendMessage(parts.join('\n'), getInlineButtons(sessionId))
+  const delivered = await sendMessage(parts.join('\n'), getInlineButtons(sessionId))
+  if (!delivered) return
+  if (dialog) await sendDialogChunks(dialog)
 }
 
 const FIELD_LABELS: Record<string, string> = {
@@ -157,8 +198,9 @@ export async function sendBriefUpdate(
     `Статус: ${status}`,
   ]
   const dialog = formatDialog(messages)
-  if (dialog) parts.push('', '<b>Диалог:</b>', dialog)
-  await sendMessage(parts.join('\n'), getInlineButtons(sessionId))
+  const delivered = await sendMessage(parts.join('\n'), getInlineButtons(sessionId))
+  if (!delivered) return
+  if (dialog) await sendDialogChunks(dialog)
 }
 
 export async function sendReadyBrief(sessionId: string, brief: Brief, messages: ChatMessage[] = []): Promise<void> {
@@ -170,8 +212,9 @@ export async function sendReadyBrief(sessionId: string, brief: Brief, messages: 
     ...lines,
     'Статус: READY',
   ]
-  if (dialog) parts.push('', '<b>Диалог:</b>', dialog)
-  await sendMessage(parts.join('\n'), getInlineButtons(sessionId))
+  const delivered = await sendMessage(parts.join('\n'), getInlineButtons(sessionId))
+  if (!delivered) return
+  if (dialog) await sendDialogChunks(dialog)
 }
 
 export async function sendQuizMessage(text: string): Promise<boolean> {
