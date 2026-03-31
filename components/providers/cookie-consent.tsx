@@ -107,15 +107,15 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
   const { consent, isDialogOpen } = snapshot
   const [forceOpen, setForceOpen] = useState(false)
-  const [isUnlocked, setIsUnlocked] = useState(false)
+  const [interactionUnlocked, setInteractionUnlocked] = useState(false)
+  const isUnlocked = Boolean(consent) || interactionUnlocked
 
   useEffect(() => {
     if (consent) {
-      setIsUnlocked(true)
       return
     }
 
-    const unlock = () => setIsUnlocked(true)
+    const unlock = () => setInteractionUnlocked(true)
     const unlockOnScroll = () => {
       if (window.scrollY > 0) unlock()
     }
@@ -138,7 +138,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
   }, [consent])
 
   const openDialog = useCallback(() => {
-    setIsUnlocked(true)
+    setInteractionUnlocked(true)
     setForceOpen(true)
   }, [])
   const closeDialog = useCallback(() => {
