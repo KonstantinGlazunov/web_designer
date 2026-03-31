@@ -20,7 +20,7 @@ export function BackToHomeLink() {
       onClick={handleClick}
       className="mt-10 inline-flex text-sm font-semibold text-emerald-500 hover:text-emerald-400"
     >
-      Zurueck zur Startseite
+      Zurück zur Startseite
     </button>
   )
 }

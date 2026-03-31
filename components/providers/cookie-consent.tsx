@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   useSyncExternalStore,
@@ -106,8 +107,40 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
   const { consent, isDialogOpen } = snapshot
   const [forceOpen, setForceOpen] = useState(false)
+  const [isUnlocked, setIsUnlocked] = useState(false)
 
-  const openDialog = useCallback(() => setForceOpen(true), [])
+  useEffect(() => {
+    if (consent) {
+      setIsUnlocked(true)
+      return
+    }
+
+    const unlock = () => setIsUnlocked(true)
+    const unlockOnScroll = () => {
+      if (window.scrollY > 0) unlock()
+    }
+
+    window.addEventListener('site:intro-ready', unlock)
+    window.addEventListener('pointerdown', unlock, { passive: true })
+    window.addEventListener('touchstart', unlock, { passive: true })
+    window.addEventListener('wheel', unlock, { passive: true })
+    window.addEventListener('keydown', unlock)
+    window.addEventListener('scroll', unlockOnScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('site:intro-ready', unlock)
+      window.removeEventListener('pointerdown', unlock)
+      window.removeEventListener('touchstart', unlock)
+      window.removeEventListener('wheel', unlock)
+      window.removeEventListener('keydown', unlock)
+      window.removeEventListener('scroll', unlockOnScroll)
+    }
+  }, [consent])
+
+  const openDialog = useCallback(() => {
+    setIsUnlocked(true)
+    setForceOpen(true)
+  }, [])
   const closeDialog = useCallback(() => {
     setForceOpen(false)
     if (!consent) {
@@ -137,14 +170,14 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
   const value = useMemo<CookieConsentContextValue>(
     () => ({
       consent,
-      isDialogOpen: Boolean(forceOpen || isDialogOpen),
+      isDialogOpen: Boolean((forceOpen || isDialogOpen) && isUnlocked),
       acceptAll,
       acceptNecessary,
       save,
       openDialog,
       closeDialog,
     }),
-    [acceptAll, acceptNecessary, closeDialog, consent, forceOpen, isDialogOpen, openDialog, save],
+    [acceptAll, acceptNecessary, closeDialog, consent, forceOpen, isDialogOpen, isUnlocked, openDialog, save],
   )
 
   return <CookieConsentContext.Provider value={value}>{children}</CookieConsentContext.Provider>

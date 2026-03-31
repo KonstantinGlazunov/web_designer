@@ -241,73 +241,73 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     themeLabel: 'Thema',
     nav: {
       services: 'Leistungen',
-      portfolio: 'Portfolio',
+      portfolio: 'Referenzen',
       process: 'Prozess',
       contact: 'Kontakt',
     },
     hero: {
-      badge: 'Moderne Website fuer Ihr Business',
-      title: 'Vibe Studio: Moderne Websites fuer Ihr Business',
+      badge: 'Moderne Webseite für Ihr Unternehmen',
+      title: 'Vibe Studio: Moderne Webseiten für Ihr Unternehmen',
       subtitle:
-        'Ich baue Websites, die gut aussehen, sich an jede Bildschirmgroesse anpassen, auf dem Handy angenehm zu bedienen sind und Kunden den schnellen Kontakt zu Ihnen ermoeglichen.',
+        'Ich baue Webseiten, die gut aussehen, sich an jede Bildschirmgröße anpassen, auf dem Handy angenehm zu bedienen sind und Kunden den schnellen Kontakt zu Ihnen ermöglichen.',
       ctaPrimary: 'Projekt starten',
-      ctaSecondary: 'Portfolio ansehen',
+      ctaSecondary: 'Referenzen ansehen',
       proofPoints: [
-        'Passt sich an jede Bildschirmgroesse an',
+        'Passt sich an jede Bildschirmgröße an',
         'Einfach auf dem Handy zu nutzen',
         'Verbindung mit Messenger, E-Mail oder CRM',
       ],
-      floatingCardTitle: 'Vibe-driven workflow',
-      floatingCardText: 'Von der Idee bis zur fertigen Website ohne unnoetige technische Komplexitaet fuer den Kunden.',
+      floatingCardTitle: 'Klarer Arbeitsablauf',
+      floatingCardText: 'Von der Idee bis zur fertigen Webseite ohne unnötige technische Komplexität für den Kunden.',
     },
     about: {
-      eyebrow: 'Ueber mich',
-      title: 'Ich helfe nicht nur beim Bauen, sondern finde mit Ihnen eine verstaendliche Loesung fuer Ihr Geschaeft',
+      eyebrow: 'Über mich',
+      title: 'Ich helfe nicht nur beim Bauen, sondern finde mit Ihnen eine verständliche Lösung für Ihr Geschäft',
       subtitle:
-        'Zu Beginn klaeren wir, was Ihre Website wirklich leisten soll: mehr Anfragen, online Termine, bessere Praesentation oder eine einfache Kontaktmoeglichkeit.',
+        'Zu Beginn klären wir, was Ihre Webseite wirklich leisten soll: mehr Anfragen, Online-Termine, bessere Präsentation oder eine einfache Kontaktmöglichkeit.',
       bullets: [
         'Wir besprechen Ziel, Umfang und den Ablauf',
-        'Ich plane eine klare Seitenstruktur und einen einfachen Weg fuer Ihre Kunden',
-        'Ich setze die Website um und bringe sie live',
+        'Ich plane eine klare Seitenstruktur und einen einfachen Weg für Ihre Kunden',
+        'Ich setze die Webseite um und bringe sie live',
       ],
     },
     services: {
-      eyebrow: 'Services',
-      title: 'Was ich fuer Ihre Website umsetzen kann',
+      eyebrow: 'Leistungen',
+      title: 'Was ich für Ihre Webseite umsetzen kann',
       subtitle:
-        'Die Loesung wird auf Ihr Geschaeft zugeschnitten: ohne Ballast, aber mit allem, was Ihre Kunden brauchen.',
+        'Die Lösung wird auf Ihr Geschäft zugeschnitten: ohne Ballast, aber mit allem, was Ihre Kunden brauchen.',
       items: [
         {
-          title: 'Website fuer ein Angebot oder eine Dienstleistung',
-          description: 'Gut geeignet, wenn Sie ein Angebot klar erklaeren und Kunden schnell zur Anfrage fuehren moechten.',
+          title: 'Webseite für ein Angebot oder eine Dienstleistung',
+          description: 'Gut geeignet, wenn Sie ein Angebot klar erklären und Kunden schnell zur Anfrage führen möchten.',
           image: '/visual-neural-grid.svg',
         },
         {
           title: 'Online-Shop',
-          description: 'Wenn Sie Produkte verkaufen, kann die Website Katalog, Produktseiten und einen klaren Weg zum Kauf enthalten.',
+          description: 'Wenn Sie Produkte verkaufen, kann die Webseite Katalog, Produktseiten und einen klaren Weg zum Kauf enthalten.',
           image: '/visual-launch-scene.svg',
         },
         {
-          title: 'Website fuer Firma, Studio oder Praxis',
+          title: 'Webseite für Firma, Studio oder Praxis',
           description: 'Damit Leistungen, Referenzen, Bewertungen und Kontakte sauber und vertrauensvoll gezeigt werden.',
           image: '/visual-workspace.svg',
         },
         {
           title: 'Anfrage, Termin und Kontakt',
-          description: 'Moeglich sind Formulare, Online-Termin, Messenger-Buttons oder die Verbindung mit E-Mail und CRM.',
+          description: 'Möglich sind Formulare, Online-Termin, Messenger-Buttons oder die Verbindung mit E-Mail und CRM.',
           image: '/visual-illustration.svg',
         },
       ],
     },
     portfolio: {
-      eyebrow: 'Portfolio',
-      title: 'Beispiele von Websites',
+      eyebrow: 'Referenzen',
+      title: 'Beispiele von Webseiten',
       subtitle:
-        'Hier sehen Sie, wie Websites fuer verschiedene Branchen und Aufgaben aussehen koennen.',
+        'Hier sehen Sie, wie Webseiten für verschiedene Branchen und Aufgaben aussehen können.',
       items: [
         {
           title: 'Speicher Balkonkraftwerk',
-          description: 'Landing fuer Solar-Module und Energiespeicher. Mehrsprachig, Rechner, Conversion-CTA.',
+          description: 'Landingpage für Solarmodule und Energiespeicher. Mehrsprachig, Rechner, klare Handlungsaufforderung.',
           image: '/portfolio/speicher.png',
           tech: ['Next.js', 'Tailwind', 'i18n', 'Vercel'],
           size: 'lg',
@@ -315,7 +315,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         },
         {
           title: 'BewerbungProfi',
-          description: 'KI-Generator fuer Bewerbungsanschreiben in Deutschland. OpenAI API, Mehrsprachigkeit, PDF.',
+          description: 'KI-Generator für Bewerbungsanschreiben in Deutschland. OpenAI API, Mehrsprachigkeit, PDF.',
           image: '/portfolio/bewerbungprofi.png',
           tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
           size: 'sm',
@@ -323,15 +323,15 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         },
         {
           title: 'Beauty Studio Lesya',
-          description: 'Website der Beauty-Studio fuer Permanent-Make-up in Braunfels. Elegantes Design, Galerie.',
+          description: 'Webseite des Beauty-Studios für Permanent-Make-up in Braunfels. Elegantes Design, Galerie.',
           image: '/portfolio/lesia.png',
           tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
           size: 'sm',
           url: 'https://konstantinglazunov.github.io/-Lesia/',
         },
         {
-          title: 'Dogs Services',
-          description: 'Service fuer Hundebesitzer. Buchung, Leistungskatalog, modernes UI.',
+          title: 'Dienstleistungen für Hundehalter',
+          description: 'Angebot für Hundehalter. Buchung, Leistungskatalog, modernes Design.',
           image: '/portfolio/dogs.png',
           tech: ['React', 'TypeScript', 'DigitalOcean'],
           size: 'lg',
@@ -341,52 +341,52 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     },
     process: {
       eyebrow: 'Prozess',
-      title: 'So laeuft die Zusammenarbeit ab',
+      title: 'So läuft die Zusammenarbeit ab',
       subtitle:
-        'Klar, verstaendlich und ohne unnötige Fachbegriffe.',
+        'Klar, verständlich und ohne unnötige Fachbegriffe.',
       steps: [
         {
           title: 'Ziel verstehen',
-          description: 'Wir klaeren, was die Website fuer Ihr Geschaeft tun soll: Anfragen bringen, Termine aufnehmen oder Ihre Leistungen klar zeigen.',
+          description: 'Wir klären, was die Webseite für Ihr Geschäft tun soll: Anfragen bringen, Termine aufnehmen oder Ihre Leistungen klar zeigen.',
         },
         {
-          title: 'Website aufbauen',
-          description: 'Ich gestalte die Seiten, passe alles fuer mobile Geraete an und richte die Kontaktwege ein.',
+          title: 'Webseite aufbauen',
+          description: 'Ich gestalte die Seiten, passe alles für mobile Geräte an und richte die Kontaktwege ein.',
         },
         {
           title: 'Live schalten',
-          description: 'Ich pruefe alles und uebergebe Ihnen die fertige Website mit funktionierendem Link.',
+          description: 'Ich prüfe alles und übergebe Ihnen die fertige Webseite mit funktionierendem Link.',
         },
       ],
     },
     stack: {
       eyebrow: 'Was Sie am Ende bekommen',
-      title: 'Nicht Technik um der Technik willen, sondern ein verstaendliches Ergebnis',
-      subtitle: 'Die Website laedt schnell, sieht auf verschiedenen Geraeten gut aus und macht den Kontakt fuer Kunden einfach.',
+      title: 'Nicht Technik um der Technik willen, sondern ein verständliches Ergebnis',
+      subtitle: 'Die Webseite lädt schnell, sieht auf verschiedenen Geräten gut aus und macht den Kontakt für Kunden einfach.',
       items: ['Mobilfreundliche Darstellung', 'Klare Seitenstruktur', 'Anfrageformular', 'Messenger-Verbindung', 'E-Mail oder CRM', 'Schnelle Ladezeit', 'Einfach zu pflegen'],
     },
     stickyCta: {
-      text: 'Bereit fuer ein Projekt? Schreib jetzt',
-      button: 'Formular oeffnen',
+      text: 'Bereit für ein Projekt? Schreiben Sie jetzt',
+      button: 'Formular öffnen',
     },
     form: {
-      title: 'Erzaehlen Sie kurz vom Projekt',
+      title: 'Erzählen Sie kurz vom Projekt',
       subtitle: 'Ein kurzes Briefing reicht aus, um zu starten.',
       name: 'Name',
       email: 'E-Mail',
       project: 'Projektbeschreibung',
       submit: 'Senden',
-      close: 'Schliessen',
-      success: 'Die Anfrage ist vorbereitet. Der naechste Schritt ist Scope und Kickoff.',
+      close: 'Schließen',
+      success: 'Die Anfrage ist vorbereitet. Der nächste Schritt ist Leistungsumfang und Projektstart.',
     },
     footer: {
-      description: 'Vibe Studio entwickelt klare und moderne Websites fuer kleine Unternehmen.',
+      description: 'Vibe Studio entwickelt klare und moderne Webseiten für kleine Unternehmen.',
       legal: {
         agb: 'AGB',
-        privacy: 'Datenschutzerklaerung',
+        privacy: 'Datenschutzerklärung',
         impressum: 'Impressum',
       },
-      socials: 'Socials',
+      socials: 'Soziale Medien',
     },
   },
 }
@@ -414,14 +414,14 @@ export const chatCopy: Record<Locale, {
   },
   de: {
     initialGreeting: `Guten Tag!
-Ich bin Max Webberater und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen.
+Ich bin Max Webberater und helfe kleinen Unternehmen in Deutschland, Kunden über Webseiten zu gewinnen.
 
 Wie darf ich Sie ansprechen?`,
     initialOptions: [],
     placeholder: 'Nachricht schreiben...',
     submitButton: 'Senden',
     other: 'Anderes',
-    emptyHint: 'Schreiben Sie die erste Nachricht — Max Webberater hilft dabei zu verstehen, welche Website Sie brauchen.',
+    emptyHint: 'Schreiben Sie die erste Nachricht — Max Webberater hilft dabei zu verstehen, welche Webseite Sie brauchen.',
     dialogTitle: 'Max Webberater',
   },
 }

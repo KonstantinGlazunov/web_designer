@@ -33,6 +33,7 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
   const [videoFinished, setVideoFinished] = useState(false)
   const [videoReady, setVideoReady] = useState(false)
   const [uiReady, setUiReady] = useState(false)
+  const introReadyNotifiedRef = useRef(false)
 
   const clearPendingTimers = useCallback(() => {
     if (fallbackTimeoutRef.current !== null) {
@@ -66,6 +67,12 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
   }, [clearPendingTimers, uiReady])
 
   useEffect(() => {
+    if (!uiReady || introReadyNotifiedRef.current) return
+    introReadyNotifiedRef.current = true
+    window.dispatchEvent(new Event('site:intro-ready'))
+  }, [uiReady])
+
+  useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
@@ -81,20 +88,28 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
     }, FALLBACK_VIDEO_MS)
 
     const handleSkipIntro = () => {
-      if (window.scrollY > 0) {
-        finishIntroImmediately()
-      }
+      finishIntroImmediately()
+    }
+
+    const handleScrollSkip = () => {
+      if (window.scrollY > 0) finishIntroImmediately()
     }
 
     window.addEventListener('wheel', handleSkipIntro, { passive: true })
+    window.addEventListener('pointerdown', handleSkipIntro, { passive: true })
+    window.addEventListener('touchstart', handleSkipIntro, { passive: true })
     window.addEventListener('touchmove', handleSkipIntro, { passive: true })
-    window.addEventListener('scroll', handleSkipIntro, { passive: true })
+    window.addEventListener('keydown', handleSkipIntro)
+    window.addEventListener('scroll', handleScrollSkip, { passive: true })
 
     return () => {
       clearPendingTimers()
       window.removeEventListener('wheel', handleSkipIntro)
+      window.removeEventListener('pointerdown', handleSkipIntro)
+      window.removeEventListener('touchstart', handleSkipIntro)
       window.removeEventListener('touchmove', handleSkipIntro)
-      window.removeEventListener('scroll', handleSkipIntro)
+      window.removeEventListener('keydown', handleSkipIntro)
+      window.removeEventListener('scroll', handleScrollSkip)
     }
   }, [finishIntroImmediately, uiReady, clearPendingTimers])
 
@@ -169,7 +184,7 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
               <div className="hero-spiral-core absolute inset-[34%] rounded-full" />
             </div>
             <div className="text-[11px] font-semibold uppercase tracking-[0.34em] text-white/62">
-              Loading intro
+              Intro wird geladen
             </div>
           </div>
         </motion.div>
@@ -313,7 +328,7 @@ export function HeroSection({ copy, onOpenForm }: HeroSectionProps) {
                 transition={{ duration: 0.72, delay: 0.66, ease: [0.22, 1, 0.36, 1] }}
                 className="rounded-full border border-white/14 bg-black/16 px-4 py-2 backdrop-blur-xl"
               >
-                Premium 3D intro
+                Premium-3D-Intro
               </motion.div>
             </div>
 
