@@ -4,10 +4,10 @@ export default function ImpressumPage() {
   return (
     <LegalPageLayout eyebrow="Impressum" title="Vibe Studio">
       <section>
-        <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Angaben gemäß Paragraf 5 DDG</h2>
+        <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Angaben gemäß § 5 DDG</h2>
         <div className="mt-4 space-y-1">
           <p>Konstantin Glazunov</p>
-          <p>Braunfels, Lindenstraße 16</p>
+          <p>Lindenstraße 16, 35619 Braunfels, Deutschland</p>
           <p>E-Mail: glazunov.const@gmail.com</p>
         </div>
       </section>
@@ -22,7 +22,7 @@ export default function ImpressumPage() {
 
       <section>
         <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Verantwortlich für den Inhalt</h2>
-        <p className="mt-4">Konstantin Glazunov, Braunfels, Lindenstraße 16.</p>
+        <p className="mt-4">Konstantin Glazunov, Lindenstraße 16, 35619 Braunfels, Deutschland.</p>
       </section>
     </LegalPageLayout>
   )
