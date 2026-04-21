@@ -6,6 +6,7 @@ import { Check, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { useMemo, useState, type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useLeadConsent } from '@/components/providers/lead-consent'
 import { quizCopy, HAS_SITE_IDS, type QuizOption, type QuizQuestion } from '@/lib/quiz-data'
 
 type FollowUps = { otherSpecify: string; otherPlaceholder: string; siteUrl: string; siteUrlPlaceholder: string }
@@ -48,12 +49,14 @@ interface QuizDialogProps {
 }
 
 export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
+  const { consent, accept, openDialog } = useLeadConsent()
   const copy = useMemo(() => (locale === 'de' ? quizCopy.de : quizCopy.ru), [locale])
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({})
   const [name, setName] = useState('')
   const [whatsapp, setWhatsapp] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [quizConsent, setQuizConsent] = useState(false)
 
   const steps = useMemo(() => buildSteps(copy.questions, answers, copy.followUps), [copy.questions, copy.followUps, answers])
   const totalSteps = steps.length + 1
@@ -107,6 +110,12 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    const hasConsent = Boolean(consent || quizConsent)
+    if (!hasConsent) {
+      openDialog()
+      return
+    }
+
     const body = [
       '--- Quiz Answers ---',
       ...copy.questions.map((q) => {
@@ -135,6 +144,9 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
         return
       }
 
+      if (!consent && quizConsent) {
+        accept()
+      }
       setSubmitted(true)
     } catch (e) {
       console.error('[Quiz] submit error', e)
@@ -147,6 +159,7 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
     setAnswers({})
     setName('')
     setWhatsapp('')
+    setQuizConsent(false)
     setSubmitted(false)
     onClose()
   }
@@ -346,6 +359,27 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
                                 placeholder={copy.final.whatsappPlaceholder}
                                 className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-300/40"
                               />
+                            </label>
+                            <label className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
+                              <input
+                                type="checkbox"
+                                checked={Boolean(consent || quizConsent)}
+                                onChange={(e) => setQuizConsent(e.target.checked)}
+                                className="mt-0.5 h-4 w-4 rounded border-white/20 accent-emerald-500"
+                              />
+                              <span>
+                                {locale === 'de'
+                                  ? 'Ich stimme der Verarbeitung meiner Daten zur Kontaktaufnahme zu.'
+                                  : 'Я согласен(на) на обработку моих данных для обратной связи.'}{' '}
+                                <a
+                                  href="/datenschutzerklaerung"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="font-semibold underline underline-offset-4"
+                                >
+                                  {locale === 'de' ? 'Datenschutzerklärung' : 'Политика конфиденциальности'}
+                                </a>
+                              </span>
                             </label>
                             <Button type="submit" size="lg" className="mt-2">
                               {copy.final.submitButton}

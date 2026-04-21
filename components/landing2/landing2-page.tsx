@@ -38,14 +38,14 @@ type PortfolioText = SiteCopy['portfolio']
 const valueIcons = [LayoutGrid, Shield, Smartphone, Map]
 const logicIcons = [Search, LayoutGrid, CheckCircle2, Phone]
 const processIcons = [Phone, CheckCircle2, FileText, LayoutGrid, Rocket]
-const beforeAfterImages = ['/landing2/assets/case1.png', '/landing2/assets/case2.png', '/landing2/assets/case3.png']
+const beforeAfterImages = ['/landing2/assets/case1.webp', '/landing2/assets/case2.webp', '/landing2/assets/case3.webp']
 const audienceImages = [
-  '/landing2/assets/kfz.png',
-  '/landing2/assets/baustelle.png',
-  '/landing2/assets/fiseur.png',
-  '/landing2/assets/reinigung.png',
-  '/landing2/assets/wohnwagen.png',
-  '/landing2/assets/optiker.png',
+  '/landing2/assets/kfz.webp',
+  '/landing2/assets/baustelle.webp',
+  '/landing2/assets/fiseur.webp',
+  '/landing2/assets/reinigung.webp',
+  '/landing2/assets/wohnwagen.webp',
+  '/landing2/assets/optiker.webp',
 ]
 
 export function Landing2Page() {
@@ -111,7 +111,7 @@ function HeroSection({
   return (
     <section className="relative mb-8 min-h-[calc(100svh-1rem)] overflow-hidden border-b border-slate-200 bg-slate-100 lg:snap-start">
       <Image
-        src="/landing2/assets/hero2.png"
+        src="/landing2/assets/hero2.webp"
         alt="Modernes Website-Mockup für kleine Unternehmen"
         fill
         priority
@@ -206,7 +206,7 @@ function ValueSection({ copy }: { copy: LandingText }) {
   return (
     <ContentSection className="relative overflow-hidden">
       <Image
-        src="/landing2/assets/versprechen.png"
+        src="/landing2/assets/versprechen.webp"
         alt=""
         aria-hidden
         fill
@@ -418,7 +418,7 @@ function ExamplesSection({ portfolio, linkLabel }: { portfolio: PortfolioText; l
 
       <div className="mt-7 grid gap-4 md:grid-cols-2">
         {portfolio.items.map((item) => {
-          const imageSrc = item.title === 'Speicher Balkonkraftwerk' ? '/landing2/assets/solaranlageseite.png' : item.image
+          const imageSrc = item.title === 'Speicher Balkonkraftwerk' ? '/landing2/assets/solaranlageseite.webp' : item.image
           const card = (
             <div className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)]">
               <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100">
@@ -522,7 +522,7 @@ function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: 
           <div className="hidden rounded-3xl border border-white/15 bg-white/10 p-3 lg:block">
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/20">
               <Image
-                src="/landing2/assets/hero.png"
+                src="/landing2/assets/hero.webp"
                 alt="Beispiel einer modernen Unternehmenswebsite"
                 fill
                 sizes="30vw"
@@ -558,7 +558,11 @@ function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel
 
         <div className="space-y-2 text-sm text-slate-700 md:text-right">
           <p className="font-semibold text-slate-900">{copy.footer.contact}</p>
-          <p>{copy.footer.whatsapp}</p>
+          <p>
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="transition hover:text-slate-950">
+              {copy.floating.whatsapp}
+            </a>
+          </p>
           <p>
             <a className="transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
               {copy.footer.email}

@@ -155,7 +155,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Speicher Balkonkraftwerk',
           description:
             'Лендинг для солнечных модулей и накопителей энергии. Мультиязычность, калькулятор, конверсионный CTA.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-          image: '/portfolio/speicher.png',
+          image: '/portfolio/speicher.webp',
           tech: ['Next.js', 'Tailwind', 'i18n', 'Vercel'],
           size: 'lg',
           url: 'https://speicher-balkonkraftwerk.de/ru/',
@@ -164,7 +164,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'BewerbungProfi',
           description:
             'AI-генератор сопроводительных писем для работы в Германии. OpenAI API, мультиязычность, PDF.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-          image: '/portfolio/bewerbungprofi.png',
+          image: '/portfolio/bewerbungprofi.webp',
           tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
           size: 'sm',
           url: 'https://bewerbungprofi.de/',
@@ -173,7 +173,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Beauty Studio Lesya',
           description:
             'Сайт бьюти-студии перманентного макияжа в Браунфельсе. Элегантный дизайн, галерея работ.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-          image: '/portfolio/lesia.png',
+          image: '/portfolio/lesia.webp',
           tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
           size: 'sm',
           url: 'https://konstantinglazunov.github.io/-Lesia/',
@@ -182,7 +182,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Dogs Services',
           description:
             'Сервис для владельцев собак. Бронирование, каталог услуг, современный UI.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-          image: '/portfolio/dogs.png',
+          image: '/portfolio/dogs.webp',
           tech: ['React', 'TypeScript', 'DigitalOcean'],
           size: 'lg',
           url: 'https://dog-app-iw6ow.ondigitalocean.app/',
@@ -313,7 +313,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Speicher Balkonkraftwerk',
           description:
             'Landingpage für Solarmodule und Energiespeicher. Mehrsprachig, Rechner, klare Handlungsaufforderung.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-          image: '/portfolio/speicher.png',
+          image: '/portfolio/speicher.webp',
           tech: ['Next.js', 'Tailwind', 'i18n', 'Vercel'],
           size: 'lg',
           url: 'https://speicher-balkonkraftwerk.de/ru/',
@@ -322,7 +322,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'BewerbungProfi',
           description:
             'KI-Generator für Bewerbungsanschreiben in Deutschland. OpenAI API, Mehrsprachigkeit, PDF.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-          image: '/portfolio/bewerbungprofi.png',
+          image: '/portfolio/bewerbungprofi.webp',
           tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
           size: 'sm',
           url: 'https://bewerbungprofi.de/',
@@ -331,7 +331,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Beauty Studio Lesya',
           description:
             'Webseite des Beauty-Studios für Permanent-Make-up in Braunfels. Elegantes Design, Galerie.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-          image: '/portfolio/lesia.png',
+          image: '/portfolio/lesia.webp',
           tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
           size: 'sm',
           url: 'https://konstantinglazunov.github.io/-Lesia/',
@@ -340,7 +340,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Dienstleistungen für Hundehalter',
           description:
             'Angebot für Hundehalter. Buchung, Leistungskatalog, modernes Design.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-          image: '/portfolio/dogs.png',
+          image: '/portfolio/dogs.webp',
           tech: ['React', 'TypeScript', 'DigitalOcean'],
           size: 'lg',
           url: 'https://dog-app-iw6ow.ondigitalocean.app/',

@@ -244,24 +244,22 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     },
     beforeAfter: {
       title: 'Was sich mit einer klaren Website verändert',
-      caseLabel: 'Case',
+      caseLabel: 'Fall',
       beforeLabel: 'Vorher',
       afterLabel: 'Nachher',
       cards: [
         {
-          before: '🧰 Lokaler Handwerksbetrieb\nKunden kommen nur über Empfehlungen\nKeine Website, die man zeigen kann',
+          before: 'Kunden nur über Empfehlungen, keine Website.',
           after:
-            'Eine klare Website, die sofort zeigt, was Sie anbieten\n👉 Kunden melden sich gezielter und wissen, was sie wollen\n👉 Ergebnis: mehr passende Anfragen und weniger Rückfragen',
+            'Eine klare Website zeigt Ihr Angebot auf einen Blick.',
         },
         {
-          before:
-            '💇‍♀️ Dienstleistung (z. B. Friseur, Beauty, Reinigung)\nKunden fragen immer wieder dieselben Dinge\nKein klarer Überblick über Leistungen',
-          after: 'Alle Infos auf einen Blick\n👉 Weniger Rückfragen, mehr passende Anfragen\n👉 Ergebnis: mehr passende Anfragen und weniger Rückfragen',
+          before: 'Viele Rückfragen, Leistungen unklar.',
+          after: 'Alle Informationen sind auf der Website — weniger Klärungsbedarf.',
         },
         {
-          before:
-            '🚗 Lokales Business (z. B. Autowerkstatt, Vermietung)\nUnklarer Eindruck im Internet oder gar nicht auffindbar\nPotenzielle Kunden gehen zur Konkurrenz',
-          after: 'Professioneller erster Eindruck\n👉 Mehr Vertrauen und mehr Anfragen von neuen Kunden\n👉 Ergebnis: mehr passende Anfragen und weniger Rückfragen',
+          before: 'Online kaum sichtbar oder kein klarer Eindruck — Kunden gehen zur Konkurrenz.',
+          after: 'Eine professionelle Website schafft Vertrauen und bringt neue Anfragen.',
         },
       ],
     },

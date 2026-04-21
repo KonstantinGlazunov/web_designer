@@ -209,6 +209,10 @@ function inferBriefFromContext(
     business?: { location?: string }
     site_status?: string
     goals?: string[]
+    success_metrics?: string[]
+    selection_criteria?: string[]
+    business_barriers?: string[]
+    prior_experience?: string
     services?: string[]
     features?: string[]
     extra_features?: string[]
@@ -263,6 +267,11 @@ function inferBriefFromContext(
     if (lastQuestionKind === 'region' && !brief.business?.location?.trim()) inferred.business = { type: '', description: '', location: trimmed }
     if (lastQuestionKind === 'site_status' && !brief.site_status?.trim()) inferred.site_status = trimmed
     if (lastQuestionKind === 'goals' && !brief.goals?.length) inferred.goals = [trimmed]
+    if (lastQuestionKind === 'business_pains' && !brief.pain_points?.length) inferred.pain_points = splitToItems(trimmed, 4)
+    if (lastQuestionKind === 'success_metrics' && !brief.success_metrics?.length) inferred.success_metrics = splitToItems(trimmed, 4)
+    if (lastQuestionKind === 'selection_criteria' && !brief.selection_criteria?.length) inferred.selection_criteria = splitToItems(trimmed, 4)
+    if (lastQuestionKind === 'business_barriers' && !brief.business_barriers?.length) inferred.business_barriers = splitToItems(trimmed, 4)
+    if (lastQuestionKind === 'prior_experience' && !brief.prior_experience?.trim()) inferred.prior_experience = trimmed
     if (lastQuestionKind === 'services' && !brief.services?.length) inferred.services = splitToItems(trimmed, 5)
     if (lastQuestionKind === 'features' && !brief.features?.length) inferred.features = splitToItems(trimmed, 5)
     if (lastQuestionKind === 'target_audience' && !brief.target_audience?.trim()) inferred.target_audience = trimmed
@@ -503,6 +512,12 @@ function detectQuestionKind(reply: string) {
   if (/уже есть сайт|нужен новый|bereits eine website/.test(text)) return 'site_status'
   if (/какие услуги|leistungen|produkte bieten sie an/.test(text)) return 'services'
   if (/какие функции|какая практическая функция|наиболее важна|funktionen brauchen/.test(text)) return 'features'
+  if (/какая проблема волнует|herausforderung|zu wenige anfragen|unpassende anfragen/.test(text)) return 'business_pains'
+  if (/какой результат считаете успешным|klarer erfolg|ergebnis waere/.test(text)) return 'success_metrics'
+  if (/выбор[а]? подрядчика|auswahl eines dienstleisters|bei der auswahl.*wichtigsten/.test(text)) return 'selection_criteria'
+  if (/что вас.*останавливает|haelt sie.*davon ab|schlechte erfahrung|budget ist begrenzt/.test(text)) return 'business_barriers'
+  if (/кто чаще всего обращается|wer meldet sich.*haeufigsten/.test(text)) return 'target_audience'
+  if (/запускать рекламу|frueher schon werbung|website getestet/.test(text)) return 'prior_experience'
   if (/идеальный клиент|портрет клиента|zielkunde|ideal customer/.test(text)) return 'target_audience'
   if (/уникальн|утп|usp/.test(text)) return 'usp'
   if (/чем конкуренты лучше|stärker als sie|was machen konkurrenten besser/.test(text)) return 'competitor_advantages'
@@ -639,6 +654,26 @@ function buildOptionsForKind(
       return locale === 'de'
         ? ['Mehr Kunden gewinnen', 'Online verkaufen', 'Vertrauen staerken']
         : ['Привлечь клиентов', 'Продавать онлайн', 'Повысить доверие']
+    case 'business_pains':
+      return locale === 'de'
+        ? ['Zu wenige Anfragen', 'Unpassende Anfragen', 'Leistungen sind schwer zu erklären']
+        : ['Мало клиентов', 'Клиенты не те', 'Сложно объяснять услуги']
+    case 'success_metrics':
+      return locale === 'de'
+        ? ['5-10 Anfragen pro Woche', 'Informieren und Vertrauen aufbauen', 'Produkte online verkaufen']
+        : ['5-10 обращений в неделю', 'Информировать и поднять доверие', 'Продать товары онлайн']
+    case 'selection_criteria':
+      return locale === 'de'
+        ? ['Preis', 'Geschwindigkeit', 'Erfahrung und Portfolio', 'Schluesselfertig']
+        : ['Цена', 'Скорость', 'Опыт и портфолио', 'Под ключ']
+    case 'business_barriers':
+      return locale === 'de'
+        ? ['Budget ist begrenzt', 'Wir wissen nicht, wie wir starten', 'Keine Zeit', 'Frueher schlechte Erfahrung']
+        : ['Бюджет ограничен', 'Не знаем, с чего начать', 'Нет времени', 'Ранее был плохой опыт']
+    case 'prior_experience':
+      return locale === 'de'
+        ? ['Ja, aber ohne Ergebnis', 'Nein, erster Versuch', 'Es gibt schon eine einfache Website/Profilseite']
+        : ['Да, но безрезультатно', 'Нет, это первый опыт', 'Есть простой сайт/страницы']
     case 'services':
       return buildNextBriefOptions({ ...brief, services: [] }, locale)
     case 'features':

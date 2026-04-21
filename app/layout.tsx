@@ -3,7 +3,9 @@ import { Inter } from 'next/font/google'
 import '@/app/globals.css'
 import { SitePreferencesProvider } from '@/components/providers/site-preferences'
 import { CookieConsentProvider } from '@/components/providers/cookie-consent'
+import { LeadConsentProvider } from '@/components/providers/lead-consent'
 import { CookieConsentDialog } from '@/components/cookie-consent-dialog'
+import { LeadConsentDialog } from '@/components/lead-consent-dialog'
 import { GoogleAnalytics } from '@/components/google-analytics'
 
 const inter = Inter({
@@ -66,9 +68,12 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         <SitePreferencesProvider>
           <CookieConsentProvider>
-            <GoogleAnalytics />
-            <CookieConsentDialog />
-            {children}
+            <LeadConsentProvider>
+              <GoogleAnalytics />
+              <CookieConsentDialog />
+              <LeadConsentDialog />
+              {children}
+            </LeadConsentProvider>
           </CookieConsentProvider>
         </SitePreferencesProvider>
       </body>

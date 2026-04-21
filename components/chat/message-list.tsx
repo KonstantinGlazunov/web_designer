@@ -15,13 +15,14 @@ interface MessageListProps {
   isTyping?: boolean
   quickReplies?: string[]
   onQuickReply?: (text: string) => void
+  otherLabel?: string
   emptyHint?: string
   theme?: 'light' | 'dark'
   typingMessageIndex?: number | null
   onTypingComplete?: () => void
 }
 
-export function MessageList({ messages, isTyping, quickReplies, onQuickReply, theme = 'dark', typingMessageIndex = null, onTypingComplete }: MessageListProps) {
+export function MessageList({ messages, isTyping, quickReplies, onQuickReply, otherLabel = 'Other', theme = 'dark', typingMessageIndex = null, onTypingComplete }: MessageListProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export function MessageList({ messages, isTyping, quickReplies, onQuickReply, th
             <div className="flex w-full justify-start gap-2">
               <div className="flex h-9 w-9 shrink-0 overflow-hidden rounded-full">
                 <Image
-                  src="/Chat_avatar.png"
+                  src="/Chat_avatar.webp"
                   alt="Max Webberater"
                   width={36}
                   height={36}
@@ -81,14 +82,14 @@ export function MessageList({ messages, isTyping, quickReplies, onQuickReply, th
               key={i}
               type="button"
               onClick={() => onQuickReply(opt)}
-              aria-label={opt}
+              aria-label={opt === '__OTHER__' ? otherLabel : opt}
               className={
                 theme === 'dark'
                   ? 'rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-sm text-slate-200 transition hover:border-emerald-300/40 hover:bg-emerald-500/20'
                   : 'rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-600 shadow-sm transition hover:border-emerald-300 hover:bg-emerald-50'
               }
             >
-              {opt}
+              {opt === '__OTHER__' ? otherLabel : opt}
             </button>
           ))}
         </div>

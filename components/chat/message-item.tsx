@@ -52,7 +52,7 @@ export function MessageItem({ role, content, theme = 'dark', animateIn, onTyping
       {!isUser && (
         <div className="flex h-9 w-9 shrink-0 overflow-hidden rounded-full">
           <Image
-            src="/Chat_avatar.png"
+            src="/Chat_avatar.webp"
             alt="Max Webberater"
             width={36}
             height={36}

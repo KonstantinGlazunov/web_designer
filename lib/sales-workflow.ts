@@ -199,10 +199,14 @@ function getMissingCriticalFields(brief: Brief, projectType: ProjectType, contac
   if (projectType === 'unknown') missing.push('projectType')
   if (!brief.services.length) missing.push('services')
   if (!brief.features.length) missing.push('features')
+  if (!brief.pain_points.length) missing.push('businessPains')
+  if (!brief.success_metrics.length) missing.push('successMetrics')
+  if (!brief.selection_criteria.length) missing.push('selectionCriteria')
+  if (!brief.business_barriers.length) missing.push('businessBarriers')
   if (!brief.target_audience.trim()) missing.push('targetAudience')
+  if (!brief.prior_experience.trim()) missing.push('priorExperience')
   if (!brief.competitors.length) missing.push('competitors')
   if (!brief.usp.trim()) missing.push('usp')
-  if (!brief.pain_points.length) missing.push('competitorGaps')
   if (!brief.design.references.length) missing.push('designRefs')
   if (!brief.extra_features.length) missing.push('extraFeatures')
   if (!brief.languages.length) missing.push('languages')
@@ -249,14 +253,19 @@ function determineStage(brief: Brief, userIntent: UserIntent, projectType: Proje
   if (userIntent === 'support' || userIntent === 'portfolio') return 'intent_detection'
   if (!brief.contact.name.trim()) return 'qualification'
   if (!brief.niche.trim() || !brief.business.location.trim() || !brief.goals.length || !brief.site_status.trim()) return 'qualification'
-  if (projectType === 'unknown') return 'project_branch'
+  // Формат проекта определяем сами по ответам клиента, не спрашиваем отдельным шагом.
+  if (projectType === 'unknown') return 'scope_capture'
   if (!brief.services.length || !brief.features.length) return 'scope_capture'
 
   const discoveryMissing =
+    !brief.pain_points.length ||
+    !brief.success_metrics.length ||
+    !brief.selection_criteria.length ||
+    !brief.business_barriers.length ||
     !brief.target_audience.trim() ||
+    !brief.prior_experience.trim() ||
     !brief.competitors.length ||
     !brief.usp.trim() ||
-    !brief.pain_points.length ||
     !brief.design.references.length ||
     !brief.extra_features.length ||
     !brief.languages.length ||
@@ -357,6 +366,42 @@ function getFeatureOptions(projectType: ProjectType, locale: 'ru' | 'de') {
       }
 
   return options[projectType]
+}
+
+function getBusinessPainOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['Zu wenige Anfragen', 'Unpassende Anfragen', 'Leistungen sind schwer zu erklären']
+    : ['Мало клиентов', 'Клиенты не те', 'Сложно объяснять услуги']
+}
+
+function getSuccessMetricOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['5-10 Anfragen pro Woche', 'Informieren und Vertrauen aufbauen', 'Produkte online verkaufen']
+    : ['5-10 обращений в неделю', 'Информировать и поднять доверие', 'Продать товары онлайн']
+}
+
+function getSelectionCriteriaOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['Preis', 'Geschwindigkeit', 'Erfahrung und Portfolio', 'Schluesselfertig - ich will mich nicht darum kuemmern']
+    : ['Цена', 'Скорость', 'Опыт и портфолио', 'Под ключ - ничего не делать самому']
+}
+
+function getBarrierOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['Budget ist begrenzt', 'Wir wissen nicht, wie wir starten', 'Keine Zeit', 'Frueher schlechte Erfahrung']
+    : ['Бюджет ограничен', 'Не знаем, с чего начать', 'Нет времени', 'Ранее был плохой опыт']
+}
+
+function getClientProfileOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['Privatkunden', 'Kleine Firmen', 'Groessere Unternehmen', 'Gemischte Zielgruppe']
+    : ['Частные лица', 'Малые фирмы', 'Большие компании', 'Смешанная аудитория']
+}
+
+function getPriorExperienceOptions(locale: 'ru' | 'de') {
+  return locale === 'de'
+    ? ['Ja, aber ohne Ergebnis', 'Nein, erster Versuch', 'Es gibt schon eine einfache Website/Profilseite']
+    : ['Да, но безрезультатно', 'Нет, это первый опыт', 'Есть простой сайт/страницы']
 }
 
 function getServiceOptions(niche: string, locale: 'ru' | 'de') {
@@ -509,9 +554,8 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
     if (!brief.business.location.trim()) {
       return {
         reply: locale === 'de'
-          ? `${brief.contact.name}, in welcher Stadt oder Region in Deutschland arbeiten Sie? Das ist wichtig fuer lokales SEO und Google Business Profile.`
-          : `${brief.contact.name}, в каком городе или регионе Германии вы работаете? Это важно для локального SEO и профиля компании в Google.`,
-        options: getRegionOptions(locale),
+          ? `${brief.contact.name}, in welcher Stadt oder Region in Deutschland arbeiten Sie? Das ist wichtig fuer lokales SEO und Google Business Profile. Sie koennen einfach den Stadtnamen oder die Postleitzahl schreiben.`
+          : `${brief.contact.name}, в каком городе или регионе Германии вы работаете? Это важно для локального SEO и профиля компании в Google. Можно просто написать название города или почтовый индекс.`,
         workflow,
       }
     }
@@ -538,24 +582,13 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
   }
 
   if (workflow.stage === 'project_branch') {
-    const hasExistingSite = /уже есть|обнов|vorhanden|aktualisieren|already exists/i.test(brief.site_status)
-    const askedCount = countAsked(previousMessages, /лендинг|landingpage|редизайн|online-shop|интернет-магазин|формат сайта|welches format/i)
-
-    if (askedCount > 0) {
-      return {
-        reply: locale === 'de'
-          ? 'Das ist vollkommen normal - Sie muessen keine Website-Formate kennen. Sagen Sie einfach, was Ihnen naeher ist, ich waehle die passende Struktur fuer Sie.'
-          : 'Это абсолютно нормально, вам не нужно разбираться в форматах сайта. Просто выберите, что вам ближе, а структуру я подберу сам.',
-        options: getProjectTypeHelperOptions(locale, hasExistingSite),
-        workflow,
-      }
-    }
-
+    // Запасной путь: даже если стадия определилась как project_branch,
+    // не просим клиента выбирать формат вручную.
     return {
       reply: locale === 'de'
-        ? 'Welches Format passt für Ihr Projekt am besten?'
-        : 'Какой формат сайта для вашего проекта подходит лучше всего?',
-      options: getProjectTypeOptions(locale, hasExistingSite),
+        ? 'Ich habe das Format notiert und bestimme die passende Struktur aus Ihren Antworten. Welche Leistungen oder Angebote sollen wir auf der Website zuerst zeigen?'
+        : 'Формат я определю по вашим ответам и зафиксирую сам. Какие услуги или направления нужно показать на сайте в первую очередь?',
+      options: getServiceOptions(brief.niche, locale),
       workflow,
     }
   }
@@ -583,11 +616,62 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
   }
 
   if (workflow.stage === 'budget_timeline') {
+    if (!brief.pain_points.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Welche Herausforderung belastet Ihr Geschaeft aktuell am meisten?'
+          : 'Какая проблема волнует вас больше всего?',
+        options: getBusinessPainOptions(locale),
+        workflow,
+      }
+    }
+
+    if (!brief.success_metrics.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Welches Ergebnis waere fuer Ihre Website fuer Sie ein klarer Erfolg?'
+          : 'Какой результат считаете успешным для вашего сайта?',
+        options: getSuccessMetricOptions(locale),
+        workflow,
+      }
+    }
+
+    if (!brief.selection_criteria.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Was ist fuer Sie bei der Auswahl eines Dienstleisters am wichtigsten?'
+          : 'Что для вас главное при выборе подрядчика?',
+        options: getSelectionCriteriaOptions(locale),
+        workflow,
+      }
+    }
+
+    if (!brief.business_barriers.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Was haelt Sie aktuell davon ab, die Website zu starten?'
+          : 'Что вас сейчас останавливает от создания сайта?',
+        options: getBarrierOptions(locale),
+        workflow,
+      }
+    }
+
     if (!brief.target_audience.trim()) {
       return {
         reply: locale === 'de'
-          ? 'Wer ist Ihr idealer Kunde? Beschreiben Sie kurz Alter, Bedarf und warum er gerade Sie wählt.'
-          : 'Кто ваш идеальный клиент? Коротко опишите возраст, боли и почему выбирают именно вас.',
+          ? 'Wer meldet sich bei Ihrem Unternehmen am haeufigsten?'
+          : 'Кто чаще всего обращается в ваш бизнес?',
+        options: getClientProfileOptions(locale),
+        workflow,
+      }
+    }
+
+    if (!brief.prior_experience.trim()) {
+      return {
+        reply: locale === 'de'
+          ? 'Haben Sie frueher schon Werbung oder eine Website getestet?'
+          : 'Пробовали ли вы ранее запускать рекламу или сайт?',
+        options: getPriorExperienceOptions(locale),
         workflow,
       }
     }
@@ -606,15 +690,6 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
         reply: locale === 'de'
           ? 'Was ist Ihr USP? Worin sind Sie besser als die Konkurrenz?'
           : 'В чем ваше уникальное торговое предложение (УТП)? Чем вы лучше конкурентов?',
-        workflow,
-      }
-    }
-
-    if (!brief.pain_points.length) {
-      return {
-        reply: locale === 'de'
-          ? 'Und in welchen Punkten sind Wettbewerber aktuell stärker als Sie?'
-          : 'Чем конкуренты лучше вас?',
         workflow,
       }
     }

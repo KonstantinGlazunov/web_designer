@@ -195,10 +195,10 @@ export function sanitizeBriefUpdate(raw: unknown): Partial<Brief> {
     } else if (['want_website', 'niche', 'site_status'].includes(key)) {
       const nextValue = toCleanString(val)
       if (nextValue) sanitized[key] = nextValue
-    } else if (['goals', 'services', 'competitors', 'traffic_sources', 'features', 'languages'].includes(key)) {
+    } else if (['goals', 'success_metrics', 'selection_criteria', 'business_barriers', 'services', 'competitors', 'traffic_sources', 'features', 'languages', 'pain_points'].includes(key)) {
       const nextArray = (Array.isArray(val) ? val.map(String) : [String(val)]).map((item) => item.trim()).filter(Boolean)
       if (nextArray.length) sanitized[key] = nextArray
-    } else if (['target_audience', 'usp', 'sales_funnel', 'deadline'].includes(key)) {
+    } else if (['target_audience', 'usp', 'sales_funnel', 'deadline', 'prior_experience'].includes(key)) {
       const nextValue = toCleanString(val)
       if (nextValue) sanitized[key] = nextValue
     }

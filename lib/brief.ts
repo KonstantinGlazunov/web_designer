@@ -5,6 +5,10 @@ export interface Brief {
   contact: { name: string; phone: string; email: string }
   business: { type: string; description: string; location: string }
   goals: string[]
+  success_metrics: string[]
+  selection_criteria: string[]
+  business_barriers: string[]
+  prior_experience: string
   pain_points: string[]
   target_audience: string
   services: string[]
@@ -33,6 +37,10 @@ export const emptyBrief: Brief = {
   contact: { name: '', phone: '', email: '' },
   business: { type: '', description: '', location: '' },
   goals: [],
+  success_metrics: [],
+  selection_criteria: [],
+  business_barriers: [],
+  prior_experience: '',
   pain_points: [],
   target_audience: '',
   services: [],
