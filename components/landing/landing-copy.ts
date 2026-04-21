@@ -116,16 +116,19 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       badges: ['Für lokale Unternehmen', 'Mobil optimiert', 'Klar & modern'],
     },
     hero: {
-      title: 'Klare Website für Ihr Unternehmen - modern, verständlich und professionell',
+      title: 'Mehr Kundenanfragen über Ihre Website – einfach und ohne Aufwand',
       subtitle:
-        'Wir erstellen Websites für kleine Unternehmen in Deutschland: klar aufgebaut, mobil optimiert und bereit, Ihr Geschäft professionell zu präsentieren.',
+        'Wir erstellen Websites für kleine Unternehmen in Deutschland, die klar zeigen, was Sie anbieten – und warum Kunden sich bei Ihnen melden.',
       ctaPrimary: 'Projekt starten',
       ctaSecondary: 'Beispiele ansehen',
       benefits: [
-        'Verständlich aufgebaut',
-        'Für Smartphone optimiert',
-        'Ohne unnötige Technik-Sprache',
-        'Passend für lokale Unternehmen',
+        'Klare Struktur, die Kunden sofort verstehen',
+        'Funktioniert perfekt auf dem Smartphone',
+        'Ohne komplizierte Fachbegriffe',
+        'Speziell für lokale Unternehmen gemacht',
+        'Ohne technisches Wissen',
+        'Wir übernehmen alles für Sie',
+        'Dauert nur 10–15 Minuten im Erstgespräch',
       ],
       hint: 'Ideal für Handwerk, Service, Beauty, Werkstatt, Vermietung und lokale Geschäfte',
       mockupTitle: 'Unternehmensprofil',
@@ -141,12 +144,12 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         'Sie wissen, dass etwas gemacht werden muss, aber nicht, wo Sie anfangen sollen',
       ],
       summary:
-        'Das Problem ist oft nicht Ihr Angebot. Das Problem ist, dass Ihr Unternehmen online nicht klar und professionell sichtbar ist.',
+        'Das Problem ist oft nicht Ihr Angebot. Das Problem ist, dass Ihr Unternehmen online nicht klar und professionell sichtbar ist. Viele Besucher entscheiden in wenigen Sekunden, ob sie bleiben oder gehen.',
     },
     value: {
-      title: 'Keine leeren Versprechen. Sondern eine saubere Grundlage für Ihren Online-Auftritt.',
+      title: 'Keine leeren Versprechen – sondern eine Website, die für Sie arbeitet',
       intro:
-        'Wir versprechen keine Kunden auf Knopfdruck. Aber wir erstellen eine Website, die Ihr Unternehmen professionell zeigt, Vertrauen aufbaut und bereit ist für Google, Werbung und Empfehlungen.',
+        'Wir versprechen keine Wunder über Nacht. Aber wir sorgen dafür, dass Ihr Unternehmen online klar wirkt, Vertrauen aufbaut und aus Besuchern Anfragen werden.',
       cards: [
         {
           title: 'Klare Struktur',
@@ -181,9 +184,9 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     audience: {
       title: 'Für welche Unternehmen ist das besonders passend?',
       cards: [
-        'Autowerkstatt',
-        'Bau / Handwerk',
-        'Beauty / Friseur',
+        'Autowerkstatt – Viele Anfragen, aber oft unklar, was genau angeboten wird',
+        'Bau / Handwerk – Stark abhängig von Empfehlungen, wenig planbar',
+        'Beauty / Friseur – Kunden fragen immer wieder dieselben Dinge',
         'Reinigungsservice',
         'Vermietung / lokaler Service',
         'Küchen, Optik, Kanzlei, Fachgeschäft',
@@ -212,7 +215,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
           description: 'Texte, Design und Technik – Sie müssen sich um nichts kümmern.',
         },
         {
-          title: 'Ihre Website bringt Kunden',
+          title: 'Ihre Website ist bereit, neue Anfragen zu bringen',
           description: 'Ihre Seite geht online und ist bereit, neue Anfragen zu generieren.',
         },
       ],
@@ -225,6 +228,8 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         'Klare Sprache statt Fachbegriffe. Wir erklären alles so, dass Sie es sofort verstehen',
         'Ehrliche Einschätzung. Sie hören von uns, was wirklich sinnvoll ist – und was nicht',
         'Fokus auf das Wesentliche. Ihre Website wird klar, verständlich und überzeugend für Ihre Kunden',
+        'Geeignet für kleine Unternehmen in Deutschland, die bereits aktiv sind',
+        'Bereits umgesetzt für lokale Betriebe',
       ],
       humanTitle: 'Viele Unternehmer sagen:',
       humanText:
@@ -233,7 +238,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     honesty: {
       title: 'Wichtig zu wissen',
       main:
-        'Eine Website allein bringt nicht automatisch Besucher. Aber ohne eine gute Website verlieren viele Unternehmen Vertrauen, Sichtbarkeit und Anfragen.',
+        'Eine Website bringt nicht automatisch Kunden – aber ohne Website verlieren Sie täglich welche.',
       extra:
         'Wir erstellen keine leeren Werbeversprechen. Wir schaffen die Grundlage, auf der Ihr Unternehmen online professionell auftreten kann.',
     },
@@ -246,17 +251,17 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         {
           before: '🧰 Lokaler Handwerksbetrieb\nKunden kommen nur über Empfehlungen\nKeine Website, die man zeigen kann',
           after:
-            'Eine klare Website, die sofort zeigt, was Sie anbieten\n👉 Kunden melden sich gezielter und wissen, was sie wollen',
+            'Eine klare Website, die sofort zeigt, was Sie anbieten\n👉 Kunden melden sich gezielter und wissen, was sie wollen\n👉 Ergebnis: mehr passende Anfragen und weniger Rückfragen',
         },
         {
           before:
             '💇‍♀️ Dienstleistung (z. B. Friseur, Beauty, Reinigung)\nKunden fragen immer wieder dieselben Dinge\nKein klarer Überblick über Leistungen',
-          after: 'Alle Infos auf einen Blick\n👉 Weniger Rückfragen, mehr passende Anfragen',
+          after: 'Alle Infos auf einen Blick\n👉 Weniger Rückfragen, mehr passende Anfragen\n👉 Ergebnis: mehr passende Anfragen und weniger Rückfragen',
         },
         {
           before:
             '🚗 Lokales Business (z. B. Autowerkstatt, Vermietung)\nUnklarer Eindruck im Internet oder gar nicht auffindbar\nPotenzielle Kunden gehen zur Konkurrenz',
-          after: 'Professioneller erster Eindruck\n👉 Mehr Vertrauen und mehr Anfragen von neuen Kunden',
+          after: 'Professioneller erster Eindruck\n👉 Mehr Vertrauen und mehr Anfragen von neuen Kunden\n👉 Ergebnis: mehr passende Anfragen und weniger Rückfragen',
         },
       ],
     },
@@ -292,12 +297,17 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
           answer:
             'Sehr wenig. In der Regel reicht ein kurzes Gespräch – wir übernehmen den Rest für Sie.',
         },
+        {
+          question: 'Was kostet eine einfache Website bei Ihnen?',
+          answer:
+            'Viele Projekte starten ab 400€. Der genaue Preis hängt davon ab, was Sie wirklich brauchen – wir sagen Ihnen das ehrlich im Gespräch.',
+        },
       ],
     },
     finalCta: {
-      title: 'Lassen Sie uns kurz sprechen.',
+      title: 'Unsicher, ob sich eine Website für Sie lohnt?',
       subtitle:
-        'Sie bekommen eine ehrliche Einschätzung, was für Ihr Unternehmen sinnvoll ist – und was nicht.',
+        'Sprechen wir kurz. Sie bekommen eine klare Einschätzung – verständlich und ohne Verpflichtung. Dauert nur 10–15 Minuten.',
       primary: 'Jetzt unverbindlich anfragen',
       secondary: 'Per WhatsApp schreiben',
     },
@@ -328,16 +338,18 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       badges: ['Для локального бизнеса', 'Оптимизировано под смартфон', 'Понятно и современно'],
     },
     hero: {
-      title: 'Понятный сайт для вашего бизнеса - современный, аккуратный и профессиональный',
+      title: 'Больше заявок через ваш сайт — просто и без лишних сложностей',
       subtitle:
-        'Мы делаем сайты для малого бизнеса в Германии: с ясной структурой, адаптацией под мобильные устройства и профессиональной подачей вашей компании.',
+        'Мы создаём сайты для малого бизнеса в Германии, которые ясно показывают, что вы предлагаете — и почему клиенты выбирают именно вас.',
       ctaPrimary: 'Начать проект',
       ctaSecondary: 'Посмотреть примеры',
       benefits: [
-        'Понятная структура',
-        'Оптимизировано под смартфон',
-        'Без сложного технического языка',
-        'Подходит для локального бизнеса',
+        'Понятная структура, которую клиент сразу понимает',
+        'Идеально работает на смартфоне',
+        'Без сложных технических терминов',
+        'Сделано специально для локального бизнеса',
+        'Без технических знаний с вашей стороны',
+        'Мы берём всё на себя',
       ],
       hint: 'Подходит для ремесла, сервиса, beauty, мастерских, аренды и локальных магазинов',
       mockupTitle: 'Профиль компании',
@@ -353,12 +365,12 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         'Понимаете, что нужно что-то делать, но не знаете, с чего начать',
       ],
       summary:
-        'Проблема обычно не в вашем предложении. Проблема в том, что компания онлайн не выглядит ясно и профессионально.',
+        'Проблема обычно не в вашем предложении. Проблема в том, что компания онлайн не выглядит ясно и профессионально. Многие посетители решают за несколько секунд: остаться или уйти.',
     },
     value: {
-      title: 'Без пустых обещаний. Только аккуратная основа для вашего онлайн-присутствия.',
+      title: 'Без пустых обещаний — а сайт, который работает на вас',
       intro:
-        'Мы не обещаем клиентов по кнопке. Но создаём сайт, который профессионально показывает ваш бизнес, формирует доверие и готов к Google, рекламе и рекомендациям.',
+        'Мы не обещаем чудес за одну ночь. Но делаем так, чтобы ваш бизнес выглядел онлайн ясно, вызывал доверие и превращал посетителей в заявки.',
       cards: [
         {
           title: 'Понятная структура',
@@ -391,9 +403,9 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     audience: {
       title: 'Для каких компаний это особенно подходит?',
       cards: [
-        'Автосервис',
-        'Строительство / ремесло',
-        'Beauty / парикмахерская',
+        'Автосервис — много обращений, но часто непонятно, что именно вы делаете',
+        'Строительство / ремесло — сильная зависимость от рекомендаций, мало предсказуемости',
+        'Beauty / парикмахерская — клиенты постоянно задают одни и те же вопросы',
         'Клининговый сервис',
         'Аренда / локальный сервис',
         'Кухни, оптика, канцелярия, профильные магазины',
@@ -422,7 +434,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
           description: 'Тексты, дизайн и техническая часть — вам не нужно разбираться в деталях.',
         },
         {
-          title: 'Сайт начинает приносить клиентов',
+          title: 'Сайт готов приносить новые заявки',
           description: 'Ваш сайт выходит в онлайн и готов получать новые заявки.',
         },
       ],
@@ -435,6 +447,8 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         'Простое объяснение без сложных терминов. Мы объясняем всё так, чтобы вы понимали сразу',
         'Честная оценка. Вы услышите от нас, что действительно полезно — и что не нужно',
         'Фокус на главном. Ваш сайт будет ясным, понятным и убедительным для ваших клиентов',
+        'Подходит для малого бизнеса в Германии, который уже работает',
+        'Уже реализовано для локальных компаний',
       ],
       humanTitle: 'Многие предприниматели говорят:',
       humanText:
@@ -443,7 +457,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     honesty: {
       title: 'Важно знать',
       main:
-        'Один сайт сам по себе не приводит посетителей автоматически. Но без хорошего сайта многие компании теряют доверие, видимость и обращения.',
+        'Сайт не приводит клиентов автоматически — но без сайта вы теряете их каждый день.',
       extra:
         'Мы не даём пустых обещаний. Мы создаём основу, на которой ваш бизнес может профессионально выглядеть онлайн.',
     },
@@ -455,15 +469,15 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       cards: [
         {
           before: '🧰 Локальный бизнес в сфере услуг\nКлиенты приходят только по рекомендациям\nНет сайта, который можно показать',
-          after: 'Понятный сайт, который сразу показывает, что вы предлагаете\n👉 Клиенты обращаются более осознанно и понимают, что им нужно',
+          after: 'Понятный сайт, который сразу показывает, что вы предлагаете\n👉 Клиенты обращаются более осознанно и понимают, что им нужно\n👉 Результат: больше целевых заявок и меньше повторяющихся вопросов',
         },
         {
           before: '💇‍♀️ Услуги (например, парикмахер, beauty, клининг)\nКлиенты снова и снова задают одни и те же вопросы\nНет ясного обзора услуг',
-          after: 'Вся информация в одном месте\n👉 Меньше уточняющих вопросов, больше целевых обращений',
+          after: 'Вся информация в одном месте\n👉 Меньше уточняющих вопросов, больше целевых обращений\n👉 Результат: больше целевых заявок и меньше повторяющихся вопросов',
         },
         {
           before: '🚗 Локальный бизнес (например, автосервис, аренда)\nНечёткое впечатление в интернете или вас вообще не находят\nПотенциальные клиенты уходят к конкурентам',
-          after: 'Профессиональное первое впечатление\n👉 Больше доверия и больше обращений от новых клиентов',
+          after: 'Профессиональное первое впечатление\n👉 Больше доверия и больше обращений от новых клиентов\n👉 Результат: больше целевых заявок и меньше повторяющихся вопросов',
         },
       ],
     },
@@ -500,12 +514,17 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
           answer:
             'Очень мало. Обычно достаточно короткого разговора — остальное мы берём на себя.',
         },
+        {
+          question: 'Сколько у вас стоит простой сайт?',
+          answer:
+            'Многие проекты стартуют от 400€. Точная стоимость зависит от того, что вам действительно нужно — мы честно обсудим это в разговоре.',
+        },
       ],
     },
     finalCta: {
-      title: 'Давайте коротко созвонимся.',
+      title: 'Не уверены, окупится ли вам сайт?',
       subtitle:
-        'Вы получите честную оценку: что действительно полезно для вашего бизнеса, а что нет.',
+        'Давайте коротко поговорим. Вы получите понятную оценку — без сложных терминов и без обязательств. Это займёт всего 10–15 минут.',
       primary: 'Оставить запрос без обязательств',
       secondary: 'Написать в WhatsApp',
     },

@@ -2,7 +2,7 @@
 
 import { Dialog, DialogBackdrop } from '@headlessui/react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Check, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Check, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { useMemo, useState, type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -180,9 +180,11 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
                     <button
                       type="button"
                       onClick={handleClose}
-                      className="text-sm text-slate-400 transition hover:text-white"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-slate-300 transition hover:border-white/35 hover:text-white"
+                      aria-label={copy.close}
+                      title={copy.close}
                     >
-                      {copy.close}
+                      <X className="h-4 w-4" />
                     </button>
                   </div>
                   <div className="h-1.5 overflow-hidden rounded-full bg-white/10">

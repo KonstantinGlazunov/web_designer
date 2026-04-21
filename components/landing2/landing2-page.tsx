@@ -109,7 +109,7 @@ function HeroSection({
   onOpenForm: () => void
 }) {
   return (
-    <section className="relative mb-8 min-h-[calc(100svh-1rem)] overflow-hidden border-b border-slate-200 bg-slate-100">
+    <section className="relative mb-8 min-h-[calc(100svh-1rem)] overflow-hidden border-b border-slate-200 bg-slate-100 lg:snap-start">
       <Image
         src="/landing2/assets/hero2.png"
         alt="Modernes Website-Mockup für kleine Unternehmen"
@@ -436,7 +436,7 @@ function ExamplesSection({ portfolio, linkLabel }: { portfolio: PortfolioText; l
 
               <div className="flex flex-1 flex-col p-5">
                 <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
+                <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
 
                 <div className="mt-3 mb-5 flex flex-wrap gap-2">
                   {item.tech.slice(0, 4).map((tech) => (
@@ -538,7 +538,7 @@ function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: 
 
 function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel: string }) {
   return (
-    <footer id="kontakt" className="mt-6 rounded-[30px] border border-slate-200 bg-white px-6 py-8 sm:px-8">
+    <footer id="kontakt" className="mt-6 rounded-[30px] border border-slate-200 bg-white px-6 py-8 sm:px-8 lg:snap-start">
       <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">{copy.footer.title}</p>
@@ -565,12 +565,6 @@ function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel
             </a>
           </p>
           <div className="flex flex-col gap-2 pt-2 md:items-end">
-            <Link href="/landing" className="transition hover:text-slate-950">
-              Landing
-            </Link>
-            <Link href="/landing2" className="transition hover:text-slate-950">
-              Landing2
-            </Link>
             <Link href="/agb" className="transition hover:text-slate-950">
               AGB
             </Link>
@@ -590,7 +584,10 @@ function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel
 
 function ContentSection({ children, id, className }: { children: ReactNode; id?: string; className?: string }) {
   return (
-    <section id={id} className={cn('mt-6 rounded-[30px] border border-slate-200/80 bg-[#fbfcff] p-6 sm:mt-7 sm:p-8 lg:p-10', className)}>
+    <section
+      id={id}
+      className={cn('mt-6 rounded-[30px] border border-slate-200/80 bg-[#fbfcff] p-6 sm:mt-7 sm:p-8 lg:snap-start lg:p-10', className)}
+    >
       {children}
     </section>
   )
