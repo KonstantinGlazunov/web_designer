@@ -31,6 +31,12 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
             <ThemeToggle />
           </div>
           <div className="flex flex-col items-start gap-2 text-sm lg:items-end">
+            <Link href="/landing" className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
+              Landing
+            </Link>
+            <Link href="/landing2" className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
+              Landing2
+            </Link>
             <Link href="/agb" className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
               {copy.legal.agb}
             </Link>

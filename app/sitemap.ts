@@ -13,6 +13,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${siteUrl}/landing`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/landing2`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${siteUrl}/impressum`,
       lastModified,
       changeFrequency: 'yearly',
@@ -38,4 +50,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 }
-
