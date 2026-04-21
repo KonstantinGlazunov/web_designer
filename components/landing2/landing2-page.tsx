@@ -325,20 +325,26 @@ function TrustSection({ copy }: { copy: LandingText }) {
   return (
     <ContentSection>
       <SectionTitle>{copy.trust.title}</SectionTitle>
-      <div className="mt-7 grid gap-4 lg:grid-cols-[1.06fr_0.94fr]">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {copy.trust.points.map((point) => (
-            <article key={point} className="flex items-start gap-3 rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300">
-              <span className="mt-1 inline-flex h-6 w-6 flex-none items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                <Check className="h-4 w-4" />
-              </span>
-              <p className="text-base leading-7 text-slate-700">{point}</p>
-            </article>
-          ))}
+      <div className="mt-7 grid items-stretch gap-4 lg:grid-cols-[1.06fr_0.94fr]">
+        <div className="flex h-full flex-col">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {copy.trust.points.map((point) => (
+              <article key={point} className="flex items-start gap-3 rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300">
+                <span className="mt-1 inline-flex h-6 w-6 flex-none items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                  <Check className="h-4 w-4" />
+                </span>
+                <p className="text-base leading-7 text-slate-700">{point}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-6 rounded-[28px] border border-sky-200 bg-sky-50 px-6 py-6 sm:px-7">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">{copy.trust.humanTitle}</p>
+            <p className="mt-3 text-lg leading-8 text-slate-800">{copy.trust.humanText}</p>
+          </div>
         </div>
 
-        <figure className="overflow-hidden rounded-[28px] border border-slate-200 bg-white p-3">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
+        <figure className="h-full overflow-hidden rounded-[28px] border border-slate-200 bg-white p-3">
+          <div className="relative h-full min-h-[420px] overflow-hidden rounded-2xl bg-slate-100">
             <Image
               src="/working-photo.png"
               alt="Lokaler Unternehmer in seinem Geschäft"
@@ -348,11 +354,6 @@ function TrustSection({ copy }: { copy: LandingText }) {
             />
           </div>
         </figure>
-      </div>
-
-      <div className="mt-6 rounded-[28px] border border-sky-200 bg-sky-50 px-6 py-6 sm:px-7">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">{copy.trust.humanTitle}</p>
-        <p className="mt-3 text-lg leading-8 text-slate-800">{copy.trust.humanText}</p>
       </div>
     </ContentSection>
   )

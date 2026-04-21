@@ -4,7 +4,6 @@ import { useState, useCallback, useEffect, useRef, useMemo } from 'react'
 import type { Locale } from '@/lib/translations'
 import { chatCopy } from '@/lib/translations'
 import { isClosingMessage } from '@/lib/chat-utils'
-import { useLeadConsent } from '@/components/providers/lead-consent'
 import { MessageList } from './message-list'
 import { ChatInput } from './chat-input'
 import type { ChatMessage } from './message-list'
@@ -60,7 +59,6 @@ interface ChatWindowProps {
 }
 
 export function ChatWindow({ locale, theme, autoFocus, onInputFocusChange }: ChatWindowProps) {
-  const { consent, openDialog } = useLeadConsent()
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const [typingMessageIndex, setTypingMessageIndex] = useState<number | null>(null)
@@ -111,11 +109,6 @@ export function ChatWindow({ locale, theme, autoFocus, onInputFocusChange }: Cha
   }, [sessionId])
 
   const sendMessage = useCallback(async (text: string) => {
-    if (!consent) {
-      openDialog()
-      return
-    }
-
     const trimmed = text.trim()
     if (!trimmed) return
     const userMsg: ChatMessage = { role: 'user', content: trimmed }
@@ -156,7 +149,7 @@ export function ChatWindow({ locale, theme, autoFocus, onInputFocusChange }: Cha
     } finally {
       setIsTyping(false)
     }
-  }, [consent, sessionId, locale, isMobile, openDialog])
+  }, [sessionId, locale, isMobile])
 
   const displayMessages = messages.length === 0 ? [getInitialGreeting(locale)] : messages
   const lastMsg = displayMessages[displayMessages.length - 1]
