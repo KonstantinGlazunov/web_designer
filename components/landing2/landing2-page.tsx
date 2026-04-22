@@ -26,6 +26,7 @@ import {
 } from 'lucide-react'
 import { ChatFab } from '@/components/chat/chat-fab'
 import { QuizDialog } from '@/components/quiz-dialog'
+import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import { cn } from '@/lib/utils'
 import { landingCopy, type LandingLocale } from '@/components/landing/landing-copy'
 import { siteCopy, type SiteCopy } from '@/lib/translations'
@@ -579,6 +580,7 @@ function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel
             <Link href="/impressum" className="transition hover:text-slate-950">
               {copy.footer.legal.impressum}
             </Link>
+            <CookieSettingsTrigger />
           </div>
           <p className="pt-1 text-slate-500">{socialsLabel}</p>
         </div>

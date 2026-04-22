@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, type ReactNode } from 'react'
+import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import {
   ArrowRight,
   Briefcase,
@@ -539,12 +540,16 @@ function FooterSection({ copy }: { copy: LandingText }) {
             </a>
           </p>
           <div className="pt-2">
+            <Link href="/agb" className="mr-4 transition hover:text-slate-950">
+              AGB
+            </Link>
             <Link href="/impressum" className="mr-4 transition hover:text-slate-950">
               {copy.footer.legal.impressum}
             </Link>
-            <Link href="/datenschutzerklaerung" className="transition hover:text-slate-950">
+            <Link href="/datenschutzerklaerung" className="mr-4 transition hover:text-slate-950">
               {copy.footer.legal.privacy}
             </Link>
+            <CookieSettingsTrigger />
           </div>
         </div>
       </div>

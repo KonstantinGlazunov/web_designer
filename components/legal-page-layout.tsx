@@ -1,4 +1,5 @@
 import { BackToHomeLink } from '@/components/back-to-home-link'
+import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 
 interface LegalPageLayoutProps {
   eyebrow: string
@@ -17,6 +18,9 @@ export function LegalPageLayout({ eyebrow, title, children }: LegalPageLayoutPro
         <h1 className="mt-4 text-4xl font-semibold text-slate-950 dark:text-white">{title}</h1>
         <div className="mt-8 space-y-8 text-sm leading-7 text-slate-600 dark:text-slate-300">
           {children}
+        </div>
+        <div className="mt-10 border-t border-slate-200 pt-5 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">
+          <CookieSettingsTrigger className="underline underline-offset-4" />
         </div>
       </div>
     </main>
