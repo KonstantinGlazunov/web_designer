@@ -430,7 +430,7 @@ function ExamplesSection({ portfolio, linkLabel }: { portfolio: PortfolioText; l
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className={cn(
                     'object-cover transition duration-500 group-hover:scale-[1.03]',
-                    item.title === 'BewerbungProfi' || item.title === 'Beauty Studio Lesya' ? 'object-top' : 'object-center',
+                    item.title === 'BewerbungProfi' || item.title === 'Beauty Studio Lesya' || item.title === 'Psycholog UA/RU' ? 'object-top' : 'object-center',
                   )}
                 />
               </div>

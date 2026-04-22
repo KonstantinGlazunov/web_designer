@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             Lead-Erfassung per Quiz und Chat inklusive Weiterleitung in Telegram zur Anfragebearbeitung: Art. 6 Abs. 1 lit. b DSGVO.
           </p>
           <p>
-            Einsatz von Google Analytics nur nach Einwilligung: Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit Paragraf 25 Abs. 1 TDDDG.
+            Einsatz von Google Analytics (Mess-ID G-H8XXSDP9W4) nur nach Einwilligung: Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit Paragraf 25 Abs. 1 TDDDG.
           </p>
           <p>
             Speicherung Ihrer Cookie-Auswahl im localStorage: Paragraf 25 Abs. 2 Nr. 2 TDDDG sowie Art. 6 Abs. 1 lit. f DSGVO.

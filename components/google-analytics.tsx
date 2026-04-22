@@ -13,15 +13,16 @@ declare global {
 
 function getGaId() {
   const id = process.env.NEXT_PUBLIC_GA_ID
-  return typeof id === 'string' && id.trim().length > 0 ? id.trim() : null
+  if (typeof id === 'string' && id.trim().length > 0) return id.trim()
+  return 'G-H8XXSDP9W4'
 }
 
 export function GoogleAnalytics() {
   const { consent } = useCookieConsent()
   const gaId = useMemo(() => getGaId(), [])
-  const enabled = Boolean(gaId && consent?.analytics)
+  const enabled = Boolean(consent?.analytics)
 
-  if (!enabled || !gaId) return null
+  if (!enabled) return null
 
   return (
     <>
@@ -38,4 +39,3 @@ gtag('config', '${gaId}', { anonymize_ip: true });
     </>
   )
 }
-

@@ -179,6 +179,15 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           url: 'https://konstantinglazunov.github.io/-Lesia/',
         },
         {
+          title: 'Psycholog UA/RU',
+          description:
+            'Сайт психолога с версиями на украинском и русском языках. Чёткая подача услуг и удобный контакт.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
+          image: '/portfolio/psycholog-ua-ru.webp',
+          tech: ['Next.js', 'i18n', 'SEO', 'Vercel'],
+          size: 'sm',
+          url: 'https://psycholog-ua-ru.de/',
+        },
+        {
           title: 'Dogs Services',
           description:
             'Сервис для владельцев собак. Бронирование, каталог услуг, современный UI.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
@@ -335,6 +344,15 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
           size: 'sm',
           url: 'https://konstantinglazunov.github.io/-Lesia/',
+        },
+        {
+          title: 'Psycholog UA/RU',
+          description:
+            'Webseite für psychologische Beratung mit ukrainischer und russischer Sprachversion. Klare Leistungsdarstellung und direkter Kontakt.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
+          image: '/portfolio/psycholog-ua-ru.webp',
+          tech: ['Next.js', 'i18n', 'SEO', 'Vercel'],
+          size: 'sm',
+          url: 'https://psycholog-ua-ru.de/',
         },
         {
           title: 'Dienstleistungen für Hundehalter',
