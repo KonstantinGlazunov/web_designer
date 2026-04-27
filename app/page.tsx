@@ -8,9 +8,33 @@ const manrope = Manrope({
 })
 
 export const metadata: Metadata = {
-  title: 'Vibe Studio',
+  title: 'Vibe Studio - Websites für kleine Unternehmen',
   description:
     'Moderne, verständliche Websites für kleine Unternehmen. Ehrlich, klar und ohne leere Versprechen.',
+  openGraph: {
+    title: 'Vibe Studio - Websites für kleine Unternehmen',
+    description:
+      'Moderne, verständliche Websites für kleine Unternehmen. Ehrlich, klar und ohne leere Versprechen.',
+    url: 'https://erstellen-websiten.de',
+    siteName: 'Vibe Studio',
+    locale: 'de_DE',
+    type: 'website',
+    images: [
+      {
+        url: '/working-photo.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Vibe Studio Arbeitssituation',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vibe Studio - Websites für kleine Unternehmen',
+    description:
+      'Moderne, verständliche Websites für kleine Unternehmen. Ehrlich, klar und ohne leere Versprechen.',
+    images: ['/working-photo.png'],
+  },
 }
 
 export default function HomePage() {

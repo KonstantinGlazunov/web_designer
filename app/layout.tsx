@@ -19,34 +19,36 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://erstellen-websiten.de'),
-  title: 'Vibe Studio',
+  title: 'Vibe Studio - Websites für kleine Unternehmen',
   description:
-    'Vibe Studio builds modern websites with Next.js, Tailwind, motion, AI-friendly UX, and premium 2026 visuals.',
+    'Moderne, verständliche Websites für kleine Unternehmen in Deutschland - klar, mobil optimiert und ohne unnötigen Aufwand.',
   applicationName: 'Vibe Studio',
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: 'Vibe Studio',
+    title: 'Vibe Studio - Websites für kleine Unternehmen',
     description:
-      'Modern websites for small businesses in Germany with strong UX, motion, and AI-assisted lead capture.',
+      'Moderne, verständliche Websites für kleine Unternehmen in Deutschland - klar, mobil optimiert und ohne unnötigen Aufwand.',
     type: 'website',
     url: 'https://erstellen-websiten.de',
+    siteName: 'Vibe Studio',
+    locale: 'de_DE',
     images: [
       {
         url: '/working-photo.png',
-        width: 1200,
-        height: 630,
-        alt: 'Vibe Studio working photo',
+        width: 1024,
+        height: 1024,
+        alt: 'Vibe Studio Arbeitssituation',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vibe Studio',
+    title: 'Vibe Studio - Websites für kleine Unternehmen',
     description:
-      'Modern websites for small businesses in Germany with strong UX, motion, and AI-assisted lead capture.',
+      'Moderne, verständliche Websites für kleine Unternehmen in Deutschland - klar, mobil optimiert und ohne unnötigen Aufwand.',
     images: ['/working-photo.png'],
   },
   icons: {
@@ -62,7 +64,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ru" suppressHydrationWarning>
+    <html lang="de" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
         <SitePreferencesProvider>
           <CookieConsentProvider>

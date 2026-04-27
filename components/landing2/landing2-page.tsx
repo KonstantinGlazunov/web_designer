@@ -109,31 +109,52 @@ function HeroSection({
   onToggleLocale: () => void
   onOpenForm: () => void
 }) {
+  const handleExamplesClick = () => {
+    window.history.pushState(null, '', '#beispiele')
+    window.setTimeout(() => {
+      const target = document.getElementById('beispiele')
+      if (!target) return
+
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - 12,
+        behavior: 'auto',
+      })
+    }, 0)
+  }
+
   return (
-    <section className="relative mb-8 min-h-[calc(100svh-1rem)] overflow-hidden border-b border-slate-200 bg-slate-100 lg:snap-start">
+    <section className="relative mb-8 min-h-[calc(100svh-1rem)] overflow-hidden border-b border-slate-200 bg-[#e8ded2] sm:bg-slate-100 lg:snap-start">
       <Image
         src="/landing2/assets/hero2.webp"
         alt="Modernes Website-Mockup für kleine Unternehmen"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[26%_center] blur-0 sm:object-center"
+        className="hidden object-cover object-[26%_center] blur-0 sm:block sm:object-center"
+      />
+      <Image
+        src="/landing2/assets/herro21mobile.png"
+        alt="Smartphone mit Website-Mockup für kleine Unternehmen"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center sm:hidden"
       />
 
-      <div className="absolute inset-0 bg-[linear-gradient(98deg,rgba(248,250,252,0.96)_0%,rgba(248,250,252,0.9)_34%,rgba(248,250,252,0.45)_56%,rgba(248,250,252,0.15)_72%,rgba(248,250,252,0.08)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,252,0.34)_0%,rgba(248,250,252,0.1)_42%,rgba(248,250,252,0.26)_100%)] sm:bg-[linear-gradient(98deg,rgba(248,250,252,0.96)_0%,rgba(248,250,252,0.9)_34%,rgba(248,250,252,0.45)_56%,rgba(248,250,252,0.15)_72%,rgba(248,250,252,0.08)_100%)]" />
 
-      <header className="absolute inset-x-0 top-0 z-20">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <header className="absolute inset-x-0 top-[clamp(2.15rem,5.2svh,2.75rem)] z-20 sm:top-0">
+        <div className="mx-auto flex w-[min(86vw,322px)] items-center justify-between gap-3 px-3 py-4 sm:w-full sm:max-w-6xl sm:px-6 lg:px-8">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-800">{copy.nav.studio}</p>
-            <p className="text-sm text-slate-700">{copy.nav.region}</p>
+            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-sky-800 sm:text-xs">{copy.nav.studio}</p>
+            <p className="hidden text-xs text-slate-700 sm:block sm:text-sm">{copy.nav.region}</p>
           </div>
 
           <button
             type="button"
             onClick={onToggleLocale}
             aria-label={locale === 'de' ? 'Switch to Russian' : 'Switch to German'}
-            className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 transition hover:border-slate-400 hover:bg-white"
+            className="inline-flex flex-none items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-700 transition hover:border-slate-400 hover:bg-white sm:text-xs"
           >
             <Globe className="h-3.5 w-3.5" />
             <span>{copy.lang.current}</span>
@@ -143,33 +164,77 @@ function HeroSection({
         </div>
       </header>
 
-      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-1rem)] w-full max-w-6xl items-center px-4 pb-10 pt-28 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <h1 className="text-3xl font-semibold leading-tight text-slate-950 sm:text-5xl lg:text-[3.3rem] lg:leading-[1.08]">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-1rem)] w-full items-start justify-center px-3 pb-[clamp(5rem,11svh,6.4rem)] pt-[clamp(0.85rem,2.4svh,1.2rem)] sm:max-w-6xl sm:items-center sm:justify-start sm:px-6 sm:pb-10 sm:pt-28 lg:px-8">
+        <div className="relative h-[min(calc(100svh-6.4rem),760px)] w-[min(88vw,342px)] rounded-[clamp(2.35rem,12vw,3rem)] border-[clamp(5px,1.8vw,7px)] border-slate-950 bg-slate-950 p-[clamp(4px,1.25vw,5px)] shadow-[0_24px_60px_rgba(15,23,42,0.32),inset_0_0_0_1px_rgba(255,255,255,0.2)] sm:hidden">
+          <div className="pointer-events-none absolute left-1/2 top-[clamp(0.4rem,1.45svh,0.52rem)] z-20 h-[clamp(1.15rem,3.9svh,1.5rem)] w-[clamp(4.6rem,24vw,6rem)] -translate-x-1/2 rounded-full bg-slate-950 shadow-[0_1px_0_rgba(255,255,255,0.22)] sm:hidden" />
+          <div className="h-full max-w-none overflow-hidden rounded-[clamp(1.95rem,10vw,2.35rem)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(255,252,244,0.9)_50%,rgba(255,244,220,0.84)_100%)] px-[clamp(0.85rem,4.1vw,1rem)] pb-[clamp(0.85rem,3.5svh,1.25rem)] pt-[clamp(4.55rem,12.8svh,5.25rem)] shadow-[inset_0_0_38px_rgba(255,255,255,0.9)]">
+            <h1 className="text-[clamp(1.36rem,7vw,1.72rem)] font-semibold leading-[1.04] text-slate-950 sm:text-5xl sm:leading-tight lg:text-[3.3rem] lg:leading-[1.08]">
+              {copy.hero.title}
+            </h1>
+
+            <p className="mt-[clamp(0.55rem,1.75svh,0.75rem)] max-w-2xl text-[clamp(0.74rem,3.45vw,0.84rem)] leading-[1.45] text-slate-700 sm:mt-5 sm:text-lg sm:leading-7">{copy.hero.subtitle}</p>
+
+            <div className="mt-[clamp(0.75rem,2.2svh,1rem)] flex flex-col gap-[clamp(0.45rem,1.55svh,0.625rem)] sm:mt-7 sm:flex-row sm:flex-wrap sm:gap-3">
+              <button
+                type="button"
+                onClick={onOpenForm}
+                className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full bg-slate-900 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 sm:h-auto sm:px-6 sm:py-3 sm:text-sm"
+              >
+                {copy.hero.ctaPrimary}
+                <ArrowRight className="h-4 w-4" />
+              </button>
+              <a
+                href="#beispiele"
+                onClick={handleExamplesClick}
+                className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 sm:h-auto sm:px-6 sm:py-3 sm:text-sm"
+              >
+                {copy.hero.ctaSecondary}
+                <MoveRight className="h-4 w-4" />
+              </a>
+            </div>
+
+            <ul className="mt-[clamp(0.7rem,2.1svh,1rem)] grid gap-[clamp(0.28rem,1svh,0.375rem)] text-[clamp(0.62rem,2.9vw,0.7rem)] leading-tight text-slate-800 [&>li:nth-last-child(-n+2)]:hidden [@media(max-height:740px)]:[&>li:nth-last-child(-n+3)]:hidden sm:mt-7 sm:grid-cols-2 sm:gap-2 sm:text-sm sm:leading-normal sm:[&>li:nth-last-child(-n+3)]:flex sm:[&>li:nth-last-child(-n+2)]:flex">
+              {copy.hero.benefits.map((item) => (
+                <li key={item} className="flex items-start gap-2 rounded-2xl border border-slate-300 bg-white/82 px-3 py-[clamp(0.32rem,1.2svh,0.375rem)] sm:bg-white/88 sm:py-2">
+                  <Check className="mt-0.5 h-[clamp(0.85rem,3.4vw,1rem)] w-[clamp(0.85rem,3.4vw,1rem)] flex-none text-emerald-600" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-3 hidden rounded-full border border-slate-300 bg-white/86 px-4 py-2 text-xs font-medium text-slate-700 sm:mt-5 sm:inline-flex sm:bg-white/90 sm:text-sm">
+              {copy.hero.hint}
+            </p>
+          </div>
+        </div>
+
+        <div className="hidden max-w-3xl sm:block">
+          <h1 className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]">
             {copy.hero.title}
           </h1>
 
-          <p className="mt-5 max-w-2xl text-base leading-7 text-slate-700 sm:text-lg">{copy.hero.subtitle}</p>
+          <p className="mt-5 max-w-2xl text-lg leading-7 text-slate-700">{copy.hero.subtitle}</p>
 
           <div className="mt-7 flex flex-wrap gap-3">
             <button
               type="button"
               onClick={onOpenForm}
-              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
             >
               {copy.hero.ctaPrimary}
               <ArrowRight className="h-4 w-4" />
             </button>
             <a
               href="#beispiele"
-              className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900"
+              onClick={handleExamplesClick}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900"
             >
               {copy.hero.ctaSecondary}
               <MoveRight className="h-4 w-4" />
             </a>
           </div>
 
-          <ul className="mt-7 grid gap-2 text-sm text-slate-800 sm:grid-cols-2">
+          <ul className="mt-7 grid gap-2 text-sm leading-normal text-slate-800 sm:grid-cols-2">
             {copy.hero.benefits.map((item) => (
               <li key={item} className="flex items-start gap-2 rounded-2xl border border-slate-300 bg-white/88 px-3 py-2">
                 <Check className="mt-0.5 h-4 w-4 flex-none text-emerald-600" />
@@ -178,7 +243,7 @@ function HeroSection({
             ))}
           </ul>
 
-          <p className="mt-5 inline-flex rounded-full border border-slate-300 bg-white/90 px-4 py-2 text-xs font-medium text-slate-700 sm:text-sm">
+          <p className="mt-5 inline-flex rounded-full border border-slate-300 bg-white/90 px-4 py-2 text-sm font-medium text-slate-700">
             {copy.hero.hint}
           </p>
         </div>
@@ -374,7 +439,7 @@ function HonestySection({ copy }: { copy: LandingText }) {
 
 function BeforeAfterSection({ copy }: { copy: LandingText }) {
   return (
-    <ContentSection id="beispiele">
+    <ContentSection id="vorher-nachher">
       <SectionTitle>{copy.beforeAfter.title}</SectionTitle>
 
       <div className="mt-7 grid gap-4 lg:grid-cols-3">
