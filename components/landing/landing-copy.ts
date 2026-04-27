@@ -93,6 +93,7 @@ export interface LandingCopy {
     contact: string
     whatsapp: string
     email: string
+    about: string
     legal: {
       impressum: string
       privacy: string
@@ -119,7 +120,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       title: 'Mehr Kundenanfragen über Ihre Website – einfach und ohne Aufwand',
       subtitle:
         'Wir erstellen Websites für kleine Unternehmen in Deutschland, die klar zeigen, was Sie anbieten – und warum Kunden sich bei Ihnen melden.',
-      ctaPrimary: 'Projekt starten',
+      ctaPrimary: 'Kostenlose Einschätzung starten',
       ctaSecondary: 'Beispiele ansehen',
       benefits: [
         'Klare Struktur, die Kunden sofort verstehen',
@@ -315,6 +316,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       contact: 'Kontakt',
       whatsapp: 'WhatsApp: +49 1511 0974353',
       email: 'E-Mail: kontakt@erstellen-websiten.de',
+      about: 'Über mich',
       legal: {
         impressum: 'Impressum',
         privacy: 'Datenschutz',
@@ -339,7 +341,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       title: 'Больше заявок через ваш сайт — просто и без лишних сложностей',
       subtitle:
         'Мы создаём сайты для малого бизнеса в Германии, которые ясно показывают, что вы предлагаете — и почему клиенты выбирают именно вас.',
-      ctaPrimary: 'Начать проект',
+      ctaPrimary: 'Начать бесплатную оценку',
       ctaSecondary: 'Посмотреть примеры',
       benefits: [
         'Понятная структура, которую клиент сразу понимает',
@@ -532,6 +534,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       contact: 'Контакт',
       whatsapp: 'WhatsApp: +49 1511 0974353',
       email: 'E-Mail: kontakt@erstellen-websiten.de',
+      about: 'Обо мне',
       legal: {
         impressum: 'Impressum',
         privacy: 'Datenschutz',

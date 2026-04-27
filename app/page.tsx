@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/working-photo.png',
+        url: '/images/working-photo.webp',
         width: 1024,
         height: 1024,
         alt: 'Vibe Studio Arbeitssituation',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: 'Vibe Studio - Websites für kleine Unternehmen',
     description:
       'Moderne, verständliche Websites für kleine Unternehmen. Ehrlich, klar und ohne leere Versprechen.',
-    images: ['/working-photo.png'],
+    images: ['/images/working-photo.webp'],
   },
 }
 

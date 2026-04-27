@@ -39,14 +39,14 @@ type PortfolioText = SiteCopy['portfolio']
 const valueIcons = [LayoutGrid, Shield, Smartphone, Map]
 const logicIcons = [Search, LayoutGrid, CheckCircle2, Phone]
 const processIcons = [Phone, CheckCircle2, FileText, LayoutGrid, Rocket]
-const beforeAfterImages = ['/landing2/assets/case1.webp', '/landing2/assets/case2.webp', '/landing2/assets/case3.webp']
+const beforeAfterImages = ['/images/case1.webp', '/images/case2.webp', '/images/case3.webp']
 const audienceImages = [
-  '/landing2/assets/kfz.webp',
-  '/landing2/assets/baustelle.webp',
-  '/landing2/assets/fiseur.webp',
-  '/landing2/assets/reinigung.webp',
-  '/landing2/assets/wohnwagen.webp',
-  '/landing2/assets/optiker.webp',
+  '/images/kfz.webp',
+  '/images/baustelle.webp',
+  '/images/fiseur.webp',
+  '/images/reinigung.webp',
+  '/images/wohnwagen.webp',
+  '/images/optiker.webp',
 ]
 
 export function Landing2Page() {
@@ -125,7 +125,7 @@ function HeroSection({
   return (
     <section className="relative mb-8 min-h-[calc(100svh-1rem)] overflow-hidden border-b border-slate-200 bg-[#e8ded2] sm:bg-slate-100 lg:snap-start">
       <Image
-        src="/landing2/assets/hero2.webp"
+        src="/images/hero2.webp"
         alt="Modernes Website-Mockup für kleine Unternehmen"
         fill
         priority
@@ -133,7 +133,7 @@ function HeroSection({
         className="hidden object-cover object-[26%_center] blur-0 sm:block sm:object-center"
       />
       <Image
-        src="/landing2/assets/herro21mobile.png"
+        src="/images/hero-mobile.webp"
         alt="Smartphone mit Website-Mockup für kleine Unternehmen"
         fill
         priority
@@ -272,7 +272,7 @@ function ValueSection({ copy }: { copy: LandingText }) {
   return (
     <ContentSection className="relative overflow-hidden">
       <Image
-        src="/landing2/assets/versprechen.webp"
+        src="/images/versprechen.webp"
         alt=""
         aria-hidden
         fill
@@ -383,6 +383,13 @@ function ProcessSection({ copy }: { copy: LandingText }) {
         })}
       </div>
       <p className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm leading-7 text-slate-700 sm:text-base">{copy.process.note}</p>
+      <Link
+        href="/ueber-mich"
+        className="mt-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950"
+      >
+        {copy.footer.about}
+        <ArrowRight className="h-4 w-4" />
+      </Link>
     </ContentSection>
   )
 }
@@ -412,7 +419,7 @@ function TrustSection({ copy }: { copy: LandingText }) {
         <figure className="h-full overflow-hidden rounded-[28px] border border-slate-200 bg-white p-3">
           <div className="relative h-full min-h-[420px] overflow-hidden rounded-2xl bg-slate-100">
             <Image
-              src="/working-photo.png"
+              src="/images/working-photo.webp"
               alt="Lokaler Unternehmer in seinem Geschäft"
               fill
               sizes="(max-width: 1024px) 100vw, 36vw"
@@ -485,7 +492,7 @@ function ExamplesSection({ portfolio, linkLabel }: { portfolio: PortfolioText; l
 
       <div className="mt-7 grid gap-4 md:grid-cols-2">
         {portfolio.items.map((item) => {
-          const imageSrc = item.title === 'Speicher Balkonkraftwerk' ? '/landing2/assets/solaranlageseite.webp' : item.image
+          const imageSrc = item.title === 'Speicher Balkonkraftwerk' ? '/images/solaranlageseite.webp' : item.image
           const card = (
             <div className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)]">
               <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100">
@@ -589,7 +596,7 @@ function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: 
           <div className="hidden rounded-3xl border border-white/15 bg-white/10 p-3 lg:block">
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/20">
               <Image
-                src="/landing2/assets/hero.webp"
+                src="/images/hero.webp"
                 alt="Beispiel einer modernen Unternehmenswebsite"
                 fill
                 sizes="30vw"
@@ -623,19 +630,11 @@ function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel
           </div>
         </div>
 
-        <div className="space-y-2 text-sm text-slate-700 md:text-right">
-          <p className="font-semibold text-slate-900">{copy.footer.contact}</p>
-          <p>
-            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="transition hover:text-slate-950">
-              {copy.floating.whatsapp}
-            </a>
-          </p>
-          <p>
-            <a className="transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
-              {copy.footer.email}
-            </a>
-          </p>
-          <div className="flex flex-col gap-2 pt-2 md:items-end">
+        <div className="text-sm text-slate-700">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-2 md:text-right">
+            <Link href="/ueber-mich" className="transition hover:text-slate-950">
+              {copy.footer.about}
+            </Link>
             <Link href="/agb" className="transition hover:text-slate-950">
               AGB
             </Link>
@@ -646,8 +645,23 @@ function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel
               {copy.footer.legal.impressum}
             </Link>
             <CookieSettingsTrigger />
+            <a className="font-semibold text-slate-900 transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
+              {copy.footer.contact}
+            </a>
           </div>
-          <p className="pt-1 text-slate-500">{socialsLabel}</p>
+          <div className="mt-4 space-y-2 md:text-right">
+            <p>
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="transition hover:text-slate-950">
+                {copy.floating.whatsapp}
+              </a>
+            </p>
+            <p>
+              <a className="transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
+                {copy.footer.email}
+              </a>
+            </p>
+          </div>
+          {socialsLabel ? <p className="pt-1 text-slate-500">{socialsLabel}</p> : null}
         </div>
       </div>
     </footer>

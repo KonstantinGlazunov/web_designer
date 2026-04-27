@@ -57,7 +57,7 @@ export function MessageList({ messages, isTyping, quickReplies, onQuickReply, ot
             <div className="flex w-full justify-start gap-2">
               <div className="flex h-9 w-9 shrink-0 overflow-hidden rounded-full">
                 <Image
-                  src="/Chat_avatar.webp"
+                  src="/images/chat-avatar.webp"
                   alt="Max Webberater"
                   width={36}
                   height={36}

@@ -18,7 +18,7 @@ export function AboutSection({ copy }: { copy: SiteCopy['about'] }) {
             className="relative aspect-[4/3] overflow-hidden rounded-[32px] border border-white/12 bg-slate-900/50"
           >
             <Image
-              src="/working-photo.png"
+              src="/images/working-photo.webp"
               alt="Developer in client meeting"
               fill
               className="object-cover"

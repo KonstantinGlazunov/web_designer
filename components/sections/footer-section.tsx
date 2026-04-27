@@ -30,7 +30,10 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
             <LocaleToggle />
             <ThemeToggle />
           </div>
-          <div className="flex flex-col items-start gap-2 text-sm lg:items-end">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm lg:text-right">
+            <Link href="/ueber-mich" className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
+              {copy.about}
+            </Link>
             <Link href="/landing" className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
               Landing
             </Link>
@@ -52,8 +55,11 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
             >
               {copy.legal.impressum}
             </Link>
+            <Link href="/#kontakt" className="font-semibold text-slate-900 transition hover:text-slate-950 dark:text-white dark:hover:text-emerald-200">
+              Kontakt
+            </Link>
           </div>
-          <p className="text-sm text-slate-500 dark:text-slate-400">{copy.socials}</p>
+          {copy.socials ? <p className="text-sm text-slate-500 dark:text-slate-400">{copy.socials}</p> : null}
         </div>
       </div>
     </footer>

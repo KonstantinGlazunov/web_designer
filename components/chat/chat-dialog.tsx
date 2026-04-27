@@ -63,7 +63,7 @@ export function ChatDialog({ open, onClose, locale, theme }: ChatDialogProps) {
                   <div className="flex w-full items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-full">
-                        <Image src="/Chat_avatar.webp" alt="Max Webberater" width={72} height={72} className="h-full w-full object-cover" />
+                        <Image src="/images/chat-avatar.webp" alt="Max Webberater" width={72} height={72} className="h-full w-full object-cover" />
                       </div>
                       <h3 className={isDark ? 'text-lg font-semibold text-white' : 'text-lg font-semibold text-slate-800'}>
                         {copy.dialogTitle}

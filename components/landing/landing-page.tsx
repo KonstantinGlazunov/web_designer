@@ -41,14 +41,14 @@ const logicIcons = [Search, Laptop, CheckCircle2, Phone]
 const audienceIcons = [Car, Hammer, Scissors, Wrench, Store, Briefcase]
 const processIcons = [Phone, CheckCircle2, FileText, LayoutGrid, Rocket]
 const beforeImages = [
-  '/landing/pexels-laptop-26689753.jpg',
-  '/landing/pexels-laptop-6372827.jpg',
-  '/landing/mockupworld-mobile-2025.jpg',
+  '/images/landing-pexels-laptop-26689753.webp',
+  '/images/landing-pexels-laptop-6372827.webp',
+  '/images/landing-mockupworld-mobile-2025.webp',
 ]
 const afterImages = [
-  '/landing/hero-responsive-device.jpg',
-  '/landing/mockupworld-screen-2022.jpg',
-  '/landing/hero-responsive-device.jpg',
+  '/images/landing-hero-responsive-device.webp',
+  '/images/landing-mockupworld-screen-2022.webp',
+  '/images/landing-hero-responsive-device.webp',
 ]
 
 export function LandingPage() {
@@ -187,7 +187,7 @@ function HeroSection({ copy }: { copy: LandingText }) {
                 </div>
                 <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
                   <Image
-                    src="/landing/hero-responsive-device.jpg"
+                    src="/images/landing-hero-responsive-device.webp"
                     alt="Laptop und Smartphone Website Mockup"
                     fill
                     sizes="(max-width: 1024px) 100vw, 40vw"
@@ -205,7 +205,7 @@ function HeroSection({ copy }: { copy: LandingText }) {
             </div>
             <div className="relative aspect-[9/18] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
               <Image
-                src="/landing/pexels-phone-27413499.jpg"
+                src="/images/landing-pexels-phone-27413499.webp"
                 alt="Smartphone Mockup"
                 fill
                 sizes="160px"
@@ -370,7 +370,7 @@ function TrustSection({ copy }: { copy: LandingText }) {
         <figure className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-3">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
             <Image
-              src="/landing/pexels-owner-36753978.jpg"
+              src="/images/landing-pexels-owner-36753978.webp"
               alt="Porträt eines lokalen Unternehmer"
               fill
               sizes="(max-width: 1024px) 100vw, 35vw"
@@ -421,7 +421,7 @@ function BeforeAfterSection({ copy }: { copy: LandingText }) {
                   </p>
                   <div className="relative mt-2 aspect-[4/3] overflow-hidden rounded-xl border border-rose-200 bg-white">
                     <Image
-                      src={beforeImages[index] ?? '/landing/pexels-laptop-26689753.jpg'}
+                      src={beforeImages[index] ?? '/images/landing-pexels-laptop-26689753.webp'}
                       alt="Vorher Website Zustand"
                       fill
                       sizes="(max-width: 1024px) 50vw, 12vw"
@@ -435,7 +435,7 @@ function BeforeAfterSection({ copy }: { copy: LandingText }) {
                   </p>
                   <div className="relative mt-2 aspect-[4/3] overflow-hidden rounded-xl border border-emerald-200 bg-white">
                     <Image
-                      src={afterImages[index] ?? '/landing/hero-responsive-device.jpg'}
+                      src={afterImages[index] ?? '/images/landing-hero-responsive-device.webp'}
                       alt="Nachher Website Ergebnis"
                       fill
                       sizes="(max-width: 1024px) 50vw, 12vw"
@@ -508,7 +508,7 @@ function FinalCtaSection({ copy }: { copy: LandingText }) {
           <div className="hidden rounded-3xl border border-white/15 bg-white/10 p-3 lg:block">
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/20">
               <Image
-                src="/landing/mockupworld-screen-2022.jpg"
+                src="/images/landing-mockupworld-screen-2022.webp"
                 alt="Website Mockup als CTA Visual"
                 fill
                 sizes="30vw"
@@ -531,25 +531,32 @@ function FooterSection({ copy }: { copy: LandingText }) {
           <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">{copy.footer.description}</p>
         </div>
 
-        <div className="space-y-2 text-sm text-slate-700 md:text-right">
-          <p className="font-semibold text-slate-900">{copy.footer.contact}</p>
-          <p>{copy.footer.whatsapp}</p>
-          <p>
-            <a className="transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
-              {copy.footer.email}
-            </a>
-          </p>
-          <div className="pt-2">
-            <Link href="/agb" className="mr-4 transition hover:text-slate-950">
+        <div className="text-sm text-slate-700">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-2 md:text-right">
+            <Link href="/ueber-mich" className="transition hover:text-slate-950">
+              {copy.footer.about}
+            </Link>
+            <Link href="/agb" className="transition hover:text-slate-950">
               AGB
             </Link>
-            <Link href="/impressum" className="mr-4 transition hover:text-slate-950">
-              {copy.footer.legal.impressum}
-            </Link>
-            <Link href="/datenschutzerklaerung" className="mr-4 transition hover:text-slate-950">
+            <Link href="/datenschutzerklaerung" className="transition hover:text-slate-950">
               {copy.footer.legal.privacy}
             </Link>
+            <Link href="/impressum" className="transition hover:text-slate-950">
+              {copy.footer.legal.impressum}
+            </Link>
             <CookieSettingsTrigger />
+            <a className="font-semibold text-slate-900 transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
+              {copy.footer.contact}
+            </a>
+          </div>
+          <div className="mt-4 space-y-2 md:text-right">
+            <p>{copy.footer.whatsapp}</p>
+            <p>
+              <a className="transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
+                {copy.footer.email}
+              </a>
+            </p>
           </div>
         </div>
       </div>

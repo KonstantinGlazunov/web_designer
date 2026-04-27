@@ -72,6 +72,7 @@ export interface SiteCopy {
   }
   footer: {
     description: string
+    about: string
     legal: {
       agb: string
       privacy: string
@@ -96,7 +97,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       title: 'Vibe Studio: Современные сайты для вашего бизнеса',
       subtitle:
         'Делаю сайты, которые хорошо выглядят, подстраиваются под размер экрана, удобно работают на мобильном телефоне и помогают клиенту быстро связаться с вами.',
-      ctaPrimary: 'Начать проект',
+      ctaPrimary: 'Начать бесплатную оценку',
       ctaSecondary: 'Смотреть работы',
       proofPoints: [
         'Дизайн адаптируется под размер экрана',
@@ -126,22 +127,22 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'Сайт для одной услуги или предложения',
           description: 'Подходит, если нужно коротко и понятно показать услугу, преимущества и способ связи.',
-          image: '/visual-neural-grid.svg',
+          image: '/images/visual-neural-grid.svg',
         },
         {
           title: 'Интернет-магазин',
           description: 'Если вы продаете товары, можно сделать удобный каталог, карточки товара и понятный путь к покупке.',
-          image: '/visual-launch-scene.svg',
+          image: '/images/visual-launch-scene.svg',
         },
         {
           title: 'Сайт компании или студии',
           description: 'Чтобы красиво показать услуги, работы, отзывы, ответы на вопросы и контакты.',
-          image: '/visual-workspace.svg',
+          image: '/images/visual-workspace.svg',
         },
         {
           title: 'Формы, запись и связь с клиентом',
           description: 'Можно добавить запись, форму заявки, кнопку в мессенджер или связку с почтой и CRM.',
-          image: '/visual-illustration.svg',
+          image: '/images/visual-illustration.svg',
         },
       ],
     },
@@ -155,7 +156,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Speicher Balkonkraftwerk',
           description:
             'Лендинг для солнечных модулей и накопителей энергии. Мультиязычность, калькулятор, конверсионный CTA.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-          image: '/portfolio/speicher.webp',
+          image: '/images/portfolio-speicher.webp',
           tech: ['Next.js', 'Tailwind', 'i18n', 'Vercel'],
           size: 'lg',
           url: 'https://speicher-balkonkraftwerk.de/ru/',
@@ -164,7 +165,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'BewerbungProfi',
           description:
             'AI-генератор сопроводительных писем для работы в Германии. OpenAI API, мультиязычность, PDF.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-          image: '/portfolio/bewerbungprofi.webp',
+          image: '/images/portfolio-bewerbungprofi.webp',
           tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
           size: 'sm',
           url: 'https://bewerbungprofi.de/',
@@ -173,7 +174,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Beauty Studio Lesya',
           description:
             'Сайт бьюти-студии перманентного макияжа в Браунфельсе. Элегантный дизайн, галерея работ.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-          image: '/portfolio/lesia.webp',
+          image: '/images/portfolio-lesia.webp',
           tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
           size: 'sm',
           url: 'https://konstantinglazunov.github.io/-Lesia/',
@@ -182,7 +183,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Psycholog UA/RU',
           description:
             'Сайт психолога с версиями на украинском и русском языках. Чёткая подача услуг и удобный контакт.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-          image: '/portfolio/psycholog-ua-ru.webp',
+          image: '/images/portfolio-psycholog-ua-ru.webp',
           tech: ['Next.js', 'i18n', 'SEO', 'Vercel'],
           size: 'sm',
           url: 'https://psycholog-ua-ru.de/',
@@ -191,7 +192,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Dogs Services',
           description:
             'Сервис для владельцев собак. Бронирование, каталог услуг, современный UI.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-          image: '/portfolio/dogs.webp',
+          image: '/images/portfolio-dogs.webp',
           tech: ['React', 'TypeScript', 'DigitalOcean'],
           size: 'lg',
           url: 'https://dog-app-iw6ow.ondigitalocean.app/',
@@ -241,12 +242,13 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     },
     footer: {
       description: 'Vibe Studio делает понятные и современные сайты для малого бизнеса.',
+      about: 'Обо мне',
       legal: {
         agb: 'AGB',
         privacy: 'Datenschutzerklaerung',
         impressum: 'Impressum',
       },
-      socials: 'Соцсети',
+      socials: '',
     },
   },
   de: {
@@ -263,7 +265,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
       title: 'Vibe Studio: Moderne Webseiten für Ihr Unternehmen',
       subtitle:
         'Ich baue Webseiten, die gut aussehen, sich an jede Bildschirmgröße anpassen, auf dem Handy angenehm zu bedienen sind und Kunden den schnellen Kontakt zu Ihnen ermöglichen.',
-      ctaPrimary: 'Projekt starten',
+      ctaPrimary: 'Kostenlose Einschätzung starten',
       ctaSecondary: 'Referenzen ansehen',
       proofPoints: [
         'Passt sich an jede Bildschirmgröße an',
@@ -293,22 +295,22 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         {
           title: 'Webseite für ein Angebot oder eine Dienstleistung',
           description: 'Gut geeignet, wenn Sie ein Angebot klar erklären und Kunden schnell zur Anfrage führen möchten.',
-          image: '/visual-neural-grid.svg',
+          image: '/images/visual-neural-grid.svg',
         },
         {
           title: 'Online-Shop',
           description: 'Wenn Sie Produkte verkaufen, kann die Webseite Katalog, Produktseiten und einen klaren Weg zum Kauf enthalten.',
-          image: '/visual-launch-scene.svg',
+          image: '/images/visual-launch-scene.svg',
         },
         {
           title: 'Webseite für Firma, Studio oder Praxis',
           description: 'Damit Leistungen, Referenzen, Bewertungen und Kontakte sauber und vertrauensvoll gezeigt werden.',
-          image: '/visual-workspace.svg',
+          image: '/images/visual-workspace.svg',
         },
         {
           title: 'Anfrage, Termin und Kontakt',
           description: 'Möglich sind Formulare, Online-Termin, Messenger-Buttons oder die Verbindung mit E-Mail und CRM.',
-          image: '/visual-illustration.svg',
+          image: '/images/visual-illustration.svg',
         },
       ],
     },
@@ -322,7 +324,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Speicher Balkonkraftwerk',
           description:
             'Landingpage für Solarmodule und Energiespeicher. Mehrsprachig, Rechner, klare Handlungsaufforderung.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-          image: '/portfolio/speicher.webp',
+          image: '/images/portfolio-speicher.webp',
           tech: ['Next.js', 'Tailwind', 'i18n', 'Vercel'],
           size: 'lg',
           url: 'https://speicher-balkonkraftwerk.de/ru/',
@@ -331,7 +333,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'BewerbungProfi',
           description:
             'KI-Generator für Bewerbungsanschreiben in Deutschland. OpenAI API, Mehrsprachigkeit, PDF.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-          image: '/portfolio/bewerbungprofi.webp',
+          image: '/images/portfolio-bewerbungprofi.webp',
           tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
           size: 'sm',
           url: 'https://bewerbungprofi.de/',
@@ -340,7 +342,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Beauty Studio Lesya',
           description:
             'Webseite des Beauty-Studios für Permanent-Make-up in Braunfels. Elegantes Design, Galerie.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-          image: '/portfolio/lesia.webp',
+          image: '/images/portfolio-lesia.webp',
           tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
           size: 'sm',
           url: 'https://konstantinglazunov.github.io/-Lesia/',
@@ -349,7 +351,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Psycholog UA/RU',
           description:
             'Webseite für psychologische Beratung mit ukrainischer und russischer Sprachversion. Klare Leistungsdarstellung und direkter Kontakt.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-          image: '/portfolio/psycholog-ua-ru.webp',
+          image: '/images/portfolio-psycholog-ua-ru.webp',
           tech: ['Next.js', 'i18n', 'SEO', 'Vercel'],
           size: 'sm',
           url: 'https://psycholog-ua-ru.de/',
@@ -358,7 +360,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           title: 'Dienstleistungen für Hundehalter',
           description:
             'Angebot für Hundehalter. Buchung, Leistungskatalog, modernes Design.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-          image: '/portfolio/dogs.webp',
+          image: '/images/portfolio-dogs.webp',
           tech: ['React', 'TypeScript', 'DigitalOcean'],
           size: 'lg',
           url: 'https://dog-app-iw6ow.ondigitalocean.app/',
@@ -407,12 +409,13 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     },
     footer: {
       description: 'Vibe Studio entwickelt klare und moderne Webseiten für kleine Unternehmen.',
+      about: 'Über mich',
       legal: {
         agb: 'AGB',
         privacy: 'Datenschutzerklärung',
         impressum: 'Impressum',
       },
-      socials: 'Soziale Medien',
+      socials: '',
     },
   },
 }
