@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { useState } from 'react'
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -20,6 +21,7 @@ import {
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import { LocaleToggle } from '@/components/locale-toggle'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { QuizDialog } from '@/components/quiz-dialog'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 import type { Locale } from '@/lib/translations'
 
@@ -33,6 +35,7 @@ const aboutCopy: Record<
     primaryCta: string
     secondaryCta: string
     proof: string[]
+    storyPoints: string[]
     problemsTitle: string
     problems: string[]
     storyTitle: string
@@ -61,6 +64,7 @@ const aboutCopy: Record<
     primaryCta: 'Kostenlose Einschätzung starten',
     secondaryCta: 'LinkedIn ansehen',
     proof: ['Braunfels, Hessen', 'Russisch und Deutsch', 'Websites für lokale Unternehmen'],
+    storyPoints: ['Mein Weg', 'Vibe Studio', 'AIT TR', 'Product & Business'],
     problemsTitle: 'Welche Probleme ich löse',
     problems: [
       'Die Website wirkt veraltet und erklärt nicht klar, warum Kunden anfragen sollen.',
@@ -140,6 +144,7 @@ const aboutCopy: Record<
     primaryCta: 'Начать бесплатную оценку',
     secondaryCta: 'Посмотреть LinkedIn',
     proof: ['Браунфельс, Гессен', 'Русский и немецкий', 'Сайты для локального бизнеса'],
+    storyPoints: ['Мой путь', 'Vibe Studio', 'AIT TR', 'Product & Business'],
     problemsTitle: 'Какие проблемы я решаю',
     problems: [
       'Сайт выглядит устаревшим и не объясняет, почему клиенту стоит обратиться именно к вам.',
@@ -218,9 +223,11 @@ const workIcons = [MessageCircle, Sparkles, Rocket, ShieldCheck]
 export function AboutMePage() {
   const { locale } = useSitePreferences()
   const copy = aboutCopy[locale]
+  const [quizOpen, setQuizOpen] = useState(false)
 
   return (
     <main className="min-h-screen bg-[#f6f8fb] text-slate-950">
+      <QuizDialog open={quizOpen} onClose={() => setQuizOpen(false)} locale={locale} />
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
         <Link href="/" className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-800">
           Vibe Studio
@@ -241,13 +248,13 @@ export function AboutMePage() {
             <p className="mt-5 max-w-2xl text-base leading-7 text-slate-700 sm:text-lg">{copy.intro}</p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/#kontakt"
+              <button
+                onClick={() => setQuizOpen(true)}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
               >
                 {copy.primaryCta}
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
               <a
                 href="https://www.linkedin.com/in/konstantin-glazunov/"
                 target="_blank"
@@ -299,9 +306,15 @@ export function AboutMePage() {
           <SectionHeader title={copy.storyTitle} />
           <div className="grid gap-5 lg:grid-cols-[0.74fr_1fr]">
             <div className="space-y-3 text-sm font-semibold uppercase tracking-[0.16em] text-sky-700">
-              <p className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Braunfels</p>
-              <p className="flex items-center gap-2"><GraduationCap className="h-4 w-4" /> AIT TR</p>
-              <p className="flex items-center gap-2"><BriefcaseBusiness className="h-4 w-4" /> Product & Business</p>
+              {copy.storyPoints.map((point, index) => {
+                const icons = [MapPin, Sparkles, Wrench, BriefcaseBusiness]
+                const Icon = icons[index] ?? MapPin
+                return (
+                  <p key={point} className="flex items-center gap-2">
+                    <Icon className="h-4 w-4" /> {point}
+                  </p>
+                )
+              })}
             </div>
             <div className="space-y-4 text-base leading-8 text-slate-700">
               {copy.story.map((paragraph) => (
@@ -393,13 +406,13 @@ export function AboutMePage() {
           <HeartHandshake className="h-7 w-7 text-emerald-300" />
           <h2 className="mt-4 max-w-3xl text-2xl font-semibold leading-tight sm:text-3xl">{copy.finalTitle}</h2>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300">{copy.finalText}</p>
-          <Link
-            href="/#kontakt"
+          <button
+            onClick={() => setQuizOpen(true)}
             className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5"
           >
             {copy.primaryCta}
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </button>
         </section>
 
         <footer className="mt-6 flex flex-col gap-3 rounded-[26px] border border-slate-200 bg-white px-6 py-6 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
