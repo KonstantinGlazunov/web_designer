@@ -67,16 +67,16 @@ const aboutCopy: Record<
     storyPoints: ['Mein Weg', 'Vibe Studio', 'AIT TR', 'Product & Business'],
     problemsTitle: 'Welche Probleme ich löse',
     problems: [
-      'Die Website wirkt veraltet und erklärt nicht klar, warum Kunden anfragen sollen.',
+      'Die Website wirkt veraltet und macht nicht klar, warum Kunden Kontakt aufnehmen sollen.',
       'Neue Kunden kommen fast nur über Empfehlungen, aber nicht zuverlässig über die eigene Seite.',
-      'Angebote, Kontaktwege und Vertrauen sind online verteilt statt sauber geführt.',
+      'Leistungen, Kontaktwege und Vertrauen wirken online oft unklar und verstreut.',
       'Technik, Texte und Struktur kosten Zeit, obwohl das Geschäft eigentlich im Vordergrund stehen sollte.',
     ],
     storyTitle: 'Mein Weg',
     story: [
       'Ich komme aus der Praxis und denke zuerst an das Geschäft: Was soll eine Website leisten, welche Entscheidung soll sie erleichtern und wie kommt ein Besucher zur Anfrage?',
-      'Die Ausbildung zum Java BackEnd Entwickler bei AIT TR und die Beschäftigung mit Softwareentwicklung geben mir das technische Fundament, um Websites nicht nur schön, sondern stabil und sauber umzusetzen.',
-      'Erfahrung aus Produktdenken, Management und eigenen digitalen Projekten hilft mir, Anforderungen zu sortieren, Prioritäten zu setzen und mit Kunden in verständlicher Sprache über Wirkung statt nur über Funktionen zu sprechen.',
+      'Meine Ausbildung zum Java-Backend-Entwickler bei AIT-TR und die Beschäftigung mit Softwareentwicklung geben mir das technische Fundament, um Websites nicht nur schön, sondern stabil und sauber umzusetzen.',
+      'Erfahrung aus Produktmanagement, Management und digitalen Projekten hilft mir, Anforderungen zu sortieren, Prioritäten zu setzen und mit Kunden in verständlicher Sprache über Wirkung statt nur über Funktionen zu sprechen.',
     ],
     expertiseTitle: 'Expertise und Zertifikate',
     credentials: [
@@ -88,7 +88,7 @@ const aboutCopy: Record<
       },
       {
         title: 'Product Manager',
-        text: 'Produktdenken hilft, aus einer Website ein Werkzeug für Kontakt, Vertrauen und Nachfrage zu machen.',
+        text: 'Produktdenken hilft, aus einer Website ein Werkzeug für Vertrauen und Anfragen zu machen.',
         meta: 'SkillFactory, 22.02.2020',
         href: '/certificates/skillfactory-product-manager-konstantin-glazunov.pdf',
       },
@@ -100,7 +100,7 @@ const aboutCopy: Record<
       },
     ],
     skillsTitle: 'Technologien und Arbeitsfelder',
-    skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Java', 'Spring Boot', 'SEO-Grundlagen', 'DSGVO-nahe Umsetzung', 'Formulare und Kontaktwege', 'AI-gestützte Workflows'],
+    skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Java', 'Spring Boot', 'SEO-Grundlagen', 'DSGVO-nahe Umsetzung', 'Formulare und Kontaktwege', 'KI-gestützte Workflows'],
     workTitle: 'Wie ich arbeite',
     workSteps: [
       {
@@ -113,7 +113,7 @@ const aboutCopy: Record<
       },
       {
         title: 'Umsetzen',
-        text: 'Design, Technik, mobile Darstellung und Basis-SEO werden in einem sauberen Prozess umgesetzt.',
+        text: 'Design, Technik, mobile Darstellung und SEO-Grundlagen setze ich in einem klaren Prozess um.',
       },
       {
         title: 'Prüfen und starten',
@@ -124,15 +124,15 @@ const aboutCopy: Record<
     why: [
       'Ich spreche Deutsch und Russisch und kann komplexe technische Themen einfach erklären.',
       'Ich arbeite direkt mit Ihnen, ohne Agentur-Phrasen und ohne unnötige Zwischenebenen.',
-      'Der Fokus liegt auf lokalen Unternehmen, klarer Kommunikation und konkreten Anfragen.',
+      'Der Fokus liegt auf lokalen Unternehmen, klarer Kommunikation und echten Anfragen.',
       'Ich sage auch ehrlich, wenn eine einfache Lösung reicht oder ein Schritt noch nicht sinnvoll ist.',
     ],
     personalTitle: 'Ein bisschen persönlich',
     personal:
-      'Ich lebe in Braunfels in Hessen. Mich interessiert, wie kleine Unternehmen mit einfachen digitalen Werkzeugen professioneller auftreten können. Privat halte ich es gern bodenständig: lernen, bauen, verbessern und Zeit mit Menschen verbringen, die mir wichtig sind.',
+      'Ich lebe in Braunfels in Hessen. Mich interessiert, wie kleine Unternehmen mit einfachen digitalen Werkzeugen professioneller auftreten können. Privat bin ich bodenständig: lernen, bauen, verbessern und Zeit mit Menschen verbringen, die mir wichtig sind.',
     finalTitle: 'Sie sind unsicher, ob sich eine neue Website lohnt?',
     finalText:
-      'Dann starten wir mit einer kurzen Einschätzung. In 10-15 Minuten klären wir, was Ihre Seite heute leisten sollte und welcher nächste Schritt sinnvoll ist.',
+      'Dann starten wir mit einer kurzen ehrlichen Einschätzung. In 10-15 Minuten klären wir, was Ihre Seite heute leisten sollte und welcher nächste Schritt sinnvoll ist.',
     footer: 'Vibe Studio - Websites für kleine Unternehmen',
   },
   ru: {

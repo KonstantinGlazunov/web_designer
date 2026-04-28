@@ -94,6 +94,7 @@ export interface LandingCopy {
     whatsapp: string
     email: string
     about: string
+    quizBrief: string
     legal: {
       impressum: string
       privacy: string
@@ -159,7 +160,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         },
         {
           title: 'Professioneller Eindruck',
-          description: 'Eine moderne Website schafft Vertrauen - besonders bei Neukunden.',
+          description: 'Eine professionelle Website schafft Vertrauen - besonders bei Neukunden.',
         },
         {
           title: 'Mobil optimiert',
@@ -178,7 +179,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         'Ein potenzieller Kunde sucht nach Ihrer Leistung bei Google',
         'Er klickt auf Ihre Website - oder auf die Ihrer Konkurrenz',
         'Innerhalb weniger Sekunden entscheidet er: Bleiben oder gehen',
-        'Ist alles klar und verständlich - er nimmt Kontakt auf. Ist es unklar - er ist weg',
+        'Ist alles klar und verständlich, nimmt er Kontakt auf. Ist es unklar, klickt er weiter.',
       ],
       note: 'Viele Unternehmen verlieren täglich Kunden, weil ihre Website nicht klar zeigt, was sie anbieten.',
     },
@@ -200,15 +201,15 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       stepLabel: 'Schritt',
       steps: [
         {
-          title: 'Wir schauen uns Ihr Business an',
-          description: 'Wir verstehen, wie Sie aktuell Kunden gewinnen – und wo Sie Geld verlieren.',
+          title: 'Wir schauen uns Ihr Unternehmen an',
+          description: 'Wir sehen, wie Sie heute Kunden gewinnen – und wo Anfragen verloren gehen.',
         },
         {
           title: 'Klare und ehrliche Empfehlung',
           description: 'Sie erfahren, was wirklich sinnvoll ist – und wofür Sie kein Geld ausgeben müssen.',
         },
         {
-          title: 'Struktur, die Kunden überzeugt',
+          title: 'Struktur, die Vertrauen schafft',
           description: 'Wir bauen Ihre Website so auf, dass Besucher verstehen, was Sie anbieten – und anfragen.',
         },
         {
@@ -216,7 +217,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
           description: 'Texte, Design und Technik – Sie müssen sich um nichts kümmern.',
         },
         {
-          title: 'Ihre Website ist bereit, neue Anfragen zu bringen',
+          title: 'Ihre Website ist bereit für neue Anfragen',
           description: 'Ihre Seite geht online und ist bereit, neue Anfragen zu generieren.',
         },
       ],
@@ -225,11 +226,11 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     trust: {
       title: 'Einfach, verständlich und ohne unnötigen Aufwand',
       points: [
-        'Direkter Kontakt ohne Umwege. Sie sprechen direkt mit uns – keine Zwischenpersonen, keine Agentur-Struktur',
+        'Direkter Kontakt ohne Umwege. Sie sprechen direkt mit uns – ohne Zwischenpersonen',
         'Klare Sprache statt Fachbegriffe. Wir erklären alles so, dass Sie es sofort verstehen',
         'Ehrliche Einschätzung. Sie hören von uns, was wirklich sinnvoll ist – und was nicht',
         'Fokus auf das Wesentliche. Ihre Website wird klar, verständlich und überzeugend für Ihre Kunden',
-        'Geeignet für kleine Unternehmen in Deutschland, die bereits aktiv sind',
+        'Passend für kleine Unternehmen in Deutschland, die bereits am Markt sind',
         'Bereits umgesetzt für lokale Betriebe',
       ],
       humanTitle: 'Viele Unternehmer sagen:',
@@ -239,7 +240,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     honesty: {
       title: 'Wichtig zu wissen',
       main:
-        'Eine Website bringt nicht automatisch Kunden – aber ohne Website verlieren Sie täglich welche.',
+        'Eine Website bringt nicht automatisch Kunden – aber ohne sie geht oft Vertrauen verloren.',
       extra:
         'Wir erstellen keine leeren Werbeversprechen. Wir schaffen die Grundlage, auf der Ihr Unternehmen online professionell auftreten kann.',
     },
@@ -260,7 +261,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         },
         {
           before: 'Online kaum sichtbar oder kein klarer Eindruck — Kunden gehen zur Konkurrenz.',
-          after: 'Eine professionelle Website schafft Vertrauen und bringt neue Anfragen.',
+          after: 'Eine professionelle Website schafft Vertrauen und fördert Anfragen.',
         },
       ],
     },
@@ -306,7 +307,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     finalCta: {
       title: 'Unsicher, ob sich eine Website für Sie lohnt?',
       subtitle:
-        'Sprechen wir kurz. Sie bekommen eine klare Einschätzung – verständlich und ohne Verpflichtung. Dauert nur 10–15 Minuten.',
+        'Lassen Sie uns kurz sprechen. Sie bekommen eine klare Einschätzung – verständlich und ohne Verpflichtung. Dauert nur 10–15 Minuten.',
       primary: 'Jetzt unverbindlich anfragen',
       secondary: 'Per WhatsApp schreiben',
     },
@@ -317,6 +318,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       whatsapp: 'WhatsApp: +49 1511 0974353',
       email: 'E-Mail: kontakt@erstellen-websiten.de',
       about: 'Über mich',
+      quizBrief: 'Brief zur Website-Entwicklung',
       legal: {
         impressum: 'Impressum',
         privacy: 'Datenschutz',
@@ -535,6 +537,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       whatsapp: 'WhatsApp: +49 1511 0974353',
       email: 'E-Mail: kontakt@erstellen-websiten.de',
       about: 'Обо мне',
+      quizBrief: 'Бриф на разработку сайта',
       legal: {
         impressum: 'Impressum',
         privacy: 'Datenschutz',

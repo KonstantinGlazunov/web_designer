@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, type ReactNode } from 'react'
+import { useSearchParams } from 'next/navigation'
 import {
   ArrowRight,
   Check,
@@ -50,12 +51,27 @@ const audienceImages = [
 ]
 
 export function Landing2Page() {
+  const searchParams = useSearchParams()
   const [locale, setLocale] = useState<LandingLocale>('de')
   const [quizOpen, setQuizOpen] = useState(false)
   const copy = landingCopy[locale]
   const portfolio = siteCopy[locale].portfolio
   const portfolioLinkLabel = locale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
   const requestLabel = locale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
+  const isQuizRequested = searchParams.get('quiz') === '1'
+
+  const handleQuizClose = () => {
+    setQuizOpen(false)
+
+    if (typeof window === 'undefined') return
+    const url = new URL(window.location.href)
+    if (!url.searchParams.has('quiz')) return
+
+    url.searchParams.delete('quiz')
+    const nextQuery = url.searchParams.toString()
+    const nextUrl = `${url.pathname}${nextQuery ? `?${nextQuery}` : ''}${url.hash}`
+    window.history.replaceState(null, '', nextUrl)
+  }
 
   return (
     <main className="min-h-screen bg-[#f6f8fb] text-slate-900">
@@ -93,7 +109,7 @@ export function Landing2Page() {
       </div>
 
       <ChatFab locale={locale} theme="light" />
-      <QuizDialog open={quizOpen} onClose={() => setQuizOpen(false)} locale={locale} />
+      <QuizDialog open={quizOpen || isQuizRequested} onClose={handleQuizClose} locale={locale} />
     </main>
   )
 }

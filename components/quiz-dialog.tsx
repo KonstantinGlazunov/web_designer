@@ -69,6 +69,20 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
     setAnswers((prev) => {
       const current = prev[questionId]
       if (multiSelect) {
+        if (questionId === 'content') {
+          const arr = Array.isArray(current) ? [...current] : []
+
+          if (optionId === 'nothing') {
+            return { ...prev, [questionId]: arr.includes('nothing') ? [] : ['nothing'] }
+          }
+
+          const filtered = arr.filter((id) => id !== 'nothing')
+          const idx = filtered.indexOf(optionId)
+          if (idx >= 0) filtered.splice(idx, 1)
+          else filtered.push(optionId)
+          return { ...prev, [questionId]: filtered }
+        }
+
         const arr = Array.isArray(current) ? [...current] : []
         const idx = arr.indexOf(optionId)
         if (idx >= 0) arr.splice(idx, 1)
@@ -107,19 +121,30 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+
+    const formatAnswer = (q: QuizQuestion): string => {
+      const raw = answers[q.id]
+      if (!raw) return '-'
+
+      const labels = new Map((q.options ?? []).map((opt) => [opt.id, opt.label]))
+      const mapOne = (value: string) => labels.get(value) ?? value
+
+      if (Array.isArray(raw)) return raw.map((value) => mapOne(String(value))).join(', ')
+      return mapOne(String(raw))
+    }
+
     const body = [
       '--- Quiz Answers ---',
       ...copy.questions.map((q) => {
-        const a = answers[q.id]
+        const answerText = formatAnswer(q)
         const extra = answers[`${q.id}_other`] ? ` (${answers[`${q.id}_other`]})` : ''
         const siteUrl = q.id === 'current_site' && answers.site_url ? ` | URL: ${answers.site_url}` : ''
-        return `${q.question}: ${Array.isArray(a) ? a.join(', ') : a || '-'}${extra}${siteUrl}`
+        return `${q.question}: ${answerText}${extra}${siteUrl}`
       }),
-      `Standort: ${location || '-'}`,
       '',
       '--- Contact ---',
       `Name: ${name}`,
-      `WhatsApp: ${whatsapp}`,
+      `${copy.final.whatsappLabel}: ${whatsapp}`,
     ].join('\n')
 
     try {

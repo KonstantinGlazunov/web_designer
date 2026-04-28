@@ -73,6 +73,7 @@ export interface SiteCopy {
   footer: {
     description: string
     about: string
+    quizBrief: string
     legal: {
       agb: string
       privacy: string
@@ -243,6 +244,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     footer: {
       description: 'Vibe Studio делает понятные и современные сайты для малого бизнеса.',
       about: 'Обо мне',
+      quizBrief: 'Бриф на разработку сайта',
       legal: {
         agb: 'AGB',
         privacy: 'Datenschutzerklaerung',
@@ -410,6 +412,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     footer: {
       description: 'Vibe Studio entwickelt klare und moderne Webseiten für kleine Unternehmen.',
       about: 'Über mich',
+      quizBrief: 'Brief zur Website-Entwicklung',
       legal: {
         agb: 'AGB',
         privacy: 'Datenschutzerklärung',
