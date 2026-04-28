@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Github, Instagram, Linkedin } from 'lucide-react'
 import { LocaleToggle } from '@/components/locale-toggle'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import type { SiteCopy } from '@/lib/translations'
 
 export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
@@ -55,6 +56,7 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
             >
               {copy.legal.impressum}
             </Link>
+            <CookieSettingsTrigger className="text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right" />
             <Link href="/#kontakt" className="font-semibold text-slate-900 transition hover:text-slate-950 dark:text-white dark:hover:text-emerald-200">
               Kontakt
             </Link>
