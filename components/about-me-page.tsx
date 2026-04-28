@@ -8,9 +8,12 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   CheckCircle2,
+  Github,
   GraduationCap,
   HeartHandshake,
+  Instagram,
   Languages,
+  Linkedin,
   MapPin,
   MessageCircle,
   Rocket,
@@ -50,6 +53,7 @@ const aboutCopy: Record<
     why: string[]
     personalTitle: string
     personal: string
+    socialsTitle: string
     finalTitle: string
     finalText: string
     footer: string
@@ -130,6 +134,7 @@ const aboutCopy: Record<
     personalTitle: 'Ein bisschen persönlich',
     personal:
       'Ich lebe in Braunfels in Hessen. Mich interessiert, wie kleine Unternehmen mit einfachen digitalen Werkzeugen professioneller auftreten können. Privat bin ich bodenständig: lernen, bauen, verbessern und Zeit mit Menschen verbringen, die mir wichtig sind.',
+    socialsTitle: 'Soziale Medien',
     finalTitle: 'Sie sind unsicher, ob sich eine neue Website lohnt?',
     finalText:
       'Dann starten wir mit einer kurzen ehrlichen Einschätzung. In 10-15 Minuten klären wir, was Ihre Seite heute leisten sollte und welcher nächste Schritt sinnvoll ist.',
@@ -210,6 +215,7 @@ const aboutCopy: Record<
     personalTitle: 'Немного личного',
     personal:
       'Я живу в Браунфельсе, земля Гессен. Мне интересно, как малый бизнес может выглядеть профессиональнее с помощью простых цифровых инструментов. В жизни ценю спокойный практичный подход: учиться, делать, улучшать и проводить время с близкими людьми.',
+    socialsTitle: 'Социальные сети',
     finalTitle: 'Не уверены, нужна ли новая страница?',
     finalText:
       'Начнем с короткой оценки. За 10-15 минут можно понять, что сайт должен делать сейчас и какой следующий шаг действительно имеет смысл.',
@@ -399,6 +405,38 @@ export function AboutMePage() {
           <Section className="mt-0">
             <SectionHeader title={copy.personalTitle} />
             <p className="text-base leading-8 text-slate-700">{copy.personal}</p>
+            <div className="mt-6">
+              <h3 className="text-base font-semibold text-slate-950">{copy.socialsTitle}</h3>
+              <div className="mt-3 flex items-center gap-3 text-slate-700">
+                <a
+                  href="https://github.com/KonstantinGlazunov"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white transition hover:border-slate-300 hover:text-slate-950"
+                >
+                  <Github className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/konstantin-glazunov/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white transition hover:border-slate-300 hover:text-slate-950"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://www.instagram.com/konstantin_podarambolskiy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white transition hover:border-slate-300 hover:text-slate-950"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
+              </div>
+            </div>
           </Section>
         </div>
 

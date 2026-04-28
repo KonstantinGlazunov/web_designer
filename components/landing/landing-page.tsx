@@ -546,9 +546,9 @@ function FooterSection({ copy }: { copy: LandingText }) {
               {copy.footer.legal.impressum}
             </Link>
             <CookieSettingsTrigger />
-            <a className="font-semibold text-slate-900 transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
+            <Link href="/kontakt" className="font-semibold text-slate-900 transition hover:text-slate-950">
               {copy.footer.contact}
-            </a>
+            </Link>
           </div>
           <div className="mt-4 space-y-2 md:text-right">
             <p>{copy.footer.whatsapp}</p>

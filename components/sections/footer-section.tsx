@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Github, Instagram, Linkedin } from 'lucide-react'
 import { LocaleToggle } from '@/components/locale-toggle'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
@@ -14,17 +13,6 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">
             {copy.description}
           </p>
-          <div className="mt-6 flex items-center gap-3 text-slate-700 dark:text-slate-200">
-            <a href="https://github.com/KonstantinGlazunov" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Github className="h-5 w-5" />
-            </a>
-            <a href="https://www.linkedin.com/in/konstantin-glazunov/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Linkedin className="h-5 w-5" />
-            </a>
-            <a href="https://www.instagram.com/konstantin_podarambolskiy/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="h-5 w-5" />
-            </a>
-          </div>
         </div>
         <div className="flex flex-col items-start gap-4 lg:items-end">
           <div className="flex items-center gap-3">
@@ -54,7 +42,7 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
               {copy.legal.impressum}
             </Link>
             <CookieSettingsTrigger className="text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right" />
-            <Link href="/#kontakt" className="font-semibold text-slate-900 transition hover:text-slate-950 dark:text-white dark:hover:text-emerald-200">
+            <Link href="/kontakt" className="font-semibold text-slate-900 transition hover:text-slate-950 dark:text-white dark:hover:text-emerald-200">
               Kontakt
             </Link>
           </div>

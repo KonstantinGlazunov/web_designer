@@ -12,10 +12,7 @@ import {
   CircleAlert,
   FileText,
   Globe,
-  Github,
-  Instagram,
   LayoutGrid,
-  Linkedin,
   Map,
   MessageCircle,
   MoveRight,
@@ -94,7 +91,7 @@ export function Landing2Page() {
         <ExamplesSection portfolio={portfolio} linkLabel={portfolioLinkLabel} />
         <FaqSection copy={copy} />
         <FinalCtaSection copy={copy} onOpenForm={() => setQuizOpen(true)} />
-        <FooterSection copy={copy} socialsLabel={siteCopy[locale].footer.socials} />
+        <FooterSection copy={copy} />
       </div>
 
       <div className="fixed bottom-5 right-4 z-40 flex flex-col gap-2 sm:bottom-6 sm:right-6">
@@ -626,24 +623,13 @@ function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: 
   )
 }
 
-function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel: string }) {
+function FooterSection({ copy }: { copy: LandingText }) {
   return (
     <footer id="kontakt" className="mt-6 rounded-[30px] border border-slate-200 bg-white px-6 py-8 sm:px-8 lg:snap-start">
       <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">{copy.footer.title}</p>
           <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">{copy.footer.description}</p>
-          <div className="mt-5 flex items-center gap-3 text-slate-700">
-            <a href="https://github.com/KonstantinGlazunov" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Github className="h-5 w-5" />
-            </a>
-            <a href="https://www.linkedin.com/in/konstantin-glazunov/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Linkedin className="h-5 w-5" />
-            </a>
-            <a href="https://www.instagram.com/konstantin_podarambolskiy/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="h-5 w-5" />
-            </a>
-          </div>
         </div>
 
         <div className="text-sm text-slate-700">
@@ -661,9 +647,9 @@ function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel
               {copy.footer.legal.impressum}
             </Link>
             <CookieSettingsTrigger />
-            <a className="font-semibold text-slate-900 transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
+            <Link href="/kontakt" className="font-semibold text-slate-900 transition hover:text-slate-950">
               {copy.footer.contact}
-            </a>
+            </Link>
           </div>
           <div className="mt-4 space-y-2 md:text-right">
             <p>
@@ -677,7 +663,6 @@ function FooterSection({ copy, socialsLabel }: { copy: LandingText; socialsLabel
               </a>
             </p>
           </div>
-          {socialsLabel ? <p className="pt-1 text-slate-500">{socialsLabel}</p> : null}
         </div>
       </div>
     </footer>
