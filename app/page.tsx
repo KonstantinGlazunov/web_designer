@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
+import { Suspense } from 'react'
 import { Landing2Page } from '@/components/landing2/landing2-page'
 
 const manrope = Manrope({
@@ -40,7 +41,9 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className={manrope.className}>
-      <Landing2Page />
+      <Suspense fallback={null}>
+        <Landing2Page />
+      </Suspense>
     </div>
   )
 }
