@@ -633,35 +633,23 @@ function FooterSection({ copy }: { copy: LandingText }) {
         </div>
 
         <div className="text-sm text-slate-700">
-          <div className="grid grid-cols-2 gap-x-8 gap-y-2 md:text-right">
-            <Link href="/ueber-mich" className="transition hover:text-slate-950">
+          <div className="grid grid-cols-2 justify-items-start gap-x-8 gap-y-2 md:justify-items-end md:text-right">
+            <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.about}
             </Link>
-            <Link href="/agb" className="transition hover:text-slate-950">
+            <Link href="/agb" className="block w-full text-left transition hover:text-slate-950 md:text-right">
               AGB
             </Link>
-            <Link href="/datenschutzerklaerung" className="transition hover:text-slate-950">
+            <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.legal.privacy}
             </Link>
-            <Link href="/impressum" className="transition hover:text-slate-950">
+            <Link href="/impressum" className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.legal.impressum}
             </Link>
-            <CookieSettingsTrigger />
-            <Link href="/kontakt" className="font-semibold text-slate-900 transition hover:text-slate-950">
+            <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 md:text-right" />
+            <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">
               {copy.footer.contact}
             </Link>
-          </div>
-          <div className="mt-4 space-y-2 md:text-right">
-            <p>
-              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="transition hover:text-slate-950">
-                {copy.floating.whatsapp}
-              </a>
-            </p>
-            <p>
-              <a className="transition hover:text-slate-950" href="mailto:kontakt@erstellen-websiten.de">
-                {copy.footer.email}
-              </a>
-            </p>
           </div>
         </div>
       </div>

@@ -19,30 +19,30 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
             <LocaleToggle />
             <ThemeToggle />
           </div>
-          <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm lg:text-right">
-            <Link href="/ueber-mich" className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
+          <div className="grid w-full grid-cols-2 justify-items-start gap-x-8 gap-y-2 text-sm lg:justify-items-end lg:text-right">
+            <Link href="/ueber-mich" className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
               {copy.about}
             </Link>
-            <Link href="/landing" className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
+            <Link href="/landing" className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
               Landing
             </Link>
-            <Link href="/agb" className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
+            <Link href="/agb" className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
               {copy.legal.agb}
             </Link>
             <Link
               href="/datenschutzerklaerung"
-              className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
+              className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right"
             >
               {copy.legal.privacy}
             </Link>
             <Link
               href="/impressum"
-              className="text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white"
+              className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right"
             >
               {copy.legal.impressum}
             </Link>
-            <CookieSettingsTrigger className="text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right" />
-            <Link href="/kontakt" className="font-semibold text-slate-900 transition hover:text-slate-950 dark:text-white dark:hover:text-emerald-200">
+            <CookieSettingsTrigger className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right" />
+            <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 dark:text-white dark:hover:text-emerald-200 lg:text-right">
               Kontakt
             </Link>
           </div>
