@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { FormEvent, useMemo, useState } from 'react'
 import { CheckCircle2, Mail, MessageCircle, Phone } from 'lucide-react'
 import { LocaleToggle } from '@/components/locale-toggle'
+import { ProtectedContactLink } from '@/components/protected-contact-link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 import type { Locale } from '@/lib/translations'
@@ -28,9 +29,15 @@ type ContactCopy = {
   whatsapp: string
   call: string
   mail: string
+  showPhone: string
+  showMail: string
 }
 
 const whatsappHref = 'https://wa.me/4915110974353'
+const phoneDisplayParts = ['+49', ' ', '1511', ' ', '0974353']
+const phoneHrefParts = ['+49', '1511', '0974353']
+const emailDisplayParts = ['kontakt', '@', 'erstellen-websiten.de']
+const emailHrefParts = ['kontakt', '@', 'erstellen-websiten.de']
 
 const contactCopy: Record<Locale, ContactCopy> = {
   de: {
@@ -53,6 +60,8 @@ const contactCopy: Record<Locale, ContactCopy> = {
     whatsapp: 'WhatsApp schreiben',
     call: 'Telefon',
     mail: 'E-Mail',
+    showPhone: 'Nummer anzeigen',
+    showMail: 'E-Mail anzeigen',
   },
   ru: {
     eyebrow: 'Контакты',
@@ -74,6 +83,8 @@ const contactCopy: Record<Locale, ContactCopy> = {
     whatsapp: 'Написать в WhatsApp',
     call: 'Телефон',
     mail: 'E-Mail',
+    showPhone: 'Показать номер',
+    showMail: 'Показать e-mail',
   },
 }
 
@@ -305,20 +316,30 @@ export function ContactPage() {
                 <MessageCircle className="h-4 w-4 text-emerald-600" />
                 {copy.whatsapp}
               </a>
-              <a
-                href="tel:+4915110974353"
-                className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition hover:border-slate-300"
-              >
+              <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition hover:border-slate-300">
                 <Phone className="h-4 w-4 text-sky-700" />
-                {copy.call}: +49 1511 0974353
-              </a>
-              <a
-                href="mailto:kontakt@erstellen-websiten.de"
-                className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition hover:border-slate-300"
-              >
+                <ProtectedContactLink
+                  label={copy.call}
+                  maskedValue="+49 1511 ..."
+                  revealLabel={copy.showPhone}
+                  hrefScheme="tel:"
+                  hrefParts={phoneHrefParts}
+                  displayParts={phoneDisplayParts}
+                  className="text-left transition hover:text-slate-950"
+                />
+              </div>
+              <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition hover:border-slate-300">
                 <Mail className="h-4 w-4 text-sky-700" />
-                {copy.mail}: kontakt@erstellen-websiten.de
-              </a>
+                <ProtectedContactLink
+                  label={copy.mail}
+                  maskedValue="kontakt@..."
+                  revealLabel={copy.showMail}
+                  hrefScheme="mailto:"
+                  hrefParts={emailHrefParts}
+                  displayParts={emailDisplayParts}
+                  className="text-left transition hover:text-slate-950"
+                />
+              </div>
             </div>
           </section>
         </div>

@@ -94,6 +94,7 @@ export interface LandingCopy {
     whatsapp: string
     email: string
     about: string
+    blog: string
     quizBrief: string
     legal: {
       impressum: string
@@ -251,17 +252,16 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       afterLabel: 'Nachher',
       cards: [
         {
-          before: 'Kunden nur über Empfehlungen, keine Website.',
-          after:
-            'Eine klare Website zeigt Ihr Angebot auf einen Blick.',
+          before: 'Anfragen nur über Empfehlungen.',
+          after: 'Website zeigt Angebot klar und bringt planbare Anfragen.',
         },
         {
           before: 'Viele Rückfragen, Leistungen unklar.',
-          after: 'Alle Informationen sind auf der Website — weniger Klärungsbedarf.',
+          after: 'Leistungen sind sofort verständlich, weniger Klärungsaufwand.',
         },
         {
-          before: 'Online kaum sichtbar oder kein klarer Eindruck — Kunden gehen zur Konkurrenz.',
-          after: 'Eine professionelle Website schafft Vertrauen und fördert Anfragen.',
+          before: 'Online kaum sichtbar, Vertrauen fehlt.',
+          after: 'Professioneller Auftritt stärkt Vertrauen und fördert Anfragen.',
         },
       ],
     },
@@ -318,6 +318,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       whatsapp: 'WhatsApp: +49 1511 0974353',
       email: 'E-Mail: kontakt@erstellen-websiten.de',
       about: 'Über mich',
+      blog: 'Blog',
       quizBrief: 'Brief zur Website-Entwicklung',
       legal: {
         impressum: 'Impressum',
@@ -470,16 +471,16 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       afterLabel: 'После',
       cards: [
         {
-          before: '🧰 Локальный бизнес в сфере услуг\nКлиенты приходят только по рекомендациям\nНет сайта, который можно показать',
-          after: 'Понятный сайт, который сразу показывает, что вы предлагаете\n👉 Клиенты обращаются более осознанно и понимают, что им нужно\n👉 Результат: больше целевых заявок и меньше повторяющихся вопросов',
+          before: 'Заявки только по рекомендациям.',
+          after: 'Сайт понятно показывает услуги и даёт более стабильные заявки.',
         },
         {
-          before: '💇‍♀️ Услуги (например, парикмахер, beauty, клининг)\nКлиенты снова и снова задают одни и те же вопросы\nНет ясного обзора услуг',
-          after: 'Вся информация в одном месте\n👉 Меньше уточняющих вопросов, больше целевых обращений\n👉 Результат: больше целевых заявок и меньше повторяющихся вопросов',
+          before: 'Много уточнений, услуги непонятны.',
+          after: 'Услуги сразу понятны, уточняющих вопросов становится меньше.',
         },
         {
-          before: '🚗 Локальный бизнес (например, автосервис, аренда)\nНечёткое впечатление в интернете или вас вообще не находят\nПотенциальные клиенты уходят к конкурентам',
-          after: 'Профессиональное первое впечатление\n👉 Больше доверия и больше обращений от новых клиентов\n👉 Результат: больше целевых заявок и меньше повторяющихся вопросов',
+          before: 'В интернете почти не видно, доверия мало.',
+          after: 'Профессиональный вид сайта усиливает доверие и даёт больше заявок.',
         },
       ],
     },
@@ -537,6 +538,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       whatsapp: 'WhatsApp: +49 1511 0974353',
       email: 'E-Mail: kontakt@erstellen-websiten.de',
       about: 'Обо мне',
+      blog: 'Блог',
       quizBrief: 'Бриф на разработку сайта',
       legal: {
         impressum: 'Impressum',

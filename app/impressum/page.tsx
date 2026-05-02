@@ -1,4 +1,8 @@
 import { LegalPageLayout } from '@/components/legal-page-layout'
+import { ProtectedContactLink } from '@/components/protected-contact-link'
+
+const impressumPhoneDisplayParts = ['+49', ' ', '1511', ' ', '0974353']
+const impressumPhoneHrefParts = ['+49', '1511', '0974353']
 
 export default function ImpressumPage() {
   return (
@@ -18,7 +22,15 @@ export default function ImpressumPage() {
         <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Kontakt</h2>
         <div className="mt-4 space-y-1">
           <p>E-Mail: glazunov.const@gmail.com</p>
-          <p>WhatsApp: +49 1511 0974353</p>
+          <ProtectedContactLink
+            label="WhatsApp"
+            maskedValue="+49 1511 ..."
+            revealLabel="Nummer anzeigen"
+            hrefScheme="tel:"
+            hrefParts={impressumPhoneHrefParts}
+            displayParts={impressumPhoneDisplayParts}
+            className="text-left underline-offset-2 hover:underline"
+          />
         </div>
       </section>
 

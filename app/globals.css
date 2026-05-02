@@ -186,6 +186,38 @@ html.dark body {
   }
 }
 
+@keyframes reveal-stagger-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-offset, 16px), 0);
+    filter: blur(var(--reveal-blur, 8px));
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
+.reveal-stagger {
+  --delay: 0ms;
+  --duration: 620ms;
+  --reveal-offset: 16px;
+  --reveal-blur: 8px;
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-offset), 0);
+  filter: blur(var(--reveal-blur));
+  will-change: transform, opacity, filter;
+}
+
+.reveal-stagger.is-visible {
+  animation-name: reveal-stagger-up;
+  animation-duration: var(--duration);
+  animation-delay: var(--delay);
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -200,5 +232,12 @@ html.dark body {
   .hero-pulse,
   .hero-loader {
     animation-duration: 12s;
+  }
+
+  .reveal-stagger {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    animation: none;
   }
 }

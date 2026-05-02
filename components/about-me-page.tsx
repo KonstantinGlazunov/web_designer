@@ -21,6 +21,7 @@ import {
   Sparkles,
   Wrench,
 } from 'lucide-react'
+import { ChatFab } from '@/components/chat/chat-fab'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import { LocaleToggle } from '@/components/locale-toggle'
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -57,6 +58,8 @@ const aboutCopy: Record<
     finalTitle: string
     finalText: string
     footer: string
+    blog: string
+    floatingQuiz: string
   }
 > = {
   de: {
@@ -139,6 +142,8 @@ const aboutCopy: Record<
     finalText:
       'Dann starten wir mit einer kurzen ehrlichen Einschätzung. In 10-15 Minuten klären wir, was Ihre Seite heute leisten sollte und welcher nächste Schritt sinnvoll ist.',
     footer: 'Vibe Studio - Websites für kleine Unternehmen',
+    blog: 'Blog',
+    floatingQuiz: 'Kurze Einschätzung',
   },
   ru: {
     navHome: 'На главную',
@@ -220,6 +225,8 @@ const aboutCopy: Record<
     finalText:
       'Начнем с короткой оценки. За 10-15 минут можно понять, что сайт должен делать сейчас и какой следующий шаг действительно имеет смысл.',
     footer: 'Vibe Studio - сайты для малого бизнеса',
+    blog: 'Блог',
+    floatingQuiz: 'Короткая оценка',
   },
 }
 
@@ -459,6 +466,9 @@ export function AboutMePage() {
             <Link href="/" className="transition hover:text-slate-950">
               {copy.navHome}
             </Link>
+            <Link href="/blog" className="transition hover:text-slate-950">
+              {copy.blog}
+            </Link>
             <Link href="/agb" className="transition hover:text-slate-950">
               AGB
             </Link>
@@ -472,6 +482,17 @@ export function AboutMePage() {
           </div>
         </footer>
       </div>
+      <div className="fixed bottom-5 right-4 z-40 sm:bottom-6 sm:right-6">
+        <button
+          type="button"
+          onClick={() => setQuizOpen(true)}
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-[0_12px_35px_rgba(15,23,42,0.12)] transition hover:-translate-y-0.5 hover:border-slate-400"
+        >
+          <MessageCircle className="h-4 w-4" />
+          {copy.floatingQuiz}
+        </button>
+      </div>
+      <ChatFab locale={locale} theme="light" />
     </main>
   )
 }

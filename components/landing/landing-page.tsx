@@ -415,11 +415,11 @@ function BeforeAfterSection({ copy }: { copy: LandingText }) {
             </p>
             <div className="mt-4 space-y-4">
               <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-rose-200 bg-rose-50 p-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-700">
+                <div className="rounded-2xl border border-rose-100 bg-rose-50/40 p-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-600">
                     {copy.beforeAfter.beforeLabel}
                   </p>
-                  <div className="relative mt-2 aspect-[4/3] overflow-hidden rounded-xl border border-rose-200 bg-white">
+                  <div className="relative mt-2 aspect-[4/3] overflow-hidden rounded-xl border border-rose-100 bg-white">
                     <Image
                       src={beforeImages[index] ?? '/images/landing-pexels-laptop-26689753.webp'}
                       alt="Vorher Website Zustand"
@@ -429,11 +429,11 @@ function BeforeAfterSection({ copy }: { copy: LandingText }) {
                     />
                   </div>
                 </div>
-                <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">
+                <div className="rounded-2xl border border-emerald-300 bg-emerald-50 p-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">
                     {copy.beforeAfter.afterLabel}
                   </p>
-                  <div className="relative mt-2 aspect-[4/3] overflow-hidden rounded-xl border border-emerald-200 bg-white">
+                  <div className="relative mt-2 aspect-[4/3] overflow-hidden rounded-xl border border-emerald-300 bg-white">
                     <Image
                       src={afterImages[index] ?? '/images/landing-hero-responsive-device.webp'}
                       alt="Nachher Website Ergebnis"
@@ -445,8 +445,8 @@ function BeforeAfterSection({ copy }: { copy: LandingText }) {
                 </div>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm leading-7 text-rose-900">{card.before}</p>
-                <p className="mt-2 border-t border-slate-200 pt-2 text-sm leading-7 text-emerald-900">{card.after}</p>
+                <p className="text-sm leading-7 text-rose-800">{card.before}</p>
+                <p className="mt-2 border-t border-slate-200 pt-2 text-sm leading-7 text-emerald-950">{card.after}</p>
               </div>
             </div>
           </article>
@@ -536,11 +536,14 @@ function FooterSection({ copy }: { copy: LandingText }) {
             <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.about}
             </Link>
-            <Link href="/agb" className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              AGB
+            <Link href="/blog" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+              {copy.footer.blog}
             </Link>
             <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.legal.privacy}
+            </Link>
+            <Link href="/agb" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+              AGB
             </Link>
             <Link href="/impressum" className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.legal.impressum}
