@@ -290,12 +290,6 @@ function getNicheOptions(locale: 'ru' | 'de') {
     : ['Салон красоты', 'Строительство и ремонт', 'Медицинский центр', 'Автомастерская']
 }
 
-function getRegionOptions(locale: 'ru' | 'de') {
-  return locale === 'de'
-    ? ['Berlin, Muenchen oder Hamburg', 'Koeln, Frankfurt oder Stuttgart', 'Umland einer Grossstadt', 'Deutschlandweit']
-    : ['Берлин, Мюнхен или Гамбург', 'Кёльн, Франкфурт или Штутгарт', 'Пригород крупного города', 'Работаю по всей Германии']
-}
-
 function getGoalOptions(locale: 'ru' | 'de') {
   return locale === 'de'
     ? ['Direkte Verkäufe', 'Leads sammeln', 'Image-Website', 'Preise und Leistungen informieren']
@@ -312,18 +306,6 @@ function getProjectTypeOptions(locale: 'ru' | 'de', hasExistingSite: boolean) {
   return hasExistingSite
     ? ['Редизайн', 'Сайт компании', 'Интернет-магазин', 'Поддержка']
     : ['Лендинг', 'Сайт компании', 'Интернет-магазин', 'Онлайн-запись']
-}
-
-function getProjectTypeHelperOptions(locale: 'ru' | 'de', hasExistingSite: boolean) {
-  if (locale === 'de') {
-    return hasExistingSite
-      ? ['Einfach eine Firmen-Website', 'Website + Online-Buchung', 'Online-Shop', 'Bestehende Website aktualisieren']
-      : ['Einfach eine Firmen-Website', 'Website + Online-Buchung', 'Online-Shop', 'Ich brauche Hilfe bei der Auswahl']
-  }
-
-  return hasExistingSite
-    ? ['Просто сайт для услуг', 'Сайт + онлайн-запись', 'Интернет-магазин', 'Обновить текущий сайт']
-    : ['Просто сайт для услуг', 'Сайт + онлайн-запись', 'Интернет-магазин', 'Нужна помощь выбрать']
 }
 
 function getSiteStatusOptions(locale: 'ru' | 'de') {

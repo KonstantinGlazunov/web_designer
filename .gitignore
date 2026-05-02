@@ -29,3 +29,6 @@ variables.env
 # Playwright
 playwright-report/
 test-results/
+
+# Local artifacts/screenshots generated during manual QA
+artifacts/

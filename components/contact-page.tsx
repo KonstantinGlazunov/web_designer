@@ -84,6 +84,7 @@ export function ContactPage() {
   const [salutation, setSalutation] = useState(copy.salutationOptions[0])
   const [name, setName] = useState('')
   const [company, setCompany] = useState('')
+  const [website, setWebsite] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [message, setMessage] = useState('')
@@ -107,6 +108,7 @@ export function ContactPage() {
           salutation: salutation === copy.salutationOptions[0] ? '' : salutation,
           name,
           company,
+          website,
           email,
           phone,
           message,
@@ -122,6 +124,7 @@ export function ContactPage() {
       setSent(true)
       setName('')
       setCompany('')
+      setWebsite('')
       setEmail('')
       setPhone('')
       setMessage('')
@@ -199,6 +202,16 @@ export function ContactPage() {
                   className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none focus:border-slate-500"
                 />
               </label>
+
+              <input
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                className="hidden"
+                name="website"
+              />
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block text-sm font-medium text-slate-700">

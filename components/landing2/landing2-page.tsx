@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useState, type ReactNode } from 'react'
 import { useSearchParams } from 'next/navigation'
 import {
@@ -22,17 +23,14 @@ import {
   Shield,
   Smartphone,
 } from 'lucide-react'
-import { ChatFab } from '@/components/chat/chat-fab'
-import { QuizDialog } from '@/components/quiz-dialog'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import { cn } from '@/lib/utils'
 import { landingCopy, type LandingLocale } from '@/components/landing/landing-copy'
-import { siteCopy, type SiteCopy } from '@/lib/translations'
+import { portfolioCopy, type PortfolioText } from '@/components/landing/portfolio-copy'
 
 const whatsappHref = 'https://wa.me/4915110974353'
 
 type LandingText = (typeof landingCopy)[LandingLocale]
-type PortfolioText = SiteCopy['portfolio']
 
 const valueIcons = [LayoutGrid, Shield, Smartphone, Map]
 const logicIcons = [Search, LayoutGrid, CheckCircle2, Phone]
@@ -47,15 +45,26 @@ const audienceImages = [
   '/images/optiker.webp',
 ]
 
+const ChatFab = dynamic(
+  () => import('@/components/chat/chat-fab').then((mod) => mod.ChatFab),
+  { ssr: false },
+)
+
+const QuizDialog = dynamic(
+  () => import('@/components/quiz-dialog').then((mod) => mod.QuizDialog),
+  { ssr: false },
+)
+
 export function Landing2Page() {
   const searchParams = useSearchParams()
   const [locale, setLocale] = useState<LandingLocale>('de')
   const [quizOpen, setQuizOpen] = useState(false)
   const copy = landingCopy[locale]
-  const portfolio = siteCopy[locale].portfolio
+  const portfolio = portfolioCopy[locale]
   const portfolioLinkLabel = locale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
   const requestLabel = locale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
   const isQuizRequested = searchParams.get('quiz') === '1'
+  const shouldMountQuiz = quizOpen || isQuizRequested
 
   const handleQuizClose = () => {
     setQuizOpen(false)
@@ -106,7 +115,7 @@ export function Landing2Page() {
       </div>
 
       <ChatFab locale={locale} theme="light" />
-      <QuizDialog open={quizOpen || isQuizRequested} onClose={handleQuizClose} locale={locale} />
+      {shouldMountQuiz ? <QuizDialog open={shouldMountQuiz} onClose={handleQuizClose} locale={locale} /> : null}
     </main>
   )
 }
