@@ -19,6 +19,24 @@ const copy = {
   },
 } as const
 
+const ruStyleLabels: Record<string, string> = {
+  'Neon Grid': 'Неоновая сетка',
+  'Paper Collage': 'Бумажный коллаж',
+  Blueprint: 'Чертеж',
+  'Warm Editorial': 'Теплая редакционная подача',
+  'Minimal Mono': 'Минимализм',
+  'Retro Pop': 'Ретро-поп',
+  'Isometric Blocks': 'Изометрические блоки',
+  Glassmorphism: 'Глассморфизм',
+  'Data Heatmap': 'Тепловая карта данных',
+  'Abstract Ribbon': 'Абстрактная лента',
+}
+
+function getStyleLabel(label: string, locale: 'de' | 'ru') {
+  if (locale === 'de') return label
+  return ruStyleLabels[label] ?? label
+}
+
 function formatDate(isoDate: string, locale: 'de' | 'ru') {
   return new Date(isoDate).toLocaleDateString(locale === 'de' ? 'de-DE' : 'ru-RU', {
     year: 'numeric',
@@ -80,7 +98,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
           <Link href="/blog" className="text-sm font-semibold text-sky-700 underline-offset-2 hover:underline">
             {t.back}
           </Link>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">{localized.styleLabel}</p>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">{getStyleLabel(localized.styleLabel, locale)}</p>
           <h1 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">{localized.title}</h1>
           <p className="mt-4 max-w-4xl text-base leading-7 text-slate-700 sm:text-lg">{localized.excerpt}</p>
           <div className="mt-5 flex flex-wrap gap-3 text-xs text-slate-600 sm:text-sm">

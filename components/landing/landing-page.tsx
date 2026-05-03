@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
+import { useSitePreferences } from '@/components/providers/site-preferences'
 import {
   ArrowRight,
   Briefcase,
@@ -52,8 +53,9 @@ const afterImages = [
 ]
 
 export function LandingPage() {
-  const [locale, setLocale] = useState<LandingLocale>('de')
-  const copy = landingCopy[locale]
+  const { locale, setLocale } = useSitePreferences()
+  const landingLocale: LandingLocale = locale === 'ru' ? 'ru' : 'de'
+  const copy = landingCopy[landingLocale]
 
   return (
     <main className="relative isolate min-h-screen bg-[#f5f7fb] text-slate-900">
@@ -74,9 +76,9 @@ export function LandingPage() {
           </div>
           <button
             type="button"
-            onClick={() => setLocale((prev) => (prev === 'de' ? 'ru' : 'de'))}
+            onClick={() => setLocale(landingLocale === 'de' ? 'ru' : 'de')}
             className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
-            aria-label={locale === 'de' ? 'Switch to Russian' : 'Switch to German'}
+            aria-label={landingLocale === 'de' ? 'Switch to Russian' : 'Switch to German'}
           >
             <Globe className="h-3.5 w-3.5" />
             <span>{copy.lang.current}</span>

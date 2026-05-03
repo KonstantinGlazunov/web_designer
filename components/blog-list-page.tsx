@@ -25,6 +25,24 @@ const copy = {
   },
 } as const
 
+const ruStyleLabels: Record<string, string> = {
+  'Neon Grid': 'Неоновая сетка',
+  'Paper Collage': 'Бумажный коллаж',
+  Blueprint: 'Чертеж',
+  'Warm Editorial': 'Теплая редакционная подача',
+  'Minimal Mono': 'Минимализм',
+  'Retro Pop': 'Ретро-поп',
+  'Isometric Blocks': 'Изометрические блоки',
+  Glassmorphism: 'Глассморфизм',
+  'Data Heatmap': 'Тепловая карта данных',
+  'Abstract Ribbon': 'Абстрактная лента',
+}
+
+function getStyleLabel(label: string, locale: 'de' | 'ru') {
+  if (locale === 'de') return label
+  return ruStyleLabels[label] ?? label
+}
+
 function formatDate(isoDate: string, locale: 'de' | 'ru') {
   return new Date(isoDate).toLocaleDateString(locale === 'de' ? 'de-DE' : 'ru-RU', {
     year: 'numeric',
@@ -84,7 +102,7 @@ export function BlogListPage() {
                 </div>
 
                 <div className="p-5 sm:p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">{localized.styleLabel}</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">{getStyleLabel(localized.styleLabel, locale)}</p>
                   <h2 className="mt-3 text-2xl font-semibold leading-tight text-slate-950">{localized.title}</h2>
                   <p className="mt-3 text-sm leading-7 text-slate-700 sm:text-base">{localized.excerpt}</p>
 

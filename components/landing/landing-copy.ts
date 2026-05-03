@@ -541,8 +541,8 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       blog: 'Блог',
       quizBrief: 'Бриф на разработку сайта',
       legal: {
-        impressum: 'Impressum',
-        privacy: 'Datenschutz',
+        impressum: 'Выходные данные',
+        privacy: 'Политика конфиденциальности',
       },
     },
     floating: {

@@ -24,6 +24,7 @@ import {
   Smartphone,
 } from 'lucide-react'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
+import { useSitePreferences } from '@/components/providers/site-preferences'
 import { cn } from '@/lib/utils'
 import { landingCopy, type LandingLocale } from '@/components/landing/landing-copy'
 import { portfolioCopy, type PortfolioText } from '@/components/landing/portfolio-copy'
@@ -64,12 +65,13 @@ function revealStyle(delay: number, duration = 620): CSSProperties {
 
 export function Landing2Page() {
   const searchParams = useSearchParams()
-  const [locale, setLocale] = useState<LandingLocale>('de')
+  const { locale, setLocale } = useSitePreferences()
+  const landingLocale: LandingLocale = locale === 'ru' ? 'ru' : 'de'
   const [quizOpen, setQuizOpen] = useState(false)
-  const copy = landingCopy[locale]
-  const portfolio = portfolioCopy[locale]
-  const portfolioLinkLabel = locale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
-  const requestLabel = locale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
+  const copy = landingCopy[landingLocale]
+  const portfolio = portfolioCopy[landingLocale]
+  const portfolioLinkLabel = landingLocale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
+  const requestLabel = landingLocale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
   const isQuizRequested = searchParams.get('quiz') === '1'
   const shouldMountQuiz = quizOpen || isQuizRequested
 
@@ -100,7 +102,7 @@ export function Landing2Page() {
 
     elements.forEach((element) => observer.observe(element))
     return () => observer.disconnect()
-  }, [])
+  }, [landingLocale])
 
   const handleQuizClose = () => {
     setQuizOpen(false)
@@ -119,8 +121,8 @@ export function Landing2Page() {
     <main className="min-h-screen bg-[#f6f8fb] text-slate-900">
       <HeroSection
         copy={copy}
-        locale={locale}
-        onToggleLocale={() => setLocale((prev) => (prev === 'de' ? 'ru' : 'de'))}
+        locale={landingLocale}
+        onToggleLocale={() => setLocale(landingLocale === 'de' ? 'ru' : 'de')}
         onOpenForm={() => setQuizOpen(true)}
       />
 
@@ -150,8 +152,8 @@ export function Landing2Page() {
         </button>
       </div>
 
-      <ChatFab locale={locale} theme="light" />
-      {shouldMountQuiz ? <QuizDialog open={shouldMountQuiz} onClose={handleQuizClose} locale={locale} /> : null}
+      <ChatFab locale={landingLocale} theme="light" />
+      {shouldMountQuiz ? <QuizDialog open={shouldMountQuiz} onClose={handleQuizClose} locale={landingLocale} /> : null}
     </main>
   )
 }

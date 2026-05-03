@@ -24,7 +24,7 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
               {copy.about}
             </Link>
             <Link href="/landing" className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
-              Landing
+              {copy.landing}
             </Link>
             <Link href="/agb" className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
               {copy.legal.agb}
@@ -43,7 +43,7 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
             </Link>
             <CookieSettingsTrigger className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right" />
             <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 dark:text-white dark:hover:text-emerald-200 lg:text-right">
-              Kontakt
+              {copy.contact}
             </Link>
           </div>
           {copy.socials ? <p className="text-sm text-slate-500 dark:text-slate-400">{copy.socials}</p> : null}

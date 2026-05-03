@@ -59,6 +59,11 @@ const aboutCopy: Record<
     finalText: string
     footer: string
     blog: string
+    legal: {
+      agb: string
+      privacy: string
+      impressum: string
+    }
     floatingQuiz: string
   }
 > = {
@@ -71,7 +76,7 @@ const aboutCopy: Record<
     primaryCta: 'Kostenlose Einschätzung starten',
     secondaryCta: 'LinkedIn ansehen',
     proof: ['Braunfels, Hessen', 'Russisch und Deutsch', 'Websites für lokale Unternehmen'],
-    storyPoints: ['Mein Weg', 'Vibe Studio', 'AIT TR', 'Product & Business'],
+    storyPoints: ['Mein Weg', 'Vibe Studio', 'AIT TR', 'Produkt & Business'],
     problemsTitle: 'Welche Probleme ich löse',
     problems: [
       'Die Website wirkt veraltet und macht nicht klar, warum Kunden Kontakt aufnehmen sollen.',
@@ -143,6 +148,11 @@ const aboutCopy: Record<
       'Dann starten wir mit einer kurzen ehrlichen Einschätzung. In 10-15 Minuten klären wir, was Ihre Seite heute leisten sollte und welcher nächste Schritt sinnvoll ist.',
     footer: 'Vibe Studio - Websites für kleine Unternehmen',
     blog: 'Blog',
+    legal: {
+      agb: 'AGB',
+      privacy: 'Datenschutz',
+      impressum: 'Impressum',
+    },
     floatingQuiz: 'Kurze Einschätzung',
   },
   ru: {
@@ -154,7 +164,7 @@ const aboutCopy: Record<
     primaryCta: 'Начать бесплатную оценку',
     secondaryCta: 'Посмотреть LinkedIn',
     proof: ['Браунфельс, Гессен', 'Русский и немецкий', 'Сайты для локального бизнеса'],
-    storyPoints: ['Мой путь', 'Vibe Studio', 'AIT TR', 'Product & Business'],
+    storyPoints: ['Мой путь', 'Vibe Studio', 'AIT TR', 'Продукт и бизнес'],
     problemsTitle: 'Какие проблемы я решаю',
     problems: [
       'Сайт выглядит устаревшим и не объясняет, почему клиенту стоит обратиться именно к вам.',
@@ -165,19 +175,19 @@ const aboutCopy: Record<
     storyTitle: 'Мой путь',
     story: [
       'Я смотрю на сайт через задачу бизнеса: что он должен делать, какое решение должен упростить и как привести посетителя к заявке.',
-      'Обучение на Java BackEnd Entwickler в AIT TR и работа с веб-разработкой дают техническую базу, чтобы делать сайты не только красивыми, но и аккуратными внутри.',
+      'Обучение на Java-Backend-разработчика в AIT TR и работа с веб-разработкой дают техническую базу, чтобы делать сайты не только красивыми, но и аккуратными внутри.',
       'Опыт продуктового мышления, менеджмента и собственных цифровых проектов помогает мне отделять важное от лишнего и говорить с клиентом понятным языком.',
     ],
     expertiseTitle: 'Экспертиза и сертификаты',
     credentials: [
       {
-        title: 'Fullstack Developer',
+        title: 'Фулстек-разработчик',
         text: 'AIT-TR GmbH: 960 UE теории и 160 часов практики, Java, Frontend, QA, Git, базы данных и выпускной проект.',
         meta: 'Берлин, 17.11.2023',
         href: '/certificates/ait-fullstack-developer-konstantin-glazunov.pdf',
       },
       {
-        title: 'Product Manager',
+        title: 'Продакт-менеджер',
         text: 'Продуктовый подход помогает делать сайт инструментом для доверия, контакта и заявок.',
         meta: 'SkillFactory, 22.02.2020',
         href: '/certificates/skillfactory-product-manager-konstantin-glazunov.pdf',
@@ -190,7 +200,7 @@ const aboutCopy: Record<
       },
     ],
     skillsTitle: 'Технологии и направления',
-    skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Java', 'Spring Boot', 'SEO-база', 'DSGVO-подход', 'Формы и контакты', 'AI-процессы'],
+    skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Java', 'Spring Boot', 'SEO-база', 'DSGVO-подход', 'Формы и контакты', 'ИИ-процессы'],
     workTitle: 'Как я работаю',
     workSteps: [
       {
@@ -226,6 +236,11 @@ const aboutCopy: Record<
       'Начнем с короткой оценки. За 10-15 минут можно понять, что сайт должен делать сейчас и какой следующий шаг действительно имеет смысл.',
     footer: 'Vibe Studio - сайты для малого бизнеса',
     blog: 'Блог',
+    legal: {
+      agb: 'AGB',
+      privacy: 'Политика конфиденциальности',
+      impressum: 'Выходные данные',
+    },
     floatingQuiz: 'Короткая оценка',
   },
 }
@@ -470,13 +485,13 @@ export function AboutMePage() {
               {copy.blog}
             </Link>
             <Link href="/agb" className="transition hover:text-slate-950">
-              AGB
+              {copy.legal.agb}
             </Link>
             <Link href="/datenschutzerklaerung" className="transition hover:text-slate-950">
-              Datenschutz
+              {copy.legal.privacy}
             </Link>
             <Link href="/impressum" className="transition hover:text-slate-950">
-              Impressum
+              {copy.legal.impressum}
             </Link>
             <CookieSettingsTrigger />
           </div>
