@@ -187,12 +187,12 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     audience: {
       title: 'Für welche Unternehmen ist das besonders passend?',
       cards: [
-        'Autowerkstatt – Viele Anfragen, aber oft unklar, was genau angeboten wird',
-        'Bau / Handwerk – Stark abhängig von Empfehlungen, wenig planbar',
-        'Beauty / Friseur – Kunden fragen immer wieder dieselben Dinge',
-        'Reinigungsservice',
-        'Vermietung / lokaler Service',
-        'Küchen, Optik, Kanzlei, Fachgeschäft',
+        'Autowerkstatt – viele Anfragen, aber online oft unklar präsentiert',
+        'Bau / Handwerk – stark von Empfehlungen abhängig, online wenig planbar',
+        'Beauty / Friseur – viele Rückfragen, Leistungen online nicht klar genug',
+        'Reinigungsservice – gute Leistung, aber online kaum Vertrauen auf den ersten Blick',
+        'Vermietung / lokaler Service – Angebote vorhanden, aber online nicht klar gebündelt',
+        'Küche / Optik / Kanzlei – professionelles Angebot, aber kein überzeugender erster Eindruck online',
       ],
       note:
         'Besonders sinnvoll für kleine Unternehmen, die bereits arbeiten, aber noch keine klare professionelle Website haben.',
@@ -406,12 +406,12 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
     audience: {
       title: 'Для каких компаний это особенно подходит?',
       cards: [
-        'Автосервис — много обращений, но часто непонятно, что именно вы делаете',
-        'Строительство / ремесло — сильная зависимость от рекомендаций, мало предсказуемости',
-        'Beauty / парикмахерская — клиенты постоянно задают одни и те же вопросы',
-        'Клининговый сервис',
-        'Аренда / локальный сервис',
-        'Кухни, оптика, канцелярия, профильные магазины',
+        'Автосервис — много обращений, но онлайн не всегда понятно, что именно вы предлагаете',
+        'Строительство / ремесло — сильная зависимость от рекомендаций и слабая предсказуемость онлайн',
+        'Beauty / парикмахерская — много повторяющихся вопросов, а услуги онлайн показаны неясно',
+        'Клининговый сервис — услуга хорошая, но сайт слабо создаёт доверие с первого взгляда',
+        'Аренда / локальный сервис — предложения есть, но онлайн они собраны не очень понятно',
+        'Кухни / оптика / профильные магазины — сильное предложение, но слабое первое впечатление онлайн',
       ],
       note:
         'Особенно полезно для малого бизнеса, который уже работает, но пока не имеет чётко оформленного профессионального сайта.',
