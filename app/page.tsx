@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
-import { Suspense } from 'react'
-import { Landing2Page } from '@/components/landing2/landing2-page'
+import { HomePage } from '@/components/home-page'
 
 const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
@@ -38,12 +37,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function HomePage() {
+export default function Page() {
   return (
     <div className={manrope.className}>
-      <Suspense fallback={null}>
-        <Landing2Page />
-      </Suspense>
+      <HomePage />
     </div>
   )
 }

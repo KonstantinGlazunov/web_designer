@@ -1,10 +1,6 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { Suspense, type CSSProperties, type ReactNode } from 'react'
 import {
   ArrowRight,
   Check,
@@ -12,7 +8,6 @@ import {
   ChevronDown,
   CircleAlert,
   FileText,
-  Globe,
   LayoutGrid,
   Map,
   MessageCircle,
@@ -21,20 +16,18 @@ import {
   Rocket,
   Search,
   Shield,
-  Smartphone,
 } from 'lucide-react'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
-import { useSitePreferences } from '@/components/providers/site-preferences'
-import { cn } from '@/lib/utils'
-import type { LandingCopy, LandingLocale } from '@/components/landing/landing-copy'
 import { landingCopyDe } from '@/components/landing/landing-copy-de'
-import { portfolioCopy, type PortfolioText } from '@/components/landing/portfolio-copy'
+import { portfolioCopy } from '@/components/landing/portfolio-copy'
+import { HomePageBridge } from '@/components/home-page-bridge'
+import { HomePageChat } from '@/components/home-page-chat'
+import { HomePageReveal } from '@/components/home-page-reveal'
+import { HomeShellLocaleToggle } from '@/components/home-shell-locale-toggle'
+import { cn } from '@/lib/utils'
 
 const whatsappHref = 'https://wa.me/4915110974353'
-
-type LandingText = LandingCopy
-
-const valueIcons = [LayoutGrid, Shield, Smartphone, Map]
+const valueIcons = [LayoutGrid, Shield, Map, Rocket]
 const logicIcons = [Search, LayoutGrid, CheckCircle2, Phone]
 const processIcons = [Phone, CheckCircle2, FileText, LayoutGrid, Rocket]
 const beforeAfterImages = ['/images/case1.webp', '/images/case2.webp', '/images/case3.webp']
@@ -47,25 +40,6 @@ const audienceImages = [
   '/images/optiker.webp',
 ]
 
-const ChatFab = dynamic(
-  () => import('@/components/chat/chat-fab').then((mod) => mod.ChatFab),
-  { ssr: false },
-)
-
-const QuizDialog = dynamic(
-  () => import('@/components/quiz-dialog').then((mod) => mod.QuizDialog),
-  { ssr: false },
-)
-
-let landingCopyRuPromise: Promise<LandingCopy> | null = null
-
-function loadLandingCopyRu() {
-  if (!landingCopyRuPromise) {
-    landingCopyRuPromise = import('@/components/landing/landing-copy-ru').then((mod) => mod.landingCopyRu)
-  }
-  return landingCopyRuPromise
-}
-
 function revealStyle(delay: number, duration = 620): CSSProperties {
   return {
     '--delay': `${delay}ms`,
@@ -73,159 +47,50 @@ function revealStyle(delay: number, duration = 620): CSSProperties {
   } as CSSProperties
 }
 
-export function Landing2Page() {
-  const searchParams = useSearchParams()
-  const { locale, setLocale } = useSitePreferences()
-  const landingLocale: LandingLocale = locale === 'ru' ? 'ru' : 'de'
-  const [quizOpen, setQuizOpen] = useState(false)
-  const [chatReady, setChatReady] = useState(false)
-  const [ruCopy, setRuCopy] = useState<LandingCopy | null>(null)
-  const copy = landingLocale === 'de' ? landingCopyDe : ruCopy ?? landingCopyDe
-  const portfolio = portfolioCopy[landingLocale]
-  const portfolioLinkLabel = landingLocale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
-  const requestLabel = landingLocale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
-  const isQuizRequested = searchParams.get('quiz') === '1'
-  const shouldMountQuiz = quizOpen || isQuizRequested
-
-  useEffect(() => {
-    if (landingLocale === 'de' || ruCopy) {
-      return
-    }
-
-    let active = true
-    void loadLandingCopyRu().then((nextCopy) => {
-      if (active) {
-        setRuCopy(nextCopy)
-      }
-    })
-
-    return () => {
-      active = false
-    }
-  }, [landingLocale, ruCopy])
-
-  useEffect(() => {
-    const elements = Array.from(document.querySelectorAll<HTMLElement>('.reveal-stagger'))
-    if (elements.length === 0) return
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reducedMotion) {
-      elements.forEach((element) => element.classList.add('is-visible'))
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
-          const target = entry.target as HTMLElement
-          target.classList.add('is-visible')
-          observer.unobserve(target)
-        })
-      },
-      {
-        threshold: 0.14,
-        rootMargin: '0px 0px -8% 0px',
-      },
-    )
-
-    elements.forEach((element) => observer.observe(element))
-    return () => observer.disconnect()
-  }, [landingLocale])
-
-  useEffect(() => {
-    const w = window as Window & {
-      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number
-      cancelIdleCallback?: (id: number) => void
-    }
-
-    if (w.requestIdleCallback) {
-      const id = w.requestIdleCallback(() => setChatReady(true), { timeout: 1800 })
-      return () => w.cancelIdleCallback?.(id)
-    }
-
-    const timer = window.setTimeout(() => setChatReady(true), 900)
-    return () => window.clearTimeout(timer)
-  }, [])
-
-  const handleQuizClose = () => {
-    setQuizOpen(false)
-
-    if (typeof window === 'undefined') return
-    const url = new URL(window.location.href)
-    if (!url.searchParams.has('quiz')) return
-
-    url.searchParams.delete('quiz')
-    const nextQuery = url.searchParams.toString()
-    const nextUrl = `${url.pathname}${nextQuery ? `?${nextQuery}` : ''}${url.hash}`
-    window.history.replaceState(null, '', nextUrl)
-  }
+export function HomePage() {
+  const copy = landingCopyDe
+  const portfolio = portfolioCopy.de
 
   return (
-    <main className="min-h-screen bg-[#f6f8fb] text-slate-900">
-      <HeroSection
-        copy={copy}
-        locale={landingLocale}
-        onToggleLocale={() => setLocale(landingLocale === 'de' ? 'ru' : 'de')}
-        onOpenForm={() => setQuizOpen(true)}
-      />
+    <>
+      <main id="home-static-shell" className="min-h-screen bg-[#f6f8fb] text-slate-900">
+        <HeroSection copy={copy} />
 
-      <div className="mx-auto w-full max-w-6xl px-4 pb-24 sm:px-6 lg:px-8">
-        <ProblemSection copy={copy} />
-        <ValueSection copy={copy} />
-        <LogicSection copy={copy} />
-        <AudienceSection copy={copy} />
-        <ProcessSection copy={copy} />
-        <TrustSection copy={copy} />
-        <HonestySection copy={copy} />
-        <BeforeAfterSection copy={copy} />
-        <ExamplesSection portfolio={portfolio} linkLabel={portfolioLinkLabel} />
-        <FaqSection copy={copy} />
-        <FinalCtaSection copy={copy} onOpenForm={() => setQuizOpen(true)} />
-        <FooterSection copy={copy} />
-      </div>
+        <div className="mx-auto w-full max-w-6xl px-4 pb-24 sm:px-6 lg:px-8">
+          <ProblemSection copy={copy} />
+          <ValueSection copy={copy} />
+          <LogicSection copy={copy} />
+          <AudienceSection copy={copy} />
+          <ProcessSection copy={copy} />
+          <TrustSection copy={copy} />
+          <HonestySection copy={copy} />
+          <BeforeAfterSection copy={copy} />
+          <ExamplesSection portfolio={portfolio} />
+          <FaqSection copy={copy} />
+          <FinalCtaSection copy={copy} />
+          <FooterSection copy={copy} />
+        </div>
 
-      <div className="fixed bottom-5 right-4 z-40 flex flex-col gap-2 sm:bottom-6 sm:right-6">
-        <button
-          type="button"
-          onClick={() => setQuizOpen(true)}
-          className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-[0_12px_35px_rgba(15,23,42,0.12)] transition hover:-translate-y-0.5 hover:border-slate-400"
-        >
-          <Phone className="h-4 w-4" />
-          {requestLabel}
-        </button>
-      </div>
-
-      {chatReady ? <ChatFab locale={landingLocale} theme="light" /> : null}
-      {shouldMountQuiz ? <QuizDialog open={shouldMountQuiz} onClose={handleQuizClose} locale={landingLocale} /> : null}
-    </main>
+        <div className="fixed bottom-5 right-4 z-40 flex flex-col gap-2 sm:bottom-6 sm:right-6">
+          <Link
+            href="/?quiz=1"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-[0_12px_35px_rgba(15,23,42,0.12)] transition hover:-translate-y-0.5 hover:border-slate-400"
+          >
+            <Phone className="h-4 w-4" />
+            Bereit für ein Projekt?
+          </Link>
+        </div>
+      </main>
+      <Suspense fallback={null}>
+        <HomePageReveal />
+        <HomePageChat />
+        <HomePageBridge />
+      </Suspense>
+    </>
   )
 }
 
-function HeroSection({
-  copy,
-  locale,
-  onToggleLocale,
-  onOpenForm,
-}: {
-  copy: LandingText
-  locale: LandingLocale
-  onToggleLocale: () => void
-  onOpenForm: () => void
-}) {
-  const handleExamplesClick = () => {
-    window.history.pushState(null, '', '#beispiele')
-    window.setTimeout(() => {
-      const target = document.getElementById('beispiele')
-      if (!target) return
-
-      window.scrollTo({
-        top: target.getBoundingClientRect().top + window.scrollY - 12,
-        behavior: 'auto',
-      })
-    }, 0)
-  }
-
+function HeroSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <section className="relative mb-8 min-h-[calc(100svh-1rem)] overflow-hidden border-b border-slate-200 bg-[#e8ded2] sm:bg-slate-100 lg:snap-start">
       <picture className="absolute inset-0">
@@ -247,18 +112,7 @@ function HeroSection({
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-sky-800 sm:text-xs">{copy.nav.studio}</p>
             <p className="hidden text-xs text-slate-700 sm:block sm:text-sm">{copy.nav.region}</p>
           </div>
-
-          <button
-            type="button"
-            onClick={onToggleLocale}
-            aria-label={locale === 'de' ? 'Switch to Russian' : 'Switch to German'}
-            className="inline-flex flex-none items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-700 transition hover:border-slate-400 hover:bg-white sm:text-xs"
-          >
-            <Globe className="h-3.5 w-3.5" />
-            <span>{copy.lang.current}</span>
-            <span className="text-slate-400">/</span>
-            <span className="text-slate-500">{copy.lang.switchTo}</span>
-          </button>
+          <HomeShellLocaleToggle />
         </div>
       </header>
 
@@ -266,39 +120,22 @@ function HeroSection({
         <div className="relative h-[min(calc(100svh-6.4rem),760px)] w-[min(88vw,342px)] rounded-[clamp(2.35rem,12vw,3rem)] border-[clamp(5px,1.8vw,7px)] border-slate-950 bg-slate-950 p-[clamp(4px,1.25vw,5px)] shadow-[0_24px_60px_rgba(15,23,42,0.32),inset_0_0_0_1px_rgba(255,255,255,0.2)] sm:hidden">
           <div className="pointer-events-none absolute left-1/2 top-[clamp(0.4rem,1.45svh,0.52rem)] z-20 h-[clamp(1.15rem,3.9svh,1.5rem)] w-[clamp(4.6rem,24vw,6rem)] -translate-x-1/2 rounded-full bg-slate-950 shadow-[0_1px_0_rgba(255,255,255,0.22)] sm:hidden" />
           <div className="h-full max-w-none overflow-hidden rounded-[clamp(1.95rem,10vw,2.35rem)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(255,252,244,0.9)_50%,rgba(255,244,220,0.84)_100%)] px-[clamp(0.85rem,4.1vw,1rem)] pb-[clamp(0.85rem,3.5svh,1.25rem)] pt-[clamp(4.55rem,12.8svh,5.25rem)] shadow-[inset_0_0_38px_rgba(255,255,255,0.9)]">
-            <h1
-              className="text-[clamp(1.36rem,7vw,1.72rem)] font-semibold leading-[1.04] text-slate-950 sm:text-5xl sm:leading-tight lg:text-[3.3rem] lg:leading-[1.08]"
-            >
+            <h1 className="text-[clamp(1.36rem,7vw,1.72rem)] font-semibold leading-[1.04] text-slate-950 sm:text-5xl sm:leading-tight lg:text-[3.3rem] lg:leading-[1.08]">
               {copy.hero.title}
             </h1>
-
-            <p
-              className="mt-[clamp(0.55rem,1.75svh,0.75rem)] max-w-2xl text-[clamp(0.74rem,3.45vw,0.84rem)] leading-[1.45] text-slate-700 sm:mt-5 sm:text-lg sm:leading-7"
-            >
+            <p className="mt-[clamp(0.55rem,1.75svh,0.75rem)] max-w-2xl text-[clamp(0.74rem,3.45vw,0.84rem)] leading-[1.45] text-slate-700 sm:mt-5 sm:text-lg sm:leading-7">
               {copy.hero.subtitle}
             </p>
-
-            <div
-              className="mt-[clamp(0.75rem,2.2svh,1rem)] flex flex-col gap-[clamp(0.45rem,1.55svh,0.625rem)] sm:mt-7 sm:flex-row sm:flex-wrap sm:gap-3"
-            >
-              <button
-                type="button"
-                onClick={onOpenForm}
-                className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full bg-slate-900 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 sm:h-auto sm:px-6 sm:py-3 sm:text-sm"
-              >
+            <div className="mt-[clamp(0.75rem,2.2svh,1rem)] flex flex-col gap-[clamp(0.45rem,1.55svh,0.625rem)] sm:mt-7 sm:flex-row sm:flex-wrap sm:gap-3">
+              <Link href="/?quiz=1" className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full bg-slate-900 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 sm:h-auto sm:px-6 sm:py-3 sm:text-sm">
                 {copy.hero.ctaPrimary}
                 <ArrowRight className="h-4 w-4" />
-              </button>
-              <a
-                href="#beispiele"
-                onClick={handleExamplesClick}
-                className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 sm:h-auto sm:px-6 sm:py-3 sm:text-sm"
-              >
+              </Link>
+              <a href="#beispiele" className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 sm:h-auto sm:px-6 sm:py-3 sm:text-sm">
                 {copy.hero.ctaSecondary}
                 <MoveRight className="h-4 w-4" />
               </a>
             </div>
-
             <ul className="mt-[clamp(0.7rem,2.1svh,1rem)] grid gap-[clamp(0.28rem,1svh,0.375rem)] text-[clamp(0.62rem,2.9vw,0.7rem)] leading-tight text-slate-800 [&>li:nth-last-child(-n+2)]:hidden [@media(max-height:740px)]:[&>li:nth-last-child(-n+3)]:hidden sm:mt-7 sm:grid-cols-2 sm:gap-2 sm:text-sm sm:leading-normal sm:[&>li:nth-last-child(-n+3)]:flex sm:[&>li:nth-last-child(-n+2)]:flex">
               {copy.hero.benefits.map((item, index) => (
                 <li
@@ -311,7 +148,6 @@ function HeroSection({
                 </li>
               ))}
             </ul>
-
             <p
               className="reveal-stagger mt-3 hidden rounded-full border border-slate-300 bg-white/86 px-4 py-2 text-xs font-medium text-slate-700 sm:mt-5 sm:inline-flex sm:bg-white/90 sm:text-sm"
               style={revealStyle(360, 620)}
@@ -322,33 +158,18 @@ function HeroSection({
         </div>
 
         <div className="hidden max-w-3xl sm:block">
-          <h1 className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]">
-            {copy.hero.title}
-          </h1>
-
-          <p className="mt-5 max-w-2xl text-lg leading-7 text-slate-700">
-            {copy.hero.subtitle}
-          </p>
-
+          <h1 className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]">{copy.hero.title}</h1>
+          <p className="mt-5 max-w-2xl text-lg leading-7 text-slate-700">{copy.hero.subtitle}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={onOpenForm}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
-            >
+            <Link href="/?quiz=1" className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800">
               {copy.hero.ctaPrimary}
               <ArrowRight className="h-4 w-4" />
-            </button>
-            <a
-              href="#beispiele"
-              onClick={handleExamplesClick}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900"
-            >
+            </Link>
+            <a href="#beispiele" className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900">
               {copy.hero.ctaSecondary}
               <MoveRight className="h-4 w-4" />
             </a>
           </div>
-
           <ul className="mt-7 grid gap-2 text-sm leading-normal text-slate-800 sm:grid-cols-2">
             {copy.hero.benefits.map((item, index) => (
               <li key={item} className="reveal-stagger flex items-start gap-2 rounded-2xl border border-slate-300 bg-white/88 px-3 py-2" style={revealStyle(310 + index * 55, 650)}>
@@ -357,7 +178,6 @@ function HeroSection({
               </li>
             ))}
           </ul>
-
           <p className="reveal-stagger mt-5 inline-flex rounded-full border border-slate-300 bg-white/90 px-4 py-2 text-sm font-medium text-slate-700" style={revealStyle(390, 650)}>
             {copy.hero.hint}
           </p>
@@ -367,7 +187,7 @@ function HeroSection({
   )
 }
 
-function ProblemSection({ copy }: { copy: LandingText }) {
+function ProblemSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection>
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
@@ -375,11 +195,7 @@ function ProblemSection({ copy }: { copy: LandingText }) {
       </SectionTitle>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         {copy.problem.cards.map((item, index) => (
-          <article
-            key={item}
-            className="reveal-stagger rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300"
-            style={revealStyle(120 + index * 70)}
-          >
+          <article key={item} className="reveal-stagger rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300" style={revealStyle(120 + index * 70)}>
             <p className="text-base leading-7 text-slate-700">{item}</p>
           </article>
         ))}
@@ -391,20 +207,11 @@ function ProblemSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function ValueSection({ copy }: { copy: LandingText }) {
+function ValueSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection className="relative overflow-hidden">
-      <Image
-        src="/images/versprechen.webp"
-        alt=""
-        aria-hidden
-        fill
-        sizes="100vw"
-        quality={55}
-        className="object-cover object-center"
-      />
+      <Image src="/images/versprechen.webp" alt="" aria-hidden fill sizes="100vw" quality={55} className="object-cover object-center" />
       <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(251,252,255,0.7)_0%,rgba(251,252,255,0.52)_35%,rgba(251,252,255,0.36)_100%)]" />
-
       <div className="relative z-10">
         <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
           {copy.value.title}
@@ -412,7 +219,6 @@ function ValueSection({ copy }: { copy: LandingText }) {
         <p className="reveal-stagger mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:text-lg" style={revealStyle(110)}>
           {copy.value.intro}
         </p>
-
         <div className="mt-7 grid gap-4 md:grid-cols-2">
           {copy.value.cards.map((card, index) => {
             const Icon = valueIcons[index] ?? LayoutGrid
@@ -436,7 +242,7 @@ function ValueSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function LogicSection({ copy }: { copy: LandingText }) {
+function LogicSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection>
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
@@ -445,13 +251,8 @@ function LogicSection({ copy }: { copy: LandingText }) {
       <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {copy.logic.steps.map((step, index) => {
           const Icon = logicIcons[index] ?? CheckCircle2
-
           return (
-            <article
-              key={step}
-              className="reveal-stagger relative rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300"
-              style={revealStyle(110 + index * 70)}
-            >
+            <article key={step} className="reveal-stagger relative rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300" style={revealStyle(110 + index * 70)}>
               <div className="flex items-center justify-between gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">{String(index + 1).padStart(2, '0')}</p>
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-slate-700">
@@ -471,7 +272,7 @@ function LogicSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function AudienceSection({ copy }: { copy: LandingText }) {
+function AudienceSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection>
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
@@ -480,29 +281,16 @@ function AudienceSection({ copy }: { copy: LandingText }) {
       <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {copy.audience.cards.map((card, index) => {
           const imageSrc = audienceImages[index] ?? audienceImages[0]
-
           return (
-            <article
-              key={card}
-              className="reveal-stagger overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300"
-              style={revealStyle(120 + index * 60)}
-            >
+            <article key={card} className="reveal-stagger overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300" style={revealStyle(120 + index * 60)}>
               <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100 bg-slate-100">
-                <Image
-                  src={imageSrc}
-                  alt={card}
-                  fill
-                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 323px"
-                  quality={55}
-                  className="object-cover"
-                />
+                <Image src={imageSrc} alt={card} fill sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 323px" quality={55} className="object-cover" />
               </div>
               <p className="p-5 text-base font-medium text-slate-800">{card}</p>
             </article>
           )
         })}
       </div>
-
       <p className="reveal-stagger mt-6 text-base leading-7 text-slate-600" style={revealStyle(280)}>
         {copy.audience.note}
       </p>
@@ -510,7 +298,7 @@ function AudienceSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function ProcessSection({ copy }: { copy: LandingText }) {
+function ProcessSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection>
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
@@ -519,16 +307,9 @@ function ProcessSection({ copy }: { copy: LandingText }) {
       <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {copy.process.steps.map((step, index) => {
           const Icon = processIcons[index] ?? CheckCircle2
-
           return (
-            <article
-              key={step.title}
-              className="reveal-stagger rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300"
-              style={revealStyle(110 + index * 70)}
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                {copy.process.stepLabel} {index + 1}
-              </p>
+            <article key={step.title} className="reveal-stagger rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300" style={revealStyle(110 + index * 70)}>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">{copy.process.stepLabel} {index + 1}</p>
               <span className="mt-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-slate-700">
                 <Icon className="h-5 w-5" />
               </span>
@@ -541,11 +322,7 @@ function ProcessSection({ copy }: { copy: LandingText }) {
       <p className="reveal-stagger mt-6 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm leading-7 text-slate-700 sm:text-base" style={revealStyle(310)}>
         {copy.process.note}
       </p>
-      <Link
-        href="/ueber-mich"
-        className="reveal-stagger mt-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950"
-        style={revealStyle(370)}
-      >
+      <Link href="/ueber-mich" className="reveal-stagger mt-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950" style={revealStyle(370)}>
         {copy.footer.about}
         <ArrowRight className="h-4 w-4" />
       </Link>
@@ -553,7 +330,7 @@ function ProcessSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function TrustSection({ copy }: { copy: LandingText }) {
+function TrustSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection>
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
@@ -563,11 +340,7 @@ function TrustSection({ copy }: { copy: LandingText }) {
         <div className="flex h-full flex-col">
           <div className="grid gap-4 sm:grid-cols-2">
             {copy.trust.points.map((point, index) => (
-              <article
-                key={point}
-                className="reveal-stagger flex items-start gap-3 rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300"
-                style={revealStyle(110 + index * 70)}
-              >
+              <article key={point} className="reveal-stagger flex items-start gap-3 rounded-[26px] border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300" style={revealStyle(110 + index * 70)}>
                 <span className="mt-1 inline-flex h-6 w-6 flex-none items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
                   <Check className="h-4 w-4" />
                 </span>
@@ -580,16 +353,9 @@ function TrustSection({ copy }: { copy: LandingText }) {
             <p className="mt-3 text-lg leading-8 text-slate-800">{copy.trust.humanText}</p>
           </div>
         </div>
-
         <figure className="reveal-stagger h-full overflow-hidden rounded-[28px] border border-slate-200 bg-white p-3" style={revealStyle(340)}>
           <div className="relative h-full min-h-[420px] overflow-hidden rounded-2xl bg-slate-100">
-            <Image
-              src="/images/working-photo.webp"
-              alt="Lokaler Unternehmer in seinem Geschäft"
-              fill
-              sizes="(max-width: 1024px) 100vw, 36vw"
-              className="object-cover"
-            />
+            <Image src="/images/working-photo.webp" alt="Lokaler Unternehmer in seinem Geschäft" fill sizes="(max-width: 1024px) 100vw, 36vw" className="object-cover" />
           </div>
         </figure>
       </div>
@@ -597,7 +363,7 @@ function TrustSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function HonestySection({ copy }: { copy: LandingText }) {
+function HonestySection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection>
       <div className="reveal-stagger rounded-[30px] border border-slate-300 bg-white p-7 sm:p-10" style={revealStyle(60)}>
@@ -615,40 +381,24 @@ function HonestySection({ copy }: { copy: LandingText }) {
   )
 }
 
-function BeforeAfterSection({ copy }: { copy: LandingText }) {
+function BeforeAfterSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection id="vorher-nachher">
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
         {copy.beforeAfter.title}
       </SectionTitle>
-
       <div className="mt-7 grid gap-4 lg:grid-cols-3">
         {copy.beforeAfter.cards.map((card, index) => (
-          <article
-            key={card.before}
-            className="reveal-stagger rounded-[26px] border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-slate-300"
-            style={revealStyle(120 + index * 70)}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-              {copy.beforeAfter.caseLabel} {index + 1}
-            </p>
-
+          <article key={card.before} className="reveal-stagger rounded-[26px] border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-slate-300" style={revealStyle(120 + index * 70)}>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">{copy.beforeAfter.caseLabel} {index + 1}</p>
             <div className="relative mt-4 aspect-[16/10] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
-              <Image
-                src={beforeAfterImages[index] ?? beforeAfterImages[0]}
-                alt={`Case ${index + 1} Ergebnis`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 30vw"
-                className="object-cover"
-              />
+              <Image src={beforeAfterImages[index] ?? beforeAfterImages[0]} alt={`Case ${index + 1} Ergebnis`} fill sizes="(max-width: 1024px) 100vw, 30vw" className="object-cover" />
             </div>
-
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-700">{copy.beforeAfter.beforeLabel}</p>
                 <p className="mt-2 whitespace-pre-line text-sm leading-7 text-rose-900">{card.before}</p>
               </div>
-
               <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">{copy.beforeAfter.afterLabel}</p>
                 <p className="mt-2 whitespace-pre-line text-sm leading-7 text-emerald-900">{card.after}</p>
@@ -661,7 +411,7 @@ function BeforeAfterSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function ExamplesSection({ portfolio, linkLabel }: { portfolio: PortfolioText; linkLabel: string }) {
+function ExamplesSection({ portfolio }: { portfolio: (typeof portfolioCopy)['de'] }) {
   return (
     <ContentSection id="beispiele">
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
@@ -670,54 +420,42 @@ function ExamplesSection({ portfolio, linkLabel }: { portfolio: PortfolioText; l
       <p className="reveal-stagger mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:text-lg" style={revealStyle(110)}>
         {portfolio.subtitle}
       </p>
-
       <div className="mt-7 grid gap-4 md:grid-cols-2">
         {portfolio.items.map((item, index) => {
           const imageSrc = item.title === 'Speicher Balkonkraftwerk' ? '/images/solaranlageseite.webp' : item.image
-          const card = (
-            <div className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)]">
-              <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100">
-                <Image
-                  src={imageSrc}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className={cn(
-                    'object-cover transition duration-500 group-hover:scale-[1.03]',
-                    item.title === 'BewerbungProfi' || item.title === 'Beauty Studio Lesya' || item.title === 'Psycholog UA/RU' ? 'object-top' : 'object-center',
-                  )}
-                />
-              </div>
-
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
-                <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
-
-                <div className="mt-3 mb-5 flex flex-wrap gap-2">
-                  {item.tech.slice(0, 4).map((tech) => (
-                    <span key={tech} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <span className="mt-auto inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition group-hover:border-slate-400 group-hover:text-slate-900">
-                  {linkLabel}
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              </div>
-            </div>
-          )
-
           return (
             <article key={item.title} className="reveal-stagger h-full" style={revealStyle(170 + index * 70)}>
-              {item.url ? (
-                <a href={item.url} target="_blank" rel="noopener noreferrer" className="block h-full">
-                  {card}
-                </a>
-              ) : (
-                card
-              )}
+              <a href={item.url} target="_blank" rel="noopener noreferrer" className="group block h-full">
+                <div className="flex h-full flex-col overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)]">
+                  <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100">
+                    <Image
+                      src={imageSrc}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                      className={cn(
+                        'object-cover transition duration-500 group-hover:scale-[1.03]',
+                        item.title === 'BewerbungProfi' || item.title === 'Beauty Studio Lesya' || item.title === 'Psycholog UA/RU' ? 'object-top' : 'object-center',
+                      )}
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
+                    <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
+                    <div className="mb-5 mt-3 flex flex-wrap gap-2">
+                      {item.tech.slice(0, 4).map((tech) => (
+                        <span key={tech} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="mt-auto inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition group-hover:border-slate-400 group-hover:text-slate-900">
+                      Webseite öffnen
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </div>
+                </div>
+              </a>
             </article>
           )
         })}
@@ -726,7 +464,7 @@ function ExamplesSection({ portfolio, linkLabel }: { portfolio: PortfolioText; l
   )
 }
 
-function FaqSection({ copy }: { copy: LandingText }) {
+function FaqSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection>
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
@@ -734,11 +472,7 @@ function FaqSection({ copy }: { copy: LandingText }) {
       </SectionTitle>
       <div className="mt-7 space-y-3">
         {copy.faq.items.map((item, index) => (
-          <details
-            key={item.question}
-            className="reveal-stagger group rounded-2xl border border-slate-200 bg-white px-5 py-4 transition hover:border-slate-300"
-            style={revealStyle(120 + index * 60)}
-          >
+          <details key={item.question} className="reveal-stagger group rounded-2xl border border-slate-200 bg-white px-5 py-4 transition hover:border-slate-300" style={revealStyle(120 + index * 60)}>
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-slate-900">
               <span>{item.question}</span>
               <ChevronDown className="h-5 w-5 flex-none text-slate-500 transition group-open:rotate-180" />
@@ -751,7 +485,7 @@ function FaqSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: () => void }) {
+function FinalCtaSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection>
       <div className="reveal-stagger rounded-[32px] border border-slate-900 bg-slate-900 px-6 py-10 text-slate-100 sm:px-10 sm:py-12" style={revealStyle(50)}>
@@ -764,35 +498,19 @@ function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: 
               {copy.finalCta.subtitle}
             </p>
             <div className="reveal-stagger mt-7 flex flex-wrap gap-3" style={revealStyle(220)}>
-              <button
-                type="button"
-                onClick={onOpenForm}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100"
-              >
+              <Link href="/?quiz=1" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100">
                 {copy.finalCta.primary}
                 <ArrowRight className="h-4 w-4" />
-              </button>
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15"
-              >
+              </Link>
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
                 {copy.finalCta.secondary}
                 <MessageCircle className="h-4 w-4" />
               </a>
             </div>
           </div>
-
           <div className="reveal-stagger hidden rounded-3xl border border-white/15 bg-white/10 p-3 lg:block" style={revealStyle(260)}>
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/20">
-              <Image
-                src="/images/hero.webp"
-                alt="Beispiel einer modernen Unternehmenswebsite"
-                fill
-                sizes="30vw"
-                className="object-cover"
-              />
+              <Image src="/images/hero.webp" alt="Beispiel einer modernen Unternehmenswebsite" fill sizes="30vw" className="object-cover" />
             </div>
           </div>
         </div>
@@ -801,7 +519,7 @@ function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: 
   )
 }
 
-function FooterSection({ copy }: { copy: LandingText }) {
+function FooterSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <footer id="kontakt" className="mt-6 rounded-[30px] border border-slate-200 bg-white px-6 py-8 sm:px-8 lg:snap-start">
       <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
@@ -809,28 +527,15 @@ function FooterSection({ copy }: { copy: LandingText }) {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">{copy.footer.title}</p>
           <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">{copy.footer.description}</p>
         </div>
-
         <div className="reveal-stagger text-sm text-slate-700" style={revealStyle(140)}>
           <div className="grid grid-cols-2 justify-items-start gap-x-8 gap-y-2 md:justify-items-end md:text-right">
-            <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              {copy.footer.about}
-            </Link>
-            <Link href="/blog" className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              {copy.footer.blog}
-            </Link>
-            <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              {copy.footer.legal.privacy}
-            </Link>
-            <Link href="/agb" className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              AGB
-            </Link>
-            <Link href="/impressum" className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              {copy.footer.legal.impressum}
-            </Link>
+            <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.about}</Link>
+            <Link href="/blog" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.blog}</Link>
+            <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.legal.privacy}</Link>
+            <Link href="/agb" className="block w-full text-left transition hover:text-slate-950 md:text-right">AGB</Link>
+            <Link href="/impressum" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.legal.impressum}</Link>
             <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 md:text-right" />
-            <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">
-              {copy.footer.contact}
-            </Link>
+            <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">{copy.footer.contact}</Link>
           </div>
         </div>
       </div>
@@ -840,19 +545,12 @@ function FooterSection({ copy }: { copy: LandingText }) {
 
 function ContentSection({ children, id, className }: { children: ReactNode; id?: string; className?: string }) {
   return (
-    <section
-      id={id}
-      className={cn('mt-6 rounded-[30px] border border-slate-200/80 bg-[#fbfcff] p-6 sm:mt-7 sm:p-8 lg:snap-start lg:p-10', className)}
-    >
+    <section id={id} className={cn('mt-6 rounded-[30px] border border-slate-200/80 bg-[#fbfcff] p-6 sm:mt-7 sm:p-8 lg:snap-start lg:p-10', className)}>
       {children}
     </section>
   )
 }
 
 function SectionTitle({ children, className, style }: { children: ReactNode; className?: string; style?: CSSProperties }) {
-  return (
-    <h2 className={cn('text-2xl font-semibold leading-tight text-slate-950 sm:text-3xl lg:text-[2.05rem] lg:leading-tight', className)} style={style}>
-      {children}
-    </h2>
-  )
+  return <h2 className={cn('text-2xl font-semibold leading-tight text-slate-950 sm:text-3xl lg:text-[2.05rem] lg:leading-tight', className)} style={style}>{children}</h2>
 }
