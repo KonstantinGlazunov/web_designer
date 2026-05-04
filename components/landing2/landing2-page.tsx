@@ -200,22 +200,16 @@ function HeroSection({
 
   return (
     <section className="relative mb-8 min-h-[calc(100svh-1rem)] overflow-hidden border-b border-slate-200 bg-[#e8ded2] sm:bg-slate-100 lg:snap-start">
-      <Image
-        src="/images/hero2.webp"
-        alt="Modernes Website-Mockup für kleine Unternehmen"
-        fill
-        priority
-        sizes="100vw"
-        className="hidden object-cover object-[26%_center] blur-0 sm:block sm:object-center"
-      />
-      <Image
-        src="/images/hero-mobile.webp"
-        alt="Smartphone mit Website-Mockup für kleine Unternehmen"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center sm:hidden"
-      />
+      <picture className="absolute inset-0">
+        <source media="(max-width: 639px)" srcSet="/images/hero-mobile.webp" />
+        <img
+          src="/images/hero2.webp"
+          alt="Modernes Website-Mockup für kleine Unternehmen"
+          fetchPriority="high"
+          decoding="async"
+          className="h-full w-full object-cover object-center"
+        />
+      </picture>
 
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,252,0.34)_0%,rgba(248,250,252,0.1)_42%,rgba(248,250,252,0.26)_100%)] sm:bg-[linear-gradient(98deg,rgba(248,250,252,0.96)_0%,rgba(248,250,252,0.9)_34%,rgba(248,250,252,0.45)_56%,rgba(248,250,252,0.15)_72%,rgba(248,250,252,0.08)_100%)]" />
 
@@ -466,7 +460,14 @@ function AudienceSection({ copy }: { copy: LandingText }) {
               style={revealStyle(120 + index * 60)}
             >
               <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100 bg-slate-100">
-                <Image src={imageSrc} alt={card} fill sizes="(max-width: 1024px) 100vw, 30vw" className="object-cover" />
+                <Image
+                  src={imageSrc}
+                  alt={card}
+                  fill
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 323px"
+                  quality={55}
+                  className="object-cover"
+                />
               </div>
               <p className="p-5 text-base font-medium text-slate-800">{card}</p>
             </article>
