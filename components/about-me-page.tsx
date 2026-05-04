@@ -76,7 +76,7 @@ const aboutCopy: Record<
     primaryCta: 'Kostenlose Einschätzung starten',
     secondaryCta: 'LinkedIn ansehen',
     proof: ['Braunfels, Hessen', 'Russisch und Deutsch', 'Websites für lokale Unternehmen'],
-    storyPoints: ['Mein Weg', 'Vibe Studio', 'AIT TR', 'Produkt & Business'],
+    storyPoints: ['Vibe Studio', 'AIT TR', 'Produkt & Business'],
     problemsTitle: 'Welche Probleme ich löse',
     problems: [
       'Die Website wirkt veraltet und macht nicht klar, warum Kunden Kontakt aufnehmen sollen.',
@@ -164,7 +164,7 @@ const aboutCopy: Record<
     primaryCta: 'Начать бесплатную оценку',
     secondaryCta: 'Посмотреть LinkedIn',
     proof: ['Браунфельс, Гессен', 'Русский и немецкий', 'Сайты для локального бизнеса'],
-    storyPoints: ['Мой путь', 'Vibe Studio', 'AIT TR', 'Продукт и бизнес'],
+    storyPoints: ['Vibe Studio', 'AIT TR', 'Продукт и бизнес'],
     problemsTitle: 'Какие проблемы я решаю',
     problems: [
       'Сайт выглядит устаревшим и не объясняет, почему клиенту стоит обратиться именно к вам.',
