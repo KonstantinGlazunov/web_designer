@@ -80,8 +80,8 @@ test('contact form submits successfully with required fields', async ({ page }) 
   await expect(page.getByText(/Vielen Dank. Ihre Nachricht wurde gesendet.|Спасибо. Ваше сообщение отправлено./i)).toBeVisible()
 })
 
-test('landing2 footer keeps legal links and removes direct contact lines', async ({ page }) => {
-  await page.goto('/landing2')
+test('home footer keeps legal links and removes direct contact lines', async ({ page }) => {
+  await page.goto('/')
   await dismissCookieBanner(page)
 
   const footer = page.locator('footer').last()

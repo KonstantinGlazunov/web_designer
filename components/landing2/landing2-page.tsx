@@ -26,12 +26,13 @@ import {
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 import { cn } from '@/lib/utils'
-import { landingCopy, type LandingLocale } from '@/components/landing/landing-copy'
+import type { LandingCopy, LandingLocale } from '@/components/landing/landing-copy'
+import { landingCopyDe } from '@/components/landing/landing-copy-de'
 import { portfolioCopy, type PortfolioText } from '@/components/landing/portfolio-copy'
 
 const whatsappHref = 'https://wa.me/4915110974353'
 
-type LandingText = (typeof landingCopy)[LandingLocale]
+type LandingText = LandingCopy
 
 const valueIcons = [LayoutGrid, Shield, Smartphone, Map]
 const logicIcons = [Search, LayoutGrid, CheckCircle2, Phone]
@@ -56,6 +57,15 @@ const QuizDialog = dynamic(
   { ssr: false },
 )
 
+let landingCopyRuPromise: Promise<LandingCopy> | null = null
+
+function loadLandingCopyRu() {
+  if (!landingCopyRuPromise) {
+    landingCopyRuPromise = import('@/components/landing/landing-copy-ru').then((mod) => mod.landingCopyRu)
+  }
+  return landingCopyRuPromise
+}
+
 function revealStyle(delay: number, duration = 620): CSSProperties {
   return {
     '--delay': `${delay}ms`,
@@ -69,12 +79,30 @@ export function Landing2Page() {
   const landingLocale: LandingLocale = locale === 'ru' ? 'ru' : 'de'
   const [quizOpen, setQuizOpen] = useState(false)
   const [chatReady, setChatReady] = useState(false)
-  const copy = landingCopy[landingLocale]
+  const [ruCopy, setRuCopy] = useState<LandingCopy | null>(null)
+  const copy = landingLocale === 'de' ? landingCopyDe : ruCopy ?? landingCopyDe
   const portfolio = portfolioCopy[landingLocale]
   const portfolioLinkLabel = landingLocale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
   const requestLabel = landingLocale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
   const isQuizRequested = searchParams.get('quiz') === '1'
   const shouldMountQuiz = quizOpen || isQuizRequested
+
+  useEffect(() => {
+    if (landingLocale === 'de' || ruCopy) {
+      return
+    }
+
+    let active = true
+    void loadLandingCopyRu().then((nextCopy) => {
+      if (active) {
+        setRuCopy(nextCopy)
+      }
+    })
+
+    return () => {
+      active = false
+    }
+  }, [landingLocale, ruCopy])
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>('.reveal-stagger'))

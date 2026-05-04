@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test('landing2 page is reachable and supports DE/RU toggle', async ({ page }) => {
+test('home page is reachable and supports DE/RU toggle', async ({ page }) => {
   await page.goto('/')
 
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
