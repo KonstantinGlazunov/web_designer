@@ -1,9 +1,7 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import { ChatFab } from '@/components/chat/chat-fab'
-import { ContactDialog } from '@/components/contact-dialog'
-import { QuizDialog } from '@/components/quiz-dialog'
+import dynamic from 'next/dynamic'
+import { useEffect, useMemo, useState } from 'react'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 import { AboutSection } from '@/components/sections/about-section'
 import { FooterSection } from '@/components/sections/footer-section'
@@ -15,12 +13,43 @@ import { StickyCta } from '@/components/sections/sticky-cta'
 import { TechMarqueeSection } from '@/components/sections/tech-marquee-section'
 import { siteCopy } from '@/lib/translations'
 
+const ChatFab = dynamic(
+  () => import('@/components/chat/chat-fab').then((mod) => mod.ChatFab),
+  { ssr: false },
+)
+
+const QuizDialog = dynamic(
+  () => import('@/components/quiz-dialog').then((mod) => mod.QuizDialog),
+  { ssr: false },
+)
+
+const ContactDialog = dynamic(
+  () => import('@/components/contact-dialog').then((mod) => mod.ContactDialog),
+  { ssr: false },
+)
+
 export function AgencyStudioPage() {
   const { locale, theme } = useSitePreferences()
   const [open, setOpen] = useState(false)
   const [quizOpen, setQuizOpen] = useState(false)
+  const [chatReady, setChatReady] = useState(false)
 
   const copy = useMemo(() => siteCopy[locale], [locale])
+
+  useEffect(() => {
+    const w = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number
+      cancelIdleCallback?: (id: number) => void
+    }
+
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(() => setChatReady(true), { timeout: 1800 })
+      return () => w.cancelIdleCallback?.(id)
+    }
+
+    const timer = window.setTimeout(() => setChatReady(true), 900)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   return (
     <>
@@ -36,9 +65,9 @@ export function AgencyStudioPage() {
         <FooterSection copy={copy.footer} />
       </main>
       <StickyCta copy={copy.stickyCta} onOpenForm={() => setQuizOpen(true)} />
-      <QuizDialog open={quizOpen} onClose={() => setQuizOpen(false)} locale={locale} />
-      <ContactDialog copy={copy.form} open={open} onClose={() => setOpen(false)} />
-      <ChatFab locale={locale} theme={theme} />
+      {quizOpen ? <QuizDialog open={quizOpen} onClose={() => setQuizOpen(false)} locale={locale} /> : null}
+      {open ? <ContactDialog copy={copy.form} open={open} onClose={() => setOpen(false)} /> : null}
+      {chatReady ? <ChatFab locale={locale} theme={theme} /> : null}
     </>
   )
 }

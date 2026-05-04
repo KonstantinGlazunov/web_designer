@@ -26,12 +26,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/landing2`,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
       url: `${siteUrl}/kontakt`,
       lastModified,
       changeFrequency: 'weekly',

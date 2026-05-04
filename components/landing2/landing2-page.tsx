@@ -68,6 +68,7 @@ export function Landing2Page() {
   const { locale, setLocale } = useSitePreferences()
   const landingLocale: LandingLocale = locale === 'ru' ? 'ru' : 'de'
   const [quizOpen, setQuizOpen] = useState(false)
+  const [chatReady, setChatReady] = useState(false)
   const copy = landingCopy[landingLocale]
   const portfolio = portfolioCopy[landingLocale]
   const portfolioLinkLabel = landingLocale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
@@ -103,6 +104,21 @@ export function Landing2Page() {
     elements.forEach((element) => observer.observe(element))
     return () => observer.disconnect()
   }, [landingLocale])
+
+  useEffect(() => {
+    const w = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number
+      cancelIdleCallback?: (id: number) => void
+    }
+
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(() => setChatReady(true), { timeout: 1800 })
+      return () => w.cancelIdleCallback?.(id)
+    }
+
+    const timer = window.setTimeout(() => setChatReady(true), 900)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   const handleQuizClose = () => {
     setQuizOpen(false)
@@ -152,7 +168,7 @@ export function Landing2Page() {
         </button>
       </div>
 
-      <ChatFab locale={landingLocale} theme="light" />
+      {chatReady ? <ChatFab locale={landingLocale} theme="light" /> : null}
       {shouldMountQuiz ? <QuizDialog open={shouldMountQuiz} onClose={handleQuizClose} locale={landingLocale} /> : null}
     </main>
   )
@@ -229,22 +245,19 @@ function HeroSection({
           <div className="pointer-events-none absolute left-1/2 top-[clamp(0.4rem,1.45svh,0.52rem)] z-20 h-[clamp(1.15rem,3.9svh,1.5rem)] w-[clamp(4.6rem,24vw,6rem)] -translate-x-1/2 rounded-full bg-slate-950 shadow-[0_1px_0_rgba(255,255,255,0.22)] sm:hidden" />
           <div className="h-full max-w-none overflow-hidden rounded-[clamp(1.95rem,10vw,2.35rem)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(255,252,244,0.9)_50%,rgba(255,244,220,0.84)_100%)] px-[clamp(0.85rem,4.1vw,1rem)] pb-[clamp(0.85rem,3.5svh,1.25rem)] pt-[clamp(4.55rem,12.8svh,5.25rem)] shadow-[inset_0_0_38px_rgba(255,255,255,0.9)]">
             <h1
-              className="reveal-stagger text-[clamp(1.36rem,7vw,1.72rem)] font-semibold leading-[1.04] text-slate-950 sm:text-5xl sm:leading-tight lg:text-[3.3rem] lg:leading-[1.08]"
-              style={revealStyle(70, 680)}
+              className="text-[clamp(1.36rem,7vw,1.72rem)] font-semibold leading-[1.04] text-slate-950 sm:text-5xl sm:leading-tight lg:text-[3.3rem] lg:leading-[1.08]"
             >
               {copy.hero.title}
             </h1>
 
             <p
-              className="reveal-stagger mt-[clamp(0.55rem,1.75svh,0.75rem)] max-w-2xl text-[clamp(0.74rem,3.45vw,0.84rem)] leading-[1.45] text-slate-700 sm:mt-5 sm:text-lg sm:leading-7"
-              style={revealStyle(150, 680)}
+              className="mt-[clamp(0.55rem,1.75svh,0.75rem)] max-w-2xl text-[clamp(0.74rem,3.45vw,0.84rem)] leading-[1.45] text-slate-700 sm:mt-5 sm:text-lg sm:leading-7"
             >
               {copy.hero.subtitle}
             </p>
 
             <div
-              className="reveal-stagger mt-[clamp(0.75rem,2.2svh,1rem)] flex flex-col gap-[clamp(0.45rem,1.55svh,0.625rem)] sm:mt-7 sm:flex-row sm:flex-wrap sm:gap-3"
-              style={revealStyle(220, 680)}
+              className="mt-[clamp(0.75rem,2.2svh,1rem)] flex flex-col gap-[clamp(0.45rem,1.55svh,0.625rem)] sm:mt-7 sm:flex-row sm:flex-wrap sm:gap-3"
             >
               <button
                 type="button"
@@ -287,15 +300,15 @@ function HeroSection({
         </div>
 
         <div className="hidden max-w-3xl sm:block">
-          <h1 className="reveal-stagger text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]" style={revealStyle(70, 700)}>
+          <h1 className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]">
             {copy.hero.title}
           </h1>
 
-          <p className="reveal-stagger mt-5 max-w-2xl text-lg leading-7 text-slate-700" style={revealStyle(160, 700)}>
+          <p className="mt-5 max-w-2xl text-lg leading-7 text-slate-700">
             {copy.hero.subtitle}
           </p>
 
-          <div className="reveal-stagger mt-7 flex flex-wrap gap-3" style={revealStyle(240, 700)}>
+          <div className="mt-7 flex flex-wrap gap-3">
             <button
               type="button"
               onClick={onOpenForm}
@@ -365,7 +378,8 @@ function ValueSection({ copy }: { copy: LandingText }) {
         aria-hidden
         fill
         sizes="100vw"
-        className="object-cover object-[62%_center] opacity-100 blur-[1.8px] scale-105 sm:object-center"
+        quality={55}
+        className="object-cover object-center"
       />
       <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(251,252,255,0.7)_0%,rgba(251,252,255,0.52)_35%,rgba(251,252,255,0.36)_100%)]" />
 

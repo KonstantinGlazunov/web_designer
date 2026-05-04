@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import type { ReactNode } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -21,13 +22,21 @@ import {
   Sparkles,
   Wrench,
 } from 'lucide-react'
-import { ChatFab } from '@/components/chat/chat-fab'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import { LocaleToggle } from '@/components/locale-toggle'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { QuizDialog } from '@/components/quiz-dialog'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 import type { Locale } from '@/lib/translations'
+
+const ChatFab = dynamic(
+  () => import('@/components/chat/chat-fab').then((mod) => mod.ChatFab),
+  { ssr: false },
+)
+
+const QuizDialog = dynamic(
+  () => import('@/components/quiz-dialog').then((mod) => mod.QuizDialog),
+  { ssr: false },
+)
 
 const aboutCopy: Record<
   Locale,
@@ -252,10 +261,26 @@ export function AboutMePage() {
   const { locale } = useSitePreferences()
   const copy = aboutCopy[locale]
   const [quizOpen, setQuizOpen] = useState(false)
+  const [chatReady, setChatReady] = useState(false)
+
+  useEffect(() => {
+    const w = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number
+      cancelIdleCallback?: (id: number) => void
+    }
+
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(() => setChatReady(true), { timeout: 1800 })
+      return () => w.cancelIdleCallback?.(id)
+    }
+
+    const timer = window.setTimeout(() => setChatReady(true), 900)
+    return () => window.clearTimeout(timer)
+  }, [])
 
   return (
     <main className="min-h-screen bg-[#f6f8fb] text-slate-950">
-      <QuizDialog open={quizOpen} onClose={() => setQuizOpen(false)} locale={locale} />
+      {quizOpen ? <QuizDialog open={quizOpen} onClose={() => setQuizOpen(false)} locale={locale} /> : null}
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
         <Link href="/" className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-800">
           Vibe Studio
@@ -507,7 +532,7 @@ export function AboutMePage() {
           {copy.floatingQuiz}
         </button>
       </div>
-      <ChatFab locale={locale} theme="light" />
+      {chatReady ? <ChatFab locale={locale} theme="light" /> : null}
     </main>
   )
 }

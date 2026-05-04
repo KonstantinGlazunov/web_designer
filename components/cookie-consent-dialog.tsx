@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 import { useCookieConsent } from '@/components/providers/cookie-consent'
@@ -135,13 +134,7 @@ function CookieConsentDialogBody() {
   return (
     <Dialog as="div" className="relative z-[60]" onClose={closeDialog} open>
           {isIntro ? null : (
-            <DialogBackdrop
-              as={motion.div}
-              className="fixed inset-0 bg-slate-950/55"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
+            <DialogBackdrop className="fixed inset-0 bg-slate-950/55" />
           )}
           <div
             className={
@@ -152,10 +145,6 @@ function CookieConsentDialogBody() {
           >
             <div className={isIntro ? 'flex items-end justify-center' : 'flex min-h-full items-end justify-center sm:items-center'}>
               <DialogPanel
-                as={motion.div}
-                initial={isIntro ? { opacity: 0, y: 24 } : { opacity: 0, y: 18, scale: 0.98 }}
-                animate={isIntro ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, scale: 1 }}
-                exit={isIntro ? { opacity: 0, y: 24 } : { opacity: 0, y: 18, scale: 0.98 }}
                 className={
                   isIntro
                     ? 'w-full overflow-hidden rounded-t-2xl border-x border-t p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-2xl sm:p-5 sm:pb-6'
@@ -303,9 +292,6 @@ function CookieConsentDialogBody() {
 
 export function CookieConsentDialog() {
   const { consent, isDialogOpen } = useCookieConsent()
-  return (
-    <AnimatePresence>
-      {isDialogOpen ? <CookieConsentDialogBody key={consent?.updatedAt ?? 'new'} /> : null}
-    </AnimatePresence>
-  )
+  if (!isDialogOpen) return null
+  return <CookieConsentDialogBody key={consent?.updatedAt ?? 'new'} />
 }
