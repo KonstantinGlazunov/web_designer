@@ -109,7 +109,7 @@ export function HomePageClient() {
     if (elements.length === 0) return
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reducedMotion) {
+    if (reducedMotion || landingLocale === 'ru') {
       elements.forEach((element) => element.classList.add('is-visible'))
       return
     }
@@ -131,7 +131,7 @@ export function HomePageClient() {
 
     elements.forEach((element) => observer.observe(element))
     return () => observer.disconnect()
-  }, [landingLocale])
+  }, [landingLocale, ruCopy])
 
   useEffect(() => {
     const w = window as Window & {
