@@ -211,28 +211,30 @@ function ValueSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection className="relative overflow-hidden">
       <Image src="/images/versprechen.webp" alt="" aria-hidden fill sizes="100vw" quality={55} className="object-cover object-center" />
-      <div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(251,252,255,0.7)_0%,rgba(251,252,255,0.52)_35%,rgba(251,252,255,0.36)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(102deg,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.92)_36%,rgba(255,255,255,0.56)_58%,rgba(255,255,255,0.18)_100%)]" />
       <div className="relative z-10">
-        <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
-          {copy.value.title}
-        </SectionTitle>
-        <p className="reveal-stagger mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:text-lg" style={revealStyle(110)}>
-          {copy.value.intro}
-        </p>
+        <div className="max-w-4xl rounded-[30px] border border-white/60 bg-white/56 px-6 py-6 shadow-[0_20px_45px_rgba(15,23,42,0.07)] backdrop-blur-[2px] sm:px-7">
+          <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
+            {copy.value.title}
+          </SectionTitle>
+          <p className="reveal-stagger mt-4 max-w-3xl text-base leading-7 text-slate-800 sm:text-lg" style={revealStyle(110)}>
+            {copy.value.intro}
+          </p>
+        </div>
         <div className="mt-7 grid gap-4 md:grid-cols-2">
           {copy.value.cards.map((card, index) => {
             const Icon = valueIcons[index] ?? LayoutGrid
             return (
               <article
                 key={card.title}
-                className="reveal-stagger rounded-[26px] border border-slate-200 bg-white/92 p-6 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)]"
+                className="reveal-stagger rounded-[26px] border border-white/70 bg-white/88 p-6 shadow-[0_18px_35px_rgba(15,23,42,0.06)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)]"
                 style={revealStyle(180 + index * 70)}
               >
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-slate-700">
                   <Icon className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 text-xl font-semibold text-slate-900">{card.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-600 sm:text-base">{card.description}</p>
+                <p className="mt-3 text-sm leading-7 text-slate-700 sm:text-base">{card.description}</p>
               </article>
             )
           })}
