@@ -8,6 +8,8 @@ import {
   useSyncExternalStore,
   type ReactNode,
 } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { isRuPath, localizePath } from '@/lib/locale-routes'
 import type { Locale } from '@/lib/translations'
 
 type Theme = 'dark' | 'light'
@@ -69,10 +71,13 @@ function getSnapshot() {
   return cachedSnapshot
 }
 
-const serverSnapshot = { locale: 'de' as Locale, theme: 'dark' as Theme }
+const serverSnapshots: Record<Locale, { locale: Locale; theme: Theme }> = {
+  de: { locale: 'de', theme: 'dark' },
+  ru: { locale: 'ru', theme: 'dark' },
+}
 
-function getServerSnapshot() {
-  return serverSnapshot
+function getServerSnapshotForLocale(locale: Locale) {
+  return serverSnapshots[locale]
 }
 
 function subscribe(onStoreChange: () => void) {
@@ -96,9 +101,24 @@ function notifyPreferencesChange() {
   }
 }
 
-export function SitePreferencesProvider({ children }: { children: ReactNode }) {
-  const preferences = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-  const { locale, theme } = preferences
+export function SitePreferencesProvider({
+  children,
+  routeLocale,
+}: {
+  children: ReactNode
+  routeLocale?: Locale
+}) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const pathLocale: Locale = pathname && isRuPath(pathname) ? 'ru' : 'de'
+  const effectiveRouteLocale = routeLocale ?? pathLocale
+  const preferences = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    () => getServerSnapshotForLocale(effectiveRouteLocale),
+  )
+  const theme = preferences.theme
+  const locale = effectiveRouteLocale ?? preferences.locale
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
@@ -113,6 +133,14 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
       locale,
       setLocale: (nextLocale: Locale) => {
         window.localStorage.setItem(LOCALE_KEY, nextLocale)
+        const currentPath = pathname || '/'
+        const nextPath = localizePath(currentPath, nextLocale)
+        const query = typeof window === 'undefined' ? '' : window.location.search
+        const nextUrl = `${nextPath}${query}`
+        const currentUrl = `${currentPath}${query}`
+        if (nextUrl !== currentUrl) {
+          router.push(nextUrl)
+        }
         notifyPreferencesChange()
       },
       theme,
@@ -123,7 +151,7 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
         notifyPreferencesChange()
       },
     }),
-    [locale, theme],
+    [locale, pathname, router, theme],
   )
 
   return <SitePreferencesContext.Provider value={value}>{children}</SitePreferencesContext.Provider>

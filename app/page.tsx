@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 import { HomePage } from '@/components/home-page'
+import { pageAlternates } from '@/lib/seo'
 
 const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   title: 'Vibe Studio - Websites für kleine Unternehmen',
   description:
     'Moderne, verständliche Websites für kleine Unternehmen. Ehrlich, klar und ohne leere Versprechen.',
+  alternates: pageAlternates('/', 'de'),
   openGraph: {
     title: 'Vibe Studio - Websites für kleine Unternehmen',
     description:

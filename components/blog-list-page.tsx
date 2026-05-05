@@ -6,6 +6,7 @@ import { CalendarDays, Clock3 } from 'lucide-react'
 import { LocaleToggle } from '@/components/locale-toggle'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useSitePreferences } from '@/components/providers/site-preferences'
+import { localizePath } from '@/lib/locale-routes'
 import { blogPosts, blogTopics } from '@/lib/blog-posts'
 
 const copy = {
@@ -55,11 +56,13 @@ export function BlogListPage() {
   const { locale } = useSitePreferences()
   const t = copy[locale]
   const topics = blogTopics[locale]
+  const homeHref = localizePath('/', locale)
+  const articleBaseHref = localizePath('/blog', locale)
 
   return (
     <main className="min-h-screen bg-[#f6f8fb] text-slate-950">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
-        <Link href="/" className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-800">
+        <Link href={homeHref} className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-800">
           Vibe Studio
         </Link>
         <div className="flex items-center gap-2">
@@ -118,7 +121,7 @@ export function BlogListPage() {
                   </div>
 
                   <Link
-                    href={`/blog/${post.slug}`}
+                    href={`${articleBaseHref}/${post.slug}`}
                     className="mt-5 inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
                   >
                     {t.readMore}

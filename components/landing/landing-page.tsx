@@ -31,6 +31,7 @@ import {
   Wrench,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { localizePath } from '@/lib/locale-routes'
 import { landingCopy, type LandingLocale } from '@/components/landing/landing-copy'
 
 const whatsappHref = 'https://wa.me/4915110974353'
@@ -525,6 +526,14 @@ function FinalCtaSection({ copy }: { copy: LandingText }) {
 }
 
 function FooterSection({ copy }: { copy: LandingText }) {
+  const { locale } = useSitePreferences()
+  const aboutHref = localizePath('/ueber-mich', locale)
+  const blogHref = localizePath('/blog', locale)
+  const privacyHref = localizePath('/datenschutzerklaerung', locale)
+  const agbHref = localizePath('/agb', locale)
+  const impressumHref = localizePath('/impressum', locale)
+  const contactHref = localizePath('/kontakt', locale)
+
   return (
     <footer id="kontakt" className="mt-6 rounded-[30px] border border-slate-200 bg-white px-6 py-8 sm:px-8">
       <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
@@ -535,23 +544,23 @@ function FooterSection({ copy }: { copy: LandingText }) {
 
         <div className="text-sm text-slate-700">
           <div className="grid grid-cols-2 justify-items-start gap-x-8 gap-y-2 md:justify-items-end md:text-right">
-            <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={aboutHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.about}
             </Link>
-            <Link href="/blog" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={blogHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.blog}
             </Link>
-            <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={privacyHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.legal.privacy}
             </Link>
-            <Link href="/agb" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={agbHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               AGB
             </Link>
-            <Link href="/impressum" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={impressumHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.legal.impressum}
             </Link>
             <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 md:text-right" />
-            <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">
+            <Link href={contactHref} className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">
               {copy.footer.contact}
             </Link>
           </div>

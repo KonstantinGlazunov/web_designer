@@ -7,8 +7,8 @@ test('landing page renders german hero and allows switching to russian', async (
     'Mehr Kundenanfragen über Ihre Website – einfach und ohne Aufwand',
   )
 
-  // In Next dev mode hydration can lag behind first paint, so we trigger a DOM click after render.
-  await page.getByRole('button', { name: /switch to russian/i }).evaluate((button: HTMLButtonElement) => button.click())
+  await page.getByRole('button', { name: /switch to russian|русский/i }).first().click()
+  await page.waitForURL(/\/ru(?:\/landing)?(?:\/|$)/)
 
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
     'Больше заявок через ваш сайт — просто и без лишних сложностей',

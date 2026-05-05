@@ -1,12 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { FormEvent, useMemo, useState } from 'react'
+import { FormEvent, useEffect, useMemo, useState } from 'react'
 import { CheckCircle2, Mail, MessageCircle, Phone } from 'lucide-react'
 import { LocaleToggle } from '@/components/locale-toggle'
 import { ProtectedContactLink } from '@/components/protected-contact-link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useSitePreferences } from '@/components/providers/site-preferences'
+import { localizePath } from '@/lib/locale-routes'
 import type { Locale } from '@/lib/translations'
 
 type ContactCopy = {
@@ -91,6 +92,8 @@ const contactCopy: Record<Locale, ContactCopy> = {
 export function ContactPage() {
   const { locale } = useSitePreferences()
   const copy = useMemo(() => contactCopy[locale], [locale])
+  const homeHref = localizePath('/', locale)
+  const privacyHref = localizePath('/datenschutzerklaerung', locale)
 
   const [salutation, setSalutation] = useState(copy.salutationOptions[0])
   const [name, setName] = useState('')
@@ -102,6 +105,19 @@ export function ContactPage() {
   const [consent, setConsent] = useState(false)
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const topic = new URLSearchParams(window.location.search).get('topic')?.trim()
+    if (!topic) return
+
+    const defaultMessage =
+      locale === 'de'
+        ? `Ich habe eine Frage zu: ${topic}. `
+        : `У меня вопрос по поводу: ${topic}. `
+
+    setMessage((current) => (current.trim().length > 0 ? current : defaultMessage))
+  }, [locale])
 
   const resetSuccess = () => setSent(false)
 
@@ -151,7 +167,7 @@ export function ContactPage() {
   return (
     <main className="min-h-screen bg-[#f6f8fb] text-slate-950">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
-        <Link href="/" className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-800">
+        <Link href={homeHref} className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-800">
           Vibe Studio
         </Link>
         <div className="flex items-center gap-2">
@@ -281,7 +297,7 @@ export function ContactPage() {
                 />
                 <span>
                   {copy.privacyLabel}{' '}
-                  <Link href="/datenschutzerklaerung" className="underline underline-offset-2">
+                  <Link href={privacyHref} className="underline underline-offset-2">
                     {copy.privacyLink}
                   </Link>
                 </span>

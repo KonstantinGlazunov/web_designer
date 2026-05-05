@@ -26,6 +26,7 @@ import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import { LocaleToggle } from '@/components/locale-toggle'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useSitePreferences } from '@/components/providers/site-preferences'
+import { localizePath } from '@/lib/locale-routes'
 import type { Locale } from '@/lib/translations'
 
 const ChatFab = dynamic(
@@ -260,6 +261,11 @@ const workIcons = [MessageCircle, Sparkles, Rocket, ShieldCheck]
 export function AboutMePage() {
   const { locale } = useSitePreferences()
   const copy = aboutCopy[locale]
+  const homeHref = localizePath('/', locale)
+  const blogHref = localizePath('/blog', locale)
+  const agbHref = localizePath('/agb', locale)
+  const privacyHref = localizePath('/datenschutzerklaerung', locale)
+  const impressumHref = localizePath('/impressum', locale)
   const [quizOpen, setQuizOpen] = useState(false)
   const [chatReady, setChatReady] = useState(false)
 
@@ -282,7 +288,7 @@ export function AboutMePage() {
     <main className="min-h-screen bg-[#f6f8fb] text-slate-950">
       {quizOpen ? <QuizDialog open={quizOpen} onClose={() => setQuizOpen(false)} locale={locale} /> : null}
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-8">
-        <Link href="/" className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-800">
+        <Link href={homeHref} className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-800">
           Vibe Studio
         </Link>
         <div className="flex items-center gap-2">
@@ -503,19 +509,19 @@ export function AboutMePage() {
         <footer className="mt-6 flex flex-col gap-3 rounded-[26px] border border-slate-200 bg-white px-6 py-6 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
           <p>{copy.footer}</p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/" className="transition hover:text-slate-950">
+            <Link href={homeHref} className="transition hover:text-slate-950">
               {copy.navHome}
             </Link>
-            <Link href="/blog" className="transition hover:text-slate-950">
+            <Link href={blogHref} className="transition hover:text-slate-950">
               {copy.blog}
             </Link>
-            <Link href="/agb" className="transition hover:text-slate-950">
+            <Link href={agbHref} className="transition hover:text-slate-950">
               {copy.legal.agb}
             </Link>
-            <Link href="/datenschutzerklaerung" className="transition hover:text-slate-950">
+            <Link href={privacyHref} className="transition hover:text-slate-950">
               {copy.legal.privacy}
             </Link>
-            <Link href="/impressum" className="transition hover:text-slate-950">
+            <Link href={impressumHref} className="transition hover:text-slate-950">
               {copy.legal.impressum}
             </Link>
             <CookieSettingsTrigger />

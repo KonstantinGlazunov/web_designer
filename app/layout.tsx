@@ -5,6 +5,7 @@ import { SitePreferencesProvider } from '@/components/providers/site-preferences
 import { CookieConsentProvider } from '@/components/providers/cookie-consent'
 import { CookieConsentDialog } from '@/components/cookie-consent-dialog'
 import { GoogleAnalytics } from '@/components/google-analytics'
+import { pageAlternates } from '@/lib/seo'
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
   title: 'Vibe Studio - Websites für kleine Unternehmen',
   description:
     'Moderne, verständliche Websites für kleine Unternehmen in Deutschland - klar, mobil optimiert und ohne unnötigen Aufwand.',
+  alternates: pageAlternates('/', 'de'),
   applicationName: 'Vibe Studio',
   robots: {
     index: true,

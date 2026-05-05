@@ -24,10 +24,12 @@ import {
   Smartphone,
 } from 'lucide-react'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
+import { localizePath } from '@/lib/locale-routes'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 import { cn } from '@/lib/utils'
 import type { LandingCopy, LandingLocale } from '@/components/landing/landing-copy'
 import { landingCopyDe } from '@/components/landing/landing-copy-de'
+import { landingCopyRu } from '@/components/landing/landing-copy-ru'
 import { portfolioCopy, type PortfolioText } from '@/components/landing/portfolio-copy'
 
 const whatsappHref = 'https://wa.me/4915110974353'
@@ -57,15 +59,6 @@ const QuizDialog = dynamic(
   { ssr: false },
 )
 
-let landingCopyRuPromise: Promise<LandingCopy> | null = null
-
-function loadLandingCopyRu() {
-  if (!landingCopyRuPromise) {
-    landingCopyRuPromise = import('@/components/landing/landing-copy-ru').then((mod) => mod.landingCopyRu)
-  }
-  return landingCopyRuPromise
-}
-
 function revealStyle(delay: number, duration = 620): CSSProperties {
   return {
     '--delay': `${delay}ms`,
@@ -79,30 +72,12 @@ export function HomePageClient() {
   const landingLocale: LandingLocale = locale === 'ru' ? 'ru' : 'de'
   const [quizOpen, setQuizOpen] = useState(false)
   const [chatReady, setChatReady] = useState(false)
-  const [ruCopy, setRuCopy] = useState<LandingCopy | null>(null)
-  const copy = landingLocale === 'de' ? landingCopyDe : ruCopy ?? landingCopyDe
+  const copy = landingLocale === 'de' ? landingCopyDe : landingCopyRu
   const portfolio = portfolioCopy[landingLocale]
   const portfolioLinkLabel = landingLocale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
   const requestLabel = landingLocale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
   const isQuizRequested = searchParams.get('quiz') === '1'
   const shouldMountQuiz = quizOpen || isQuizRequested
-
-  useEffect(() => {
-    if (landingLocale === 'de' || ruCopy) {
-      return
-    }
-
-    let active = true
-    void loadLandingCopyRu().then((nextCopy) => {
-      if (active) {
-        setRuCopy(nextCopy)
-      }
-    })
-
-    return () => {
-      active = false
-    }
-  }, [landingLocale, ruCopy])
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>('.reveal-stagger'))
@@ -131,7 +106,7 @@ export function HomePageClient() {
 
     elements.forEach((element) => observer.observe(element))
     return () => observer.disconnect()
-  }, [landingLocale, ruCopy])
+  }, [landingLocale])
 
   useEffect(() => {
     const w = window as Window & {
@@ -175,14 +150,14 @@ export function HomePageClient() {
         <ValueSection copy={copy} />
         <LogicSection copy={copy} />
         <AudienceSection copy={copy} />
-        <ProcessSection copy={copy} />
+        <ProcessSection copy={copy} locale={landingLocale} />
         <TrustSection copy={copy} />
         <HonestySection copy={copy} />
         <BeforeAfterSection copy={copy} />
         <ExamplesSection portfolio={portfolio} linkLabel={portfolioLinkLabel} />
         <FaqSection copy={copy} />
         <FinalCtaSection copy={copy} onOpenForm={() => setQuizOpen(true)} />
-        <FooterSection copy={copy} />
+        <FooterSection copy={copy} locale={landingLocale} />
       </div>
 
       <div className="fixed bottom-5 right-4 z-40 flex flex-col gap-2 sm:bottom-6 sm:right-6">
@@ -512,7 +487,9 @@ function AudienceSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function ProcessSection({ copy }: { copy: LandingText }) {
+function ProcessSection({ copy, locale }: { copy: LandingText; locale: LandingLocale }) {
+  const aboutHref = localizePath('/ueber-mich', locale)
+
   return (
     <ContentSection>
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
@@ -544,7 +521,7 @@ function ProcessSection({ copy }: { copy: LandingText }) {
         {copy.process.note}
       </p>
       <Link
-        href="/ueber-mich"
+        href={aboutHref}
         className="reveal-stagger mt-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950"
         style={revealStyle(370)}
       >
@@ -803,7 +780,14 @@ function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: 
   )
 }
 
-function FooterSection({ copy }: { copy: LandingText }) {
+function FooterSection({ copy, locale }: { copy: LandingText; locale: LandingLocale }) {
+  const aboutHref = localizePath('/ueber-mich', locale)
+  const blogHref = localizePath('/blog', locale)
+  const privacyHref = localizePath('/datenschutzerklaerung', locale)
+  const agbHref = localizePath('/agb', locale)
+  const impressumHref = localizePath('/impressum', locale)
+  const contactHref = localizePath('/kontakt', locale)
+
   return (
     <footer id="kontakt" className="mt-6 rounded-[30px] border border-slate-200 bg-white px-6 py-8 sm:px-8 lg:snap-start">
       <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
@@ -814,23 +798,23 @@ function FooterSection({ copy }: { copy: LandingText }) {
 
         <div className="reveal-stagger text-sm text-slate-700" style={revealStyle(140)}>
           <div className="grid grid-cols-2 justify-items-start gap-x-8 gap-y-2 md:justify-items-end md:text-right">
-            <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={aboutHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.about}
             </Link>
-            <Link href="/blog" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={blogHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.blog}
             </Link>
-            <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={privacyHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.legal.privacy}
             </Link>
-            <Link href="/agb" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={agbHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               AGB
             </Link>
-            <Link href="/impressum" className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={impressumHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.legal.impressum}
             </Link>
             <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 md:text-right" />
-            <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">
+            <Link href={contactHref} className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">
               {copy.footer.contact}
             </Link>
           </div>

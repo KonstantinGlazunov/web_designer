@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { BlogListPage } from '@/components/blog-list-page'
+import { pageAlternates } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Blog | Landingpage-Strategien 2026',
   description:
     '10 aktuelle Artikel über die Vermarktung von Produkten und Dienstleistungen über Landingpages.',
+  alternates: pageAlternates('/blog', 'de'),
   openGraph: {
     title: 'Blog | Landingpage-Strategien 2026',
     description:

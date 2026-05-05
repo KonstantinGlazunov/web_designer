@@ -1,10 +1,22 @@
+'use client'
+
 import Link from 'next/link'
 import { LocaleToggle } from '@/components/locale-toggle'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
+import { useSitePreferences } from '@/components/providers/site-preferences'
+import { localizePath } from '@/lib/locale-routes'
 import type { SiteCopy } from '@/lib/translations'
 
 export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
+  const { locale } = useSitePreferences()
+  const aboutHref = localizePath('/ueber-mich', locale)
+  const landingHref = localizePath('/landing', locale)
+  const agbHref = localizePath('/agb', locale)
+  const privacyHref = localizePath('/datenschutzerklaerung', locale)
+  const impressumHref = localizePath('/impressum', locale)
+  const kontaktHref = localizePath('/kontakt', locale)
+
   return (
     <footer id="contact" className="px-4 pb-28 pt-16 sm:px-6 lg:snap-start lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 rounded-[32px] border border-white/12 bg-white/70 p-8 shadow-glow backdrop-blur-xl dark:bg-glass-dark/75 lg:grid-cols-[1.2fr_0.8fr]">
@@ -20,29 +32,29 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
             <ThemeToggle />
           </div>
           <div className="grid w-full grid-cols-2 justify-items-start gap-x-8 gap-y-2 text-sm lg:justify-items-end lg:text-right">
-            <Link href="/ueber-mich" className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
+            <Link href={aboutHref} className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
               {copy.about}
             </Link>
-            <Link href="/landing" className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
+            <Link href={landingHref} className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
               {copy.landing}
             </Link>
-            <Link href="/agb" className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
+            <Link href={agbHref} className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
               {copy.legal.agb}
             </Link>
             <Link
-              href="/datenschutzerklaerung"
+              href={privacyHref}
               className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right"
             >
               {copy.legal.privacy}
             </Link>
             <Link
-              href="/impressum"
+              href={impressumHref}
               className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right"
             >
               {copy.legal.impressum}
             </Link>
             <CookieSettingsTrigger className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right" />
-            <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 dark:text-white dark:hover:text-emerald-200 lg:text-right">
+            <Link href={kontaktHref} className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 dark:text-white dark:hover:text-emerald-200 lg:text-right">
               {copy.contact}
             </Link>
           </div>

@@ -7,7 +7,8 @@ test('home page is reachable and supports DE/RU toggle', async ({ page }) => {
     'Mehr Kundenanfragen über Ihre Website – einfach und ohne Aufwand',
   )
 
-  await page.getByRole('button', { name: /switch to russian/i }).evaluate((button: HTMLButtonElement) => button.click())
+  await page.getByRole('button', { name: /switch to russian|русский/i }).first().click()
+  await page.waitForURL(/\/ru(?:\/|$)/)
 
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
     'Больше заявок через ваш сайт — просто и без лишних сложностей',

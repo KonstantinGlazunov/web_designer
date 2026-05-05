@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { AboutMePage } from '@/components/about-me-page'
+import { pageAlternates } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Über mich | Vibe Studio',
   description:
     'Konstantin Glazunov: Websites für kleine Unternehmen in Deutschland - verständlich, persönlich und auf Anfragen ausgerichtet.',
+  alternates: pageAlternates('/ueber-mich', 'de'),
   openGraph: {
     title: 'Über mich | Vibe Studio',
     description:

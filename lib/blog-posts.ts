@@ -49,7 +49,7 @@ const seoNote: Record<Locale, string> = {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'mobile-speed-conversion',
+    slug: 'mobile-geschwindigkeit-und-conversion',
     image: '/images/blog-landing-v2-01.webp',
     publishedAtISO: '2026-05-02',
     readTimeMin: 8,
@@ -195,7 +195,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    slug: 'ad-message-match',
+    slug: 'anzeige-und-landingpage-im-gleichen-ton',
     image: '/images/blog-landing-v2-02.webp',
     publishedAtISO: '2026-05-03',
     readTimeMin: 7,
@@ -341,7 +341,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    slug: 'forms-that-convert',
+    slug: 'formulare-die-anfragen-bringen',
     image: '/images/blog-landing-v2-03.webp',
     publishedAtISO: '2026-05-04',
     readTimeMin: 8,
@@ -487,7 +487,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    slug: 'local-service-seo-landing',
+    slug: 'lokale-seo-landingpages-fuer-dienstleister',
     image: '/images/blog-landing-v2-04.webp',
     publishedAtISO: '2026-05-05',
     readTimeMin: 9,
@@ -633,7 +633,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    slug: 'social-proof-trust',
+    slug: 'social-proof-fuer-mehr-vertrauen',
     image: '/images/blog-landing-v2-05.webp',
     publishedAtISO: '2026-05-06',
     readTimeMin: 7,
@@ -779,7 +779,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    slug: 'pricing-offer-architecture',
+    slug: 'angebots-und-preisstruktur-ohne-reibung',
     image: '/images/blog-landing-v2-06.webp',
     publishedAtISO: '2026-05-07',
     readTimeMin: 8,
@@ -925,7 +925,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    slug: 'cta-flow-and-thankyou',
+    slug: 'cta-flow-und-danke-seite',
     image: '/images/blog-landing-v2-07.webp',
     publishedAtISO: '2026-05-08',
     readTimeMin: 7,
@@ -1071,7 +1071,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    slug: 'ai-personalization-landing',
+    slug: 'ki-personalisierung-fuer-landingpages',
     image: '/images/blog-landing-v2-08.webp',
     publishedAtISO: '2026-05-09',
     readTimeMin: 9,
@@ -1217,7 +1217,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    slug: 'retargeting-landing-consistency',
+    slug: 'retargeting-landingpages-konsistent-aufbauen',
     image: '/images/blog-landing-v2-09.webp',
     publishedAtISO: '2026-05-10',
     readTimeMin: 8,
@@ -1363,7 +1363,7 @@ export const blogPosts: BlogPost[] = [
     },
   },
   {
-    slug: 'landing-seo-content-structure',
+    slug: 'seo-content-struktur-fuer-landingpages',
     image: '/images/blog-landing-v2-10.webp',
     publishedAtISO: '2026-05-11',
     readTimeMin: 9,
@@ -1542,6 +1542,23 @@ export const blogTopics: Record<Locale, string[]> = {
   ],
 }
 
+const legacyBlogSlugMap: Record<string, string> = {
+  'mobile-speed-conversion': 'mobile-geschwindigkeit-und-conversion',
+  'ad-message-match': 'anzeige-und-landingpage-im-gleichen-ton',
+  'forms-that-convert': 'formulare-die-anfragen-bringen',
+  'local-service-seo-landing': 'lokale-seo-landingpages-fuer-dienstleister',
+  'social-proof-trust': 'social-proof-fuer-mehr-vertrauen',
+  'pricing-offer-architecture': 'angebots-und-preisstruktur-ohne-reibung',
+  'cta-flow-and-thankyou': 'cta-flow-und-danke-seite',
+  'ai-personalization-landing': 'ki-personalisierung-fuer-landingpages',
+  'retargeting-landing-consistency': 'retargeting-landingpages-konsistent-aufbauen',
+  'landing-seo-content-structure': 'seo-content-struktur-fuer-landingpages',
+}
+
 export function getBlogPostBySlug(slug: string) {
   return blogPosts.find((post) => post.slug === slug) ?? null
+}
+
+export function getRedirectedBlogSlug(slug: string) {
+  return legacyBlogSlugMap[slug] ?? null
 }

@@ -4,7 +4,7 @@ import { BlogArticlePage } from '@/components/blog-article-page'
 import { blogPosts, getBlogPostBySlug, getRedirectedBlogSlug } from '@/lib/blog-posts'
 import { pageAlternates } from '@/lib/seo'
 
-interface BlogArticleRouteProps {
+interface RuBlogArticleRouteProps {
   params: Promise<{ slug: string }>
 }
 
@@ -12,56 +12,56 @@ export async function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }))
 }
 
-export async function generateMetadata({ params }: BlogArticleRouteProps): Promise<Metadata> {
+export async function generateMetadata({ params }: RuBlogArticleRouteProps): Promise<Metadata> {
   const { slug } = await params
   const post = getBlogPostBySlug(slug)
   if (!post) {
     const redirectedSlug = getRedirectedBlogSlug(slug)
     if (redirectedSlug) {
       return {
-        alternates: pageAlternates(`/blog/${redirectedSlug}`, 'de'),
+        alternates: pageAlternates(`/blog/${redirectedSlug}`, 'ru'),
       }
     }
     return {
-      title: 'Artikel nicht gefunden | Blog',
-      description: 'Der angefragte Blogartikel wurde nicht gefunden.',
+      title: 'Статья не найдена | Блог',
+      description: 'Запрошенная статья не найдена.',
     }
   }
 
   return {
-    title: `${post.content.de.title} | Blog`,
+    title: `${post.content.ru.title} | Блог`,
     description: post.seoDescription,
-    alternates: pageAlternates(`/blog/${post.slug}`, 'de'),
+    alternates: pageAlternates(`/blog/${post.slug}`, 'ru'),
     openGraph: {
-      title: `${post.content.de.title} | Blog`,
+      title: `${post.content.ru.title} | Блог`,
       description: post.seoDescription,
-      url: `https://erstellen-websiten.de/blog/${post.slug}`,
+      url: `https://erstellen-websiten.de/ru/blog/${post.slug}`,
       siteName: 'Vibe Studio',
-      locale: 'de_DE',
+      locale: 'ru_RU',
       type: 'article',
       images: [
         {
           url: post.image,
           width: 1600,
           height: 900,
-          alt: post.content.de.title,
+          alt: post.content.ru.title,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${post.content.de.title} | Blog`,
+      title: `${post.content.ru.title} | Блог`,
       description: post.seoDescription,
       images: [post.image],
     },
   }
 }
 
-export default async function BlogArticleRoute({ params }: BlogArticleRouteProps) {
+export default async function RuBlogArticleRoute({ params }: RuBlogArticleRouteProps) {
   const { slug } = await params
   const redirectedSlug = getRedirectedBlogSlug(slug)
   if (redirectedSlug) {
-    permanentRedirect(`/blog/${redirectedSlug}`)
+    permanentRedirect(`/ru/blog/${redirectedSlug}`)
   }
 
   if (!getBlogPostBySlug(slug)) {
