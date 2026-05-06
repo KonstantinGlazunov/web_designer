@@ -531,6 +531,7 @@ function FooterSection({ copy }: { copy: typeof landingCopyDe }) {
         </div>
         <div className="reveal-stagger text-sm text-slate-700" style={revealStyle(140)}>
           <div className="grid grid-cols-2 justify-items-start gap-x-8 gap-y-2 md:justify-items-end md:text-right">
+            <Link href="/landing" className="block w-full text-left transition hover:text-slate-950 md:text-right">Landing</Link>
             <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.about}</Link>
             <Link href="/blog" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.blog}</Link>
             <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.legal.privacy}</Link>
@@ -539,6 +540,15 @@ function FooterSection({ copy }: { copy: typeof landingCopyDe }) {
             <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 md:text-right" />
             <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">{copy.footer.contact}</Link>
           </div>
+          <nav className="sr-only" aria-label="Russian alternate links" aria-hidden="true">
+            <Link href="/ru">Главная</Link>
+            <Link href="/ru/ueber-mich">Обо мне</Link>
+            <Link href="/ru/blog">Блог</Link>
+            <Link href="/ru/kontakt">Контакты</Link>
+            <Link href="/ru/impressum">Выходные данные</Link>
+            <Link href="/ru/datenschutzerklaerung">Конфиденциальность</Link>
+            <Link href="/ru/agb">Условия</Link>
+          </nav>
         </div>
       </div>
     </footer>

@@ -18,7 +18,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   const staticEntries: MetadataRoute.Sitemap = ['de', 'ru'].flatMap((locale) =>
-    staticPaths.map((path) => {
+    staticPaths
+      .filter((path) => !(locale === 'ru' && path === '/landing'))
+      .map((path) => {
       const localizedPath = localizePath(path, locale === 'ru' ? 'ru' : 'de')
       return {
         url: `${siteUrl}${localizedPath}`,

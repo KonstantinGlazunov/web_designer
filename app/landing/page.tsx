@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 import { LandingPage } from '@/components/landing/landing-page'
-import { pageAlternates } from '@/lib/seo'
+import { absoluteUrl } from '@/lib/seo'
 
 const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
@@ -12,7 +12,13 @@ export const metadata: Metadata = {
   title: 'Landingpage für kleine Unternehmen | Vibe Studio',
   description:
     'Klare, moderne Websites für kleine Unternehmen im Lahn-Dill-Kreis. Ohne leere Versprechen, mit klarer Struktur und professionellem Auftritt.',
-  alternates: pageAlternates('/landing', 'de'),
+  alternates: {
+    canonical: absoluteUrl('/landing'),
+    languages: {
+      'de-DE': absoluteUrl('/landing'),
+      'x-default': absoluteUrl('/landing'),
+    },
+  },
   openGraph: {
     title: 'Landingpage für kleine Unternehmen | Vibe Studio',
     description:

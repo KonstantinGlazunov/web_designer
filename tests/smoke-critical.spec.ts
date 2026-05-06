@@ -86,10 +86,10 @@ test('home footer keeps legal links and removes direct contact lines', async ({ 
 
   const footer = page.locator('footer').last()
 
-  await expect(footer.getByRole('link', { name: /Über mich|Обо мне/i })).toHaveAttribute('href', '/ueber-mich')
-  await expect(footer.getByRole('link', { name: /Kontakt|Контакт/i })).toHaveAttribute('href', '/kontakt')
-  await expect(footer.getByRole('link', { name: /Datenschutz|Конфиденциальность/i })).toHaveAttribute('href', '/datenschutzerklaerung')
-  await expect(footer.getByRole('link', { name: /Impressum/i })).toHaveAttribute('href', '/impressum')
+  await expect(footer.locator('a[href="/ueber-mich"]')).toHaveCount(1)
+  await expect(footer.locator('a[href="/kontakt"]')).toHaveCount(1)
+  await expect(footer.locator('a[href="/datenschutzerklaerung"]')).toHaveCount(1)
+  await expect(footer.locator('a[href="/impressum"]')).toHaveCount(1)
 
   await expect(footer).not.toContainText('WhatsApp')
   await expect(footer).not.toContainText('kontakt@erstellen-websiten.de')
