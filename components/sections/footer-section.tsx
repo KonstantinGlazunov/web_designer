@@ -11,7 +11,6 @@ import type { SiteCopy } from '@/lib/translations'
 export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
   const { locale } = useSitePreferences()
   const aboutHref = localizePath('/ueber-mich', locale)
-  const landingHref = localizePath('/landing', locale)
   const agbHref = localizePath('/agb', locale)
   const privacyHref = localizePath('/datenschutzerklaerung', locale)
   const impressumHref = localizePath('/impressum', locale)
@@ -34,9 +33,6 @@ export function FooterSection({ copy }: { copy: SiteCopy['footer'] }) {
           <div className="grid w-full grid-cols-2 justify-items-start gap-x-8 gap-y-2 text-sm lg:justify-items-end lg:text-right">
             <Link href={aboutHref} className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
               {copy.about}
-            </Link>
-            <Link href={landingHref} className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
-              {copy.landing}
             </Link>
             <Link href={agbHref} className="block w-full text-left text-slate-700 transition hover:text-slate-950 dark:text-slate-300 dark:hover:text-white lg:text-right">
               {copy.legal.agb}

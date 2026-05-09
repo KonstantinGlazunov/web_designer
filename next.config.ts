@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
   experimental: {
     devtoolSegmentExplorer: false,
   },
+  async redirects() {
+    return [
+      { source: '/landing', destination: '/', permanent: true },
+      { source: '/ru/landing', destination: '/ru', permanent: true },
+    ]
+  },
   async headers() {
     return [
       {

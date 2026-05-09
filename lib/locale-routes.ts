@@ -23,9 +23,6 @@ export function stripRuPrefix(pathname: string) {
 export function localizePath(pathname: string, locale: Locale) {
   const basePath = stripRuPrefix(pathname)
   if (locale === 'ru') {
-    if (basePath === '/landing') {
-      return '/ru'
-    }
     return basePath === '/' ? '/ru' : `/ru${basePath}`
   }
   return basePath

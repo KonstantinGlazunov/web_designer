@@ -531,7 +531,6 @@ function FooterSection({ copy }: { copy: typeof landingCopyDe }) {
         </div>
         <div className="reveal-stagger text-sm text-slate-700" style={revealStyle(140)}>
           <div className="grid grid-cols-2 justify-items-start gap-x-8 gap-y-2 md:justify-items-end md:text-right">
-            <Link href="/landing" className="block w-full text-left transition hover:text-slate-950 md:text-right">Landing</Link>
             <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.about}</Link>
             <Link href="/blog" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.blog}</Link>
             <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.legal.privacy}</Link>

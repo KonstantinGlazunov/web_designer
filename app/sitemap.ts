@@ -8,7 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
   const staticPaths = [
     '/',
-    '/landing',
     '/ueber-mich',
     '/kontakt',
     '/blog',
@@ -18,9 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   const staticEntries: MetadataRoute.Sitemap = ['de', 'ru'].flatMap((locale) =>
-    staticPaths
-      .filter((path) => !(locale === 'ru' && path === '/landing'))
-      .map((path) => {
+    staticPaths.map((path) => {
       const localizedPath = localizePath(path, locale === 'ru' ? 'ru' : 'de')
       return {
         url: `${siteUrl}${localizedPath}`,
