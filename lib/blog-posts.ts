@@ -48,6 +48,141 @@ const seoNote: Record<Locale, string> = {
 }
 
 export const blogPosts: BlogPost[] = [
+
+  {
+    slug: 'landingpage-als-filter-fuer-qualifizierte-anfragen',
+    image: '/images/blog-landing-filter-cover.svg',
+    publishedAtISO: '2026-05-12',
+    readTimeMin: 8,
+    topicLabel: {
+      de: 'Landingpage als Filter',
+      ru: 'Лендинг как фильтр',
+    },
+    seoTitle: 'Landingpage als Filter: So gewinnen kleine Unternehmen bessere Anfragen in 2026',
+    seoDescription:
+      'Wie Landingpages nicht nur Leads sammeln, sondern schlechte Anfragen aussortieren und bessere Kundenkontakte vorbereiten.',
+    keywords: ['landingpage filter', 'qualifizierte leads', 'kleines unternehmen landingpage', 'anfragen qualifizieren', 'conversion qualität'],
+    sources: [
+      {
+        title: '45 landing page design examples to inspire your own',
+        url: 'https://blog.hubspot.com/marketing/landing-page-examples-list',
+        publisher: 'HubSpot',
+        publishedAt: '2026',
+      },
+      {
+        title: 'Landing Page Best Practices To Create High-Converting Pages',
+        url: 'https://unbounce.com/landing-page-articles/landing-page-best-practices/',
+        publisher: 'Unbounce',
+        publishedAt: '2026',
+      },
+      {
+        title: 'Visual Hierarchy in UX: Definition',
+        url: 'https://www.nngroup.com/articles/visual-hierarchy-ux-definition/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2026',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Landingpage als Filter: Warum nicht jede Anfrage eine gute Anfrage ist',
+        excerpt:
+          'Viele kleine Unternehmen wollen mehr Leads, kämpfen danach aber mit unklaren, unpassenden oder zu billigen Anfragen. Eine gute Landingpage sammelt nicht nur Kontakte, sie sortiert auch vor.',
+        summary:
+          'Wenn eine Seite alles für alle sagt, kommen oft viele, aber schwache Leads. Wenn sie klar positioniert, Grenzen setzt und Erwartungen sauber vorbereitet, entstehen weniger Streuverluste und deutlich bessere Gespräche.',
+        styleLabel: 'Signal Frame',
+        sections: [
+          {
+            title: '1) Mehr Anfragen ist nicht automatisch besser',
+            paragraphs: [
+              'Viele Unternehmen bewerten eine Landingpage zuerst nach Menge: Wie viele Formulare, wie viele Klicks, wie viele Kontakte. Das Problem zeigt sich später im Vertrieb oder im Alltag.',
+              'Ein großer Teil der Anfragen passt oft nicht: falsches Budget, falsche Erwartung, falscher Bedarf oder reine Vergleichsanfragen ohne echte Kaufabsicht.',
+            ],
+          },
+          {
+            title: '2) Gute Landingpages qualifizieren schon vor dem Formular',
+            paragraphs: [
+              'Eine starke Seite erklärt nicht nur Leistung und Vorteil, sondern auch, für wen das Angebot gedacht ist und für wen nicht. Genau das macht sie zu einem Filter.',
+              'Klare Preiseinstiege, saubere Zielgruppenansprache, ein nachvollziehbarer Ablauf und konkrete Leistungsgrenzen helfen, unpassende Anfragen früh auszusortieren.',
+            ],
+          },
+          {
+            title: '3) Weniger Reibung für gute Leads, mehr Reibung für schlechte',
+            paragraphs: [
+              'Filter bedeutet nicht, Hürden für alle zu bauen. Gute Landingpages machen den nächsten Schritt für passende Kunden leicht und für unpassende Besucher automatisch unattraktiver.',
+              'Wer erkennt, dass Angebot, Preisniveau oder Prozess nicht passt, springt früher ab. Das spart später Zeit, Rückfragen und frustrierende Erstgespräche.',
+            ],
+          },
+          {
+            title: '4) Design und Copy müssen dieselbe Grenze ziehen',
+            paragraphs: [
+              'Wenn der Text eine klare Premium- oder Service-Positionierung behauptet, das Design aber generisch oder billig wirkt, zieht die Seite falsche Kontakte an. Umgekehrt funktioniert ein hochwertiges Layout nicht, wenn die Formulierungen zu vage bleiben.',
+              'Filterwirkung entsteht dort, wo Struktur, Bildsprache, CTA und Formulierung dieselbe Botschaft senden: Das ist für die richtigen Kunden gedacht, nicht für jeden Klick.',
+            ],
+          },
+        ],
+        checklistTitle: 'Kurz-Check für filternde Landingpages',
+        checklist: [
+          'Die Seite nennt klar, für wen das Angebot gedacht ist',
+          'Preisrahmen, Ablauf oder Leistungsgrenzen werden nicht versteckt',
+          'Der CTA spricht passende Kunden direkt an statt alle gleichzeitig',
+          'Leistungen sind konkret beschrieben statt allgemein formuliert',
+          'Die Seite reduziert unnötige Anfragen schon vor dem Erstkontakt',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          '2026 zählt nicht nur, wie viele Leads eine Landingpage bringt, sondern wie gut diese Leads sind. Für kleine Unternehmen ist eine Landingpage als Filter oft wertvoller als eine Seite, die nur maximale Kontaktmenge erzeugt.',
+      },
+      ru: {
+        title: 'Лендинг как фильтр: почему не каждая заявка полезна бизнесу',
+        excerpt:
+          'Малый бизнес часто хочет больше заявок, но потом сталкивается с другой проблемой: много случайных, слабых или нерелевантных обращений. Хороший лендинг не только собирает лиды, но и заранее их фильтрует.',
+        summary:
+          'Если страница пытается понравиться всем сразу, она часто приводит много, но слабых обращений. Если же лендинг четко задает рамку, показывает уровень услуги и формирует ожидания, качество заявок становится заметно выше.',
+        styleLabel: 'Signal Frame',
+        sections: [
+          {
+            title: '1) Больше заявок не всегда означает лучше',
+            paragraphs: [
+              'Многие смотрят на лендинг только через количество обращений: сколько отправлено форм, сколько кликов, сколько контактов пришло. Но реальная проблема проявляется позже, когда бизнес начинает разбирать эти лиды.',
+              'Часто значительная часть обращений не подходит: не тот бюджет, не тот запрос, не тот уровень ожиданий или просто интерес без готовности покупать.',
+            ],
+          },
+          {
+            title: '2) Сильный лендинг квалифицирует клиента еще до формы',
+            paragraphs: [
+              'Хорошая страница объясняет не только, что вы делаете и почему это полезно, но и для кого это предложение подходит, а для кого нет. Именно это и делает лендинг фильтром.',
+              'Порог входа по цене, понятный процесс работы, конкретные рамки услуги и четкое описание целевого клиента помогают отсекать слабые обращения заранее.',
+            ],
+          },
+          {
+            title: '3) Для хороших лидов путь проще, для плохих — сложнее',
+            paragraphs: [
+              'Фильтр не означает, что надо всем усложнять жизнь. Наоборот, правильный лендинг делает следующий шаг простым для подходящего клиента и менее привлекательным для неподходящего.',
+              'Если человек заранее видит, что формат, бюджет или логика сотрудничества ему не подходят, он уходит раньше. Это экономит время, снижает количество пустых диалогов и делает входящие обращения сильнее.',
+            ],
+          },
+          {
+            title: '4) Дизайн и текст должны вместе задавать рамку',
+            paragraphs: [
+              'Если текст говорит о качественной услуге или премиальном подходе, а визуально страница выглядит дешево и шаблонно, она будет притягивать не ту аудиторию. И наоборот: аккуратный дизайн не спасет, если формулировки слишком размыты.',
+              'Фильтрующий эффект появляется тогда, когда структура, визуал, CTA и формулировки говорят одно и то же: это предложение не для всех подряд, а для подходящего клиента.',
+            ],
+          },
+        ],
+        checklistTitle: 'Быстрый чеклист для лендинга-фильтра',
+        checklist: [
+          'На странице ясно сказано, кому подходит предложение',
+          'Цена, формат работы или ограничения не спрятаны полностью',
+          'CTA обращается к подходящему клиенту, а не ко всем сразу',
+          'Услуги описаны конкретно, а не общими словами',
+          'Страница сокращает лишние обращения еще до первого контакта',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'В 2026 важна не только масса лидов, но и их качество. Для малого бизнеса лендинг как фильтр часто полезнее, чем страница, которая просто собирает максимум случайных заявок.',
+      },
+    },
+  },
   {
     slug: 'mobile-geschwindigkeit-und-conversion',
     image: '/images/blog-landing-v2-01.webp',
@@ -1527,6 +1662,7 @@ export const blogTopics: Record<Locale, string[]> = {
     'Pragmatische AI-Personalisierung für kleine Teams',
     'Retargeting-Landingpages für warmen Traffic',
     'SEO-Content-Struktur für klassische und AI-Suche',
+    'Landingpage als Filter für bessere Anfragen',
   ],
   ru: [
     'Скорость мобильного лендинга как рычаг конверсии',
@@ -1539,6 +1675,7 @@ export const blogTopics: Record<Locale, string[]> = {
     'Практичная AI-персонализация для малого бизнеса',
     'Ретаргетинг-лендинги для теплой аудитории',
     'SEO-структура контента для поиска и AI-ответов',
+    'Лендинг как фильтр для более качественных заявок',
   ],
 }
 
