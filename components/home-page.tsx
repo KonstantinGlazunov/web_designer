@@ -18,6 +18,7 @@ import {
   Shield,
 } from 'lucide-react'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
+import { TrackedLink } from '@/components/tracked-link'
 import { landingCopyDe } from '@/components/landing/landing-copy-de'
 import { portfolioCopy } from '@/components/landing/portfolio-copy'
 import { HomePageBridge } from '@/components/home-page-bridge'
@@ -72,13 +73,14 @@ export function HomePage() {
         </div>
 
         <div className="fixed bottom-5 right-4 z-40 flex flex-col gap-2 sm:bottom-6 sm:right-6">
-          <Link
-            href="/?quiz=1"
+          <TrackedLink
+            href="/?quiz=1&source=home_shell_fixed_cta"
+            eventParams={{ cta_name: 'project_ready', placement: 'fixed_cta', locale: 'de' }}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-[0_12px_35px_rgba(15,23,42,0.12)] transition hover:-translate-y-0.5 hover:border-slate-400"
           >
             <Phone className="h-4 w-4" />
             Bereit für ein Projekt?
-          </Link>
+          </TrackedLink>
         </div>
       </main>
       <Suspense fallback={null}>
@@ -127,14 +129,14 @@ function HeroSection({ copy }: { copy: typeof landingCopyDe }) {
               {copy.hero.subtitle}
             </p>
             <div className="mt-[clamp(0.75rem,2.2svh,1rem)] flex flex-col gap-[clamp(0.45rem,1.55svh,0.625rem)] sm:mt-7 sm:flex-row sm:flex-wrap sm:gap-3">
-              <Link href="/?quiz=1" className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full bg-slate-900 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 sm:h-auto sm:px-6 sm:py-3 sm:text-sm">
+              <TrackedLink href="/?quiz=1&source=home_shell_hero_mobile" eventParams={{ cta_name: 'hero_primary', placement: 'hero_mobile', locale: 'de' }} className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full bg-slate-900 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 sm:h-auto sm:px-6 sm:py-3 sm:text-sm">
                 {copy.hero.ctaPrimary}
                 <ArrowRight className="h-4 w-4" />
-              </Link>
-              <a href="#beispiele" className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 sm:h-auto sm:px-6 sm:py-3 sm:text-sm">
+              </TrackedLink>
+              <TrackedLink href="#beispiele" eventParams={{ cta_name: 'hero_examples', placement: 'hero_mobile', locale: 'de' }} className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 sm:h-auto sm:px-6 sm:py-3 sm:text-sm">
                 {copy.hero.ctaSecondary}
                 <MoveRight className="h-4 w-4" />
-              </a>
+              </TrackedLink>
             </div>
             <ul className="mt-[clamp(0.7rem,2.1svh,1rem)] grid gap-[clamp(0.28rem,1svh,0.375rem)] text-[clamp(0.62rem,2.9vw,0.7rem)] leading-tight text-slate-800 [&>li:nth-last-child(-n+2)]:hidden [@media(max-height:740px)]:[&>li:nth-last-child(-n+3)]:hidden sm:mt-7 sm:grid-cols-2 sm:gap-2 sm:text-sm sm:leading-normal sm:[&>li:nth-last-child(-n+3)]:flex sm:[&>li:nth-last-child(-n+2)]:flex">
               {copy.hero.benefits.map((item, index) => (
@@ -161,14 +163,14 @@ function HeroSection({ copy }: { copy: typeof landingCopyDe }) {
           <h1 className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]">{copy.hero.title}</h1>
           <p className="mt-5 max-w-2xl text-lg leading-7 text-slate-700">{copy.hero.subtitle}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link href="/?quiz=1" className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800">
+            <TrackedLink href="/?quiz=1&source=home_shell_hero_desktop" eventParams={{ cta_name: 'hero_primary', placement: 'hero_desktop', locale: 'de' }} className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800">
               {copy.hero.ctaPrimary}
               <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a href="#beispiele" className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900">
+            </TrackedLink>
+            <TrackedLink href="#beispiele" eventParams={{ cta_name: 'hero_examples', placement: 'hero_desktop', locale: 'de' }} className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900">
               {copy.hero.ctaSecondary}
               <MoveRight className="h-4 w-4" />
-            </a>
+            </TrackedLink>
           </div>
           <ul className="mt-7 grid gap-2 text-sm leading-normal text-slate-800 sm:grid-cols-2">
             {copy.hero.benefits.map((item, index) => (
@@ -500,14 +502,14 @@ function FinalCtaSection({ copy }: { copy: typeof landingCopyDe }) {
               {copy.finalCta.subtitle}
             </p>
             <div className="reveal-stagger mt-7 flex flex-wrap gap-3" style={revealStyle(220)}>
-              <Link href="/?quiz=1" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100">
+              <TrackedLink href="/?quiz=1&source=home_shell_final_cta" eventParams={{ cta_name: 'final_primary', placement: 'final_cta', locale: 'de' }} className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100">
                 {copy.finalCta.primary}
                 <ArrowRight className="h-4 w-4" />
-              </Link>
-              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
+              </TrackedLink>
+              <TrackedLink href={whatsappHref} target="_blank" rel="noopener noreferrer" eventName="contact_click" eventParams={{ contact_kind: 'whatsapp', placement: 'final_cta', locale: 'de' }} className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
                 {copy.finalCta.secondary}
                 <MessageCircle className="h-4 w-4" />
-              </a>
+              </TrackedLink>
             </div>
           </div>
           <div className="reveal-stagger hidden rounded-3xl border border-white/15 bg-white/10 p-3 lg:block" style={revealStyle(260)}>

@@ -24,6 +24,8 @@ import {
   Smartphone,
 } from 'lucide-react'
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
+import { TrackedLink } from '@/components/tracked-link'
+import { trackEvent } from '@/lib/analytics'
 import { localizePath } from '@/lib/locale-routes'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 import { cn } from '@/lib/utils'
@@ -77,7 +79,9 @@ export function HomePageClient() {
   const portfolioLinkLabel = landingLocale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
   const requestLabel = landingLocale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
   const isQuizRequested = searchParams.get('quiz') === '1'
+  const quizSourceFromQuery = searchParams.get('source') || 'deeplink'
   const shouldMountQuiz = quizOpen || isQuizRequested
+  const [quizSource, setQuizSource] = useState('home_client')
 
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>('.reveal-stagger'))
@@ -131,6 +135,7 @@ export function HomePageClient() {
     if (!url.searchParams.has('quiz')) return
 
     url.searchParams.delete('quiz')
+    url.searchParams.delete('source')
     const nextQuery = url.searchParams.toString()
     const nextUrl = `${url.pathname}${nextQuery ? `?${nextQuery}` : ''}${url.hash}`
     window.history.replaceState(null, '', nextUrl)
@@ -141,8 +146,18 @@ export function HomePageClient() {
       <HeroSection
         copy={copy}
         locale={landingLocale}
-        onToggleLocale={() => setLocale(landingLocale === 'de' ? 'ru' : 'de')}
-        onOpenForm={() => setQuizOpen(true)}
+        onToggleLocale={() => {
+          trackEvent('locale_switch', {
+            from_locale: landingLocale,
+            to_locale: landingLocale === 'de' ? 'ru' : 'de',
+            placement: 'home_hero',
+          })
+          setLocale(landingLocale === 'de' ? 'ru' : 'de')
+        }}
+        onOpenForm={(source) => {
+          setQuizSource(source)
+          setQuizOpen(true)
+        }}
       />
 
       <div className="mx-auto w-full max-w-6xl px-4 pb-24 sm:px-6 lg:px-8">
@@ -154,16 +169,27 @@ export function HomePageClient() {
         <TrustSection copy={copy} />
         <HonestySection copy={copy} />
         <BeforeAfterSection copy={copy} />
-        <ExamplesSection portfolio={portfolio} linkLabel={portfolioLinkLabel} />
+        <ExamplesSection portfolio={portfolio} linkLabel={portfolioLinkLabel} locale={landingLocale} />
         <FaqSection copy={copy} />
-        <FinalCtaSection copy={copy} onOpenForm={() => setQuizOpen(true)} />
+        <FinalCtaSection
+          copy={copy}
+          locale={landingLocale}
+          onOpenForm={(source) => {
+            setQuizSource(source)
+            setQuizOpen(true)
+          }}
+        />
         <FooterSection copy={copy} locale={landingLocale} />
       </div>
 
       <div className="fixed bottom-5 right-4 z-40 flex flex-col gap-2 sm:bottom-6 sm:right-6">
         <button
           type="button"
-          onClick={() => setQuizOpen(true)}
+          onClick={() => {
+            setQuizSource('home_client_fixed_cta')
+            trackEvent('cta_click', { cta_name: 'project_ready', placement: 'fixed_cta', locale: landingLocale })
+            setQuizOpen(true)
+          }}
           className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-[0_12px_35px_rgba(15,23,42,0.12)] transition hover:-translate-y-0.5 hover:border-slate-400"
         >
           <Phone className="h-4 w-4" />
@@ -172,7 +198,14 @@ export function HomePageClient() {
       </div>
 
       {chatReady ? <ChatFab locale={landingLocale} theme="light" /> : null}
-      {shouldMountQuiz ? <QuizDialog open={shouldMountQuiz} onClose={handleQuizClose} locale={landingLocale} /> : null}
+      {shouldMountQuiz ? (
+        <QuizDialog
+          open={shouldMountQuiz}
+          onClose={handleQuizClose}
+          locale={landingLocale}
+          source={isQuizRequested ? quizSourceFromQuery : quizSource}
+        />
+      ) : null}
     </main>
   )
 }
@@ -186,9 +219,10 @@ function HeroSection({
   copy: LandingText
   locale: LandingLocale
   onToggleLocale: () => void
-  onOpenForm: () => void
+  onOpenForm: (source: string) => void
 }) {
-  const handleExamplesClick = () => {
+  const handleExamplesClick = (placement: 'hero_mobile' | 'hero_desktop') => {
+    trackEvent('cta_click', { cta_name: 'hero_examples', placement, locale })
     window.history.pushState(null, '', '#beispiele')
     window.setTimeout(() => {
       const target = document.getElementById('beispiele')
@@ -256,9 +290,12 @@ function HeroSection({
             <div
               className="mt-[clamp(0.75rem,2.2svh,1rem)] flex flex-col gap-[clamp(0.45rem,1.55svh,0.625rem)] sm:mt-7 sm:flex-row sm:flex-wrap sm:gap-3"
             >
-              <button
-                type="button"
-                onClick={onOpenForm}
+          <button
+            type="button"
+            onClick={() => {
+              trackEvent('cta_click', { cta_name: 'hero_primary', placement: 'hero_mobile', locale })
+              onOpenForm('home_client_hero_mobile')
+            }}
                 className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full bg-slate-900 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 sm:h-auto sm:px-6 sm:py-3 sm:text-sm"
               >
                 {copy.hero.ctaPrimary}
@@ -266,7 +303,7 @@ function HeroSection({
               </button>
               <a
                 href="#beispiele"
-                onClick={handleExamplesClick}
+                onClick={() => handleExamplesClick('hero_mobile')}
                 className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900 sm:h-auto sm:px-6 sm:py-3 sm:text-sm"
               >
                 {copy.hero.ctaSecondary}
@@ -308,7 +345,10 @@ function HeroSection({
           <div className="mt-7 flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={onOpenForm}
+              onClick={() => {
+                trackEvent('cta_click', { cta_name: 'hero_primary', placement: 'hero_desktop', locale })
+                onOpenForm('home_client_hero_desktop')
+              }}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
             >
               {copy.hero.ctaPrimary}
@@ -316,7 +356,7 @@ function HeroSection({
             </button>
             <a
               href="#beispiele"
-              onClick={handleExamplesClick}
+              onClick={() => handleExamplesClick('hero_desktop')}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/92 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-900"
             >
               {copy.hero.ctaSecondary}
@@ -520,14 +560,15 @@ function ProcessSection({ copy, locale }: { copy: LandingText; locale: LandingLo
       <p className="reveal-stagger mt-6 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm leading-7 text-slate-700 sm:text-base" style={revealStyle(310)}>
         {copy.process.note}
       </p>
-      <Link
+      <TrackedLink
         href={aboutHref}
+        eventParams={{ cta_name: 'about_link', placement: 'process_section', locale }}
         className="reveal-stagger mt-4 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950"
         style={revealStyle(370)}
       >
         {copy.footer.about}
         <ArrowRight className="h-4 w-4" />
-      </Link>
+      </TrackedLink>
     </ContentSection>
   )
 }
@@ -640,7 +681,7 @@ function BeforeAfterSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function ExamplesSection({ portfolio, linkLabel }: { portfolio: PortfolioText; linkLabel: string }) {
+function ExamplesSection({ portfolio, linkLabel, locale }: { portfolio: PortfolioText; linkLabel: string; locale: LandingLocale }) {
   return (
     <ContentSection id="beispiele">
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
@@ -691,7 +732,13 @@ function ExamplesSection({ portfolio, linkLabel }: { portfolio: PortfolioText; l
           return (
             <article key={item.title} className="reveal-stagger h-full" style={revealStyle(170 + index * 70)}>
               {item.url ? (
-                <a href={item.url} target="_blank" rel="noopener noreferrer" className="block h-full">
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block h-full"
+                  onClick={() => trackEvent('portfolio_open', { portfolio_item: item.title, locale, placement: 'examples_section' })}
+                >
                   {card}
                 </a>
               ) : (
@@ -730,7 +777,7 @@ function FaqSection({ copy }: { copy: LandingText }) {
   )
 }
 
-function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: () => void }) {
+function FinalCtaSection({ copy, locale, onOpenForm }: { copy: LandingText; locale: LandingLocale; onOpenForm: (source: string) => void }) {
   return (
     <ContentSection>
       <div className="reveal-stagger rounded-[32px] border border-slate-900 bg-slate-900 px-6 py-10 text-slate-100 sm:px-10 sm:py-12" style={revealStyle(50)}>
@@ -745,7 +792,10 @@ function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: 
             <div className="reveal-stagger mt-7 flex flex-wrap gap-3" style={revealStyle(220)}>
               <button
                 type="button"
-                onClick={onOpenForm}
+                onClick={() => {
+                  trackEvent('cta_click', { cta_name: 'final_primary', placement: 'final_cta', locale })
+                  onOpenForm('home_client_final_cta')
+                }}
                 className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100"
               >
                 {copy.finalCta.primary}
@@ -755,6 +805,7 @@ function FinalCtaSection({ copy, onOpenForm }: { copy: LandingText; onOpenForm: 
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('contact_click', { contact_kind: 'whatsapp', placement: 'final_cta', locale })}
                 className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15"
               >
                 {copy.finalCta.secondary}
@@ -798,10 +849,10 @@ function FooterSection({ copy, locale }: { copy: LandingText; locale: LandingLoc
 
         <div className="reveal-stagger text-sm text-slate-700" style={revealStyle(140)}>
           <div className="grid grid-cols-2 justify-items-start gap-x-8 gap-y-2 md:justify-items-end md:text-right">
-            <Link href={aboutHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={aboutHref} onClick={() => trackEvent('cta_click', { cta_name: 'about_link', placement: 'footer', locale })} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.about}
             </Link>
-            <Link href={blogHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
+            <Link href={blogHref} onClick={() => trackEvent('cta_click', { cta_name: 'blog_link', placement: 'footer', locale })} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {copy.footer.blog}
             </Link>
             <Link href={privacyHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
@@ -814,7 +865,7 @@ function FooterSection({ copy, locale }: { copy: LandingText; locale: LandingLoc
               {copy.footer.legal.impressum}
             </Link>
             <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 md:text-right" />
-            <Link href={contactHref} className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">
+            <Link href={contactHref} onClick={() => trackEvent('cta_click', { cta_name: 'contact_link', placement: 'footer', locale })} className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">
               {copy.footer.contact}
             </Link>
           </div>

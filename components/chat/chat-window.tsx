@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback, useEffect, useRef, useMemo } from 'react'
+import { trackEvent, trackLead } from '@/lib/analytics'
 import type { Locale } from '@/lib/translations'
 import { chatCopy } from '@/lib/translations'
 import { isClosingMessage } from '@/lib/chat-utils'
@@ -68,6 +69,8 @@ export function ChatWindow({ locale, theme, autoFocus, onInputFocusChange }: Cha
   const inputRef = useRef<HTMLInputElement>(null)
   const chatCopyLocale = useMemo(() => chatCopy[locale], [locale])
   const [isMobile, setIsMobile] = useState(false)
+  const briefRef = useRef<Record<string, unknown> | null>(null)
+  const statusRef = useRef<string | null>(null)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -111,6 +114,7 @@ export function ChatWindow({ locale, theme, autoFocus, onInputFocusChange }: Cha
   const sendMessage = useCallback(async (text: string) => {
     const trimmed = text.trim()
     if (!trimmed) return
+    trackEvent('chat_message_sent', { locale, message_length: trimmed.length })
     const userMsg: ChatMessage = { role: 'user', content: trimmed }
     setMessages((prev) => [...prev, userMsg])
     setIsTyping(true)
@@ -130,6 +134,42 @@ export function ChatWindow({ locale, theme, autoFocus, onInputFocusChange }: Cha
 
       const reply = data.reply as string
       const options = data.options as string[] | undefined
+      const nextBrief = (data.brief ?? null) as {
+        contact?: { name?: string; phone?: string; email?: string }
+      } | null
+      const nextStatus = typeof data.status === 'string' ? data.status : null
+      const previousBrief = briefRef.current as { contact?: { name?: string; phone?: string; email?: string } } | null
+      const previousStatus = statusRef.current
+      const previousHasName = Boolean(previousBrief?.contact?.name?.trim())
+      const previousHasPhone = Boolean(previousBrief?.contact?.phone?.trim())
+      const previousHasEmail = Boolean(previousBrief?.contact?.email?.trim())
+      const nextHasName = Boolean(nextBrief?.contact?.name?.trim())
+      const nextHasPhone = Boolean(nextBrief?.contact?.phone?.trim())
+      const nextHasEmail = Boolean(nextBrief?.contact?.email?.trim())
+
+      if (nextHasName && !previousHasName) {
+        trackEvent('chat_contact_progress', { locale, field: 'name' })
+      }
+      if (nextHasPhone && !previousHasPhone) {
+        trackEvent('chat_contact_progress', { locale, field: 'phone' })
+      }
+      if (nextHasEmail && !previousHasEmail) {
+        trackEvent('chat_contact_progress', { locale, field: 'email' })
+      }
+      if (nextHasName && (nextHasPhone || nextHasEmail) && !(previousHasName && (previousHasPhone || previousHasEmail))) {
+        trackLead({
+          source: 'chatbot',
+          locale,
+          contactMethod: nextHasPhone && nextHasEmail ? 'phone_and_email' : nextHasPhone ? 'phone' : 'email',
+          pagePath: window.location.pathname,
+          readyForHandoff: nextStatus === 'READY',
+        })
+      }
+      if (nextStatus === 'READY' && previousStatus !== 'READY') {
+        trackEvent('chat_handoff_ready', { locale, page_path: window.location.pathname })
+      }
+      briefRef.current = nextBrief
+      statusRef.current = nextStatus
       const assistantMsg: ChatMessage = { role: 'assistant', content: reply, options }
       setMessages((prev) => {
         const next = [...prev, assistantMsg]
@@ -179,13 +219,15 @@ export function ChatWindow({ locale, theme, autoFocus, onInputFocusChange }: Cha
   const handleQuickReply = useCallback(
     (text: string) => {
       if (text === '__OTHER__') {
+        trackEvent('chat_quick_reply_other', { locale })
         setQuickRepliesDismissed(true)
         inputRef.current?.focus()
       } else {
+        trackEvent('chat_quick_reply_selected', { locale, option_label: text })
         sendMessage(text)
       }
     },
-    [sendMessage]
+    [locale, sendMessage]
   )
 
   return (

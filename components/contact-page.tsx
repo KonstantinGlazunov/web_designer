@@ -7,6 +7,7 @@ import { LocaleToggle } from '@/components/locale-toggle'
 import { ProtectedContactLink } from '@/components/protected-contact-link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useSitePreferences } from '@/components/providers/site-preferences'
+import { trackEvent, trackLead } from '@/lib/analytics'
 import { localizePath } from '@/lib/locale-routes'
 import type { Locale } from '@/lib/translations'
 
@@ -148,6 +149,19 @@ export function ContactPage() {
         return
       }
 
+      trackEvent('contact_form_submit_success', {
+        locale,
+        page_path: window.location.pathname,
+        has_phone: Boolean(phone.trim()),
+        has_company: Boolean(company.trim()),
+      })
+      trackLead({
+        source: 'contact_form',
+        locale,
+        contactMethod: phone.trim() ? 'phone_and_email' : 'email',
+        pagePath: window.location.pathname,
+        readyForHandoff: true,
+      })
       setSent(true)
       setName('')
       setCompany('')
@@ -327,6 +341,7 @@ export function ContactPage() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('contact_click', { contact_kind: 'whatsapp', placement: 'contact_page', locale })}
                 className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition hover:border-slate-300"
               >
                 <MessageCircle className="h-4 w-4 text-emerald-600" />
@@ -342,6 +357,9 @@ export function ContactPage() {
                   hrefParts={phoneHrefParts}
                   displayParts={phoneDisplayParts}
                   className="text-left transition hover:text-slate-950"
+                  analyticsKind="phone"
+                  analyticsPlacement="contact_page"
+                  locale={locale}
                 />
               </div>
               <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 transition hover:border-slate-300">
@@ -354,6 +372,9 @@ export function ContactPage() {
                   hrefParts={emailHrefParts}
                   displayParts={emailDisplayParts}
                   className="text-left transition hover:text-slate-950"
+                  analyticsKind="email"
+                  analyticsPlacement="contact_page"
+                  locale={locale}
                 />
               </div>
             </div>

@@ -3,13 +3,14 @@
 import { Dialog, DialogBackdrop } from '@headlessui/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, ChevronLeft, ChevronRight, X } from 'lucide-react'
-import { useMemo, useState, type FormEvent } from 'react'
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
+import { trackEvent, trackLead } from '@/lib/analytics'
+import type { Locale } from '@/lib/translations'
 import { cn } from '@/lib/utils'
 import { quizCopy, HAS_SITE_IDS, type QuizOption, type QuizQuestion } from '@/lib/quiz-data'
 
 type FollowUps = { otherSpecify: string; otherPlaceholder: string; siteUrl: string; siteUrlPlaceholder: string }
-import type { Locale } from '@/lib/translations'
 
 type Step = { type: 'question'; data: QuizQuestion } | { type: 'followup'; id: string; question: string; placeholder: string; questionId: string }
 
@@ -45,9 +46,10 @@ interface QuizDialogProps {
   open: boolean
   onClose: () => void
   locale: Locale
+  source?: string
 }
 
-export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
+export function QuizDialog({ open, onClose, locale, source = 'unknown' }: QuizDialogProps) {
   const copy = useMemo(() => (locale === 'de' ? quizCopy.de : quizCopy.ru), [locale])
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({})
@@ -64,6 +66,13 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
   const isInputQuestion = isQuestion && currentStep?.data?.type === 'input'
   const location = (answers['location'] as string) || ''
   const progress = ((step + 1) / totalSteps) * 100
+  const openedTrackedRef = useRef(false)
+
+  useEffect(() => {
+    if (!open || openedTrackedRef.current) return
+    openedTrackedRef.current = true
+    trackEvent('quiz_started', { locale, source })
+  }, [locale, open, source])
 
   function toggleOption(questionId: string, optionId: string, multiSelect?: boolean) {
     setAnswers((prev) => {
@@ -112,7 +121,16 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
   }
 
   function handleNext() {
-    if (step < steps.length) setStep((s) => s + 1)
+    if (step < steps.length) {
+      trackEvent('quiz_step_completed', {
+        locale,
+        source,
+        step_index: step + 1,
+        step_type: currentStep?.type,
+        question_id: currentStep?.type === 'question' ? currentStep.data.id : currentStep?.questionId,
+      })
+      setStep((s) => s + 1)
+    }
   }
 
   function handleBack() {
@@ -160,6 +178,18 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
         return
       }
 
+      trackEvent('quiz_submit_success', {
+        locale,
+        source,
+        answered_steps: steps.length,
+      })
+      trackLead({
+        source: 'quiz',
+        locale,
+        contactMethod: 'phone',
+        pagePath: window.location.pathname,
+        readyForHandoff: true,
+      })
       setSubmitted(true)
     } catch (e) {
       console.error('[Quiz] submit error', e)
@@ -168,6 +198,7 @@ export function QuizDialog({ open, onClose, locale }: QuizDialogProps) {
   }
 
   function handleClose() {
+    openedTrackedRef.current = false
     setStep(0)
     setAnswers({})
     setName('')

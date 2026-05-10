@@ -1,26 +1,21 @@
 'use client'
 
 import Script from 'next/script'
-import { useMemo } from 'react'
+import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { useCookieConsent } from '@/components/providers/cookie-consent'
-
-declare global {
-  interface Window {
-    dataLayer?: unknown[]
-    gtag?: (...args: unknown[]) => void
-  }
-}
-
-function getGaId() {
-  const id = process.env.NEXT_PUBLIC_GA_ID
-  if (typeof id === 'string' && id.trim().length > 0) return id.trim()
-  return 'G-H8XXSDP9W4'
-}
+import { getGaId, setAnalyticsUserContext } from '@/lib/analytics'
 
 export function GoogleAnalytics() {
   const { consent } = useCookieConsent()
-  const gaId = useMemo(() => getGaId(), [])
+  const pathname = usePathname()
+  const gaId = getGaId()
   const enabled = Boolean(consent?.analytics)
+
+  useEffect(() => {
+    if (!enabled) return
+    setAnalyticsUserContext(pathname)
+  }, [enabled, pathname])
 
   if (!enabled) return null
 

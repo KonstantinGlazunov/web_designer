@@ -3,6 +3,7 @@
 import { Globe } from 'lucide-react'
 import type { Locale } from '@/lib/translations'
 import { useSitePreferences } from '@/components/providers/site-preferences'
+import { trackEvent } from '@/lib/analytics'
 
 export function LocaleToggle() {
   const { locale, setLocale } = useSitePreferences()
@@ -13,7 +14,10 @@ export function LocaleToggle() {
   return (
     <button
       type="button"
-      onClick={() => setLocale(nextLocale)}
+      onClick={() => {
+        trackEvent('locale_switch', { from_locale: locale, to_locale: nextLocale, placement: 'global_toggle' })
+        setLocale(nextLocale)
+      }}
       aria-label={locale === 'de' ? 'Switch to Russian' : 'Switch to German'}
       className="inline-flex flex-none items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-700 transition hover:border-slate-400 hover:bg-white sm:text-xs"
     >
