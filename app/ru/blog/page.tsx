@@ -5,12 +5,12 @@ import { pageAlternates } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Блог | Лендинги и заявки в 2026',
   description:
-    '10 практических статей о том, как продвигать услуги и товары через лендинги и получать больше заявок.',
+    '21 практическая статья о том, как продвигать услуги и товары через лендинги и получать больше заявок.',
   alternates: pageAlternates('/blog', 'ru'),
   openGraph: {
     title: 'Блог | Лендинги и заявки в 2026',
     description:
-      'Практические материалы про конверсию, SEO, мобильный UX и маркетинг лендингов.',
+      'Практические материалы про конверсию, SEO, мобильный UX, доверие, consent UX и видимость в AI/LLM-выдаче.',
     url: 'https://erstellen-websiten.de/ru/blog',
     siteName: 'Vibe Studio',
     locale: 'ru_RU',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Блог | Лендинги и заявки в 2026',
     description:
-      'Практические материалы про конверсию, SEO, мобильный UX и маркетинг лендингов.',
+      '21 практическая статья про конверсию, SEO, мобильный UX и маркетинг лендингов.',
     images: ['/images/blog-landing-v2-01.webp'],
   },
 }
@@ -36,4 +36,3 @@ export const metadata: Metadata = {
 export default function RuBlogRoute() {
   return <BlogListPage />
 }
-

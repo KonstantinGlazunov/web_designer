@@ -5,12 +5,12 @@ import { pageAlternates } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Blog | Landingpage-Strategien 2026',
   description:
-    '10 aktuelle Artikel über die Vermarktung von Produkten und Dienstleistungen über Landingpages.',
+    '21 aktuelle Artikel über die Vermarktung von Produkten und Dienstleistungen über Landingpages.',
   alternates: pageAlternates('/blog', 'de'),
   openGraph: {
     title: 'Blog | Landingpage-Strategien 2026',
     description:
-      'Praxisartikel zu Conversion, SEO, Mobile UX, Retargeting und AI-Personalisierung auf Landingpages.',
+      'Praxisartikel zu Conversion, SEO, Mobile UX, Retargeting, Consent UX, Trust und AI/LLM-Sichtbarkeit auf Landingpages.',
     url: 'https://erstellen-websiten.de/blog',
     siteName: 'Vibe Studio',
     locale: 'de_DE',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Blog | Landingpage-Strategien 2026',
     description:
-      '10 praxisnahe Artikel zur besseren Conversion von Landingpages.',
+      '21 praxisnahe Artikel zur besseren Conversion von Landingpages.',
     images: ['/images/blog-landing-v2-01.webp'],
   },
 }

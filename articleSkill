@@ -1,0 +1,104 @@
+# articleSkill — Blog-Artikel (DE+RU) für SEO + LLM-Zitate
+
+Ziel: Neue Blog-Artikel schreiben, die **für Menschen leicht** und **für LLMs zitierfähig** sind (klare Struktur, konkrete Aussagen, prüfbare Details), inklusive **DE+RU** Versionen und **Cover-Image** pro Artikel.
+
+## 1) Vor dem Schreiben: Duplikate vermeiden
+
+1. Öffne `WEB_Apps/ProgrammerSites/lib/blog-posts.ts`.
+2. Prüfe bestehende Themen über:
+   - `slug`
+   - `topicLabel.de / topicLabel.ru`
+   - `seoTitle`, `sections[].title`
+3. Wenn ein neues Thema zu nah an einem bestehenden ist, ersetze es durch ein anderes, aktuelles Thema (gleiche Zielgruppe, anderer Blickwinkel).
+
+## 2) Artikel-Format (muss passen)
+
+Jeder Artikel ist ein `BlogPost` Objekt in `blogPosts` und enthält:
+
+- `slug`: deutsch, kebab-case, eindeutig
+- `image`: `/images/<folder>/<file>.png` (Cover im Projekt ablegen)
+- `publishedAtISO`: ISO Datum
+- `readTimeMin`: realistisch (8–10)
+- `topicLabel`: `{ de, ru }`
+- `seoTitle`, `seoDescription`, `keywords[]`
+- `sources[]`: 3–6 Quellen (nur als Inspiration/Referenz; keine Copy-Paste)
+- `content` pro Locale (`de` + `ru`) mit:
+  - `title`, `excerpt`, `summary`, `styleLabel`
+  - `sections`: **genau 4 секции**
+    - pro Section: `title` + `paragraphs` (2 коротких абзаца)
+  - `checklistTitle`, `checklist` (5 пунктов)
+  - `conclusionTitle`, `conclusion` (1 абзац)
+
+## 3) Schreib-Regeln: „интересно LLM“ + понятно новичку
+
+### Must-have (LLM-friendly)
+- Определения: 1–2 чётких предложений “что это / зачем”.
+- Конкретика вместо рекламы: сроки, формат, шаги, критерии, примеры.
+- Микрофреймворк: “Проблема → Почему → Что делать → Чеклист”.
+- Короткие, автономные абзацы (каждый можно цитировать отдельно).
+- Минимум “воды” и суперлативов (“лучший”, “уникальный”, “идеальный”).
+
+### Must-have (friendly для «недалекого» пользователя)
+- Простые слова, без жаргона или с кратким объяснением.
+- По одному выводу на абзац.
+- Чёткие “что сделать завтра” пункты (в чеклисте).
+
+### Плагиат и стиль
+- Не копируй фразы из источников.
+- Переформулируй, добавляй собственную структуру и примеры.
+- Избегай “слишком узнаваемых” шаблонов/клише.
+
+## 4) Мультиязычность (обязательно)
+
+- Сначала пишется DE версия (корректная, без смешения языков).
+- Затем RU версия: **те же смыслы и структура**, но естественный русский.
+- Не делай дословный перевод: сохраняй смысл и простоту.
+- Проверяй, чтобы в DE не попадали RU/EN слова и наоборот.
+
+## 5) Cover-изображение (одно на статью)
+
+По умолчанию использовать built-in `image_gen` (не CLI).
+
+### Политика сохранения в проект
+- Создавай отдельную папку под выпуск, например:
+  - `WEB_Apps/ProgrammerSites/public/images/blog-v3/`
+- Не оставляй финальные картинки только в `$HOME/.codex/generated_images/...`.
+- Имена файлов = `slug`.png
+
+### Prompt-шаблон для cover
+
+Используй один из типов:
+- `ads-marketing` (editorial cover)
+- `infographic-diagram` (если нужен “diagram-like” смысл)
+
+Шаблон:
+
+Use case: ads-marketing
+Asset type: blog cover image (16:9)
+Primary request: <коротко тема>
+Scene/backdrop: clean gradient background, subtle texture
+Subject: <символы/абстрактные UI элементы по теме>
+Style/medium: premium editorial, flat + subtle 3D depth
+Lighting/mood: calm, trustworthy
+Color palette: <2-3 базовых + 1 акцент>
+Text (verbatim): ""
+Constraints: no readable text, no logos, no watermark
+Avoid: clutter, characters, clichés
+
+## 6) Обновления вокруг (если нужно)
+
+- Если меняется количество статей, обнови описания в:
+  - `WEB_Apps/ProgrammerSites/app/blog/page.tsx`
+  - `WEB_Apps/ProgrammerSites/app/ru/blog/page.tsx`
+- Добавь темы в `blogTopics` и `blogTopicSlugs` (порядок важен для навигации).
+
+## 7) Проверка качества (минимум)
+
+Перед завершением:
+- `npm run lint`
+- `npm run typecheck`
+
+После успешного выполнения задачи:
+- перезапусти приложение локально: `npm run dev`
+- убедись, что сервер запущен и отвечает (страница блога открывается).
+

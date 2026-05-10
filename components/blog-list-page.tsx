@@ -14,8 +14,8 @@ import { blogPosts, blogTopics, blogTopicSlugs } from '@/lib/blog-posts'
 const copy = {
   de: {
     title: 'Blog',
-    subtitle: '10 aktuelle Artikel über die Vermarktung von Produkten und Dienstleistungen über Landingpages.',
-    topicsTitle: '10 aktuelle Themen',
+    subtitle: '{count} aktuelle Artikel über die Vermarktung von Produkten und Dienstleistungen über Landingpages.',
+    topicsTitle: '{count} aktuelle Themen',
     searchLabel: 'Schnell zu einer Thema springen',
     searchPlaceholder: 'Thema suchen...',
     noMatches: 'Keine passenden Themen gefunden.',
@@ -24,8 +24,8 @@ const copy = {
   },
   ru: {
     title: 'Блог',
-    subtitle: '10 актуальных статей о продвижении товаров и услуг через лендинги.',
-    topicsTitle: '10 актуальных тем',
+    subtitle: '{count} актуальных статей о продвижении товаров и услуг через лендинги.',
+    topicsTitle: '{count} актуальных тем',
     searchLabel: 'Быстрый переход к теме',
     searchPlaceholder: 'Найти тему...',
     noMatches: 'Подходящие темы не найдены.',
@@ -74,6 +74,8 @@ export function BlogListPage() {
         .filter((post): post is (typeof blogPosts)[number] => post !== null),
     [],
   )
+  const subtitle = t.subtitle.replace('{count}', String(orderedPosts.length || blogPosts.length))
+  const topicsTitle = t.topicsTitle.replace('{count}', String(topics.length))
   const topicLinks = topics.map((topic, index) => {
     const post = orderedPosts[index]
     return {
@@ -104,10 +106,10 @@ export function BlogListPage() {
       <section className="mx-auto w-full max-w-6xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="rounded-[30px] border border-slate-200 bg-white p-6 sm:p-8 lg:p-10">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">{t.title}</p>
-          <h1 className="mt-4 text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">{t.subtitle}</h1>
+          <h1 className="mt-4 text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">{subtitle}</h1>
 
           <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
-            <h2 className="text-xl font-semibold text-slate-950">{t.topicsTitle}</h2>
+            <h2 className="text-xl font-semibold text-slate-950">{topicsTitle}</h2>
             <label className="mt-4 flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-600">
               <Search className="h-4 w-4 text-sky-700" />
               <span className="sr-only">{t.searchLabel}</span>

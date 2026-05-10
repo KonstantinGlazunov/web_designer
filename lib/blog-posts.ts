@@ -1643,6 +1643,1346 @@ export const blogPosts: BlogPost[] = [
       },
     },
   },
+  {
+    slug: 'mikroanimationen-die-konvertieren',
+    image: '/images/blog-v3/mikroanimationen-die-konvertieren.png',
+    publishedAtISO: '2026-05-13',
+    readTimeMin: 8,
+    topicLabel: {
+      de: 'Mikroanimationen',
+      ru: 'Микроанимации',
+    },
+    seoTitle: 'Mikroanimationen, die verkaufen: UX-Details für mehr Conversion (2026)',
+    seoDescription:
+      'Wie Mikroanimationen Orientierung geben, Vertrauen stärken und Conversion erhöhen – ohne vom Angebot abzulenken.',
+    keywords: ['mikroanimationen', 'microinteractions', 'landingpage ux', 'conversion', 'ui feedback'],
+    sources: [
+      {
+        title: 'Microinteractions: Designing with Details',
+        url: 'https://www.microinteractions.com/',
+        publisher: 'Dan Saffer',
+        publishedAt: '2013',
+      },
+      {
+        title: 'Progress Indicators: The Good, the Bad, and the Ugly',
+        url: 'https://www.nngroup.com/articles/progress-indicators/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2021',
+      },
+      {
+        title: 'Buttons in UI Design: Best Practices',
+        url: 'https://www.nngroup.com/articles/buttons/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2022',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Mikroanimationen, die verkaufen – und nicht ablenken',
+        excerpt:
+          'Die beste Animation ist die, die man kaum als Animation wahrnimmt: Sie erklärt, bestätigt und beruhigt – und macht den nächsten Schritt leichter.',
+        summary:
+          'In 2026 gewinnen Landingpages nicht durch „mehr Motion“, sondern durch gezieltes Feedback: Zustand, Fortschritt, Ergebnis. Mikroanimationen sind Verkaufslogik in UI-Form.',
+        styleLabel: 'Minimal Mono',
+        sections: [
+          {
+            title: '1) Was Mikroanimationen wirklich „verkaufen“',
+            paragraphs: [
+              'Mikroanimationen verkaufen nicht durch Show, sondern durch Klarheit. Sie reduzieren die Unsicherheit: Hat mein Klick funktioniert? Wird etwas geladen? Wo bin ich im Prozess?',
+              'Wenn Unsicherheit sinkt, steigt Abschlussrate. Das gilt besonders bei Formularen, Buchungen und CTA-Übergängen.',
+            ],
+          },
+          {
+            title: '2) Drei Motions, die fast immer wirken',
+            paragraphs: [
+              'Status-Feedback: Button-Press, Loading-State, Erfolgsmeldung. Der Nutzer bekommt sofort das Gefühl „es passiert etwas“.',
+              'Layout-Stabilität: sanfte Übergänge statt Sprünge. Nicht die Animation macht den Effekt, sondern dass die Seite „ruhig“ bleibt.',
+            ],
+          },
+          {
+            title: '3) Wo Motion Conversion zerstört',
+            paragraphs: [
+              'Wenn Animationen Aufmerksamkeit vom Angebot wegziehen, sind sie ein Conversion-Steuer. Typisch: große Hero-Animationen, endlose Parallax, „wow“-Effekte ohne Nutzen.',
+              'Auch kritisch: zu langsame Übergänge. Wenn Motion Zeit kostet, fühlt sich die Seite schwer an – besonders mobil.',
+            ],
+          },
+          {
+            title: '4) Ein pragmatisches Motion-Setup für KMU',
+            paragraphs: [
+              'Definieren Sie 3–5 wiederverwendbare Patterns: Hover/Press, Loading, Success, Error, Section-Enter. Mehr braucht es selten.',
+              'Wenn jedes Element anders animiert, wirkt die Seite unprofessionell. Konsistenz ist hier wichtiger als Kreativität.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: Mikroanimationen ohne Ablenkung',
+        checklist: [
+          'Jeder wichtige Klick hat sichtbares Feedback',
+          'Loading-States sind kurz und eindeutig',
+          'Keine großen Bewegungen im ersten Screen ohne Zweck',
+          'Motion bleibt auf Mobil schnell und sparsam',
+          'Transitions sind konsistent (ein System, nicht „Zufall“)',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'Mikroanimationen sind kein „Nice-to-have“. Richtig eingesetzt machen sie den Kaufpfad ruhiger, sicherer und messbar effizienter – ohne dass die Seite nach Effekten aussieht.',
+      },
+      ru: {
+        title: 'Микроанимации, которые продают, а не отвлекают',
+        excerpt:
+          'Лучшая анимация — та, которую не замечают как анимацию: она подтверждает действие, объясняет состояние и делает следующий шаг спокойнее.',
+        summary:
+          'В 2026 выигрывают не «самые анимированные» лендинги, а самые понятные. Микроанимации работают как визуальный сервис: статус, прогресс, результат.',
+        styleLabel: 'Minimal Mono',
+        sections: [
+          {
+            title: '1) Что именно “продаёт” микроанимация',
+            paragraphs: [
+              'Она продаёт не эффектом, а уверенностью. Пользователь сразу понимает: клик сработал, форма отправляется, ошибка подсвечена, процесс идёт.',
+              'Чем меньше неопределенности, тем выше вероятность, что человек завершит действие — особенно на мобильных.',
+            ],
+          },
+          {
+            title: '2) Три типа анимаций с самым стабильным эффектом',
+            paragraphs: [
+              'Обратная связь: нажатие кнопки, состояние загрузки, подтверждение успеха. Это снижает тревожность и “пустые клики”.',
+              'Плавные переходы без прыжков: важно не «красиво двигается», а «ничего не ломается и не скачет».',
+            ],
+          },
+          {
+            title: '3) Где анимация убивает конверсию',
+            paragraphs: [
+              'Когда движение забирает внимание у смысла: гигантские hero-анимации, параллакс “ради вау”, бесконечные эффекты на скролле.',
+              'Второй риск — медлительность. Если анимация добавляет ожидание, лендинг ощущается тяжелым и раздражает.',
+            ],
+          },
+          {
+            title: '4) Практичная “motion-система” для малого бизнеса',
+            paragraphs: [
+              'Достаточно 3–5 повторяемых паттернов: hover/press, loading, success, error, появление блока.',
+              'Главное — единый стиль. Когда каждый элемент анимирован по-разному, страница выглядит случайной и дешевой.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: микроанимации без отвлечения',
+        checklist: [
+          'У каждого важного клика есть явная обратная связь',
+          'Загрузка показывается коротко и понятно',
+          'На первом экране нет движения “ради красоты”',
+          'На мобильных анимации быстрые и экономные',
+          'Переходы консистентны: один набор правил',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'Микроанимации — это не украшение. Это способ сделать путь к заявке спокойнее и понятнее, а значит — поднять конверсию без агрессивных приемов.',
+      },
+    },
+  },
+  {
+    slug: 'dark-patterns-sind-tot-was-statt-druck-funktioniert',
+    image: '/images/blog-v3/dark-patterns-sind-tot.png',
+    publishedAtISO: '2026-05-14',
+    readTimeMin: 9,
+    topicLabel: {
+      de: 'Trust statt Druck',
+      ru: 'Доверие вместо давления',
+    },
+    seoTitle: 'Dark Patterns sind tot: Wie Landingpages 2026 ohne Druck verkaufen',
+    seoDescription:
+      'Aggressive Knappheit, Fake-Timer und Tricks kosten heute Vertrauen. Was stattdessen nachhaltig konvertiert.',
+    keywords: ['dark patterns', 'ethical ux', 'landingpage vertrauen', 'conversion psychologie', 'transparenz'],
+    sources: [
+      {
+        title: 'Deceptive Patterns',
+        url: 'https://www.deceptive.design/',
+        publisher: 'deceptive.design',
+        publishedAt: 'laufend',
+      },
+      {
+        title: 'Ethical Design: Manifesto',
+        url: 'https://ethicaldesign.network/',
+        publisher: 'Ethical Design Network',
+        publishedAt: 'laufend',
+      },
+      {
+        title: 'How People Read Online: New and Old Findings',
+        url: 'https://www.nngroup.com/articles/how-people-read-online/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2020',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Dark Patterns sind tot: womit man aggressiven Druck ersetzt',
+        excerpt:
+          'Wenn die Seite „drückt“, klicken vielleicht mehr Leute – aber weniger passende. In 2026 zählt nicht nur Conversion, sondern auch Qualität und Vertrauen.',
+        summary:
+          'Die Alternative zu Druck ist nicht „nett sein“. Es ist klare Erwartungsführung: Transparenz, Prozesssicherheit und echte Gründe, jetzt zu handeln.',
+        styleLabel: 'Warm Editorial',
+        sections: [
+          {
+            title: '1) Warum Druck-Patterns heute teurer werden',
+            paragraphs: [
+              'Fake-Knappheit, Timer und Schuldgefühle erzeugen kurzfristige Klicks, aber sie beschädigen Marke und Weiterempfehlungen.',
+              'Außerdem steigen die Kosten nachgelagert: mehr Rückfragen, mehr Stornos, mehr „falsche“ Leads.',
+            ],
+          },
+          {
+            title: '2) Der Ersatz: „Begründete Dringlichkeit“',
+            paragraphs: [
+              'Dringlichkeit funktioniert, wenn sie erklärbar ist: feste Kapazität, echte Lieferzeiten, begrenzte Slots mit sichtbarem Prozess.',
+              'Sagen Sie nicht „nur heute“, sondern „so läuft es: Anfrage → Termin → Umsetzung“ und wo Engpässe real entstehen.',
+            ],
+          },
+          {
+            title: '3) Druck wird ersetzt durch Entscheidungshilfe',
+            paragraphs: [
+              'Eine Seite konvertiert sauber, wenn sie die Entscheidung kleiner macht: klare Pakete, klare nächsten Schritte, klare Grenzen.',
+              'Statt „Jetzt sofort!“ hilft oft: Beispiel-Ergebnis + Ablauf + was der Kunde vorbereiten muss.',
+            ],
+          },
+          {
+            title: '4) Vertrauen ist ein System aus vielen kleinen Signalen',
+            paragraphs: [
+              'Transparente Preiseinstiege, echte Fotos, saubere FAQ, klare Datenschutz-Hinweise und stabile UI sind zusammen stärker als jeder Trick.',
+              'Gerade bei Services ist „wie arbeiten wir?“ häufig wichtiger als „wie laut schreien wir?“.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: Conversion ohne Dark Patterns',
+        checklist: [
+          'Dringlichkeit nur, wenn sie belegbar ist',
+          'Klare Schritte und Erwartungen statt Druck-Sprache',
+          'Echte Trust-Signale: Beispiele, Fotos, FAQ',
+          'Transparente Grenzen: für wen geeignet / nicht geeignet',
+          'Messung auf Lead-Qualität, nicht nur auf Anzahl',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'Aggressiver Druck wirkt wie ein Kurzschluss. Nachhaltig gewinnt die Landingpage, die Klarheit schafft: was passiert als nächstes und warum sich der Schritt lohnt.',
+      },
+      ru: {
+        title: 'Темные паттерны умерли: чем заменять агрессивное давление',
+        excerpt:
+          'Если лендинг “давит”, заявок может стать больше — но качество обычно падает. В 2026 важнее доверие и предсказуемость процесса.',
+        summary:
+          'Замена давлению — не “быть милым”, а быть ясным: объяснять причины, показывать процесс, помогать принять решение без манипуляций.',
+        styleLabel: 'Warm Editorial',
+        sections: [
+          {
+            title: '1) Почему давление стало плохой ставкой',
+            paragraphs: [
+              'Фейковая срочность, таймеры и «вам сейчас выгодно» иногда дают клики, но портят отношение к бренду.',
+              'А дальше растут скрытые издержки: больше пустых обращений, больше отказов, больше негативных ощущений.',
+            ],
+          },
+          {
+            title: '2) Замена №1: “обоснованная срочность”',
+            paragraphs: [
+              'Срочность работает, когда она объяснима: реальные слоты в календаре, реальная загрузка, реальные сроки.',
+              'Не “только сегодня”, а “как устроен процесс и где появляется очередь”. Тогда решение выглядит взрослым.',
+            ],
+          },
+          {
+            title: '3) Замена №2: помощь в выборе вместо давления',
+            paragraphs: [
+              'Хороший лендинг уменьшает сложность решения: понятные варианты, понятный следующий шаг, понятные ограничения.',
+              'Часто сильнее любых “акций” работает связка: пример результата → этапы → что нужно от клиента.',
+            ],
+          },
+          {
+            title: '4) Доверие собирается из мелочей',
+            paragraphs: [
+              'Прозрачные рамки цены, реальные фото, FAQ, аккуратная форма, честные условия и понятный Datenschutz — это система.',
+              'Особенно в услугах “как вы работаете” продает сильнее, чем “как громко вы кричите”.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: конверсия без манипуляций',
+        checklist: [
+          'Срочность только там, где она реальная и объяснимая',
+          'Ясные шаги и ожидания вместо “давящих” формулировок',
+          'Trust-сигналы: примеры, фото, FAQ, гарантии',
+          'Четко сказано, кому подходит услуга и кому нет',
+          'Оцениваем качество лидов, а не только их количество',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'Давление — это быстрый трюк. В 2026 устойчиво выигрывает лендинг, который объясняет: что будет дальше и почему шаг безопасен и выгоден по делу.',
+      },
+    },
+  },
+  {
+    slug: 'minimalismus-der-verkauft-landingpages',
+    image: '/images/blog-v3/minimalismus-der-verkauft.png',
+    publishedAtISO: '2026-05-15',
+    readTimeMin: 8,
+    topicLabel: {
+      de: 'Verkaufender Minimalismus',
+      ru: 'Продающий минимализм',
+    },
+    seoTitle: 'Verkaufender Minimalismus auf Landingpages: weniger, aber schärfer (2026)',
+    seoDescription:
+      'Wie minimalistische Landingpages mehr verkaufen: durch klare Prioritäten, harte Struktur und bessere Lesbarkeit.',
+    keywords: ['minimalismus landingpage', 'conversion design', 'ux writing', 'visual hierarchy', 'landingpage struktur'],
+    sources: [
+      {
+        title: 'Visual Hierarchy in UX: Definition',
+        url: 'https://www.nngroup.com/articles/visual-hierarchy-ux-definition/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2023',
+      },
+      {
+        title: 'The Fold Manifesto',
+        url: 'https://foldmanifesto.com/',
+        publisher: 'Fold Manifesto',
+        publishedAt: 'laufend',
+      },
+      {
+        title: 'Fitts’s Law',
+        url: 'https://www.nngroup.com/articles/fitts-law/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2022',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Verkaufender Minimalismus: nicht weniger Inhalt, sondern weniger Lärm',
+        excerpt:
+          'Minimalismus heißt nicht „kurz“. Es heißt: jede Zeile verdient ihren Platz – und jeder Block hat eine Aufgabe im Kaufpfad.',
+        summary:
+          'Minimalistische Landingpages konvertieren, wenn sie die Entscheidung vereinfachen: klare Hierarchie, klare Belege, klarer nächster Schritt.',
+        styleLabel: 'Blueprint',
+        sections: [
+          {
+            title: '1) Minimalismus scheitert oft am falschen Ziel',
+            paragraphs: [
+              'Viele Seiten entfernen „zu viel“ und verlieren dann Kontext: Was bekomme ich? Für wen ist das? Wie läuft es ab?',
+              'Der richtige Minimalismus kürzt nicht die Information, sondern die Ablenkung: redundante Claims, doppelte CTAs, überladene Layouts.',
+            ],
+          },
+          {
+            title: '2) Eine Seite braucht eine klare Rangliste',
+            paragraphs: [
+              'Definieren Sie: 1) Angebot, 2) Beweis, 3) Prozess, 4) CTA. Alles andere ist sekundär.',
+              'Wenn alles gleich wichtig aussieht, wirkt nichts wichtig. Minimalismus ist Visual Hierarchy als Disziplin.',
+            ],
+          },
+          {
+            title: '3) „Leere“ ist nur gut, wenn sie Sinn trägt',
+            paragraphs: [
+              'Whitespace wirkt edel, wenn die Inhalte präzise sind. Bei schwachen Formulierungen wirkt er nur „leer“.',
+              'Deshalb braucht minimalistische Copy mehr Schärfe: konkrete Ergebnisse, konkrete Zeitrahmen, konkrete Beispiele.',
+            ],
+          },
+          {
+            title: '4) Minimalismus als Conversion-Test',
+            paragraphs: [
+              'Stellen Sie sich pro Block eine Frage: Welche Entscheidung soll der Nutzer jetzt treffen?',
+              'Wenn ein Block keine Entscheidung vorbereitet, gehört er raus – oder er muss umgebaut werden.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: Minimalismus, der konvertiert',
+        checklist: [
+          'Pro Abschnitt genau eine Aufgabe im Kaufpfad',
+          'Headline sagt Leistung + Zielgruppe + Outcome',
+          'Belege sichtbar (Beispiele, Zahlen, Resultate)',
+          'Ein primärer CTA, wiederholt mit Kontext',
+          'Kein „Design-Whitespace“ ohne starke Copy',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'Verkaufender Minimalismus ist nicht „weniger Text“. Es ist weniger Lärm und mehr Präzision – damit Nutzer schneller verstehen und handeln.',
+      },
+      ru: {
+        title: 'Продающий минимализм на лендингах',
+        excerpt:
+          'Минимализм — это не “коротко”. Это когда каждая строка на странице работает на решение: понять, поверить, сделать шаг.',
+        summary:
+          'Минималистичный лендинг продает, если он упрощает выбор: четкая иерархия, доказательства, понятный процесс, один главный CTA.',
+        styleLabel: 'Blueprint',
+        sections: [
+          {
+            title: '1) Где минимализм чаще всего ломается',
+            paragraphs: [
+              'Когда убирают не шум, а смысл: кому услуга, какой результат, как вы работаете, что будет дальше.',
+              'Правильный минимализм вырезает лишнее: дубли, общие слова, конкурирующие CTA и декоративные блоки.',
+            ],
+          },
+          {
+            title: '2) Странице нужна “таблица приоритетов”',
+            paragraphs: [
+              'Соберите порядок: 1) оффер, 2) доказательства, 3) процесс, 4) CTA. Остальное — вторично.',
+              'Если все выглядит одинаково важным, ничто не выглядит важным. Минимализм — дисциплина иерархии.',
+            ],
+          },
+          {
+            title: '3) “Пустота” работает только с точным текстом',
+            paragraphs: [
+              'Whitespace выглядит дорого, когда формулировки конкретные. Если текст слабый, страница кажется просто пустой.',
+              'Поэтому минимализм требует точности: примеры, сроки, формат, ограничения, понятные слова вместо рекламы.',
+            ],
+          },
+          {
+            title: '4) Минимализм как тест на полезность блоков',
+            paragraphs: [
+              'Задайте вопрос к каждому блоку: какое решение пользователь должен принять после него?',
+              'Если блок не приближает к действию, он лишний — или его нужно перестроить.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: минимализм, который конвертит',
+        checklist: [
+          'У каждого блока одна задача в пути решения',
+          'Заголовок = услуга + кому + результат',
+          'Доказательства видны сразу (примеры, цифры, кейсы)',
+          'Один главный CTA, повторяется с контекстом',
+          'Нет “пустоты ради дизайна” без сильного смысла',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'Продающий минимализм — это меньше шума и больше точности. Он помогает человеку быстрее понять, поверить и сделать шаг.',
+      },
+    },
+  },
+  {
+    slug: 'landingpages-fuer-llm-antworten-und-zitate',
+    image: '/images/blog-v3/landingpages-fuer-llm-zitate.png',
+    publishedAtISO: '2026-05-16',
+    readTimeMin: 10,
+    topicLabel: {
+      de: 'LLM-Sichtbarkeit',
+      ru: 'Видимость в LLM',
+    },
+    seoTitle: 'Landingpages für LLM-Antworten: so werden Sie zitierfähig (2026)',
+    seoDescription:
+      'Wie man Landingpages so strukturiert, dass Menschen schneller verstehen – und LLMs sie eher zusammenfassen und verlinken.',
+    keywords: ['llm seo', 'ai search', 'citability', 'landingpage struktur', 'entity seo'],
+    sources: [
+      {
+        title: 'Learn About Article Schema Markup',
+        url: 'https://developers.google.com/search/docs/appearance/structured-data/article',
+        publisher: 'Google Search Central',
+        publishedAt: '2026',
+      },
+      {
+        title: 'Structured Data General Guidelines',
+        url: 'https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data',
+        publisher: 'Google Search Central',
+        publishedAt: '2026',
+      },
+      {
+        title: 'How People Read Online: New and Old Findings',
+        url: 'https://www.nngroup.com/articles/how-people-read-online/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2020',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Landingpage für LLMs: nicht „Keywords“, sondern Zitierbarkeit',
+        excerpt:
+          'Wenn ein LLM Ihre Seite zusammenfasst, braucht es klare, überprüfbare Sätze. Je mehr Struktur und Kontext, desto eher wird Ihre Seite als Quelle genutzt.',
+        summary:
+          'LLM-freundliche Landingpages sind für Menschen ebenfalls besser: klare Begriffe, kurze Definitionen, saubere FAQ und strukturierte Daten. Das verbessert sowohl SEO als auch Conversion.',
+        styleLabel: 'Data Heatmap',
+        sections: [
+          {
+            title: '1) Was „zitierfähig“ in der Praxis bedeutet',
+            paragraphs: [
+              'Zitierfähig ist ein Absatz, den man als Antwortbaustein nutzen kann: konkret, ohne Marketing-Schaum, mit klaren Begriffen.',
+              'Beispiel: „Wir erstellen Landingpages für lokale Dienstleister in Deutschland, inkl. Text, Design, Tracking und DSGVO-Setup.“ Das ist greifbar.',
+            ],
+          },
+          {
+            title: '2) Struktur schlägt Länge',
+            paragraphs: [
+              'LLMs und Suchsysteme profitieren von H-Struktur, kurzen Absätzen und eindeutigen Überschriften, die tatsächlich Inhalt tragen.',
+              'Bauen Sie „Definition → Nutzen → Ablauf → Beispiele → FAQ“ als wiederkehrendes Muster. Das ist leicht zu verstehen und leicht zu referenzieren.',
+            ],
+          },
+          {
+            title: '3) „Entity-Klarheit“: wer, was, wo, wie',
+            paragraphs: [
+              'Nennen Sie Leistung, Zielgruppe, Region und nächsten Schritt mehrfach – aber natürlich, nicht als Spam.',
+              'Wichtig: echte Details. Tools, Zeitrahmen, Lieferobjekte, Voraussetzungen. Das erhöht Vertrauen und Antwortqualität.',
+            ],
+          },
+          {
+            title: '4) Maschinenlesbarkeit ohne Overengineering',
+            paragraphs: [
+              'Nutzen Sie strukturierte Daten dort, wo es passt (Organization, LocalBusiness, Service, FAQPage/BlogPosting).',
+              'Aber: nur Markup, das durch sichtbaren Inhalt gedeckt ist. Konsistenz ist wichtiger als Menge.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: LLM-freundliche Landingpage',
+        checklist: [
+          'Konkrete, zitierbare Sätze statt Werbephrasen',
+          'Klare H1/H2-Struktur mit „Definition → Ablauf → FAQ“',
+          'Echte Details (Lieferumfang, Zeitrahmen, Voraussetzungen)',
+          'FAQ mit kurzen, direkten Antworten',
+          'Passende strukturierte Daten ohne Übertreibung',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'Wenn Sie für LLM-Zitate schreiben, schreiben Sie automatisch besser für Menschen: klar, überprüfbar und hilfreich. Das ist 2026 ein doppelter SEO- und Conversion-Vorteil.',
+      },
+      ru: {
+        title: 'Лендинг для LLM: не “ключи”, а цитируемость',
+        excerpt:
+          'Чтобы LLM захотела сослаться на вашу страницу, ей нужны ясные, проверяемые формулировки. Чем больше структуры и фактов, тем выше шанс стать источником.',
+        summary:
+          'LLM-дружелюбный лендинг почти всегда лучше и для людей: четкие определения, короткие ответы, понятные шаги, FAQ и структурированные данные.',
+        styleLabel: 'Data Heatmap',
+        sections: [
+          {
+            title: '1) Что значит “цитируемость” простыми словами',
+            paragraphs: [
+              'Цитируемый текст — это кусок, который можно вставить в ответ без стыда: конкретно, без рекламного тумана, с понятными терминами.',
+              'Пример: “Делаем лендинги для локального бизнеса в Германии: текст, дизайн, аналитика, настройка Datenschutz.” Это понятно и полезно.',
+            ],
+          },
+          {
+            title: '2) Структура важнее объема',
+            paragraphs: [
+              'LLM и поиску легче работать с H-структурой, короткими абзацами и заголовками, которые реально описывают смысл.',
+              'Соберите повторяемый шаблон: “что это → кому подходит → как работает → примеры → FAQ”. Это удобно пересказывать и ссылаться.',
+            ],
+          },
+          {
+            title: '3) Ясность сущностей: кто, что, где, как',
+            paragraphs: [
+              'Называйте услугу, аудиторию, регион и следующий шаг естественно и несколько раз, но без спама.',
+              'Добавляйте факты: сроки, формат, что входит, что нужно от клиента. Это повышает доверие и качество “пересказа” LLM.',
+            ],
+          },
+          {
+            title: '4) Машиночитаемость без усложнений',
+            paragraphs: [
+              'Структурированные данные помогают, когда они по делу: Organization, LocalBusiness, Service, FAQPage/BlogPosting.',
+              'Важно: разметка должна соответствовать видимому контенту. Консистентность важнее количества.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: LLM-дружелюбный лендинг',
+        checklist: [
+          'Конкретные фразы вместо “лучшее качество по лучшей цене”',
+          'Четкая H-структура + логичный шаблон блоков',
+          'Факты: сроки, вход/выход, требования, гарантии',
+          'FAQ с короткими прямыми ответами',
+          'Structured data по типу страницы, без перегиба',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'Когда вы пишете “чтобы LLM было легко сослаться”, вы автоматически пишете лучше для людей. В 2026 это дает и SEO-видимость, и более сильную конверсию.',
+      },
+    },
+  },
+  {
+    slug: 'visuelle-seriositaet-webdesign-2026',
+    image: '/images/blog-v3/visuelle-seriositaet-2026.png',
+    publishedAtISO: '2026-05-17',
+    readTimeMin: 9,
+    topicLabel: {
+      de: 'Visuelle Seriosität',
+      ru: 'Визуальная серьезность',
+    },
+    seoTitle: 'Visuelle Seriosität 2026: Warum Webdesign wieder „ernster“ wird',
+    seoDescription:
+      'Was sich im Webdesign 2026 verschiebt: weniger „laut“, mehr Präzision, Textqualität und glaubwürdige Marken-Signale.',
+    keywords: ['webdesign 2026', 'design trends', 'trust design', 'typografie', 'branding'],
+    sources: [
+      {
+        title: '10 Usability Heuristics for User Interface Design',
+        url: 'https://www.nngroup.com/articles/ten-usability-heuristics/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2020',
+      },
+      {
+        title: 'Typography for Interfaces',
+        url: 'https://practicaltypography.com/typography-in-ten-minutes.html',
+        publisher: 'Practical Typography',
+        publishedAt: 'laufend',
+      },
+      {
+        title: 'The Psychology of Design',
+        url: 'https://lawsofux.com/',
+        publisher: 'Laws of UX',
+        publishedAt: 'laufend',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Neue visuelle Seriosität: Webdesign 2026 wird weniger „Show“',
+        excerpt:
+          'Viele Nutzer sind müde von generischen, überlauten Designs. Was funktioniert, wirkt ruhiger: gute Typografie, echte Inhalte, klare Belege.',
+        summary:
+          '„Seriös“ heißt nicht langweilig. Es heißt: präzise, aufgeräumt, glaubwürdig. Für Services ist das oft der schnellste Weg zu besseren Leads.',
+        styleLabel: 'Paper Collage',
+        sections: [
+          {
+            title: '1) Warum sich der Geschmack verschiebt',
+            paragraphs: [
+              'Wenn vieles aussieht wie ein Template, wird Differenzierung wieder in Details entschieden: Sprache, Struktur, echte Beispiele.',
+              'Nutzer suchen weniger „Wow“, mehr „Kann ich dem vertrauen?“. Das ist ein Design- und Content-Thema.',
+            ],
+          },
+          {
+            title: '2) Seriosität entsteht durch Text- und Typografie-Qualität',
+            paragraphs: [
+              'Klare Headline, verständliche Sätze, gutes Zeilenmaß und saubere Abstände wirken stärker als dekorative Effekte.',
+              'Schlechte Copy macht jedes Design billig. Gute Copy macht sogar einfache Layouts hochwertig.',
+            ],
+          },
+          {
+            title: '3) Echte Belege schlagen generische Claims',
+            paragraphs: [
+              'Seriös wirkt, was überprüfbar ist: Vorher/Nachher, konkrete Resultate, klare Prozesse, echte Fotos.',
+              'Wenn Sie „Qualität“ sagen, zeigen Sie, wie sie entsteht: Methodik, QA, Iterationen, Abnahme.',
+            ],
+          },
+          {
+            title: '4) „Ruhig“ heißt: weniger Reibung im Flow',
+            paragraphs: [
+              'Visuelle Seriosität ist auch UX: stabile Layouts, schnelle Seiten, klare CTA-Flows.',
+              'Wer aufdringlich wirkt, verliert. Wer ruhig führt, gewinnt – besonders bei hochpreisigen Services.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: seriöser Look ohne Kälte',
+        checklist: [
+          'Bessere Typografie (Spacing, Line-Height, Hierarchie)',
+          'Weniger Effekte, mehr echte Beispiele',
+          'Klarer Prozessblock: Schritt 1–2–3',
+          'Saubere FAQ mit realen Fragen',
+          'Schnelle Seite + stabile UI ohne Sprünge',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'In 2026 ist „seriös“ ein Performance-Vorteil: weniger Misstrauen, weniger Rückfragen, bessere Leads. Der Hebel ist Präzision – nicht Lautstärke.',
+      },
+      ru: {
+        title: 'Новая визуальная серьезность в web-дизайне 2026',
+        excerpt:
+          'Пользователи устали от одинаковых “шаблонных вау-лендингов”. Лучше работают спокойные страницы: типографика, факты, реальные примеры.',
+        summary:
+          'Серьезность — это не скука. Это точность, порядок и доверие. Для услуг это часто самый быстрый путь к более качественным заявкам.',
+        styleLabel: 'Paper Collage',
+        sections: [
+          {
+            title: '1) Почему “вкус” меняется',
+            paragraphs: [
+              'Когда многое выглядит как один и тот же шаблон, дифференциация снова уходит в детали: слова, структура, примеры.',
+              'Люди ищут меньше “вау” и больше “можно ли доверять?”. Это одновременно дизайн и контент.',
+            ],
+          },
+          {
+            title: '2) Серьезность начинается с текста и типографики',
+            paragraphs: [
+              'Четкий заголовок, понятные предложения, правильные отступы и длина строк дают эффект сильнее, чем декор.',
+              'Плохой текст делает любой дизайн дешевым. Хороший текст делает даже простую верстку дорогой.',
+            ],
+          },
+          {
+            title: '3) Факты сильнее общих обещаний',
+            paragraphs: [
+              'Доверие растет от проверяемого: результаты, процесс, сроки, реальные фото, прозрачные условия.',
+              'Если вы пишете “качество”, покажите, как оно получается: этапы, проверки, согласования.',
+            ],
+          },
+          {
+            title: '4) “Спокойный дизайн” = меньше трения в пути',
+            paragraphs: [
+              'Серьезность — это ещё и UX: стабильная верстка, скорость, понятный CTA-путь.',
+              'Навязчивость проигрывает. Спокойное ведение выигрывает — особенно в дорогих услугах.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: серьезный вид без “холодности”',
+        checklist: [
+          'Усилить типографику (иерархия, отступы, читаемость)',
+          'Сократить эффекты, добавить реальные примеры',
+          'Показать процесс: шаг 1–2–3',
+          'Собрать FAQ из реальных вопросов клиентов',
+          'Сделать страницу быстрой и “непрыгающей”',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'В 2026 визуальная серьезность — это конкурентное преимущество. Она снижает недоверие и повышает качество лидов за счет точности, а не громкости.',
+      },
+    },
+  },
+  {
+    slug: 'personal-brand-des-inhabers-auf-landingpages',
+    image: '/images/blog-v3/personal-brand-inhaber.png',
+    publishedAtISO: '2026-05-18',
+    readTimeMin: 9,
+    topicLabel: {
+      de: 'Owner Brand',
+      ru: 'Личный бренд владельца',
+    },
+    seoTitle: 'Personal Brand des Inhabers: Wie kleine Businesses über Landingpages Vertrauen gewinnen',
+    seoDescription:
+      'Wie man den владельца/Founders sinnvoll in die Landingpage integriert: ohne Selbstdarstellung, aber mit mehr Vertrauen und Klarheit.',
+    keywords: ['personal brand', 'founder marketing', 'landingpage vertrauen', 'small business', 'local services'],
+    sources: [
+      {
+        title: 'Trust in UX Design',
+        url: 'https://www.nngroup.com/articles/trustworthy-design/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2021',
+      },
+      {
+        title: 'About Us Page Best Practices',
+        url: 'https://www.nngroup.com/articles/about-us-pages/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2022',
+      },
+      {
+        title: 'Cialdini’s Principles of Persuasion',
+        url: 'https://www.influenceatwork.com/principles-of-persuasion/',
+        publisher: 'Influence at Work',
+        publishedAt: 'laufend',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Personal Brand des Inhabers: Vertrauen schneller aufbauen (ohne Ego-Show)',
+        excerpt:
+          'Bei lokalen Services kaufen Menschen nicht „eine Website“, sie kaufen Vertrauen. Der Inhaber kann dieses Vertrauen beschleunigen – wenn er richtig platziert wird.',
+        summary:
+          'Eine gute Owner-Story ist kurz, konkret und nützlich: Warum machen wir das, wie arbeiten wir, wofür stehen wir – und was heißt das für den Kunden.',
+        styleLabel: 'Warm Editorial',
+        sections: [
+          {
+            title: '1) Wann Owner-Brand wirklich hilft',
+            paragraphs: [
+              'Wenn das Angebot erklärungsbedürftig ist, wenn Qualität schwer messbar ist oder wenn der Markt voll mit austauschbaren Anbietern ist.',
+              'In diesen Fällen reduziert ein Gesicht und eine klare Haltung Unsicherheit – aber nur mit echten Details.',
+            ],
+          },
+          {
+            title: '2) Die richtige „Owner Box“: 6 Elemente',
+            paragraphs: [
+              'Name + Rolle, 1 Satz Positionierung, 1 Satz Prozess, 1 Beleg (Zertifikat/Ergebnis), 1 Foto, 1 Kontaktweg.',
+              'Nicht: Lebenslauf. Sondern: warum der Kunde hier sicher ist und was er erwarten darf.',
+            ],
+          },
+          {
+            title: '3) Typische Fehler (und wie man sie vermeidet)',
+            paragraphs: [
+              'Zu lang, zu privat, zu unkonkret. Oder ein Stockfoto, das Vertrauen zerstört.',
+              'Besser: echte Bilder, klare Worte, kurze Fakten. Und die Story als Ergänzung zum Angebot, nicht als Ersatz.',
+            ],
+          },
+          {
+            title: '4) Owner-Brand als Conversion-Mechanik',
+            paragraphs: [
+              'Platzierung nahe CTA wirkt am stärksten: „Wer ist das?“ und „Wie läuft das?“ werden direkt beantwortet.',
+              'Kombinieren Sie das mit Prozess-Block und FAQ – so entsteht ein „sicherer Pfad“ zur Anfrage.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: Owner-Brand auf Landingpages',
+        checklist: [
+          'Echtes Foto + echter Name + klare Rolle',
+          '1–2 Sätze: wofür wir stehen und wie wir arbeiten',
+          'Ein Beleg: Ergebnis, Erfahrung, Zertifikat oder Fall',
+          'Platzierung nahe CTA oder Prozess, nicht im Footer',
+          'Keine „Story“, die das Angebot ersetzt',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'Für kleine Unternehmen ist der Inhaber oft der stärkste Trust-Hebel. Nicht durch Selbstdarstellung, sondern durch klare, nützliche Orientierung für den Kunden.',
+      },
+      ru: {
+        title: 'Личный бренд владельца на лендинге малого бизнеса',
+        excerpt:
+          'В услугах люди покупают не “страницу”, а уверенность. Владелец может ускорить доверие — если показать его правильно и коротко.',
+        summary:
+          'Сильный блок владельца — это не автобиография. Это понятные ответы: почему вам можно доверять, как вы работаете и что получит клиент.',
+        styleLabel: 'Warm Editorial',
+        sections: [
+          {
+            title: '1) Когда личный бренд реально помогает',
+            paragraphs: [
+              'Когда услуга сложная, качество трудно проверить заранее, а вокруг много похожих предложений.',
+              'В таких рынках “лицо + позиция + процесс” снижает неопределенность быстрее любых общих обещаний.',
+            ],
+          },
+          {
+            title: '2) “Owner-блок”, который работает: 6 элементов',
+            paragraphs: [
+              'Имя и роль, 1 фраза позиционирования, 1 фраза про процесс, 1 доказательство (результат/сертификат), 1 фото, 1 удобный контакт.',
+              'Не резюме, а причина, почему клиенту безопасно сделать шаг.',
+            ],
+          },
+          {
+            title: '3) Типичные ошибки',
+            paragraphs: [
+              'Слишком длинно, слишком лично, слишком размыто. Или стоковое фото, которое мгновенно ломает доверие.',
+              'Лучше: реальные фото, конкретные слова, короткие факты. И история — как дополнение к офферу, а не вместо него.',
+            ],
+          },
+          {
+            title: '4) Личный бренд как часть конверсионной логики',
+            paragraphs: [
+              'Сильнее всего работает рядом с CTA: человек сразу понимает, кто вы и как будет выглядеть взаимодействие.',
+              'Добавьте процесс и FAQ — и получится “безопасный путь” к заявке без давления.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: личный бренд владельца на лендинге',
+        checklist: [
+          'Реальное фото, реальное имя, понятная роль',
+          '1–2 предложения: позиция и стиль работы',
+          'Одно доказательство: результат/опыт/сертификат',
+          'Размещать ближе к CTA или процессу, а не в футере',
+          'Не превращать страницу в “историю о себе” вместо оффера',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'Для малого бизнеса владелец — сильнейший trust-актив. Он работает, когда помогает клиенту понять: “мне безопасно и понятно, что будет дальше”.',
+      },
+    },
+  },
+  {
+    slug: 'anti-chaos-landingpage-viele-leistungen',
+    image: '/images/blog-v3/anti-chaos-viele-leistungen.png',
+    publishedAtISO: '2026-05-19',
+    readTimeMin: 10,
+    topicLabel: {
+      de: 'Anti-Chaos',
+      ru: 'Антихаос',
+    },
+    seoTitle: 'Anti-Chaos: Landingpage bauen, wenn das Business viele Leistungen hat (2026)',
+    seoDescription:
+      'Wie man eine Landingpage strukturiert, wenn es 10–50 услуг gibt: Fokus über Cluster, Pfade und klare Auswahl.',
+    keywords: ['landingpage viele services', 'information architecture', 'service clustering', 'conversion', 'ux struktur'],
+    sources: [
+      {
+        title: 'Information Architecture (IA) Basics',
+        url: 'https://www.nngroup.com/articles/information-architecture-ia-basics/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2022',
+      },
+      {
+        title: 'Recognition rather than recall',
+        url: 'https://www.nngroup.com/articles/recognition-and-recall/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2020',
+      },
+      {
+        title: 'Choice Overload',
+        url: 'https://lawsofux.com/choice-overload/',
+        publisher: 'Laws of UX',
+        publishedAt: 'laufend',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Anti-Chaos: Wie eine Landingpage bei vielen Leistungen trotzdem verkauft',
+        excerpt:
+          'Wenn alles auf eine Seite soll, wird nichts verstanden. Die Lösung ist nicht „mehr Text“, sondern eine klare Navigations- und Auswahl-Logik.',
+        summary:
+          'Mehr Leistungen brauchen nicht mehr Chaos. Mit Clustern, Pfaden und passenden CTAs können Besucher schnell erkennen, ob und wie Sie helfen.',
+        styleLabel: 'Neon Grid',
+        sections: [
+          {
+            title: '1) Das Kernproblem: zu viele Türen, kein Flur',
+            paragraphs: [
+              'Viele Unternehmen stapeln Services als Liste. Nutzer wissen dann nicht, wo sie anfangen sollen.',
+              'Die Landingpage braucht einen „Flur“: eine klare Orientierung, die zu 2–3 passenden Wegen führt.',
+            ],
+          },
+          {
+            title: '2) Clustering statt Aufzählung',
+            paragraphs: [
+              'Bilden Sie 3–5 Service-Cluster nach Kundenzielen, nicht nach interner Organisation.',
+              'Beispiel: „Schnell starten“, „Mehr Anfragen“, „Online-Buchung“, „Shop“, „Support“. Das ist für Nutzer verständlicher.',
+            ],
+          },
+          {
+            title: '3) Pfade: „Wenn X, dann Y“',
+            paragraphs: [
+              'Geben Sie Mini-Entscheidungen: „Wenn Sie schon eine Website haben → Redesign/Optimierung“. „Wenn Sie viele Anrufe wollen → Local Landing + Tracking“.',
+              'So fühlt sich die Seite wie Beratung an, nicht wie ein Katalog.',
+            ],
+          },
+          {
+            title: '4) CTAs pro Cluster (und ein globaler Einstieg)',
+            paragraphs: [
+              'Jeder Cluster braucht eine passende Aktion: Beratung, Audit, Termin, Beispiel ansehen.',
+              'Zusätzlich ein globaler Einstieg: „Kostenlose Kurz-Einschätzung“ für Unentschlossene.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: viele Leistungen, klare Struktur',
+        checklist: [
+          '3–5 Cluster nach Kundenzielen',
+          'Pro Cluster: 1 Satz Nutzen + 3 Beispiele',
+          '„Wenn X, dann Y“-Pfade für Orientierung',
+          'CTA je Cluster + ein globaler Einstieg',
+          'Separate Unterseiten für SEO-Tiefe, Landingpage bleibt fokussiert',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'Eine Landingpage ist kein Preisverzeichnis. Sie ist ein Entscheidungshelfer. Bei vielen Leistungen gewinnt, wer Auswahl einfach macht – nicht wer alles zeigt.',
+      },
+      ru: {
+        title: 'Антихаос: как собирать лендинг, если у бизнеса много услуг',
+        excerpt:
+          'Когда на одну страницу пытаются положить все, пользователь не понимает ничего. Решение — не “больше текста”, а понятная логика выбора.',
+        summary:
+          'Много услуг не означает хаос. Кластеры по целям клиента, простые “пути” и разные CTA позволяют продавать даже сложный каталог.',
+        styleLabel: 'Neon Grid',
+        sections: [
+          {
+            title: '1) Проблема: слишком много дверей и нет коридора',
+            paragraphs: [
+              'Частая ошибка — список услуг подряд. Пользователь не знает, с чего начать и что ему подходит.',
+              'Лендингу нужен “коридор”: короткая ориентация и 2–3 понятных направления.',
+            ],
+          },
+          {
+            title: '2) Кластеры вместо перечисления',
+            paragraphs: [
+              'Соберите 3–5 групп услуг по целям клиента, а не по внутренней структуре компании.',
+              'Например: “быстрый старт”, “больше заявок”, “онлайн-запись”, “магазин”, “поддержка”. Это легче выбрать.',
+            ],
+          },
+          {
+            title: '3) Пути: “если X — то Y”',
+            paragraphs: [
+              'Дайте маленькие решения: “если сайт уже есть — редизайн/оптимизация”. “если нужен поток заявок — локальный лендинг + аналитика”.',
+              'Так страница ощущается как консультация, а не как каталог.',
+            ],
+          },
+          {
+            title: '4) CTA по кластеру + один общий вход',
+            paragraphs: [
+              'Каждому кластеру — свой шаг: консультация, аудит, запись, примеры.',
+              'И общий вход для сомневающихся: “короткая бесплатная оценка”, чтобы не терять теплых клиентов.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: много услуг, но ясная структура',
+        checklist: [
+          '3–5 кластеров по целям клиента',
+          'В каждом: 1 фраза пользы + 3 примера услуг',
+          '“Если X — то Y” для ориентации',
+          'CTA по кластеру + один общий “вход”',
+          'SEO-глубина на отдельных страницах, лендинг держим сфокусированным',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'Лендинг — не прайс-лист. Он помогает выбрать и сделать шаг. При большом наборе услуг выигрывает тот, кто упрощает выбор, а не показывает всё сразу.',
+      },
+    },
+  },
+  {
+    slug: 'consent-ux-datenschutz-ohne-conversionverlust',
+    image: '/images/blog-v3/consent-ux-datenschutz.png',
+    publishedAtISO: '2026-05-20',
+    readTimeMin: 9,
+    topicLabel: {
+      de: 'Consent UX',
+      ru: 'Consent UX',
+    },
+    seoTitle: 'Consent UX 2026: Datenschutz ohne Conversion-Verlust auf Landingpages',
+    seoDescription:
+      'Wie Sie Einwilligung, Tracking und Datenschutztexte so gestalten, dass Vertrauen steigt und Leads nicht abspringen.',
+    keywords: ['consent ux', 'cookie banner', 'datenschutz', 'dsgvo', 'landingpage vertrauen'],
+    sources: [
+      {
+        title: 'GDPR Guidelines on Consent',
+        url: 'https://edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-regulation-2016679_en',
+        publisher: 'EDPB',
+        publishedAt: '2020',
+      },
+      {
+        title: 'Cookie Consent UX: Best Practices',
+        url: 'https://www.nngroup.com/articles/cookie-consent/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2021',
+      },
+      {
+        title: 'Privacy Policy: What to Include',
+        url: 'https://gdpr.eu/privacy-notice/',
+        publisher: 'GDPR.eu',
+        publishedAt: 'laufend',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Consent UX: Wie Datenschutz den Verkauf nicht bremsen muss',
+        excerpt:
+          'Viele Cookie-Banner wirken wie ein Hindernis. Dabei kann Datenschutz auch ein Trust-Signal sein – wenn er klar und respektvoll umgesetzt ist.',
+        summary:
+          'In 2026 ist Tracking nicht nur Technik, sondern Kommunikation. Gute Consent UX erklärt kurz, wofür Daten genutzt werden und gibt Kontrolle ohne Spielchen.',
+        styleLabel: 'Glassmorphism',
+        sections: [
+          {
+            title: '1) Warum Consent UX Conversion beeinflusst',
+            paragraphs: [
+              'Der Banner ist oft der erste „Dialog“ mit dem Nutzer. Wenn er aggressiv oder verwirrend ist, sinkt Vertrauen sofort.',
+              'Gute Consent UX ist schnell, klar und fair – und genau deshalb konvertiert sie besser.',
+            ],
+          },
+          {
+            title: '2) Klarer Text statt juristischer Nebel',
+            paragraphs: [
+              'Ein Satz reicht oft: „Wir nutzen Analytics, um die Seite zu verbessern. Sie können jederzeit ändern.“',
+              'Wenn Sie 200 Wörter zeigen, liest niemand. Der Trick ist: kurz erklären und sauber verlinken (Datenschutz/Impressum).',
+            ],
+          },
+          {
+            title: '3) Keine Tricks: gleichwertige Optionen',
+            paragraphs: [
+              'Wenn „Ablehnen“ versteckt ist, wirkt das wie Manipulation. Das kostet am Ende mehr als es bringt.',
+              'Gleichwertige Buttons und nachvollziehbare Kategorien sind die Basis für Vertrauen und saubere Daten.',
+            ],
+          },
+          {
+            title: '4) Post-Click-Vertrauen: Datenschutz im Flow',
+            paragraphs: [
+              'Neben dem Banner helfen kleine Hinweise: Datenschutz-Link nahe Formular, kurzer Hinweis zur Kontaktaufnahme, klare Aufbewahrungslogik.',
+              'Bei Services ist das ein Vorteil: Der Nutzer spürt „hier ist es seriös“ – ohne dass es kompliziert wird.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: Consent UX ohne Reibung',
+        checklist: [
+          'Kurzer Klartext + Link zu Datenschutz/Impressum',
+          'Gleichwertige Aktionen (Akzeptieren/Ablehnen)',
+          'Kategorien verständlich (Analytics, Marketing, etc.)',
+          'Formular-Hinweis zur Datenverarbeitung',
+          'Einstellungen jederzeit erreichbar',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'Datenschutz ist kein Gegner der Conversion. Er wird zum Vorteil, wenn er als respektvoller, klarer Teil des Nutzerflusses gestaltet ist.',
+      },
+      ru: {
+        title: 'Consent UX: как просить согласие без потери доверия и заявок',
+        excerpt:
+          'Cookie-баннер часто становится первым раздражением. Но Datenschutz может работать как trust-сигнал — если он сделан честно и понятно.',
+        summary:
+          'В 2026 трекинг — это не только техника, но и коммуникация. Хорошая Consent UX объясняет “зачем”, дает контроль и не пытается обмануть.',
+        styleLabel: 'Glassmorphism',
+        sections: [
+          {
+            title: '1) Почему consent влияет на конверсию',
+            paragraphs: [
+              'Баннер — это первый “разговор” с пользователем. Если он агрессивный или запутанный, доверие падает мгновенно.',
+              'Хорошая Consent UX быстрая, понятная и честная — поэтому и конвертит лучше.',
+            ],
+          },
+          {
+            title: '2) Человеческий текст вместо юридического тумана',
+            paragraphs: [
+              'Обычно достаточно одного предложения: “Мы используем аналитику, чтобы улучшать сайт. Настройки можно изменить в любой момент.”',
+              'Если показывать 200 слов, никто не читает. Лучше коротко объяснить и дать ссылки на Datenschutz/Impressum.',
+            ],
+          },
+          {
+            title: '3) Без трюков: равные варианты выбора',
+            paragraphs: [
+              'Если “отказаться” спрятано, это воспринимается как манипуляция и портит бренд.',
+              'Равные кнопки и понятные категории дают и доверие, и более честные данные для оптимизации.',
+            ],
+          },
+          {
+            title: '4) Доверие после клика: приватность в самом пути',
+            paragraphs: [
+              'Помогают мелочи: ссылка на политику рядом с формой, короткое пояснение по обработке контакта, понятные ожидания.',
+              'Для услуг это плюс: пользователь чувствует “здесь все серьезно”, не читая длинных документов.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: consent UX без лишнего трения',
+        checklist: [
+          'Короткий ясный текст + ссылки на Datenschutz/Impressum',
+          'Равные действия: “принять” и “отклонить”',
+          'Понятные категории (аналитика, маркетинг и т.д.)',
+          'Заметный текст про обработку данных рядом с формой',
+          'Настройки доступны в любой момент',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'Приватность не мешает продажам. Она помогает, если встроена в UX честно и понятно — как часть доверия, а не как барьер.',
+      },
+    },
+  },
+  {
+    slug: 'hochpreisige-dienstleistung-landingpage-ohne-preisschock',
+    image: '/images/blog-v3/hochpreisig-ohne-preisschock.png',
+    publishedAtISO: '2026-05-21',
+    readTimeMin: 10,
+    topicLabel: {
+      de: 'High-Ticket Services',
+      ru: 'Дорогие услуги',
+    },
+    seoTitle: 'Teure услуги über Landingpages verkaufen: ohne „zu teuer“-Gefühl (2026)',
+    seoDescription:
+      'Wie hochpreisige Dienstleistungen auf Landingpages verkauft werden, ohne Druck: через Prozess, Kriterien und Risikoreduktion.',
+    keywords: ['hochpreisige dienstleistung', 'high ticket landingpage', 'value communication', 'qualifizierung', 'conversion'],
+    sources: [
+      {
+        title: 'Pricing Page UX: Common Patterns',
+        url: 'https://www.nngroup.com/articles/pricing-pages/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2022',
+      },
+      {
+        title: 'Reducing Cognitive Load in UX',
+        url: 'https://www.nngroup.com/articles/minimize-cognitive-load/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2021',
+      },
+      {
+        title: 'The Scarcity Principle (ethical use)',
+        url: 'https://lawsofux.com/scarcity-bias/',
+        publisher: 'Laws of UX',
+        publishedAt: 'laufend',
+      },
+    ],
+    content: {
+      de: {
+        title: 'High-Ticket-Services verkaufen, ohne dass es „zu teuer“ wirkt',
+        excerpt:
+          '„Zu teuer“ ist oft kein Preisproblem, sondern ein Verständnisproblem: Was bekomme ich genau, wie läuft es ab, und welches Risiko trage ich?',
+        summary:
+          'Teure Services verkaufen sich über Prozessklarheit, Auswahlkriterien und Risikoreduktion. Die Landingpage muss Unsicherheit abbauen, nicht nur „Value“ behaupten.',
+        styleLabel: 'Abstract Ribbon',
+        sections: [
+          {
+            title: '1) Der echte Gegner ist Unsicherheit',
+            paragraphs: [
+              'Wenn Nutzer nicht verstehen, was enthalten ist, wirkt jeder Preis hoch.',
+              'Deshalb muss die Seite zuerst Klarheit liefern: Ergebnis, Lieferobjekte, Zeitrahmen, Verantwortlichkeiten.',
+            ],
+          },
+          {
+            title: '2) Prozess als „Preis-Anker“',
+            paragraphs: [
+              'Ein guter Prozessblock zeigt, warum Qualität Geld kostet: Recherche, Strategie, Umsetzung, QA, Übergabe.',
+              'Das ist kein Selbstlob, sondern ein sichtbarer Arbeitsumfang. Für viele ist das der Moment, in dem Preis logisch wird.',
+            ],
+          },
+          {
+            title: '3) Qualifizierung ist Teil des Verkaufs',
+            paragraphs: [
+              'Sagen Sie klar, für wen das Angebot gedacht ist. Das nimmt Druck aus dem Gespräch und erhöht Lead-Qualität.',
+              'High-Ticket konvertiert oft besser mit einem „Kurz-Check“ oder „Audit“ statt mit „jetzt kaufen“.',
+            ],
+          },
+          {
+            title: '4) Risikoreduktion ohne leere Garantien',
+            paragraphs: [
+              'Statt „100% garantiert“ helfen: klare Scope-Grenzen, feste Meilensteine, transparentes Feedback-System, Referenzen.',
+              'Wenn der Kunde weiß, wie Risiken gehandhabt werden, wirkt der Preis weniger bedrohlich.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: High-Ticket ohne Preisschock',
+        checklist: [
+          'Ergebnis + Lieferobjekte konkret benennen',
+          'Prozess in 4–6 Schritten sichtbar machen',
+          'Klar sagen, für wen es passt (und für wen nicht)',
+          'Einstiegsangebot: Audit/Check statt „Kaufen“',
+          'Risikoreduktion über Scope, Milestones und Referenzen',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'Teure Services verkaufen sich, wenn der Kunde den Wert versteht und das Risiko klein wirkt. Die Landingpage ist dafür Ihr bestes Werkzeug – wenn sie Klarheit statt Druck liefert.',
+      },
+      ru: {
+        title: 'Как продавать дорогую услугу через лендинг без ощущения “слишком дорого”',
+        excerpt:
+          '“Дорого” часто означает не “цена высокая”, а “я не понимаю, что получу и чем рискую”. Лендинг должен объяснить и успокоить.',
+        summary:
+          'Дорогие услуги продаются через ясный процесс, критерии выбора и снижение риска. Задача страницы — убрать неопределенность, а не давить “ценностью”.',
+        styleLabel: 'Abstract Ribbon',
+        sections: [
+          {
+            title: '1) Главный враг — неопределенность',
+            paragraphs: [
+              'Когда человек не понимает состав работ и результат, любая цена кажется высокой.',
+              'Поэтому сначала нужны факты: что входит, какие этапы, сроки, ответственность сторон.',
+            ],
+          },
+          {
+            title: '2) Процесс — лучший “якорь” цены',
+            paragraphs: [
+              'Процесс показывает, за что платят: анализ, стратегия, дизайн, разработка, QA, запуск, поддержка.',
+              'Это не “самохвальство”, а прозрачный объем работ. В этот момент цена становится логичнее.',
+            ],
+          },
+          {
+            title: '3) Квалификация — часть продажи',
+            paragraphs: [
+              'Четко скажите, кому услуга подходит. Это отсекает неподходящих и повышает качество заявок.',
+              'В high-ticket часто лучше работает вход через “аудит/чек” вместо “покупайте прямо сейчас”.',
+            ],
+          },
+          {
+            title: '4) Снижение риска без пустых гарантий',
+            paragraphs: [
+              'Вместо “100% гарантия” работают: рамки scope, контрольные точки, прозрачные согласования, примеры результатов.',
+              'Когда клиент понимает, как вы управляете рисками, цена перестает пугать.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: дорогая услуга без “шока”',
+        checklist: [
+          'Назвать результат и конкретный состав работ',
+          'Показать процесс в 4–6 шагах',
+          'Четко описать “кому подходит / кому не подходит”',
+          'Сделать вход через аудит/проверку/созвон по делу',
+          'Снизить риск через этапы, scope и реальные примеры',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'Дорогая услуга продается, когда ценность понятна, а риск выглядит управляемым. Лендинг должен быть спокойным объяснением, а не криком “оно того стоит”.',
+      },
+    },
+  },
+  {
+    slug: 'landingpages-ohne-werbe-klischees',
+    image: '/images/blog-v3/ohne-werbe-klischees.png',
+    publishedAtISO: '2026-05-22',
+    readTimeMin: 8,
+    topicLabel: {
+      de: 'Ohne Klischees',
+      ru: 'Без клише',
+    },
+    seoTitle: 'Landingpages ohne Werbe-Klischees: Texte, die 2026 noch wirken',
+    seoDescription:
+      'Wie man Landingpage-Texte schreibt, die nicht nach Werbung klingen – und genau deshalb besser konvertieren und eher zitiert werden.',
+    keywords: ['landingpage texte', 'ux writing', 'keine klischees', 'conversion copy', 'llm friendly'],
+    sources: [
+      {
+        title: 'Writing for Web',
+        url: 'https://www.nngroup.com/articles/writing-for-the-web/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2020',
+      },
+      {
+        title: 'Plain Language Guidelines',
+        url: 'https://www.plainlanguage.gov/guidelines/',
+        publisher: 'plainlanguage.gov',
+        publishedAt: 'laufend',
+      },
+      {
+        title: 'How Users Read on the Web',
+        url: 'https://www.nngroup.com/articles/how-users-read-on-the-web/',
+        publisher: 'Nielsen Norman Group',
+        publishedAt: '2019',
+      },
+    ],
+    content: {
+      de: {
+        title: 'Landingpages ohne Klischees: warum „Wir sind die Besten“ nicht mehr verkauft',
+        excerpt:
+          'Viele Landingpages klingen gleich. Genau deshalb glaubt ihnen keiner. 2026 gewinnt, wer konkret und menschlich erklärt, was wirklich passiert.',
+        summary:
+          'Klicks kommen über Relevanz, nicht über Superlative. Klischeefreie Texte sind gleichzeitig besser für Conversion und besser für AI/LLM-Zitate.',
+        styleLabel: 'Minimal Mono',
+        sections: [
+          {
+            title: '1) Klischees sind nicht nur „cringe“, sie sind uninformativ',
+            paragraphs: [
+              '„Beste Qualität“, „individuelle Lösungen“, „faire Preise“ sagen nichts. Nutzer können es nicht prüfen.',
+              'Wenn eine Aussage nicht prüfbar ist, ist sie für Vertrauen wertlos – und für LLMs ebenfalls.',
+            ],
+          },
+          {
+            title: '2) Das Ersatzmuster: Kontext + Ergebnis + Vorgehen',
+            paragraphs: [
+              'Statt Superlativ: „Für lokale Dienstleister in Berlin: Landingpage + Tracking + WhatsApp-Flow in 10–14 Tagen.“',
+              'Das ist nicht poetisch, aber es ist hilfreich. Und hilfreich ist die neue Conversion-Währung.',
+            ],
+          },
+          {
+            title: '3) Microcopy: die kleinen Sätze, die abschließen',
+            paragraphs: [
+              'Rund um Formulare zählen Details: „Antwort in 24h“, „keine Werbung“, „nur 3 Fragen“.',
+              'Diese Sätze sind oft stärker als jede Headline – weil sie konkrete Angst wegnehmen.',
+            ],
+          },
+          {
+            title: '4) Eine einfache Methode zum Umschreiben',
+            paragraphs: [
+              'Nehmen Sie jeden Claim und fragen Sie: „Woran erkennt man das?“ Dann schreiben Sie diese Beobachtung hin.',
+              'Aus „professionell“ wird „saubere Struktur, schnelle Ladezeit, messbares Tracking“. Aus „zuverlässig“ wird „fester Ablauf + Milestones“.',
+            ],
+          },
+        ],
+        checklistTitle: 'Checkliste: Texte ohne Werbesprache',
+        checklist: [
+          'Jeder Claim ist überprüfbar oder wird durch Beispiel belegt',
+          'Mehr Verben („wir machen…“) statt Adjektive („wir sind…“)',
+          'Konkrete Zeitrahmen, Lieferobjekte, Schritte',
+          'Microcopy an Formular/CTA nimmt konkrete Ängste',
+          'Kein „Buzzword“-Block ohne Inhalt',
+        ],
+        conclusionTitle: 'Fazit',
+        conclusion:
+          'Klischeefreie Landingpages verkaufen nicht durch Lautstärke, sondern durch Klarheit. Das macht sie auch zu besseren Quellen – für Menschen und für AI-Antworten.',
+      },
+      ru: {
+        title: 'Лендинги без шаблонных рекламных клише',
+        excerpt:
+          'Когда все пишут “лучшее качество” и “индивидуальный подход”, это перестает что-либо значить. В 2026 выигрывают конкретные и человеческие тексты.',
+        summary:
+          'Конверсия растет от релевантности и ясности, а не от суперлативов. Тексты без клише лучше и для людей, и для цитирования в AI/LLM-ответах.',
+        styleLabel: 'Minimal Mono',
+        sections: [
+          {
+            title: '1) Клише — это не просто “стыдно”, это бесполезно',
+            paragraphs: [
+              '“Качество”, “надежность”, “лучшие цены” не проверяются и не объясняют, что произойдет после заявки.',
+              'Если фразу нельзя проверить, она почти не дает доверия — и LLM тоже не любит такой “туман”.',
+            ],
+          },
+          {
+            title: '2) Замена: контекст + результат + способ',
+            paragraphs: [
+              'Вместо “лучшие” — “для локального бизнеса: лендинг + аналитика + мессенджер в 10–14 дней”.',
+              'Это не поэтично, зато полезно. А полезность в 2026 — новая валюта конверсии.',
+            ],
+          },
+          {
+            title: '3) Microcopy: маленькие фразы, которые закрывают',
+            paragraphs: [
+              'Возле формы решают детали: “ответим за 24 часа”, “без спама”, “3 вопроса”.',
+              'Эти короткие фразы часто сильнее заголовка, потому что снимают конкретные страхи.',
+            ],
+          },
+          {
+            title: '4) Простая техника переписывания',
+            paragraphs: [
+              'Берем любую “рекламную” фразу и спрашиваем: “как это проверить?”. Потом пишем наблюдаемый факт.',
+              '“Профессионально” превращается в “быстро грузится, понятная структура, есть аналитика”. “Надежно” — в “этапы и контрольные точки”.',
+            ],
+          },
+        ],
+        checklistTitle: 'Чеклист: текст без рекламного тумана',
+        checklist: [
+          'Каждое обещание либо проверяемо, либо подкреплено примером',
+          'Больше глаголов (“делаем”), меньше прилагательных (“самые лучшие”)',
+          'Есть сроки, состав работ, этапы и следующий шаг',
+          'Microcopy возле CTA/формы снимает страхи',
+          'Нет “блоков с buzzword’ами” без смысла',
+        ],
+        conclusionTitle: 'Вывод',
+        conclusion:
+          'Лендинг без клише продает спокойнее и сильнее, потому что дает ясность. А ясность сегодня ценится и людьми, и AI-системами, которые выбирают источники.',
+      },
+    },
+  },
 ]
 
 export const blogExtras = {
@@ -1663,6 +3003,16 @@ export const blogTopics: Record<Locale, string[]> = {
     'Retargeting-Landingpages für warmen Traffic',
     'SEO-Content-Struktur für klassische und AI-Suche',
     'Landingpage als Filter für bessere Anfragen',
+    'Mikroanimationen, die konvertieren statt abzulenken',
+    'Trust statt Druck: Conversion ohne Dark Patterns',
+    'Verkaufender Minimalismus auf Landingpages',
+    'Landingpages für LLM-Antworten und Zitate',
+    'Visuelle Seriosität im Webdesign 2026',
+    'Personal Brand des Inhabers auf Landingpages',
+    'Anti-Chaos: viele Leistungen, klare Auswahl',
+    'Consent UX: Datenschutz ohne Conversion-Verlust',
+    'High-Ticket-Services ohne „zu teuer“-Gefühl',
+    'Landingpages ohne Werbe-Klischees',
   ],
   ru: [
     'Скорость мобильного лендинга как рычаг конверсии',
@@ -1676,6 +3026,16 @@ export const blogTopics: Record<Locale, string[]> = {
     'Ретаргетинг-лендинги для теплой аудитории',
     'SEO-структура контента для поиска и AI-ответов',
     'Лендинг как фильтр для более качественных заявок',
+    'Микроанимации, которые продают, а не отвлекают',
+    'Темные паттерны умерли: доверие вместо давления',
+    'Продающий минимализм на лендингах',
+    'Лендинг для LLM: цитируемость и структура',
+    'Новая визуальная серьезность в web-дизайне 2026',
+    'Личный бренд владельца на лендинге малого бизнеса',
+    'Антихаос: лендинг при большом числе услуг',
+    'Consent UX: согласие и Datenschutz без потерь',
+    'Дорогие услуги без ощущения “слишком дорого”',
+    'Лендинги без рекламных клише',
   ],
 }
 
@@ -1691,6 +3051,16 @@ export const blogTopicSlugs = [
   'retargeting-landingpages-konsistent-aufbauen',
   'seo-content-struktur-fuer-landingpages',
   'landingpage-als-filter-fuer-qualifizierte-anfragen',
+  'mikroanimationen-die-konvertieren',
+  'dark-patterns-sind-tot-was-statt-druck-funktioniert',
+  'minimalismus-der-verkauft-landingpages',
+  'landingpages-fuer-llm-antworten-und-zitate',
+  'visuelle-seriositaet-webdesign-2026',
+  'personal-brand-des-inhabers-auf-landingpages',
+  'anti-chaos-landingpage-viele-leistungen',
+  'consent-ux-datenschutz-ohne-conversionverlust',
+  'hochpreisige-dienstleistung-landingpage-ohne-preisschock',
+  'landingpages-ohne-werbe-klischees',
 ] as const
 
 const legacyBlogSlugMap: Record<string, string> = {
