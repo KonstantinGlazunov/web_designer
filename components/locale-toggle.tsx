@@ -1,32 +1,26 @@
 'use client'
 
+import { Globe } from 'lucide-react'
 import type { Locale } from '@/lib/translations'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 
-const locales: Locale[] = ['ru', 'de']
-
 export function LocaleToggle() {
   const { locale, setLocale } = useSitePreferences()
+  const nextLocale: Locale = locale === 'de' ? 'ru' : 'de'
+  const currentLabel = locale === 'de' ? 'DE' : 'RU'
+  const nextLabel = locale === 'de' ? 'RU' : 'DE'
 
   return (
-    <div className="inline-flex rounded-full border border-white/15 bg-white/10 p-1">
-      {locales.map((value) => {
-        const active = value === locale
-        return (
-          <button
-            key={value}
-            type="button"
-            onClick={() => setLocale(value)}
-            aria-pressed={active}
-            aria-label={value === 'de' ? 'Deutsch' : 'Русский'}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] transition ${
-              active ? 'bg-white text-slate-950' : 'text-slate-200 hover:text-white'
-            }`}
-          >
-            {value}
-          </button>
-        )
-      })}
-    </div>
+    <button
+      type="button"
+      onClick={() => setLocale(nextLocale)}
+      aria-label={locale === 'de' ? 'Switch to Russian' : 'Switch to German'}
+      className="inline-flex flex-none items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-700 transition hover:border-slate-400 hover:bg-white sm:text-xs"
+    >
+      <Globe className="h-3.5 w-3.5" />
+      <span>{currentLabel}</span>
+      <span className="text-slate-400">/</span>
+      <span className="text-slate-500">{nextLabel}</span>
+    </button>
   )
 }

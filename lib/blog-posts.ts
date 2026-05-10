@@ -51,7 +51,7 @@ export const blogPosts: BlogPost[] = [
 
   {
     slug: 'landingpage-als-filter-fuer-qualifizierte-anfragen',
-    image: '/images/blog-landing-filter-cover.svg',
+    image: '/images/blog-landing-filter-cover.webp',
     publishedAtISO: '2026-05-12',
     readTimeMin: 8,
     topicLabel: {
@@ -1678,6 +1678,20 @@ export const blogTopics: Record<Locale, string[]> = {
     'Лендинг как фильтр для более качественных заявок',
   ],
 }
+
+export const blogTopicSlugs = [
+  'mobile-geschwindigkeit-und-conversion',
+  'anzeige-und-landingpage-im-gleichen-ton',
+  'formulare-die-anfragen-bringen',
+  'lokale-seo-landingpages-fuer-dienstleister',
+  'social-proof-fuer-mehr-vertrauen',
+  'angebots-und-preisstruktur-ohne-reibung',
+  'cta-flow-und-danke-seite',
+  'ki-personalisierung-fuer-landingpages',
+  'retargeting-landingpages-konsistent-aufbauen',
+  'seo-content-struktur-fuer-landingpages',
+  'landingpage-als-filter-fuer-qualifizierte-anfragen',
+] as const
 
 const legacyBlogSlugMap: Record<string, string> = {
   'mobile-speed-conversion': 'mobile-geschwindigkeit-und-conversion',

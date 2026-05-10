@@ -2,12 +2,13 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { CalendarDays, CheckCircle2, Clock3 } from 'lucide-react'
+import { CalendarDays, CheckCircle2, ChevronLeft, ChevronRight, Clock3 } from 'lucide-react'
 import { LocaleToggle } from '@/components/locale-toggle'
+import { SiteFooter } from '@/components/site-footer'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { useSitePreferences } from '@/components/providers/site-preferences'
 import { localizePath } from '@/lib/locale-routes'
-import { blogPosts, getBlogPostBySlug } from '@/lib/blog-posts'
+import { blogPosts, blogTopicSlugs, getBlogPostBySlug } from '@/lib/blog-posts'
 
 const copy = {
   de: {
@@ -15,6 +16,9 @@ const copy = {
     notFound: 'Artikel nicht gefunden',
     relatedTitle: 'Weitere passende Artikel',
     readMore: 'Lesen',
+    prevTopic: 'Vorheriges Thema',
+    nextTopic: 'Nächstes Thema',
+    backToTopics: 'Zurück zu Themen',
     contactTitle: 'Sie möchten das für Ihre Website umsetzen?',
     contactText: 'Wir besprechen kurz die Ausgangslage und den nächsten sinnvollen Schritt.',
     contactCta: 'Kontakt aufnehmen',
@@ -24,6 +28,9 @@ const copy = {
     notFound: 'Статья не найдена',
     relatedTitle: 'Другие статьи по теме',
     readMore: 'Читать',
+    prevTopic: 'Предыдущая тема',
+    nextTopic: 'Следующая тема',
+    backToTopics: 'Назад к темам',
     contactTitle: 'Хотите применить это на своем сайте?',
     contactText: 'Коротко разберем текущую ситуацию и подскажем следующий шаг.',
     contactCta: 'Связаться',
@@ -78,6 +85,15 @@ export function BlogArticlePage({ slug }: { slug: string }) {
   }
 
   const localized = post.content[locale]
+  const orderedPosts = blogTopicSlugs
+    .map((orderedSlug) => blogPosts.find((item) => item.slug === orderedSlug) ?? null)
+    .filter((item): item is (typeof blogPosts)[number] => item !== null)
+  const currentPostIndex = orderedPosts.findIndex((item) => item.slug === post.slug)
+  const previousPost = currentPostIndex > 0 ? orderedPosts[currentPostIndex - 1] : null
+  const nextPost =
+    currentPostIndex >= 0 && currentPostIndex < orderedPosts.length - 1
+      ? orderedPosts[currentPostIndex + 1]
+      : null
   const contactWithTopicHref = `${contactHref}?topic=${encodeURIComponent(localized.title)}`
   const relatedPosts = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 3)
   const jsonLd = {
@@ -114,6 +130,42 @@ export function BlogArticlePage({ slug }: { slug: string }) {
           <Link href={blogHref} className="text-sm font-semibold text-sky-700 underline-offset-2 hover:underline">
             {t.back}
           </Link>
+          <nav className="mt-5 grid gap-2 sm:grid-cols-3">
+            {previousPost ? (
+              <Link
+                href={localizePath(`/blog/${previousPost.slug}`, locale)}
+                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
+              >
+                <ChevronLeft className="h-4 w-4" />
+                {t.prevTopic}
+              </Link>
+            ) : (
+              <span className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-400">
+                {t.prevTopic}
+              </span>
+            )}
+
+            <Link
+              href={blogHref}
+              className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
+            >
+              {t.backToTopics}
+            </Link>
+
+            {nextPost ? (
+              <Link
+                href={localizePath(`/blog/${nextPost.slug}`, locale)}
+                className="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-950"
+              >
+                {t.nextTopic}
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+            ) : (
+              <span className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-400">
+                {t.nextTopic}
+              </span>
+            )}
+          </nav>
           <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">{getStyleLabel(localized.styleLabel, locale)}</p>
           <h1 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">{localized.title}</h1>
           <p className="mt-4 max-w-4xl text-base leading-7 text-slate-700 sm:text-lg">{localized.excerpt}</p>
@@ -130,15 +182,21 @@ export function BlogArticlePage({ slug }: { slug: string }) {
         </div>
 
         <article className="mt-6 rounded-[30px] border border-slate-200 bg-white p-6 sm:p-8 lg:p-10">
-          <div className="relative mb-8 aspect-[16/9] overflow-hidden rounded-[20px] border border-slate-200 bg-slate-100">
+          <a
+            href={post.image}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative mb-8 block aspect-[16/9] overflow-hidden rounded-[20px] border border-slate-200 bg-slate-100"
+            aria-label={localized.title}
+          >
             <Image
               src={post.image}
               alt={localized.title}
               fill
               sizes="(max-width: 1024px) 100vw, 960px"
-              className="object-cover"
+              className="object-cover transition duration-200 group-hover:scale-[1.01]"
             />
-          </div>
+          </a>
 
           <p className="text-base leading-7 text-slate-700 sm:text-lg">{localized.summary}</p>
 
@@ -203,6 +261,8 @@ export function BlogArticlePage({ slug }: { slug: string }) {
           </section>
 
         </article>
+
+        <SiteFooter className="mt-6" />
       </section>
     </main>
   )
