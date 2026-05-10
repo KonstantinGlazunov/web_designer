@@ -32,5 +32,6 @@ test-results/
 
 # Local artifacts/screenshots generated during manual QA
 artifacts/
+tmp/
 
 AGENTS.md
