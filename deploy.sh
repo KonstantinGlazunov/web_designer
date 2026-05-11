@@ -73,7 +73,7 @@ start_app() {
         set +a
     fi
     export PORT="${PORT:-3000}"
-    export HOSTNAME="${HOSTNAME:-0.0.0.0}"
+    export HOSTNAME="0.0.0.0"
     cd .next/standalone
     nohup node server.js >> "$LOG_FILE" 2>&1 &
     echo $! > "$PID_FILE"
