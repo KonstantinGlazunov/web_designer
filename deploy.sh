@@ -44,13 +44,24 @@ build_app() {
     cd "$APP_DIR"
     export NODE_OPTIONS="--max-old-space-size=512"
     if [ -d "node_modules" ]; then
-        rm -rf node_modules 2>/dev/null || python3 - <<'PY'
+        local stale_dir="node_modules.stale.$(date +%s)"
+        mv node_modules "$stale_dir" 2>/dev/null || true
+        rm -rf node_modules 2>/dev/null || true
+        python3 - <<PY
 from pathlib import Path
 import shutil
+import time
 
-path = Path("node_modules")
-if path.exists():
-    shutil.rmtree(path, ignore_errors=True)
+for target in (Path("node_modules"), Path("$stale_dir")):
+    if not target.exists():
+        continue
+    for _ in range(3):
+        shutil.rmtree(target, ignore_errors=True)
+        if not target.exists():
+            break
+        time.sleep(1)
+    if target.exists():
+        raise SystemExit(f"Failed to remove {target}")
 PY
     fi
     npm ci
