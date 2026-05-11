@@ -43,6 +43,7 @@ build_app() {
     echo_info "Building application..."
     cd "$APP_DIR"
     export NODE_OPTIONS="--max-old-space-size=512"
+    rm -rf node_modules
     npm ci
     npm run build
     if [ ! -d ".next/standalone" ]; then
