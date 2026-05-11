@@ -6,7 +6,7 @@
 set -e
 
 APP_NAME="programmersites"
-APP_DIR="/home/opc/programmersites"
+APP_DIR="${APP_DIR:-$(cd "$(dirname "$0")" && pwd)}"
 PID_FILE="$APP_DIR/app.pid"
 LOG_FILE="$APP_DIR/app.log"
 PORT="${PORT:-3000}"
@@ -114,13 +114,15 @@ status_app() {
 case "${1:-}" in
     stop)   stop_app ;;
     build)  stop_app; build_app ;;
+    build-only) build_app ;;
     start)  stop_app; start_app ;;
+    start-only) start_app ;;
     restart) stop_app; start_app ;;
     deploy) stop_app; build_app; start_app ;;
     status) status_app ;;
     logs)   tail -f "$LOG_FILE" ;;
     *)
-        echo "Usage: $0 {stop|build|start|restart|deploy|status|logs}"
+        echo "Usage: $0 {stop|build|build-only|start|start-only|restart|deploy|status|logs}"
         exit 1
         ;;
 esac

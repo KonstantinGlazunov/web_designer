@@ -36,36 +36,51 @@ jobs:
           echo "SSH connection failed after 5 attempts"
           exit 1
 
-      - name: Stop application and free memory
+      - name: Prepare staging directory
         run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'ENDSSH'
-            pkill -9 -f "node.*programmersites" || true
-            pkill -9 -f "node.*server.js" || true
-            sleep 2
-            sync
-            sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches' || true
-            free -h
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << ENDSSH
+            rm -rf /home/opc/programmersites_stage
+            mkdir -p /home/opc/programmersites_stage
+            if [ -f /home/opc/programmersites/variables.env ]; then
+              cp /home/opc/programmersites/variables.env /home/opc/programmersites_stage/variables.env
+            fi
           ENDSSH
 
-      - name: Copy files to server
+      - name: Copy files to staging
         run: |
           rsync -avz --exclude 'node_modules' --exclude '.next' --exclude '.git' \
             -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30" \
-            ./ ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:/home/opc/programmersites/
+            ./ ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:/home/opc/programmersites_stage/
 
-      - name: Deploy application
+      - name: Build staging release
         run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=60 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'ENDSSH'
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=60 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << ENDSSH
             set -e
-            APP_DIR="/home/opc/programmersites"
-            cd "$APP_DIR"
-            chmod +x deploy.sh
+            cd /home/opc/programmersites_stage
+            chmod +x /home/opc/programmersites_stage/deploy.sh
             export NODE_OPTIONS="--max-old-space-size=512"
-            ./deploy.sh deploy
+            APP_DIR="/home/opc/programmersites_stage" /home/opc/programmersites_stage/deploy.sh build-only
+          ENDSSH
+
+      - name: Cut over release
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=60 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << ENDSSH
+            set -e
+            chmod +x /home/opc/programmersites/deploy.sh /home/opc/programmersites_stage/deploy.sh 2>/dev/null || true
+            APP_DIR="/home/opc/programmersites" /home/opc/programmersites/deploy.sh stop || true
+            mkdir -p /home/opc/programmersites/.next /home/opc/programmersites/public
+            rsync -a --delete /home/opc/programmersites_stage/.next/ /home/opc/programmersites/.next/
+            rsync -a --delete /home/opc/programmersites_stage/public/ /home/opc/programmersites/public/
+            cp /home/opc/programmersites_stage/deploy.sh /home/opc/programmersites/deploy.sh
+            chmod +x /home/opc/programmersites/deploy.sh
+            if [ -f /home/opc/programmersites_stage/package.json ]; then cp /home/opc/programmersites_stage/package.json /home/opc/programmersites/package.json; fi
+            if [ -f /home/opc/programmersites_stage/package-lock.json ]; then cp /home/opc/programmersites_stage/package-lock.json /home/opc/programmersites/package-lock.json; fi
+            APP_DIR="/home/opc/programmersites" /home/opc/programmersites/deploy.sh start-only
           ENDSSH
 
       - name: Verify deployment
         run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'ENDSSH'
-            /home/opc/programmersites/deploy.sh status || exit 1
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << ENDSSH
+            APP_DIR="/home/opc/programmersites" /home/opc/programmersites/deploy.sh status || exit 1
+            curl -I -s http://127.0.0.1:3000/ | head -n 1 | grep "200"
           ENDSSH
