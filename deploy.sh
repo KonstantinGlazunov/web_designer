@@ -43,7 +43,16 @@ build_app() {
     echo_info "Building application..."
     cd "$APP_DIR"
     export NODE_OPTIONS="--max-old-space-size=512"
-    rm -rf node_modules
+    if [ -d "node_modules" ]; then
+        rm -rf node_modules 2>/dev/null || python3 - <<'PY'
+from pathlib import Path
+import shutil
+
+path = Path("node_modules")
+if path.exists():
+    shutil.rmtree(path, ignore_errors=True)
+PY
+    fi
     npm ci
     npm run build
     if [ ! -d ".next/standalone" ]; then
