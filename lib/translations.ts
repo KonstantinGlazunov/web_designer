@@ -192,6 +192,24 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           url: 'https://psycholog-ua-ru.de/',
         },
         {
+          title: 'CuteColor',
+          description:
+            'Сайт-портфолио для иллюстратора. Спокойный первый экран, понятная навигация и прямые способы связи.\nЦель: показать работы\nФокус: визуальная подача\nРезультат: быстрый контакт',
+          image: '/images/portfolio-cutecolor.webp',
+          tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
+          size: 'sm',
+          url: 'https://konstantinglazunov.github.io/cutecolor/',
+        },
+        {
+          title: 'WohnWagen',
+          description:
+            'Сайт для аренды кемперов в Центральном Гессене. Чёткие пакеты, прямой контакт и спокойная структура.\nЦель: больше заявок\nФокус: понятная подача\nРезультат: более быстрый старт',
+          image: '/images/portfolio-wohnwagen.webp',
+          tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
+          size: 'sm',
+          url: 'https://konstantinglazunov.github.io/WohnWagen/',
+        },
+        {
           title: 'Dogs Services',
           description:
             'Сервис для владельцев собак. Бронирование, каталог услуг, современный UI.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
@@ -361,6 +379,24 @@ export const siteCopy: Record<Locale, SiteCopy> = {
           tech: ['Next.js', 'i18n', 'SEO', 'Vercel'],
           size: 'sm',
           url: 'https://psycholog-ua-ru.de/',
+        },
+        {
+          title: 'CuteColor',
+          description:
+            'Portfolio-Website für eine Illustratorin. Ruhiger erster Eindruck, klare Navigation und direkte Kontaktwege.\nZiel: Arbeiten zeigen\nFokus: visuelle Präsentation\nErgebnis: schneller Kontakt',
+          image: '/images/portfolio-cutecolor.webp',
+          tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
+          size: 'sm',
+          url: 'https://konstantinglazunov.github.io/cutecolor/',
+        },
+        {
+          title: 'WohnWagen',
+          description:
+            'Webseite für Wohnmobil-Vermietung in Mittelhessen. Klare Angebotspakete, direkter Kontakt und ruhige Struktur.\nZiel: mehr Anfragen\nFokus: klare Darstellung\nErgebnis: schnellerer Einstieg',
+          image: '/images/portfolio-wohnwagen.webp',
+          tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
+          size: 'sm',
+          url: 'https://konstantinglazunov.github.io/WohnWagen/',
         },
         {
           title: 'Dienstleistungen für Hundehalter',
