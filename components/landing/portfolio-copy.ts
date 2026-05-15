@@ -28,24 +28,6 @@ export const portfolioCopy: Record<'de' | 'ru', PortfolioText> = {
         url: 'https://speicher-balkonkraftwerk.de/ru/',
       },
       {
-        title: 'BewerbungProfi',
-        description:
-          'KI-Generator für Bewerbungsanschreiben in Deutschland. OpenAI API, Mehrsprachigkeit, PDF.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-        image: '/images/portfolio-bewerbungprofi.webp',
-        tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
-        size: 'sm',
-        url: 'https://bewerbungprofi.de/',
-      },
-      {
-        title: 'Beauty Studio Lesya',
-        description:
-          'Webseite des Beauty-Studios für Permanent-Make-up in Braunfels. Elegantes Design, Galerie.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
-        image: '/images/portfolio-lesia.webp',
-        tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
-        size: 'sm',
-        url: 'https://konstantinglazunov.github.io/-Lesia/',
-      },
-      {
         title: 'Psycholog UA/RU',
         description:
           'Webseite für psychologische Beratung mit ukrainischer und russischer Sprachversion. Klare Leistungsdarstellung und direkter Kontakt.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
@@ -73,6 +55,24 @@ export const portfolioCopy: Record<'de' | 'ru', PortfolioText> = {
         url: 'https://konstantinglazunov.github.io/WohnWagen/',
       },
       {
+        title: 'Beauty Studio Lesya',
+        description:
+          'Webseite des Beauty-Studios für Permanent-Make-up in Braunfels. Elegantes Design, Galerie.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
+        image: '/images/portfolio-lesia.webp',
+        tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
+        size: 'sm',
+        url: 'https://konstantinglazunov.github.io/-Lesia/',
+      },
+      {
+        title: 'BewerbungProfi',
+        description:
+          'KI-Generator für Bewerbungsanschreiben in Deutschland. OpenAI API, Mehrsprachigkeit, PDF.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
+        image: '/images/portfolio-bewerbungprofi.webp',
+        tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
+        size: 'sm',
+        url: 'https://bewerbungprofi.de/',
+      },
+      {
         title: 'Dienstleistungen für Hundehalter',
         description:
           'Angebot für Hundehalter. Buchung, Leistungskatalog, modernes Design.\nZiel: mehr Anfragen\nFokus: klare Struktur\nErgebnis: bessere Verständlichkeit',
@@ -95,24 +95,6 @@ export const portfolioCopy: Record<'de' | 'ru', PortfolioText> = {
         tech: ['Next.js', 'Tailwind', 'i18n', 'Vercel'],
         size: 'lg',
         url: 'https://speicher-balkonkraftwerk.de/ru/',
-      },
-      {
-        title: 'BewerbungProfi',
-        description:
-          'AI-генератор сопроводительных писем для работы в Германии. OpenAI API, мультиязычность, PDF.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-        image: '/images/portfolio-bewerbungprofi.webp',
-        tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
-        size: 'sm',
-        url: 'https://bewerbungprofi.de/',
-      },
-      {
-        title: 'Beauty Studio Lesya',
-        description:
-          'Сайт бьюти-студии перманентного макияжа в Браунфельсе. Элегантный дизайн, галерея работ.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
-        image: '/images/portfolio-lesia.webp',
-        tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
-        size: 'sm',
-        url: 'https://konstantinglazunov.github.io/-Lesia/',
       },
       {
         title: 'Psycholog UA/RU',
@@ -140,6 +122,24 @@ export const portfolioCopy: Record<'de' | 'ru', PortfolioText> = {
         tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
         size: 'sm',
         url: 'https://konstantinglazunov.github.io/WohnWagen/',
+      },
+      {
+        title: 'Beauty Studio Lesya',
+        description:
+          'Сайт бьюти-студии перманентного макияжа в Браунфельсе. Элегантный дизайн, галерея работ.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
+        image: '/images/portfolio-lesia.webp',
+        tech: ['HTML/CSS', 'JavaScript', 'GitHub Pages'],
+        size: 'sm',
+        url: 'https://konstantinglazunov.github.io/-Lesia/',
+      },
+      {
+        title: 'BewerbungProfi',
+        description:
+          'AI-генератор сопроводительных писем для работы в Германии. OpenAI API, мультиязычность, PDF.\nЦель: больше заявок\nФокус: понятная структура\nРезультат: лучшая понятность для клиентов',
+        image: '/images/portfolio-bewerbungprofi.webp',
+        tech: ['Next.js', 'OpenAI API', 'Oracle Cloud', 'DSGVO'],
+        size: 'sm',
+        url: 'https://bewerbungprofi.de/',
       },
       {
         title: 'Dogs Services',
