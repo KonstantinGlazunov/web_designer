@@ -5,46 +5,12 @@ import { SitePreferencesProvider } from '@/components/providers/site-preferences
 import { CookieConsentProvider } from '@/components/providers/cookie-consent'
 import { CookieConsentDialog } from '@/components/cookie-consent-dialog'
 import { GoogleAnalytics } from '@/components/google-analytics'
-import { pageAlternates } from '@/lib/seo'
+import { pageAlternates, siteJsonLd } from '@/lib/seo'
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-inter',
 })
-
-const siteJsonLd = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Vibe Studio',
-    url: 'https://erstellen-websiten.de',
-    logo: 'https://erstellen-websiten.de/images/favicon.svg',
-    image: 'https://erstellen-websiten.de/images/working-photo.webp',
-    founder: {
-      '@type': 'Person',
-      name: 'Konstantin Glazunov',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'customer support',
-      url: 'https://erstellen-websiten.de/kontakt',
-      areaServed: 'DE',
-      availableLanguage: ['de', 'ru'],
-    },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Vibe Studio',
-    url: 'https://erstellen-websiten.de',
-    inLanguage: ['de-DE', 'ru-RU'],
-    publisher: {
-      '@type': 'Organization',
-      name: 'Vibe Studio',
-      url: 'https://erstellen-websiten.de',
-    },
-  },
-]
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -54,37 +20,37 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://erstellen-websiten.de'),
-  title: 'Vibe Studio - Websites für kleine Unternehmen',
+  title: 'Vibe Studio - сайты для малого бизнеса в Германии',
   description:
-    'Moderne, verständliche Websites für kleine Unternehmen in Deutschland - klar, mobil optimiert und ohne unnötigen Aufwand.',
-  alternates: pageAlternates('/', 'de'),
+    'Понятные современные сайты для малого бизнеса в Германии: структура, доверие и заявки без лишней сложности.',
+  alternates: pageAlternates('/', 'ru'),
   applicationName: 'Vibe Studio',
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: 'Vibe Studio - Websites für kleine Unternehmen',
+    title: 'Vibe Studio - сайты для малого бизнеса в Германии',
     description:
-      'Moderne, verständliche Websites für kleine Unternehmen in Deutschland - klar, mobil optimiert und ohne unnötigen Aufwand.',
+      'Понятные современные сайты для малого бизнеса в Германии: структура, доверие и заявки без лишней сложности.',
     type: 'website',
-    url: 'https://erstellen-websiten.de',
+    url: 'https://erstellen-websiten.de/ru',
     siteName: 'Vibe Studio',
-    locale: 'de_DE',
+    locale: 'ru_RU',
     images: [
       {
         url: '/images/working-photo.webp',
         width: 1024,
         height: 1024,
-        alt: 'Vibe Studio Arbeitssituation',
+        alt: 'Рабочий процесс Vibe Studio',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vibe Studio - Websites für kleine Unternehmen',
+    title: 'Vibe Studio - сайты для малого бизнеса в Германии',
     description:
-      'Moderne, verständliche Websites für kleine Unternehmen in Deutschland - klar, mobil optimiert und ohne unnötigen Aufwand.',
+      'Понятные современные сайты для малого бизнеса в Германии: структура, доверие и заявки без лишней сложности.',
     images: ['/images/working-photo.webp'],
   },
   icons: {
@@ -94,15 +60,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default function RuRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="de" suppressHydrationWarning>
+    <html lang="ru" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <SitePreferencesProvider>
+        <SitePreferencesProvider routeLocale="ru">
           <CookieConsentProvider>
             <script
               type="application/ld+json"
