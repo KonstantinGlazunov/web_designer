@@ -79,7 +79,7 @@ export function HomePageClient() {
   const portfolioLinkLabel = landingLocale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
   const requestLabel = landingLocale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
   const isQuizRequested = searchParams.get('quiz') === '1'
-  const quizSourceFromQuery = searchParams.get('source') || 'deeplink'
+  const quizSourceFromQuery = searchParams.get('quizSource') || searchParams.get('source') || 'deeplink'
   const shouldMountQuiz = quizOpen || isQuizRequested
   const [quizSource, setQuizSource] = useState('home_client')
 
@@ -135,6 +135,7 @@ export function HomePageClient() {
     if (!url.searchParams.has('quiz')) return
 
     url.searchParams.delete('quiz')
+    url.searchParams.delete('quizSource')
     url.searchParams.delete('source')
     const nextQuery = url.searchParams.toString()
     const nextUrl = `${url.pathname}${nextQuery ? `?${nextQuery}` : ''}${url.hash}`

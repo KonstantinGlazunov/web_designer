@@ -74,7 +74,7 @@ export function HomePage() {
 
         <div className="fixed bottom-5 right-4 z-40 flex flex-col gap-2 sm:bottom-6 sm:right-6">
           <TrackedLink
-            href="/?quiz=1&source=home_shell_fixed_cta"
+            href="/?quiz=1&quizSource=home_shell_fixed_cta"
             eventParams={{ cta_name: 'project_ready', placement: 'fixed_cta', locale: 'de' }}
             className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-[0_12px_35px_rgba(15,23,42,0.12)] transition hover:-translate-y-0.5 hover:border-slate-400"
           >
@@ -129,7 +129,7 @@ function HeroSection({ copy }: { copy: typeof landingCopyDe }) {
               {copy.hero.subtitle}
             </p>
             <div className="mt-[clamp(0.75rem,2.2svh,1rem)] flex flex-col gap-[clamp(0.45rem,1.55svh,0.625rem)] sm:mt-7 sm:flex-row sm:flex-wrap sm:gap-3">
-              <TrackedLink href="/?quiz=1&source=home_shell_hero_mobile" eventParams={{ cta_name: 'hero_primary', placement: 'hero_mobile', locale: 'de' }} className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full bg-slate-900 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 sm:h-auto sm:px-6 sm:py-3 sm:text-sm">
+              <TrackedLink href="/?quiz=1&quizSource=home_shell_hero_mobile" eventParams={{ cta_name: 'hero_primary', placement: 'hero_mobile', locale: 'de' }} className="inline-flex h-[clamp(2.45rem,6.9svh,2.75rem)] items-center justify-center gap-2 rounded-full bg-slate-900 px-5 text-[clamp(0.78rem,3.35vw,0.875rem)] font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 sm:h-auto sm:px-6 sm:py-3 sm:text-sm">
                 {copy.hero.ctaPrimary}
                 <ArrowRight className="h-4 w-4" />
               </TrackedLink>
@@ -163,7 +163,7 @@ function HeroSection({ copy }: { copy: typeof landingCopyDe }) {
           <h1 className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]">{copy.hero.title}</h1>
           <p className="mt-5 max-w-2xl text-lg leading-7 text-slate-700">{copy.hero.subtitle}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <TrackedLink href="/?quiz=1&source=home_shell_hero_desktop" eventParams={{ cta_name: 'hero_primary', placement: 'hero_desktop', locale: 'de' }} className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800">
+            <TrackedLink href="/?quiz=1&quizSource=home_shell_hero_desktop" eventParams={{ cta_name: 'hero_primary', placement: 'hero_desktop', locale: 'de' }} className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800">
               {copy.hero.ctaPrimary}
               <ArrowRight className="h-4 w-4" />
             </TrackedLink>
@@ -502,7 +502,7 @@ function FinalCtaSection({ copy }: { copy: typeof landingCopyDe }) {
               {copy.finalCta.subtitle}
             </p>
             <div className="reveal-stagger mt-7 flex flex-wrap gap-3" style={revealStyle(220)}>
-              <TrackedLink href="/?quiz=1&source=home_shell_final_cta" eventParams={{ cta_name: 'final_primary', placement: 'final_cta', locale: 'de' }} className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100">
+              <TrackedLink href="/?quiz=1&quizSource=home_shell_final_cta" eventParams={{ cta_name: 'final_primary', placement: 'final_cta', locale: 'de' }} className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:bg-slate-100">
                 {copy.finalCta.primary}
                 <ArrowRight className="h-4 w-4" />
               </TrackedLink>
