@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   reactStrictMode: true,
   poweredByHeader: false,
+  images: {
+    qualities: [55, 75],
+  },
   experimental: {
     devtoolSegmentExplorer: false,
   },
