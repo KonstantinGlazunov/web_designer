@@ -48,6 +48,7 @@ const ruStyleLabels: Record<string, string> = {
   Glassmorphism: 'Глассморфизм',
   'Data Heatmap': 'Тепловая карта данных',
   'Abstract Ribbon': 'Абстрактная лента',
+  'Signal Frame': 'Сигнальная рамка',
 }
 
 function getStyleLabel(label: string, locale: 'de' | 'ru') {

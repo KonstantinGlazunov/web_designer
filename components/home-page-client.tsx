@@ -335,9 +335,13 @@ function HeroSection({
         </div>
 
         <div className="hidden max-w-3xl sm:block">
-          <h1 className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]">
+          <p
+            role="heading"
+            aria-level={1}
+            className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]"
+          >
             {copy.hero.title}
-          </h1>
+          </p>
 
           <p className="mt-5 max-w-2xl text-lg leading-7 text-slate-700">
             {copy.hero.subtitle}

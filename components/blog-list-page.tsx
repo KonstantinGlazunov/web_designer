@@ -14,7 +14,7 @@ import { blogPosts, blogTopics, blogTopicSlugs } from '@/lib/blog-posts'
 const copy = {
   de: {
     title: 'Blog',
-    subtitle: '{count} aktuelle Artikel über die Vermarktung von Produkten und Dienstleistungen über Landingpages.',
+    subtitle: '{count} aktuelle Artikel über Landingpages, Firmenwebsites und digitale Anfragen für kleine Unternehmen.',
     topicsTitle: '{count} aktuelle Themen',
     searchLabel: 'Schnell zu einer Thema springen',
     searchPlaceholder: 'Thema suchen...',
@@ -24,7 +24,7 @@ const copy = {
   },
   ru: {
     title: 'Блог',
-    subtitle: '{count} актуальных статей о продвижении товаров и услуг через лендинги.',
+    subtitle: '{count} актуальных статей о лендингах, сайтах услуг и цифровых заявках для малого бизнеса.',
     topicsTitle: '{count} актуальных тем',
     searchLabel: 'Быстрый переход к теме',
     searchPlaceholder: 'Найти тему...',
@@ -45,6 +45,7 @@ const ruStyleLabels: Record<string, string> = {
   Glassmorphism: 'Глассморфизм',
   'Data Heatmap': 'Тепловая карта данных',
   'Abstract Ribbon': 'Абстрактная лента',
+  'Signal Frame': 'Сигнальная рамка',
 }
 
 function getStyleLabel(label: string, locale: 'de' | 'ru') {
@@ -168,7 +169,7 @@ export function BlogListPage() {
         </div>
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-          {blogPosts.map((post) => {
+          {orderedPosts.map((post) => {
             const localized = post.content[locale]
 
             return (

@@ -28,13 +28,15 @@ export async function generateMetadata({ params }: BlogArticleRouteProps): Promi
     }
   }
 
+  const localized = post.content.de
+
   return {
-    title: `${post.content.de.title} | Blog`,
-    description: post.seoDescription,
+    title: `${localized.title} | Blog`,
+    description: localized.excerpt,
     alternates: pageAlternates(`/blog/${post.slug}`, 'de'),
     openGraph: {
-      title: `${post.content.de.title} | Blog`,
-      description: post.seoDescription,
+      title: `${localized.title} | Blog`,
+      description: localized.excerpt,
       url: `https://erstellen-websiten.de/blog/${post.slug}`,
       siteName: 'Vibe Studio',
       locale: 'de_DE',
@@ -44,14 +46,14 @@ export async function generateMetadata({ params }: BlogArticleRouteProps): Promi
           url: post.image,
           width: 1600,
           height: 900,
-          alt: post.content.de.title,
+          alt: localized.title,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${post.content.de.title} | Blog`,
-      description: post.seoDescription,
+      title: `${localized.title} | Blog`,
+      description: localized.excerpt,
       images: [post.image],
     },
   }

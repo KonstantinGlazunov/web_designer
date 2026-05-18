@@ -28,13 +28,15 @@ export async function generateMetadata({ params }: RuBlogArticleRouteProps): Pro
     }
   }
 
+  const localized = post.content.ru
+
   return {
-    title: `${post.content.ru.title} | Блог`,
-    description: post.seoDescription,
+    title: `${localized.title} | Блог`,
+    description: localized.excerpt,
     alternates: pageAlternates(`/blog/${post.slug}`, 'ru'),
     openGraph: {
-      title: `${post.content.ru.title} | Блог`,
-      description: post.seoDescription,
+      title: `${localized.title} | Блог`,
+      description: localized.excerpt,
       url: `https://erstellen-websiten.de/ru/blog/${post.slug}`,
       siteName: 'Vibe Studio',
       locale: 'ru_RU',
@@ -44,14 +46,14 @@ export async function generateMetadata({ params }: RuBlogArticleRouteProps): Pro
           url: post.image,
           width: 1600,
           height: 900,
-          alt: post.content.ru.title,
+          alt: localized.title,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${post.content.ru.title} | Блог`,
-      description: post.seoDescription,
+      title: `${localized.title} | Блог`,
+      description: localized.excerpt,
       images: [post.image],
     },
   }

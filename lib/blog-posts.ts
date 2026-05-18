@@ -1,4 +1,9 @@
 import type { Locale } from '@/lib/translations'
+import {
+  serviceSeoBlogPosts,
+  serviceSeoBlogTopics,
+  serviceSeoBlogTopicSlugs,
+} from '@/lib/blog-posts-service-seo'
 
 export interface BlogSource {
   title: string
@@ -2983,6 +2988,7 @@ export const blogPosts: BlogPost[] = [
       },
     },
   },
+  ...serviceSeoBlogPosts,
 ]
 
 export const blogExtras = {
@@ -3013,6 +3019,7 @@ export const blogTopics: Record<Locale, string[]> = {
     'Consent UX: Datenschutz ohne Conversion-Verlust',
     'High-Ticket-Services ohne „zu teuer“-Gefühl',
     'Landingpages ohne Werbe-Klischees',
+    ...serviceSeoBlogTopics.de,
   ],
   ru: [
     'Скорость мобильного лендинга как рычаг конверсии',
@@ -3036,6 +3043,7 @@ export const blogTopics: Record<Locale, string[]> = {
     'Consent UX: согласие и Datenschutz без потерь',
     'Дорогие услуги без ощущения “слишком дорого”',
     'Лендинги без рекламных клише',
+    ...serviceSeoBlogTopics.ru,
   ],
 }
 
@@ -3061,7 +3069,8 @@ export const blogTopicSlugs = [
   'consent-ux-datenschutz-ohne-conversionverlust',
   'hochpreisige-dienstleistung-landingpage-ohne-preisschock',
   'landingpages-ohne-werbe-klischees',
-] as const
+  ...serviceSeoBlogTopicSlugs,
+]
 
 const legacyBlogSlugMap: Record<string, string> = {
   'mobile-speed-conversion': 'mobile-geschwindigkeit-und-conversion',

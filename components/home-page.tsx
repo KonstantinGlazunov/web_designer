@@ -160,7 +160,13 @@ function HeroSection({ copy }: { copy: typeof landingCopyDe }) {
         </div>
 
         <div className="hidden max-w-3xl sm:block">
-          <h1 className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]">{copy.hero.title}</h1>
+          <p
+            role="heading"
+            aria-level={1}
+            className="text-5xl font-semibold leading-tight text-slate-950 lg:text-[3.3rem] lg:leading-[1.08]"
+          >
+            {copy.hero.title}
+          </p>
           <p className="mt-5 max-w-2xl text-lg leading-7 text-slate-700">{copy.hero.subtitle}</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <TrackedLink href="/?quiz=1&quizSource=home_shell_hero_desktop" eventParams={{ cta_name: 'hero_primary', placement: 'hero_desktop', locale: 'de' }} className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800">

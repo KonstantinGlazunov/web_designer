@@ -1,16 +1,19 @@
 import type { Metadata } from 'next'
 import { BlogListPage } from '@/components/blog-list-page'
+import { blogTopicSlugs } from '@/lib/blog-posts'
 import { pageAlternates } from '@/lib/seo'
 
+const articleCount = blogTopicSlugs.length
+
 export const metadata: Metadata = {
-  title: 'Blog | Landingpage-Strategien 2026',
+  title: 'Blog | Websites, SEO und Anfragen 2026',
   description:
-    '21 aktuelle Artikel über die Vermarktung von Produkten und Dienstleistungen über Landingpages.',
+    `${articleCount} aktuelle Artikel über die Vermarktung von Produkten und Dienstleistungen über Landingpages und Firmenwebsites.`,
   alternates: pageAlternates('/blog', 'de'),
   openGraph: {
-    title: 'Blog | Landingpage-Strategien 2026',
+    title: 'Blog | Websites, SEO und Anfragen 2026',
     description:
-      'Praxisartikel zu Conversion, SEO, Mobile UX, Retargeting, Consent UX, Trust und AI/LLM-Sichtbarkeit auf Landingpages.',
+      'Praxisartikel zu Conversion, SEO, Mobile UX, lokaler Sichtbarkeit, Firmenwebsites, Trust und AI/LLM-Sichtbarkeit.',
     url: 'https://erstellen-websiten.de/blog',
     siteName: 'Vibe Studio',
     locale: 'de_DE',
@@ -20,15 +23,15 @@ export const metadata: Metadata = {
         url: '/images/blog-landing-v2-01.webp',
         width: 1600,
         height: 900,
-        alt: 'Landingpage-Strategien 2026',
+        alt: 'Blog zu Websites, SEO und digitalen Anfragen',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog | Landingpage-Strategien 2026',
+    title: 'Blog | Websites, SEO und Anfragen 2026',
     description:
-      '21 praxisnahe Artikel zur besseren Conversion von Landingpages.',
+      `${articleCount} praxisnahe Artikel zu Landingpages, Firmenwebsites und lokaler Sichtbarkeit.`,
     images: ['/images/blog-landing-v2-01.webp'],
   },
 }

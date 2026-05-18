@@ -12,6 +12,40 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+const siteJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Vibe Studio',
+    url: 'https://erstellen-websiten.de',
+    logo: 'https://erstellen-websiten.de/images/favicon.svg',
+    image: 'https://erstellen-websiten.de/images/working-photo.webp',
+    founder: {
+      '@type': 'Person',
+      name: 'Konstantin Glazunov',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      url: 'https://erstellen-websiten.de/kontakt',
+      areaServed: 'DE',
+      availableLanguage: ['de', 'ru'],
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Vibe Studio',
+    url: 'https://erstellen-websiten.de',
+    inLanguage: ['de-DE', 'ru-RU'],
+    publisher: {
+      '@type': 'Organization',
+      name: 'Vibe Studio',
+      url: 'https://erstellen-websiten.de',
+    },
+  },
+]
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -70,6 +104,10 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         <SitePreferencesProvider>
           <CookieConsentProvider>
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
+            />
             <GoogleAnalytics />
             <CookieConsentDialog />
             {children}
