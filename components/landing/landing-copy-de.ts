@@ -118,23 +118,23 @@ export const landingCopyDe: LandingCopy = {
     note: 'Sie wissen bei jedem Schritt, was gerade passiert. Ohne komplizierte Fachsprache.',
   },
   pricingTeaser: {
-    title: 'Transparente Preise ab 400 €',
+    title: 'Transparente Preise ab 400€',
     subtitle:
-      'Eine einfache Landingpage startet ab 400 €. Für mehrseitige Business-Websites oder Websites mit zusätzlichen Funktionen gibt es passende Pakete mit klar beschriebenem Umfang.',
+      'Eine einfache Landingpage startet ab 400€. Für mehrseitige Business-Websites oder Websites mit zusätzlichen Funktionen gibt es passende Pakete mit klar beschriebenem Umfang.',
     cards: [
       {
         title: 'Start Website',
-        price: 'ab 400 €',
+        price: 'ab 400€',
         description: 'Eine klare Landingpage für den schnellen Online-Auftritt.',
       },
       {
         title: 'Business Website',
-        price: 'ab 900 €',
+        price: 'ab 900€',
         description: '3–5 Seiten für mehr Vertrauen und bessere Übersicht.',
       },
       {
-        title: 'Funktionale Website',
-        price: 'ab 1.500 €',
+        title: 'Web-App',
+        price: 'ab 1.500€',
         description: 'Zusätzliche Funktionen, Integrationen und Automatisierung.',
       },
     ],

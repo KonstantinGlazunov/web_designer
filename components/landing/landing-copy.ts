@@ -239,23 +239,23 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       note: 'Sie wissen bei jedem Schritt, was gerade passiert. Ohne komplizierte Fachsprache.',
     },
     pricingTeaser: {
-      title: 'Transparente Preise ab 400 €',
+      title: 'Transparente Preise ab 400€',
       subtitle:
-        'Eine einfache Landingpage startet ab 400 €. Für mehrseitige Business-Websites oder Websites mit zusätzlichen Funktionen gibt es passende Pakete mit klar beschriebenem Umfang.',
+        'Eine einfache Landingpage startet ab 400€. Für mehrseitige Business-Websites oder Websites mit zusätzlichen Funktionen gibt es passende Pakete mit klar beschriebenem Umfang.',
       cards: [
         {
           title: 'Start Website',
-          price: 'ab 400 €',
+          price: 'ab 400€',
           description: 'Eine klare Landingpage für den schnellen Online-Auftritt.',
         },
         {
           title: 'Business Website',
-          price: 'ab 900 €',
+          price: 'ab 900€',
           description: '3–5 Seiten für mehr Vertrauen und bessere Übersicht.',
         },
         {
-          title: 'Funktionale Website',
-          price: 'ab 1.500 €',
+          title: 'Web-App',
+          price: 'ab 1.500€',
           description: 'Zusätzliche Funktionen, Integrationen und Automatisierung.',
         },
       ],
@@ -484,23 +484,23 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       note: 'На каждом шаге вы понимаете, что происходит. Без сложной терминологии.',
     },
     pricingTeaser: {
-      title: 'Прозрачные цены от 400 €',
+      title: 'Прозрачные цены от 400€',
       subtitle:
-        'Простая landing page начинается от 400 €. Для многостраничных бизнес-сайтов и сайтов с дополнительными функциями есть отдельные пакеты с понятным объёмом работ.',
+        'Простая landing page начинается от 400€. Для многостраничных бизнес-сайтов и сайтов с дополнительными функциями есть отдельные пакеты с понятным объёмом работ.',
       cards: [
         {
           title: 'Start Website',
-          price: 'от 400 €',
+          price: 'от 400€',
           description: 'Одна понятная страница для быстрого онлайн-присутствия.',
         },
         {
           title: 'Business Website',
-          price: 'от 900 €',
+          price: 'от 900€',
           description: '3–5 страниц для доверия, структуры и презентации услуг.',
         },
         {
-          title: 'Функциональный сайт',
-          price: 'от 1.500 €',
+          title: 'WEB Приложение',
+          price: 'от 1.500€',
           description: 'Дополнительные функции, интеграции и автоматизация.',
         },
       ],
