@@ -32,7 +32,7 @@ import { cn } from '@/lib/utils'
 import type { LandingCopy, LandingLocale } from '@/components/landing/landing-copy'
 import { landingCopyDe } from '@/components/landing/landing-copy-de'
 import { landingCopyRu } from '@/components/landing/landing-copy-ru'
-import { portfolioCopy, type PortfolioText } from '@/components/landing/portfolio-copy'
+import { homeCaseStudyCopy } from '@/components/landing/portfolio-copy'
 
 const whatsappHref = 'https://wa.me/4915110974353'
 
@@ -41,7 +41,6 @@ type LandingText = LandingCopy
 const valueIcons = [LayoutGrid, Shield, Smartphone, Map]
 const logicIcons = [Search, LayoutGrid, CheckCircle2, Phone]
 const processIcons = [Phone, CheckCircle2, FileText, LayoutGrid, Rocket]
-const beforeAfterImages = ['/images/case1.webp', '/images/case2.webp', '/images/case3.webp']
 const audienceImages = [
   '/images/kfz.webp',
   '/images/baustelle.webp',
@@ -75,8 +74,6 @@ export function HomePageClient() {
   const [quizOpen, setQuizOpen] = useState(false)
   const [chatReady, setChatReady] = useState(false)
   const copy = landingLocale === 'de' ? landingCopyDe : landingCopyRu
-  const portfolio = portfolioCopy[landingLocale]
-  const portfolioLinkLabel = landingLocale === 'de' ? 'Webseite öffnen' : 'Открыть сайт'
   const requestLabel = landingLocale === 'de' ? 'Bereit für ein Projekt?' : 'Готовы к проекту?'
   const isQuizRequested = searchParams.get('quiz') === '1'
   const quizSourceFromQuery = searchParams.get('quizSource') || searchParams.get('source') || 'deeplink'
@@ -166,11 +163,14 @@ export function HomePageClient() {
         <ValueSection copy={copy} />
         <LogicSection copy={copy} />
         <AudienceSection copy={copy} />
+        <PricesTeaserSection copy={copy} locale={landingLocale} onOpenForm={(source) => {
+          setQuizSource(source)
+          setQuizOpen(true)
+        }} />
         <ProcessSection copy={copy} locale={landingLocale} />
         <TrustSection copy={copy} />
         <HonestySection copy={copy} />
-        <BeforeAfterSection copy={copy} />
-        <ExamplesSection portfolio={portfolio} linkLabel={portfolioLinkLabel} locale={landingLocale} />
+        <BeforeAfterSection locale={landingLocale} />
         <FaqSection copy={copy} />
         <FinalCtaSection
           copy={copy}
@@ -222,6 +222,8 @@ function HeroSection({
   onToggleLocale: () => void
   onOpenForm: (source: string) => void
 }) {
+  const pricesHref = localizePath('/preise', locale)
+
   const handleExamplesClick = (placement: 'hero_mobile' | 'hero_desktop') => {
     trackEvent('cta_click', { cta_name: 'hero_examples', placement, locale })
     window.history.pushState(null, '', '#beispiele')
@@ -258,17 +260,26 @@ function HeroSection({
             <p className="hidden text-xs text-slate-700 sm:block sm:text-sm">{copy.nav.region}</p>
           </div>
 
-          <button
-            type="button"
-            onClick={onToggleLocale}
-            aria-label={locale === 'de' ? 'Switch to Russian' : 'Switch to German'}
-            className="inline-flex flex-none items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-700 transition hover:border-slate-400 hover:bg-white sm:text-xs"
-          >
-            <Globe className="h-3.5 w-3.5" />
-            <span>{copy.lang.current}</span>
-            <span className="text-slate-400">/</span>
-            <span className="text-slate-500">{copy.lang.switchTo}</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <Link
+              href={pricesHref}
+              className="hidden rounded-full border border-slate-300 bg-white px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-700 transition hover:border-slate-400 hover:text-slate-950 sm:inline-flex sm:text-xs"
+            >
+              {copy.nav.prices}
+            </Link>
+
+            <button
+              type="button"
+              onClick={onToggleLocale}
+              aria-label={locale === 'de' ? 'Switch to Russian' : 'Switch to German'}
+              className="inline-flex flex-none items-center gap-2 rounded-full border border-slate-300 bg-white/90 px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-700 transition hover:border-slate-400 hover:bg-white sm:text-xs"
+            >
+              <Globe className="h-3.5 w-3.5" />
+              <span>{copy.lang.current}</span>
+              <span className="text-slate-400">/</span>
+              <span className="text-slate-500">{copy.lang.switchTo}</span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -532,6 +543,67 @@ function AudienceSection({ copy }: { copy: LandingText }) {
   )
 }
 
+function PricesTeaserSection({
+  copy,
+  locale,
+  onOpenForm,
+}: {
+  copy: LandingText
+  locale: LandingLocale
+  onOpenForm: (source: string) => void
+}) {
+  return (
+    <ContentSection className="overflow-hidden border-slate-300 bg-[linear-gradient(135deg,rgba(255,255,255,0.98)_0%,rgba(240,247,255,0.94)_54%,rgba(229,236,245,0.98)_100%)]">
+      <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">{copy.nav.prices}</p>
+          <SectionTitle className="reveal-stagger mt-3" style={revealStyle(40)}>
+            {copy.pricingTeaser.title}
+          </SectionTitle>
+          <p className="reveal-stagger mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg" style={revealStyle(110)}>
+            {copy.pricingTeaser.subtitle}
+          </p>
+          <div className="reveal-stagger mt-6 flex flex-wrap gap-3" style={revealStyle(170)}>
+            <TrackedLink
+              href={locale === 'ru' ? '/ru/preise' : '/preise'}
+              eventParams={{ cta_name: 'prices_teaser_primary', placement: 'home_prices_teaser', locale }}
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
+            >
+              {copy.pricingTeaser.primary}
+              <ArrowRight className="h-4 w-4" />
+            </TrackedLink>
+            <button
+              type="button"
+              onClick={() => {
+                trackEvent('cta_click', { cta_name: 'prices_teaser_secondary', placement: 'home_prices_teaser', locale })
+                onOpenForm('home_client_prices_teaser')
+              }}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950"
+            >
+              {copy.pricingTeaser.secondary}
+              <MoveRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {copy.pricingTeaser.cards.map((card, index) => (
+            <article
+              key={card.title}
+              className="reveal-stagger rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_16px_35px_rgba(15,23,42,0.05)] transition hover:-translate-y-0.5 hover:border-slate-300"
+              style={revealStyle(130 + index * 70)}
+            >
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">{card.title}</p>
+              <p className="mt-3 text-2xl font-semibold text-slate-950">{card.price}</p>
+              <p className="mt-3 text-sm leading-7 text-slate-600">{card.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </ContentSection>
+  )
+}
+
 function ProcessSection({ copy, locale }: { copy: LandingText; locale: LandingLocale }) {
   const aboutHref = localizePath('/ueber-mich', locale)
 
@@ -640,118 +712,59 @@ function HonestySection({ copy }: { copy: LandingText }) {
   )
 }
 
-function BeforeAfterSection({ copy }: { copy: LandingText }) {
+function BeforeAfterSection({ locale }: { locale: LandingLocale }) {
+  const caseStudies = homeCaseStudyCopy[locale]
+  const portfolioHref = localizePath('/portfolio', locale)
+
   return (
     <ContentSection id="vorher-nachher">
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
-        {copy.beforeAfter.title}
+        {caseStudies.title}
       </SectionTitle>
+      <p className="reveal-stagger mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:text-lg" style={revealStyle(110)}>
+        {caseStudies.subtitle}
+      </p>
 
       <div className="mt-7 grid gap-4 lg:grid-cols-3">
-        {copy.beforeAfter.cards.map((card, index) => (
+        {caseStudies.items.map((card, index) => (
           <article
-            key={card.before}
-            className="reveal-stagger rounded-[26px] border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-slate-300"
+            key={card.title}
+            className="reveal-stagger overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300"
             style={revealStyle(120 + index * 70)}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-              {copy.beforeAfter.caseLabel} {index + 1}
-            </p>
-
-            <div className="relative mt-4 aspect-[16/10] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+            <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
               <Image
-                src={beforeAfterImages[index] ?? beforeAfterImages[0]}
-                alt={`Case ${index + 1} Ergebnis`}
+                src={card.image}
+                alt={card.imageAlt}
                 fill
-                sizes="(max-width: 1024px) 100vw, 30vw"
-                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="object-cover object-center"
               />
             </div>
-
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-700">{copy.beforeAfter.beforeLabel}</p>
-                <p className="mt-2 whitespace-pre-line text-sm leading-7 text-rose-900">{card.before}</p>
-              </div>
-
-              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">{copy.beforeAfter.afterLabel}</p>
-                <p className="mt-2 whitespace-pre-line text-sm leading-7 text-emerald-900">{card.after}</p>
+            <div className="p-5 sm:p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">{card.label}</p>
+              <h3 className="mt-3 text-xl font-semibold text-slate-950">{card.title}</h3>
+              <div className="mt-4 space-y-3">
+                <p className="rounded-2xl border border-rose-100 bg-rose-50 p-4 text-sm leading-7 text-rose-950">
+                  {card.before}
+                </p>
+                <p className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm leading-7 text-emerald-950">
+                  {card.after}
+                </p>
               </div>
             </div>
           </article>
         ))}
       </div>
-    </ContentSection>
-  )
-}
-
-function ExamplesSection({ portfolio, linkLabel, locale }: { portfolio: PortfolioText; linkLabel: string; locale: LandingLocale }) {
-  return (
-    <ContentSection id="beispiele">
-      <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
-        {portfolio.title}
-      </SectionTitle>
-      <p className="reveal-stagger mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:text-lg" style={revealStyle(110)}>
-        {portfolio.subtitle}
-      </p>
-
-      <div className="mt-7 grid gap-4 md:grid-cols-2">
-        {portfolio.items.map((item, index) => {
-          const imageSrc = item.title === 'Speicher Balkonkraftwerk' ? '/images/solaranlageseite.webp' : item.image
-          const card = (
-            <div className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)]">
-              <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100">
-                <Image
-                  src={imageSrc}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className={cn(
-                    'object-cover transition duration-500 group-hover:scale-[1.03]',
-                    item.title === 'BewerbungProfi' || item.title === 'Beauty Studio Lesya' || item.title === 'Psycholog UA/RU' ? 'object-top' : 'object-center',
-                  )}
-                />
-              </div>
-
-              <div className="flex flex-1 flex-col p-5">
-                <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
-                <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
-
-                <div className="mt-3 mb-5 flex flex-wrap gap-2">
-                  {item.tech.slice(0, 4).map((tech) => (
-                    <span key={tech} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <span className="mt-auto inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition group-hover:border-slate-400 group-hover:text-slate-900">
-                  {linkLabel}
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              </div>
-            </div>
-          )
-
-          return (
-            <article key={item.title} className="reveal-stagger h-full" style={revealStyle(170 + index * 70)}>
-              {item.url ? (
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block h-full"
-                  onClick={() => trackEvent('portfolio_open', { portfolio_item: item.title, locale, placement: 'examples_section' })}
-                >
-                  {card}
-                </a>
-              ) : (
-                card
-              )}
-            </article>
-          )
-        })}
+      <div className="reveal-stagger mt-7" style={revealStyle(340)}>
+        <TrackedLink
+          href={portfolioHref}
+          eventParams={{ cta_name: 'home_case_studies_more', placement: 'home_case_studies', locale }}
+          className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950"
+        >
+          {caseStudies.cta}
+          <ArrowRight className="h-4 w-4" />
+        </TrackedLink>
       </div>
     </ContentSection>
   )
@@ -838,7 +851,9 @@ function FinalCtaSection({ copy, locale, onOpenForm }: { copy: LandingText; loca
 
 function FooterSection({ copy, locale }: { copy: LandingText; locale: LandingLocale }) {
   const aboutHref = localizePath('/ueber-mich', locale)
+  const portfolioHref = localizePath('/portfolio', locale)
   const blogHref = localizePath('/blog', locale)
+  const pricesHref = localizePath('/preise', locale)
   const privacyHref = localizePath('/datenschutzerklaerung', locale)
   const agbHref = localizePath('/agb', locale)
   const impressumHref = localizePath('/impressum', locale)
@@ -846,33 +861,45 @@ function FooterSection({ copy, locale }: { copy: LandingText; locale: LandingLoc
 
   return (
     <footer id="kontakt" className="mt-6 rounded-[30px] border border-slate-200 bg-white px-6 py-8 sm:px-8 lg:snap-start">
-      <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+      <div className="grid gap-6 md:grid-cols-[1.15fr_1fr] md:items-start">
         <div className="reveal-stagger" style={revealStyle(60)}>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">{copy.footer.title}</p>
           <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">{copy.footer.description}</p>
         </div>
 
         <div className="reveal-stagger text-sm text-slate-700" style={revealStyle(140)}>
-          <div className="grid grid-cols-2 justify-items-start gap-x-8 gap-y-2 md:justify-items-end md:text-right">
-            <Link href={aboutHref} onClick={() => trackEvent('cta_click', { cta_name: 'about_link', placement: 'footer', locale })} className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              {copy.footer.about}
-            </Link>
-            <Link href={blogHref} onClick={() => trackEvent('cta_click', { cta_name: 'blog_link', placement: 'footer', locale })} className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              {copy.footer.blog}
-            </Link>
-            <Link href={privacyHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              {copy.footer.legal.privacy}
-            </Link>
-            <Link href={agbHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              AGB
-            </Link>
-            <Link href={impressumHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
-              {copy.footer.legal.impressum}
-            </Link>
-            <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 md:text-right" />
-            <Link href={contactHref} onClick={() => trackEvent('cta_click', { cta_name: 'contact_link', placement: 'footer', locale })} className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">
-              {copy.footer.contact}
-            </Link>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:justify-items-end lg:text-right">
+            <div className="grid gap-2">
+              <Link href={aboutHref} onClick={() => trackEvent('cta_click', { cta_name: 'about_link', placement: 'footer', locale })} className="block w-full text-left transition hover:text-slate-950 lg:text-right">
+                {copy.footer.about}
+              </Link>
+              <Link href={blogHref} onClick={() => trackEvent('cta_click', { cta_name: 'blog_link', placement: 'footer', locale })} className="block w-full text-left transition hover:text-slate-950 lg:text-right">
+                {copy.footer.blog}
+              </Link>
+              <Link href={pricesHref} onClick={() => trackEvent('cta_click', { cta_name: 'prices_link', placement: 'footer', locale })} className="block w-full text-left transition hover:text-slate-950 lg:text-right">
+                {copy.footer.prices}
+              </Link>
+            </div>
+            <div className="grid gap-2">
+              <Link href={portfolioHref} className="block w-full text-left transition hover:text-slate-950 lg:text-right">
+                {locale === 'ru' ? 'Портфолио' : 'Portfolio'}
+              </Link>
+              <Link href={privacyHref} className="block w-full text-left transition hover:text-slate-950 lg:text-right">
+                {copy.footer.legal.privacy}
+              </Link>
+              <Link href={agbHref} className="block w-full text-left transition hover:text-slate-950 lg:text-right">
+                AGB
+              </Link>
+            </div>
+            <div className="grid gap-2">
+              <Link href={impressumHref} className="block w-full text-left transition hover:text-slate-950 lg:text-right">
+                {copy.footer.legal.impressum}
+              </Link>
+              <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 lg:text-right" />
+              <Link href={contactHref} onClick={() => trackEvent('cta_click', { cta_name: 'contact_link', placement: 'footer', locale })} className="block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 lg:text-right">
+                {copy.footer.contact}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

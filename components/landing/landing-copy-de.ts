@@ -9,6 +9,7 @@ export const landingCopyDe: LandingCopy = {
     studio: 'Vibe Studio',
     region: 'Websites für kleine Unternehmen',
     badges: ['Für lokale Unternehmen', 'Mobil optimiert', 'Klar & modern'],
+    prices: 'Preise',
   },
   hero: {
     title: 'Mehr Kundenanfragen über Ihre Website – einfach und ohne Aufwand',
@@ -62,7 +63,7 @@ export const landingCopyDe: LandingCopy = {
       {
         title: 'Bereit für den nächsten Schritt',
         description:
-          'Eine gute Website ist die Grundlage, wenn Sie später Werbung schalten oder besser gefunden werden möchten.',
+          'Eine gute Website ist die Grundlage, wenn Sie später mehr Inhalte, Funktionen oder klare Kontaktwege ergänzen möchten.',
       },
     ],
   },
@@ -116,6 +117,30 @@ export const landingCopyDe: LandingCopy = {
     ],
     note: 'Sie wissen bei jedem Schritt, was gerade passiert. Ohne komplizierte Fachsprache.',
   },
+  pricingTeaser: {
+    title: 'Transparente Preise ab 400 €',
+    subtitle:
+      'Eine einfache Landingpage startet ab 400 €. Für mehrseitige Business-Websites oder Websites mit zusätzlichen Funktionen gibt es passende Pakete mit klar beschriebenem Umfang.',
+    cards: [
+      {
+        title: 'Start Website',
+        price: 'ab 400 €',
+        description: 'Eine klare Landingpage für den schnellen Online-Auftritt.',
+      },
+      {
+        title: 'Business Website',
+        price: 'ab 900 €',
+        description: '3–5 Seiten für mehr Vertrauen und bessere Übersicht.',
+      },
+      {
+        title: 'Funktionale Website',
+        price: 'ab 1.500 €',
+        description: 'Zusätzliche Funktionen, Integrationen und Automatisierung.',
+      },
+    ],
+    primary: 'Preise ansehen',
+    secondary: 'Kostenlose Einschätzung starten',
+  },
   trust: {
     title: 'Einfach, verständlich und ohne unnötigen Aufwand',
     points: [
@@ -168,7 +193,7 @@ export const landingCopyDe: LandingCopy = {
       {
         question: 'Bringt mir eine Website automatisch Kunden?',
         answer:
-          'Nein. Eine Website ersetzt keine Werbung. Aber sie ist eine wichtige Grundlage für Sichtbarkeit, Vertrauen und professionelle Präsentation.',
+          'Nein. Eine Website ist kein Automatismus. Aber sie ist eine wichtige Grundlage für Sichtbarkeit, Vertrauen und professionelle Präsentation.',
       },
       {
         question: 'Ist das auch für kleine lokale Unternehmen sinnvoll?',
@@ -211,6 +236,7 @@ export const landingCopyDe: LandingCopy = {
     email: 'E-Mail: kontakt@erstellen-websiten.de',
     about: 'Über mich',
     blog: 'Blog',
+    prices: 'Preise',
     quizBrief: 'Brief zur Website-Entwicklung',
     legal: {
       impressum: 'Impressum',

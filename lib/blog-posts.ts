@@ -1650,7 +1650,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'mikroanimationen-die-konvertieren',
-    image: '/images/blog-v3/mikroanimationen-die-konvertieren.png',
+    image: '/images/blog-v3/generated/mikroanimationen-die-konvertieren-cover.webp',
     publishedAtISO: '2026-05-13',
     readTimeMin: 8,
     topicLabel: {
@@ -1784,7 +1784,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'dark-patterns-sind-tot-was-statt-druck-funktioniert',
-    image: '/images/blog-v3/dark-patterns-sind-tot.png',
+    image: '/images/blog-v3/generated/dark-patterns-sind-tot-cover.webp',
     publishedAtISO: '2026-05-14',
     readTimeMin: 9,
     topicLabel: {
@@ -1918,7 +1918,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'minimalismus-der-verkauft-landingpages',
-    image: '/images/blog-v3/minimalismus-der-verkauft.png',
+    image: '/images/blog-v3/generated/minimalismus-der-verkauft-cover.webp',
     publishedAtISO: '2026-05-15',
     readTimeMin: 8,
     topicLabel: {
@@ -2052,7 +2052,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'landingpages-fuer-llm-antworten-und-zitate',
-    image: '/images/blog-v3/landingpages-fuer-llm-zitate.png',
+    image: '/images/blog-v3/generated/landingpages-fuer-llm-zitate-cover.webp',
     publishedAtISO: '2026-05-16',
     readTimeMin: 10,
     topicLabel: {
@@ -2186,7 +2186,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'visuelle-seriositaet-webdesign-2026',
-    image: '/images/blog-v3/visuelle-seriositaet-2026.png',
+    image: '/images/blog-v3/generated/visuelle-seriositaet-2026-cover.webp',
     publishedAtISO: '2026-05-17',
     readTimeMin: 9,
     topicLabel: {
@@ -2320,7 +2320,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'personal-brand-des-inhabers-auf-landingpages',
-    image: '/images/blog-v3/personal-brand-inhaber.png',
+    image: '/images/blog-v3/generated/personal-brand-inhaber-cover.webp',
     publishedAtISO: '2026-05-18',
     readTimeMin: 9,
     topicLabel: {
@@ -2454,7 +2454,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'anti-chaos-landingpage-viele-leistungen',
-    image: '/images/blog-v3/anti-chaos-viele-leistungen.png',
+    image: '/images/blog-v3/generated/anti-chaos-viele-leistungen-cover.webp',
     publishedAtISO: '2026-05-19',
     readTimeMin: 10,
     topicLabel: {
@@ -2588,7 +2588,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'consent-ux-datenschutz-ohne-conversionverlust',
-    image: '/images/blog-v3/consent-ux-datenschutz.png',
+    image: '/images/blog-v3/generated/consent-ux-datenschutz-cover.webp',
     publishedAtISO: '2026-05-20',
     readTimeMin: 9,
     topicLabel: {
@@ -2722,7 +2722,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'hochpreisige-dienstleistung-landingpage-ohne-preisschock',
-    image: '/images/blog-v3/hochpreisig-ohne-preisschock.png',
+    image: '/images/blog-v3/generated/hochpreisig-ohne-preisschock-cover.webp',
     publishedAtISO: '2026-05-21',
     readTimeMin: 10,
     topicLabel: {
@@ -2856,7 +2856,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'landingpages-ohne-werbe-klischees',
-    image: '/images/blog-v3/ohne-werbe-klischees.png',
+    image: '/images/blog-v3/generated/ohne-werbe-klischees-cover.webp',
     publishedAtISO: '2026-05-22',
     readTimeMin: 8,
     topicLabel: {

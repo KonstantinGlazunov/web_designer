@@ -20,7 +20,7 @@ import {
 import { CookieSettingsTrigger } from '@/components/cookie-settings-trigger'
 import { TrackedLink } from '@/components/tracked-link'
 import { landingCopyDe } from '@/components/landing/landing-copy-de'
-import { portfolioCopy } from '@/components/landing/portfolio-copy'
+import { homeCaseStudyCopy } from '@/components/landing/portfolio-copy'
 import { HomePageBridge } from '@/components/home-page-bridge'
 import { HomePageChat } from '@/components/home-page-chat'
 import { HomePageReveal } from '@/components/home-page-reveal'
@@ -31,7 +31,6 @@ const whatsappHref = 'https://wa.me/4915110974353'
 const valueIcons = [LayoutGrid, Shield, Map, Rocket]
 const logicIcons = [Search, LayoutGrid, CheckCircle2, Phone]
 const processIcons = [Phone, CheckCircle2, FileText, LayoutGrid, Rocket]
-const beforeAfterImages = ['/images/case1.webp', '/images/case2.webp', '/images/case3.webp']
 const audienceImages = [
   '/images/kfz.webp',
   '/images/baustelle.webp',
@@ -50,7 +49,6 @@ function revealStyle(delay: number, duration = 620): CSSProperties {
 
 export function HomePage() {
   const copy = landingCopyDe
-  const portfolio = portfolioCopy.de
 
   return (
     <>
@@ -62,11 +60,11 @@ export function HomePage() {
           <ValueSection copy={copy} />
           <LogicSection copy={copy} />
           <AudienceSection copy={copy} />
+          <PricesTeaserSection copy={copy} />
           <ProcessSection copy={copy} />
           <TrustSection copy={copy} />
           <HonestySection copy={copy} />
-          <BeforeAfterSection copy={copy} />
-          <ExamplesSection portfolio={portfolio} />
+          <BeforeAfterSection />
           <FaqSection copy={copy} />
           <FinalCtaSection copy={copy} />
           <FooterSection copy={copy} />
@@ -114,7 +112,15 @@ function HeroSection({ copy }: { copy: typeof landingCopyDe }) {
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-sky-800 sm:text-xs">{copy.nav.studio}</p>
             <p className="hidden text-xs text-slate-700 sm:block sm:text-sm">{copy.nav.region}</p>
           </div>
-          <HomeShellLocaleToggle />
+          <div className="flex items-center gap-2">
+            <Link
+              href="/preise"
+              className="hidden rounded-full border border-slate-300 bg-white px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-slate-700 transition hover:border-slate-400 hover:text-slate-950 sm:inline-flex sm:text-xs"
+            >
+              {copy.nav.prices}
+            </Link>
+            <HomeShellLocaleToggle />
+          </div>
         </div>
       </header>
 
@@ -308,6 +314,56 @@ function AudienceSection({ copy }: { copy: typeof landingCopyDe }) {
   )
 }
 
+function PricesTeaserSection({ copy }: { copy: typeof landingCopyDe }) {
+  return (
+    <ContentSection className="overflow-hidden border-slate-300 bg-[linear-gradient(135deg,rgba(255,255,255,0.98)_0%,rgba(240,247,255,0.94)_54%,rgba(229,236,245,0.98)_100%)]">
+      <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">Preise</p>
+          <SectionTitle className="reveal-stagger mt-3" style={revealStyle(40)}>
+            {copy.pricingTeaser.title}
+          </SectionTitle>
+          <p className="reveal-stagger mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg" style={revealStyle(110)}>
+            {copy.pricingTeaser.subtitle}
+          </p>
+          <div className="reveal-stagger mt-6 flex flex-wrap gap-3" style={revealStyle(170)}>
+            <TrackedLink
+              href="/preise"
+              eventParams={{ cta_name: 'prices_teaser_primary', placement: 'home_prices_teaser', locale: 'de' }}
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
+            >
+              {copy.pricingTeaser.primary}
+              <ArrowRight className="h-4 w-4" />
+            </TrackedLink>
+            <TrackedLink
+              href="/?quiz=1&quizSource=home_shell_prices_teaser"
+              eventParams={{ cta_name: 'prices_teaser_secondary', placement: 'home_prices_teaser', locale: 'de' }}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950"
+            >
+              {copy.pricingTeaser.secondary}
+              <MoveRight className="h-4 w-4" />
+            </TrackedLink>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {copy.pricingTeaser.cards.map((card, index) => (
+            <article
+              key={card.title}
+              className="reveal-stagger rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_16px_35px_rgba(15,23,42,0.05)] transition hover:-translate-y-0.5 hover:border-slate-300"
+              style={revealStyle(130 + index * 70)}
+            >
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-700">{card.title}</p>
+              <p className="mt-3 text-2xl font-semibold text-slate-950">{card.price}</p>
+              <p className="mt-3 text-sm leading-7 text-slate-600">{card.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </ContentSection>
+  )
+}
+
 function ProcessSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <ContentSection>
@@ -391,84 +447,56 @@ function HonestySection({ copy }: { copy: typeof landingCopyDe }) {
   )
 }
 
-function BeforeAfterSection({ copy }: { copy: typeof landingCopyDe }) {
+function BeforeAfterSection() {
+  const caseStudies = homeCaseStudyCopy.de
+
   return (
     <ContentSection id="vorher-nachher">
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
-        {copy.beforeAfter.title}
+        {caseStudies.title}
       </SectionTitle>
+      <p className="reveal-stagger mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:text-lg" style={revealStyle(110)}>
+        {caseStudies.subtitle}
+      </p>
       <div className="mt-7 grid gap-4 lg:grid-cols-3">
-        {copy.beforeAfter.cards.map((card, index) => (
-          <article key={card.before} className="reveal-stagger rounded-[26px] border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-slate-300" style={revealStyle(120 + index * 70)}>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">{copy.beforeAfter.caseLabel} {index + 1}</p>
-            <div className="relative mt-4 aspect-[16/10] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
-              <Image src={beforeAfterImages[index] ?? beforeAfterImages[0]} alt={`Case ${index + 1} Ergebnis`} fill sizes="(max-width: 1024px) 100vw, 30vw" className="object-cover" />
+        {caseStudies.items.map((card, index) => (
+          <article
+            key={card.title}
+            className="reveal-stagger overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300"
+            style={revealStyle(120 + index * 70)}
+          >
+            <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+              <Image
+                src={card.image}
+                alt={card.imageAlt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                className="object-cover object-center"
+              />
             </div>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-rose-700">{copy.beforeAfter.beforeLabel}</p>
-                <p className="mt-2 whitespace-pre-line text-sm leading-7 text-rose-900">{card.before}</p>
-              </div>
-              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700">{copy.beforeAfter.afterLabel}</p>
-                <p className="mt-2 whitespace-pre-line text-sm leading-7 text-emerald-900">{card.after}</p>
+            <div className="p-5 sm:p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">{card.label}</p>
+              <h3 className="mt-3 text-xl font-semibold text-slate-950">{card.title}</h3>
+              <div className="mt-4 space-y-3">
+                <p className="rounded-2xl border border-rose-100 bg-rose-50 p-4 text-sm leading-7 text-rose-950">
+                  {card.before}
+                </p>
+                <p className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm leading-7 text-emerald-950">
+                  {card.after}
+                </p>
               </div>
             </div>
           </article>
         ))}
       </div>
-    </ContentSection>
-  )
-}
-
-function ExamplesSection({ portfolio }: { portfolio: (typeof portfolioCopy)['de'] }) {
-  return (
-    <ContentSection id="beispiele">
-      <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
-        {portfolio.title}
-      </SectionTitle>
-      <p className="reveal-stagger mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:text-lg" style={revealStyle(110)}>
-        {portfolio.subtitle}
-      </p>
-      <div className="mt-7 grid gap-4 md:grid-cols-2">
-        {portfolio.items.map((item, index) => {
-          const imageSrc = item.title === 'Speicher Balkonkraftwerk' ? '/images/solaranlageseite.webp' : item.image
-          return (
-            <article key={item.title} className="reveal-stagger h-full" style={revealStyle(170 + index * 70)}>
-              <a href={item.url} target="_blank" rel="noopener noreferrer" className="group block h-full">
-                <div className="flex h-full flex-col overflow-hidden rounded-[26px] border border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_18px_35px_rgba(15,23,42,0.08)]">
-                  <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100">
-                    <Image
-                      src={imageSrc}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 45vw"
-                      className={cn(
-                        'object-cover transition duration-500 group-hover:scale-[1.03]',
-                        item.title === 'BewerbungProfi' || item.title === 'Beauty Studio Lesya' || item.title === 'Psycholog UA/RU' ? 'object-top' : 'object-center',
-                      )}
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-xl font-semibold text-slate-900">{item.title}</h3>
-                    <p className="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600 sm:text-base">{item.description}</p>
-                    <div className="mb-5 mt-3 flex flex-wrap gap-2">
-                      {item.tech.slice(0, 4).map((tech) => (
-                        <span key={tech} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="mt-auto inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition group-hover:border-slate-400 group-hover:text-slate-900">
-                      Webseite öffnen
-                      <ArrowRight className="h-4 w-4" />
-                    </span>
-                  </div>
-                </div>
-              </a>
-            </article>
-          )
-        })}
+      <div className="reveal-stagger mt-7" style={revealStyle(340)}>
+        <Link
+          href="/portfolio"
+          className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950"
+        >
+          {caseStudies.cta}
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
     </ContentSection>
   )
@@ -532,20 +560,28 @@ function FinalCtaSection({ copy }: { copy: typeof landingCopyDe }) {
 function FooterSection({ copy }: { copy: typeof landingCopyDe }) {
   return (
     <footer id="kontakt" className="mt-6 rounded-[30px] border border-slate-200 bg-white px-6 py-8 sm:px-8 lg:snap-start">
-      <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-end">
+      <div className="grid gap-6 md:grid-cols-[1.15fr_1fr] md:items-start">
         <div className="reveal-stagger" style={revealStyle(60)}>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">{copy.footer.title}</p>
           <p className="mt-4 max-w-xl text-base leading-7 text-slate-600">{copy.footer.description}</p>
         </div>
         <div className="reveal-stagger text-sm text-slate-700" style={revealStyle(140)}>
-          <div className="grid grid-cols-2 justify-items-start gap-x-8 gap-y-2 md:justify-items-end md:text-right">
-            <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.about}</Link>
-            <Link href="/blog" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.blog}</Link>
-            <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.legal.privacy}</Link>
-            <Link href="/agb" className="block w-full text-left transition hover:text-slate-950 md:text-right">AGB</Link>
-            <Link href="/impressum" className="block w-full text-left transition hover:text-slate-950 md:text-right">{copy.footer.legal.impressum}</Link>
-            <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 md:text-right" />
-            <Link href="/kontakt" className="col-span-2 block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 md:text-right">{copy.footer.contact}</Link>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:justify-items-end lg:text-right">
+            <div className="grid gap-2">
+              <Link href="/ueber-mich" className="block w-full text-left transition hover:text-slate-950 lg:text-right">{copy.footer.about}</Link>
+              <Link href="/blog" className="block w-full text-left transition hover:text-slate-950 lg:text-right">{copy.footer.blog}</Link>
+              <Link href="/preise" className="block w-full text-left transition hover:text-slate-950 lg:text-right">{copy.footer.prices}</Link>
+            </div>
+            <div className="grid gap-2">
+              <Link href="/portfolio" className="block w-full text-left transition hover:text-slate-950 lg:text-right">Portfolio</Link>
+              <Link href="/datenschutzerklaerung" className="block w-full text-left transition hover:text-slate-950 lg:text-right">{copy.footer.legal.privacy}</Link>
+              <Link href="/agb" className="block w-full text-left transition hover:text-slate-950 lg:text-right">AGB</Link>
+            </div>
+            <div className="grid gap-2">
+              <Link href="/impressum" className="block w-full text-left transition hover:text-slate-950 lg:text-right">{copy.footer.legal.impressum}</Link>
+              <CookieSettingsTrigger className="block w-full text-left transition hover:text-slate-950 lg:text-right" />
+              <Link href="/kontakt" className="block w-full text-left font-semibold text-slate-900 transition hover:text-slate-950 lg:text-right">{copy.footer.contact}</Link>
+            </div>
           </div>
           <nav className="sr-only" aria-label="Russian alternate links" aria-hidden="true">
             <Link href="/ru">Главная</Link>

@@ -9,6 +9,7 @@ export interface LandingCopy {
     studio: string
     region: string
     badges: string[]
+    prices: string
   }
   hero: {
     title: string
@@ -53,6 +54,17 @@ export interface LandingCopy {
     }>
     note: string
   }
+  pricingTeaser: {
+    title: string
+    subtitle: string
+    cards: Array<{
+      title: string
+      price: string
+      description: string
+    }>
+    primary: string
+    secondary: string
+  }
   trust: {
     title: string
     points: string[]
@@ -95,6 +107,7 @@ export interface LandingCopy {
     email: string
     about: string
     blog: string
+    prices: string
     quizBrief: string
     legal: {
       impressum: string
@@ -117,6 +130,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       studio: 'Vibe Studio',
       region: 'Websites für kleine Unternehmen',
       badges: ['Für lokale Unternehmen', 'Mobil optimiert', 'Klar & modern'],
+      prices: 'Preise',
     },
     hero: {
       title: 'Mehr Kundenanfragen über Ihre Website – einfach und ohne Aufwand',
@@ -170,7 +184,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         {
           title: 'Bereit für den nächsten Schritt',
           description:
-            'Eine gute Website ist die Grundlage, wenn Sie später Werbung schalten oder besser gefunden werden möchten.',
+            'Eine gute Website ist die Grundlage, wenn Sie später mehr Inhalte, Funktionen oder klare Kontaktwege ergänzen möchten.',
         },
       ],
     },
@@ -224,6 +238,30 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       ],
       note: 'Sie wissen bei jedem Schritt, was gerade passiert. Ohne komplizierte Fachsprache.',
     },
+    pricingTeaser: {
+      title: 'Transparente Preise ab 400 €',
+      subtitle:
+        'Eine einfache Landingpage startet ab 400 €. Für mehrseitige Business-Websites oder Websites mit zusätzlichen Funktionen gibt es passende Pakete mit klar beschriebenem Umfang.',
+      cards: [
+        {
+          title: 'Start Website',
+          price: 'ab 400 €',
+          description: 'Eine klare Landingpage für den schnellen Online-Auftritt.',
+        },
+        {
+          title: 'Business Website',
+          price: 'ab 900 €',
+          description: '3–5 Seiten für mehr Vertrauen und bessere Übersicht.',
+        },
+        {
+          title: 'Funktionale Website',
+          price: 'ab 1.500 €',
+          description: 'Zusätzliche Funktionen, Integrationen und Automatisierung.',
+        },
+      ],
+      primary: 'Preise ansehen',
+      secondary: 'Kostenlose Einschätzung starten',
+    },
     trust: {
       title: 'Einfach, verständlich und ohne unnötigen Aufwand',
       points: [
@@ -276,7 +314,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         {
           question: 'Bringt mir eine Website automatisch Kunden?',
           answer:
-            'Nein. Eine Website ersetzt keine Werbung. Aber sie ist eine wichtige Grundlage für Sichtbarkeit, Vertrauen und professionelle Präsentation.',
+            'Nein. Eine Website ist kein Automatismus. Aber sie ist eine wichtige Grundlage für Sichtbarkeit, Vertrauen und professionelle Präsentation.',
         },
         {
           question: 'Ist das auch für kleine lokale Unternehmen sinnvoll?',
@@ -319,6 +357,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       email: 'E-Mail: kontakt@erstellen-websiten.de',
       about: 'Über mich',
       blog: 'Blog',
+      prices: 'Preise',
       quizBrief: 'Brief zur Website-Entwicklung',
       legal: {
         impressum: 'Impressum',
@@ -339,6 +378,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       studio: 'Vibe Studio',
       region: 'Сайты для малого бизнеса',
       badges: ['Для локального бизнеса', 'Оптимизировано под смартфон', 'Понятно и современно'],
+      prices: 'Цены',
     },
     hero: {
       title: 'Больше заявок через ваш сайт — просто и без лишних сложностей',
@@ -389,7 +429,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         },
         {
           title: 'Готовность к следующему шагу',
-          description: 'Хороший сайт - это база, если позже вы захотите запускать рекламу или улучшать видимость.',
+          description: 'Хороший сайт - это база, если позже вы захотите добавить больше страниц, функций или понятных способов связи.',
         },
       ],
     },
@@ -443,6 +483,30 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       ],
       note: 'На каждом шаге вы понимаете, что происходит. Без сложной терминологии.',
     },
+    pricingTeaser: {
+      title: 'Прозрачные цены от 400 €',
+      subtitle:
+        'Простая landing page начинается от 400 €. Для многостраничных бизнес-сайтов и сайтов с дополнительными функциями есть отдельные пакеты с понятным объёмом работ.',
+      cards: [
+        {
+          title: 'Start Website',
+          price: 'от 400 €',
+          description: 'Одна понятная страница для быстрого онлайн-присутствия.',
+        },
+        {
+          title: 'Business Website',
+          price: 'от 900 €',
+          description: '3–5 страниц для доверия, структуры и презентации услуг.',
+        },
+        {
+          title: 'Функциональный сайт',
+          price: 'от 1.500 €',
+          description: 'Дополнительные функции, интеграции и автоматизация.',
+        },
+      ],
+      primary: 'Посмотреть цены',
+      secondary: 'Получить бесплатную оценку',
+    },
     trust: {
       title: 'Просто, понятно и без лишних сложностей',
       points: [
@@ -495,7 +559,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
         {
           question: 'Сайт автоматически приведёт клиентов?',
           answer:
-            'Нет. Сайт не заменяет рекламу. Но это важная основа для видимости, доверия и профессиональной презентации.',
+            'Нет. Сайт не работает автоматически сам по себе. Но это важная основа для видимости, доверия и профессиональной презентации.',
         },
         {
           question: 'Это подходит маленькому локальному бизнесу?',
@@ -539,6 +603,7 @@ export const landingCopy: Record<LandingLocale, LandingCopy> = {
       email: 'E-Mail: kontakt@erstellen-websiten.de',
       about: 'Обо мне',
       blog: 'Блог',
+      prices: 'Цены',
       quizBrief: 'Бриф на разработку сайта',
       legal: {
         impressum: 'Выходные данные',
