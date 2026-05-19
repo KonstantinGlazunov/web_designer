@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
     return [
       { source: '/landing', destination: '/', permanent: true },
       { source: '/ru/landing', destination: '/ru', permanent: true },
+      { source: '/datenschutz', destination: '/datenschutzerklaerung', permanent: true },
+      { source: '/ru/datenschutz', destination: '/ru/datenschutzerklaerung', permanent: true },
     ]
   },
   async headers() {

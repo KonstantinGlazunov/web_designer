@@ -346,7 +346,7 @@ function PricesTeaserSection({ copy }: { copy: typeof landingCopyDe }) {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
           {copy.pricingTeaser.cards.map((card, index) => (
             <article
               key={card.title}

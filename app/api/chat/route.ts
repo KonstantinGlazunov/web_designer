@@ -424,25 +424,25 @@ function isDeferredAnswer(text: string) {
   )
 }
 
-function hasPendingBriefQuestions(brief: { niche?: string; site_status?: string; goals?: string[]; services?: string[]; features?: string[]; budget?: { range?: string }; deadline?: string }) {
-  return !brief.niche?.trim() || !brief.site_status?.trim() || !brief.goals?.length || !brief.services?.length || !brief.features?.length || !brief.budget?.range?.trim() || !brief.deadline?.trim()
+function hasPendingBriefQuestions(brief: { niche?: string; business?: { location?: string }; site_status?: string; goals?: string[]; services?: string[]; features?: string[]; budget?: { range?: string }; deadline?: string }) {
+  return !brief.niche?.trim() || !brief.business?.location?.trim() || !brief.site_status?.trim() || !brief.goals?.length || !brief.services?.length || !brief.features?.length || !brief.budget?.range?.trim() || !brief.deadline?.trim()
 }
 
 function buildDeferredContactTransition(nextQuestion: string, locale: 'ru' | 'de') {
   return locale === 'de'
     ? `Kein Problem, dann kommen wir später auf den Kontakt zurück. ${nextQuestion}`
-    : `Без проблем, тогда вернемся к контакту ближе к концу. ${nextQuestion}`
+    : `Без проблем, тогда вернёмся к контакту ближе к концу. ${nextQuestion}`
 }
 
 function buildNextBriefQuestion(
-  brief: { niche?: string; site_status?: string; goals?: string[]; services?: string[]; features?: string[]; budget?: { range?: string }; deadline?: string },
+  brief: { niche?: string; business?: { location?: string }; site_status?: string; goals?: string[]; services?: string[]; features?: string[]; budget?: { range?: string }; deadline?: string },
   locale: 'ru' | 'de'
 ) {
   if (!brief.niche?.trim()) {
     return locale === 'de' ? 'In welcher Branche arbeiten Sie?' : 'В какой нише вы работаете?'
   }
-  if (!brief.site_status?.trim()) {
-    return locale === 'de' ? 'Haben Sie bereits eine Website oder brauchen Sie eine neue?' : 'У вас уже есть сайт или нужен новый?'
+  if (!brief.business?.location?.trim()) {
+    return locale === 'de' ? 'In welcher Stadt oder Region arbeiten Sie?' : 'В каком городе или регионе вы работаете?'
   }
   if (!brief.goals?.length) {
     return locale === 'de' ? 'Was soll die Website vor allem erreichen?' : 'Какие цели у сайта?'
@@ -452,6 +452,9 @@ function buildNextBriefQuestion(
   }
   if (!brief.features?.length) {
     return locale === 'de' ? 'Welche Funktionen brauchen Sie auf der Website?' : 'Какие функции нужны на сайте?'
+  }
+  if (!brief.site_status?.trim()) {
+    return locale === 'de' ? 'Haben Sie bereits eine Website oder brauchen Sie eine neue?' : 'У вас уже есть сайт или нужен новый?'
   }
   if (!brief.budget?.range?.trim()) {
     return locale === 'de' ? 'Welches Budget planen Sie ungefähr ein?' : 'Какой бюджет вы примерно планируете?'
@@ -464,7 +467,7 @@ function buildNextBriefQuestion(
 }
 
 function buildNextBriefOptions(
-  brief: { niche?: string; site_status?: string; goals?: string[]; services?: string[]; features?: string[]; budget?: { range?: string }; deadline?: string },
+  brief: { niche?: string; business?: { location?: string }; site_status?: string; goals?: string[]; services?: string[]; features?: string[]; budget?: { range?: string }; deadline?: string },
   locale: 'ru' | 'de'
 ) {
   if (!brief.niche?.trim()) {
@@ -472,10 +475,10 @@ function buildNextBriefOptions(
       ? ['Friseursalon', 'Handwerk und Reparatur', 'Kfz-Werkstatt', 'Anwaltskanzlei']
       : ['Салон красоты', 'Строительство и ремонт', 'Автомастерская', 'Юридическая практика']
   }
-  if (!brief.site_status?.trim()) {
+  if (!brief.business?.location?.trim()) {
     return locale === 'de'
-      ? ['Website ist vorhanden, ich moechte sie aktualisieren', 'Noch keine Website, aber ich brauche eine', 'Bisher gibt es nur eine Idee']
-      : ['Сайт уже есть, хочу обновить', 'Сайта еще нет, но он нужен', 'Пока есть только идея']
+      ? ['Stadt', 'Region', 'Bundesweit']
+      : ['Город', 'Регион', 'По всей Германии']
   }
   if (!brief.goals?.length) {
     return locale === 'de'
@@ -489,6 +492,11 @@ function buildNextBriefOptions(
     return locale === 'de'
       ? ['Online-Buchung', 'Preisliste', 'Galerie']
       : ['Онлайн-запись', 'Прайс-лист', 'Галерея работ']
+  }
+  if (!brief.site_status?.trim()) {
+    return locale === 'de'
+      ? ['Website ist vorhanden, ich moechte sie aktualisieren', 'Noch keine Website, aber ich brauche eine', 'Bisher gibt es nur eine Idee']
+      : ['Сайт уже есть, хочу обновить', 'Сайта еще нет, но он нужен', 'Пока есть только идея']
   }
   if (!brief.budget?.range?.trim()) {
     return locale === 'de'
@@ -563,6 +571,11 @@ function buildQuestionVariant(kind: string, locale: 'ru' | 'de', repeatCount: nu
           'Damit ich passende Beispiele nennen kann: Was genau machen Sie beruflich?',
           'Beschreiben Sie bitte kurz Ihr Geschäftsfeld.',
         ],
+        region: [
+          'In welcher Stadt oder Region arbeiten Sie?',
+          'Damit ich Ihr Projekt lokal einordnen kann: Wo sind Sie aktiv?',
+          'Nennen Sie mir bitte den Ort oder die Region, die wichtig ist.',
+        ],
         site_status: [
           'Haben Sie schon eine Website oder starten wir neu?',
           'Arbeiten wir mit einer bestehenden Website weiter oder bauen wir von null?',
@@ -604,6 +617,11 @@ function buildQuestionVariant(kind: string, locale: 'ru' | 'de', repeatCount: nu
           'В какой сфере вы работаете?',
           'Чтобы предложить подходящую структуру, подскажите, чем именно вы занимаетесь?',
           'Опишите коротко ваш бизнес или направление работы.',
+        ],
+        region: [
+          'В каком городе или регионе вы работаете?',
+          'Чтобы я корректно учёл локальный поиск, где вы работаете?',
+          'Напишите город или регион, который важен для проекта.',
         ],
         site_status: [
           'У вас уже есть сайт или будем делать новый?',
@@ -650,6 +668,10 @@ function buildOptionsForKind(
       return locale === 'de'
         ? ['Website ist vorhanden, ich moechte sie aktualisieren', 'Noch keine Website, aber ich brauche eine', 'Bisher gibt es nur eine Idee']
         : ['Сайт уже есть, хочу обновить', 'Сайта еще нет, но он нужен', 'Пока есть только идея']
+    case 'region':
+      return locale === 'de'
+        ? ['Stadt', 'Region', 'Bundesweit']
+        : ['Город', 'Регион', 'По всей Германии']
     case 'goals':
       return locale === 'de'
         ? ['Mehr Kunden gewinnen', 'Online verkaufen', 'Vertrauen staerken']

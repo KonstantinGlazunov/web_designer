@@ -7,9 +7,14 @@ interface ContactPayload {
   salutation?: string
   name?: string
   company?: string
+  companyOrIndustry?: string
   website?: string
   email?: string
   phone?: string
+  phoneOrWhatsapp?: string
+  selectedPackage?: string
+  source?: string
+  page?: string
   message?: string
   consent?: boolean
 }
@@ -58,10 +63,13 @@ export async function POST(req: NextRequest) {
     const locale = body.locale === 'ru' ? 'ru' : 'de'
     const salutation = normalizeUserMessage(body.salutation ?? '', 60) ?? ''
     const name = normalizeUserMessage(body.name ?? '', 120)
-    const company = normalizeUserMessage(body.company ?? '', 160) ?? ''
+    const company = normalizeUserMessage(body.company ?? body.companyOrIndustry ?? '', 160) ?? ''
     const honeypotWebsite = normalizeUserMessage(body.website ?? '', 160) ?? ''
     const email = normalizeUserMessage(body.email ?? '', 160)
-    const phone = normalizeUserMessage(body.phone ?? '', 80) ?? ''
+    const phone = normalizeUserMessage(body.phone ?? body.phoneOrWhatsapp ?? '', 80) ?? ''
+    const selectedPackage = normalizeUserMessage(body.selectedPackage ?? '', 120) ?? ''
+    const source = normalizeUserMessage(body.source ?? '', 80) ?? ''
+    const page = normalizeUserMessage(body.page ?? '', 160) ?? ''
     const message = normalizeLongText(body.message ?? '')
     const consent = body.consent === true
 
@@ -84,6 +92,9 @@ export async function POST(req: NextRequest) {
       company ? `Unternehmen: ${company}` : '',
       `E-Mail: ${email}`,
       phone ? `Telefon: ${phone}` : '',
+      selectedPackage ? `Paket: ${selectedPackage}` : '',
+      source ? `Quelle: ${source}` : '',
+      page ? `Seite: ${page}` : '',
       '',
       'Nachricht:',
       message,

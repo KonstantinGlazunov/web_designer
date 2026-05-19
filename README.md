@@ -23,8 +23,10 @@ Useful scripts:
 - `npm run dev` — local development server
 - `npm run build` — production build
 - `npm run start` — production server
-- `npm run lint` — ESLint
+- `npm run lint` — fast ESLint pass for app code
+- `npm run lint:all` — full repository ESLint pass
 - `npm run typecheck` — TypeScript checks
+- `npm run test:e2e:smoke` — minimal Playwright smoke suite
 
 ## Environment Variables
 

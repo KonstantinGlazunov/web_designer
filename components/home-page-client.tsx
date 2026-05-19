@@ -124,6 +124,25 @@ export function HomePageClient() {
     return () => window.clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    const scrollToExamples = () => {
+      if (window.location.hash !== '#beispiele') return
+
+      const target = document.getElementById('beispiele')
+      if (!target) return
+
+      target.scrollIntoView({ behavior: 'auto', block: 'start' })
+    }
+
+    const timer = window.setTimeout(scrollToExamples, 100)
+    window.addEventListener('hashchange', scrollToExamples)
+
+    return () => {
+      window.clearTimeout(timer)
+      window.removeEventListener('hashchange', scrollToExamples)
+    }
+  }, [])
+
   const handleQuizClose = () => {
     setQuizOpen(false)
 
@@ -586,7 +605,7 @@ function PricesTeaserSection({
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
           {copy.pricingTeaser.cards.map((card, index) => (
             <article
               key={card.title}

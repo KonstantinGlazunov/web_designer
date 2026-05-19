@@ -251,9 +251,7 @@ function shouldMoveToContact(brief: Brief, userMessage: string) {
 
 function determineStage(brief: Brief, userIntent: UserIntent, projectType: ProjectType, contactStatus: ContactStatus, userMessage: string): LeadStage {
   if (userIntent === 'support' || userIntent === 'portfolio') return 'intent_detection'
-  if (!brief.contact.name.trim()) return 'qualification'
   if (!brief.niche.trim() || !brief.business.location.trim() || !brief.goals.length || !brief.site_status.trim()) return 'qualification'
-  // Формат проекта определяем сами по ответам клиента, не спрашиваем отдельным шагом.
   if (projectType === 'unknown') return 'scope_capture'
   if (!brief.services.length || !brief.features.length) return 'scope_capture'
 
@@ -278,10 +276,6 @@ function determineStage(brief: Brief, userIntent: UserIntent, projectType: Proje
   if (discoveryMissing) return 'budget_timeline'
   if (contactStatus !== 'complete' || shouldMoveToContact(brief, userMessage)) return contactStatus === 'complete' ? 'summary' : 'contact_capture'
   return 'summary'
-}
-
-function countAsked(messages: ChatMessage[], pattern: RegExp) {
-  return messages.filter((msg) => msg.role === 'assistant' && pattern.test(msg.content)).length
 }
 
 function getNicheOptions(locale: 'ru' | 'de') {
@@ -509,25 +503,11 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
   }
 
   if (workflow.stage === 'qualification') {
-    if (!brief.contact.name.trim()) {
-      const namePromptCount = countAsked(previousMessages, /wie darf ich sie ansprechen|как я могу к вам обращаться|ваше имя|ihr name/i)
-      return {
-        reply: locale === 'de'
-          ? namePromptCount > 0
-            ? 'Danke. Nennen Sie mir bitte nur Ihren Vornamen, damit ich das Projekt korrekt anlegen kann.'
-            : 'Guten Tag! Ich bin Max Webberater und helfe kleinen Unternehmen in Deutschland, Kunden ueber Websites zu gewinnen. Wie darf ich Sie ansprechen?'
-          : namePromptCount > 0
-            ? 'Спасибо. Напишите, пожалуйста, только ваше имя, чтобы я корректно оформил проект.'
-            : 'Здравствуйте! Меня зовут Max Webberater, я помогаю малому бизнесу в Германии получать клиентов через сайты. Подскажите, пожалуйста, как я могу к вам обращаться?',
-        workflow,
-      }
-    }
-
     if (!brief.niche.trim()) {
       return {
         reply: locale === 'de'
-          ? `${brief.contact.name}, angenehm. Damit ich nichts Unnoetiges anbiete: In welcher Branche arbeiten Sie?`
-          : `${brief.contact.name}, приятно познакомиться. Чтобы не предлагать лишнего, подскажите, чем вы занимаетесь?`,
+          ? 'Damit ich nichts Unnötiges anbiete: In welcher Branche arbeiten Sie?'
+          : 'Чтобы не предлагать лишнего, подскажите, чем вы занимаетесь?',
         options: getNicheOptions(locale),
         workflow,
       }
@@ -536,8 +516,8 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
     if (!brief.business.location.trim()) {
       return {
         reply: locale === 'de'
-          ? `${brief.contact.name}, in welcher Stadt oder Region in Deutschland arbeiten Sie? Das ist wichtig fuer lokales SEO und Google Business Profile. Sie koennen einfach den Stadtnamen oder die Postleitzahl schreiben.`
-          : `${brief.contact.name}, в каком городе или регионе Германии вы работаете? Это важно для локального SEO и профиля компании в Google. Можно просто написать название города или почтовый индекс.`,
+          ? 'In welcher Stadt oder Region in Deutschland arbeiten Sie? Das ist wichtig für lokales SEO und Google Business Profile.'
+          : 'В каком городе или регионе Германии вы работаете? Это важно для локального SEO и профиля компании в Google.',
         workflow,
       }
     }
@@ -545,8 +525,8 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
     if (!brief.goals.length) {
       return {
         reply: locale === 'de'
-          ? `${brief.contact.name}, welche Hauptaufgabe soll die Website fuer Ihr Geschaeft loesen?`
-          : `${brief.contact.name}, какая сейчас главная задача сайта для вашего бизнеса?`,
+          ? 'Welche Hauptaufgabe soll die Website für Ihr Geschäft lösen?'
+          : 'Какая сейчас главная задача сайта для вашего бизнеса?',
         options: getGoalOptions(locale),
         workflow,
       }
@@ -555,8 +535,8 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
     if (!brief.site_status.trim()) {
       return {
         reply: locale === 'de'
-          ? `${brief.contact.name}, haben Sie schon eine Website oder sprechen wir ueber einen Start von null?`
-          : `${brief.contact.name}, скажите, у вас уже есть сайт или мы говорим о запуске с нуля?`,
+          ? 'Haben Sie schon eine Website oder sprechen wir über einen Start von null?'
+          : 'Скажите, у вас уже есть сайт oder мы говорим о запуске с нуля?',
         options: getSiteStatusOptions(locale),
         workflow,
       }
@@ -598,22 +578,12 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
   }
 
   if (workflow.stage === 'budget_timeline') {
-    if (!brief.pain_points.length) {
+    if (!brief.target_audience.trim()) {
       return {
         reply: locale === 'de'
-          ? 'Welche Herausforderung belastet Ihr Geschaeft aktuell am meisten?'
-          : 'Какая проблема волнует вас больше всего?',
-        options: getBusinessPainOptions(locale),
-        workflow,
-      }
-    }
-
-    if (!brief.success_metrics.length) {
-      return {
-        reply: locale === 'de'
-          ? 'Welches Ergebnis waere fuer Ihre Website fuer Sie ein klarer Erfolg?'
-          : 'Какой результат считаете успешным для вашего сайта?',
-        options: getSuccessMetricOptions(locale),
+          ? 'Wer ist Ihr typischer Kunde oder Käufer?'
+          : 'Кто чаще всего обращается в ваш бизнес?',
+        options: getClientProfileOptions(locale),
         workflow,
       }
     }
@@ -621,7 +591,7 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
     if (!brief.selection_criteria.length) {
       return {
         reply: locale === 'de'
-          ? 'Was ist fuer Sie bei der Auswahl eines Dienstleisters am wichtigsten?'
+          ? 'Was ist für Sie bei der Auswahl eines Dienstleisters am wichtigsten?'
           : 'Что для вас главное при выборе подрядчика?',
         options: getSelectionCriteriaOptions(locale),
         workflow,
@@ -631,19 +601,29 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
     if (!brief.business_barriers.length) {
       return {
         reply: locale === 'de'
-          ? 'Was haelt Sie aktuell davon ab, die Website zu starten?'
+          ? 'Was hält Sie aktuell davon ab, die Website zu starten?'
           : 'Что вас сейчас останавливает от создания сайта?',
         options: getBarrierOptions(locale),
         workflow,
       }
     }
 
-    if (!brief.target_audience.trim()) {
+    if (!brief.success_metrics.length) {
       return {
         reply: locale === 'de'
-          ? 'Wer meldet sich bei Ihrem Unternehmen am haeufigsten?'
-          : 'Кто чаще всего обращается в ваш бизнес?',
-        options: getClientProfileOptions(locale),
+          ? 'Welches Ergebnis wäre für Ihre Website für Sie ein klarer Erfolg?'
+          : 'Какой результат считаете успешным для вашего сайта?',
+        options: getSuccessMetricOptions(locale),
+        workflow,
+      }
+    }
+
+    if (!brief.pain_points.length) {
+      return {
+        reply: locale === 'de'
+          ? 'Welche Herausforderung belastet Ihr Geschäft aktuell am meisten?'
+          : 'Какая проблема волнует вас больше всего?',
+        options: getBusinessPainOptions(locale),
         workflow,
       }
     }
@@ -651,7 +631,7 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
     if (!brief.prior_experience.trim()) {
       return {
         reply: locale === 'de'
-          ? 'Haben Sie frueher schon Werbung oder eine Website getestet?'
+          ? 'Haben Sie früher schon Werbung oder eine Website getestet?'
           : 'Пробовали ли вы ранее запускать рекламу или сайт?',
         options: getPriorExperienceOptions(locale),
         workflow,
@@ -661,8 +641,8 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
     if (!brief.competitors.length) {
       return {
         reply: locale === 'de'
-          ? 'Nennen Sie bitte Ihre wichtigsten Wettbewerber.'
-          : 'Назовите своих конкурентов.',
+          ? 'Nennen Sie bitte Ihre wichtigsten Wettbewerber oder sagen Sie kurz, dass Sie keine kennen.'
+          : 'Назовите своих конкурентов или просто скажите, что не знаете.',
         workflow,
       }
     }
@@ -679,8 +659,8 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
     if (!brief.design.references.length) {
       return {
         reply: locale === 'de'
-          ? 'Welche 3-5 Wettbewerber-Websites gefallen Ihnen? Was genau gefällt: Design, UX oder Funktionen?'
-          : 'Какие 3–5 сайтов конкурентов вам нравятся? Что именно нравится: дизайн, удобство или функции?',
+          ? 'Welche Websites gefallen Ihnen als Beispiel? Was genau gefällt: Design, Struktur oder Funktionen?'
+          : 'Какие сайты вам нравятся как примеры? Что именно нравится: дизайн, структура или функции?',
         workflow,
       }
     }
@@ -765,6 +745,16 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
       }
     }
 
+    if (!brief.contact.name.trim()) {
+      return {
+        reply: locale === 'de'
+          ? 'Damit ich Sie korrekt im Projekt notiere: Wie darf ich Sie ansprechen?'
+          : 'Чтобы я корректно зафиксировал проект, как я могу к вам обращаться?',
+        options: locale === 'de' ? ['Schreibe ich in Nachricht', 'Lieber später'] : ['Укажу в сообщении', 'Предпочту позже'],
+        workflow,
+      }
+    }
+
     if (workflow.preferredContact === 'email' && !brief.contact.email.trim()) {
       return {
         reply: locale === 'de'
@@ -788,26 +778,6 @@ export function buildManagedSalesTurn(args: ManagedTurnArgs): ManagedTurn | null
           : deferredContactCount === 1
             ? buildContactReasonReply(locale, workflow.preferredContact)
             : `Отлично. Тогда пришлите, пожалуйста, контакт для ${workflow.preferredContact === 'telegram' ? 'Telegram' : 'WhatsApp'}.`,
-        options: locale === 'de' ? ['Schreibe ich in Nachricht', 'Lieber später'] : ['Укажу в сообщении', 'Предпочту позже'],
-        workflow,
-      }
-    }
-
-    if (!brief.contact.phone.trim() && !brief.contact.email.trim()) {
-      return {
-        reply: locale === 'de'
-          ? 'Jetzt habe ich schon genug Kontext. Wo ist es für Sie am bequemsten, wenn wir den Kontakt fortsetzen?'
-          : 'Сейчас у меня уже есть понятная картина по проекту. Где вам удобнее продолжить общение?',
-        options: locale === 'de' ? ['WhatsApp', 'Telegram', 'E-Mail'] : ['WhatsApp', 'Telegram', 'Электронная почта'],
-        workflow,
-      }
-    }
-
-    if (!brief.contact.name.trim()) {
-      return {
-        reply: locale === 'de'
-          ? 'Damit ich Sie korrekt im Projekt notiere: Wie darf ich Sie ansprechen?'
-          : 'Чтобы я корректно зафиксировал ваш проект, как я могу к вам обращаться?',
         options: locale === 'de' ? ['Schreibe ich in Nachricht', 'Lieber später'] : ['Укажу в сообщении', 'Предпочту позже'],
         workflow,
       }

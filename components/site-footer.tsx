@@ -12,7 +12,9 @@ export function SiteFooter({ className }: { className?: string }) {
   const { locale } = useSitePreferences()
   const footerCopy = locale === 'ru' ? landingCopyRu.footer : landingCopyDe.footer
   const aboutHref = localizePath('/ueber-mich', locale)
+  const portfolioHref = localizePath('/portfolio', locale)
   const blogHref = localizePath('/blog', locale)
+  const pricesHref = localizePath('/preise', locale)
   const privacyHref = localizePath('/datenschutzerklaerung', locale)
   const agbHref = localizePath('/agb', locale)
   const impressumHref = localizePath('/impressum', locale)
@@ -32,8 +34,14 @@ export function SiteFooter({ className }: { className?: string }) {
             <Link href={aboutHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {footerCopy.about}
             </Link>
+            <Link href={portfolioHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
+              {locale === 'ru' ? 'Портфолио' : 'Portfolio'}
+            </Link>
             <Link href={blogHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {footerCopy.blog}
+            </Link>
+            <Link href={pricesHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
+              {footerCopy.prices}
             </Link>
             <Link href={privacyHref} className="block w-full text-left transition hover:text-slate-950 md:text-right">
               {footerCopy.legal.privacy}

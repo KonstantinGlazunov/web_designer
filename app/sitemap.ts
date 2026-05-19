@@ -8,8 +8,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
   const staticPaths = [
     '/',
+    '/portfolio',
     '/ueber-mich',
     '/kontakt',
+    '/preise',
     '/blog',
     '/impressum',
     '/datenschutzerklaerung',
