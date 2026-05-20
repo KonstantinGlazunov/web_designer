@@ -736,7 +736,7 @@ function BeforeAfterSection({ locale }: { locale: LandingLocale }) {
   const portfolioHref = localizePath('/portfolio', locale)
 
   return (
-    <ContentSection id="vorher-nachher">
+    <ContentSection id="beispiele">
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
         {caseStudies.title}
       </SectionTitle>

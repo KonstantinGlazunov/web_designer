@@ -451,7 +451,7 @@ function BeforeAfterSection() {
   const caseStudies = homeCaseStudyCopy.de
 
   return (
-    <ContentSection id="vorher-nachher">
+    <ContentSection id="beispiele">
       <SectionTitle className="reveal-stagger" style={revealStyle(40)}>
         {caseStudies.title}
       </SectionTitle>
